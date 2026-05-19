@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* SiteHeader: py-6 + h-10 + py-6 / md: py-8 + h-12 + py-8 */
+  --site-header-height: 5.5rem;
+  --color-primary: #234f3c;
+  --color-primary-foreground: #f5f3ee;
+  --color-secondary: #4a6e78;
+  --color-secondary-foreground: #ffffff;
+  --color-tertiary: #f9f9f5;
+  --page-bg: 249 249 245;
+  --page-heading: 74 124 147;
+  --page-body: 75 75 75;
+  --link-active: #b8c98e;
+  --scrollbar-size: 6px;
+  --scrollbar-thumb: rgb(var(--page-body) / 0.28);
+  --scrollbar-thumb-hover: rgb(var(--page-body) / 0.42);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-height: 7rem;
+  }
+}
+
+.dark {
+  --color-primary: #2a5f48;
+  --color-primary-foreground: #f5f3ee;
+  --color-secondary: #6a909c;
+  --color-secondary-foreground: #ffffff;
+  --color-tertiary: #1a1f24;
+  --page-bg: 26 31 36;
+  --page-heading: 126 184 201;
+  --page-body: 200 200 200;
+  --link-active: #c5d4a0;
+  --scrollbar-thumb: rgb(var(--page-body) / 0.32);
+  --scrollbar-thumb-hover: rgb(var(--page-body) / 0.5);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: var(--site-header-height);
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-page-bg text-page-body font-sans antialiased;
+  }
+
+  body.phmh-edit-active [data-phmh-edit="image"] img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  body.phmh-edit-active [data-phmh-key].phmh-edit-pending {
+    position: relative;
+  }
+
+  body.phmh-edit-active [data-phmh-key].phmh-edit-pending::before {
+    content: "";
+    position: absolute;
+    top: 0.35em;
+    left: -0.65rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #eab308;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08);
+    pointer-events: none;
+  }
+
+  /* textarea·패널 스크롤 — 트랙 투명, 얇은 thumb (라이트/다크) */
+  textarea,
+  .phmh-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+
+  textarea::-webkit-scrollbar,
+  .phmh-scrollbar::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  textarea::-webkit-scrollbar-track,
+  .phmh-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  textarea::-webkit-scrollbar-thumb,
+  .phmh-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border: 2px solid transparent;
+    border-radius: 9999px;
+    background-clip: padding-box;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover,
+  .phmh-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+
+  textarea::-webkit-scrollbar-corner,
+  .phmh-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply mx-auto max-w-6xl px-6 py-16 md:py-20;
+  }
+  .page-title {
+    @apply text-center font-logo text-4xl font-normal text-page-heading md:text-5xl;
+  }
+  .page-title-rule {
+    @apply mx-auto mt-4 h-0.5 w-14 bg-page-heading;
+  }
+  .interactive-link {
+    @apply transition-[color,opacity,transform] duration-300 ease-out hover:opacity-80 active:scale-[0.98];
+  }
+  .interactive-button {
+    @apply transition-[color,background-color,opacity,transform,box-shadow] duration-300 ease-out active:scale-[0.97];
+  }
+  .cta-primary {
+    @apply interactive-button inline-block rounded-sm bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground ring-1 ring-white/80 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-md active:translate-y-0;
+  }
+  .nav-dropdown-panel {
+    @apply cursor-pointer rounded-sm bg-page-bg px-4 py-3 shadow-lg ring-1 ring-page-body/10 backdrop-blur-md;
+  }
+  .input-underline {
+    @apply w-full border-0 border-b border-neutral-300 bg-transparent py-2 text-page-body outline-none transition-[border-color,opacity] duration-300 placeholder:text-neutral-400 focus:border-secondary dark:border-neutral-600 dark:placeholder:text-neutral-500;
+  }
+
+  /* Chrome/Safari 자동완성 기본 하늘색 배경 제거 */
+  .input-underline:-webkit-autofill,
+  .input-underline:-webkit-autofill:hover,
+  .input-underline:-webkit-autofill:focus,
+  .input-underline:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgb(var(--page-bg)) inset;
+    box-shadow: 0 0 0 1000px rgb(var(--page-bg)) inset;
+    -webkit-text-fill-color: rgb(var(--page-body));
+    caret-color: rgb(var(--page-body));
+    transition: background-color 99999s ease-out 0s;
+  }
+
+  .input-underline:autofill {
+    box-shadow: 0 0 0 1000px rgb(var(--page-bg)) inset;
+    -webkit-text-fill-color: rgb(var(--page-body));
+    caret-color: rgb(var(--page-body));
+  }
+  .input-checkbox {
+    @apply mt-1 size-4 shrink-0 cursor-pointer appearance-none rounded-sm border border-page-body/35 bg-page-bg shadow-none transition-[border-color,background-color,box-shadow];
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-page-bg;
+  }
+
+  .input-checkbox:checked {
+    @apply border-secondary bg-secondary;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2.5-2.5a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+    background-size: 75% 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .input-checkbox:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* 편집 모드 hover·selected 하이라이트 */
+  .edit-highlight-box {
+    @apply transition-[opacity,border-color,border-style,background-color] duration-200 ease-in-out;
+  }
+
+  .edit-highlight-visible {
+    @apply opacity-100;
+  }
+
+  .edit-highlight-hidden {
+    @apply opacity-0;
+  }
+
+  .edit-highlight-hover {
+    @apply border-dashed border-page-bg;
+    background-color: rgb(35 79 60 / 0.18);
+  }
+
+  .edit-highlight-selected {
+    @apply border-solid border-page-bg;
+    background-color: rgb(35 79 60 / 0.24);
+  }
+
+  .dark .edit-highlight-hover {
+    border-color: rgb(var(--page-bg));
+    background-color: rgb(42 95 72 / 0.28);
+  }
+
+  .dark .edit-highlight-selected {
+    border-color: rgb(var(--page-bg));
+    background-color: rgb(42 95 72 / 0.34);
+  }
+
+  /* 편집 패널 — 파일 선택 트리거 */
+  .input-file-trigger {
+    @apply inline-flex shrink-0 items-center rounded border border-page-body/20 bg-page-bg px-3 py-2 text-sm font-medium text-page-heading transition-[border-color,background-color] duration-200 ease-in-out;
+    background-color: rgb(35 79 60 / 0.12);
+  }
+
+  label:hover .input-file-trigger,
+  .input-file-trigger:hover {
+    @apply border-secondary;
+    background-color: rgb(35 79 60 / 0.2);
+  }
+
+  .dark .input-file-trigger {
+    border-color: rgb(var(--page-bg));
+    background-color: rgb(42 95 72 / 0.22);
+  }
+
+  .dark label:hover .input-file-trigger,
+  .dark .input-file-trigger:hover {
+    border-color: rgb(var(--page-body) / 0.35);
+    background-color: rgb(42 95 72 / 0.32);
+  }
+
+  /* 편집 모드 — 인라인 삭제 버튼 */
+  .edit-control-delete {
+    @apply interactive-button rounded border border-page-body/20 px-1.5 py-0.5 text-xs text-page-body/80 outline-none transition-[border-color,background-color,color] duration-200 ease-in-out;
+    @apply hover:border-red-400/40 hover:text-red-600 disabled:opacity-40;
+    background-color: rgb(var(--page-bg));
+  }
+
+  .edit-control-delete:hover {
+    background-color: rgb(185 28 28 / 0.1);
+  }
+
+  .dark .edit-control-delete:hover {
+    border-color: rgb(248 113 113 / 0.35);
+    background-color: rgb(248 113 113 / 0.12);
+    color: rgb(248 113 113);
+  }
+
+  /* 편집 패널·설정 폼 — 다크 모드에서도 페이지 배경·글자색 유지 */
+  .input-panel {
+    @apply rounded border border-page-body/20 bg-page-bg text-sm text-page-heading outline-none transition-[border-color,box-shadow] duration-200 ease-in-out;
+    @apply placeholder:text-page-body/50 focus:border-secondary focus:ring-1 focus:ring-secondary;
+  }
+
+  .input-panel:-webkit-autofill,
+  .input-panel:-webkit-autofill:hover,
+  .input-panel:-webkit-autofill:focus,
+  .input-panel:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgb(var(--page-bg)) inset;
+    box-shadow: 0 0 0 1000px rgb(var(--page-bg)) inset;
+    -webkit-text-fill-color: rgb(var(--page-heading));
+    caret-color: rgb(var(--page-heading));
+    transition: background-color 99999s ease-out 0s;
+  }
+
+  /* 히어로 상단: 헤더와 경계 없이 이어지는 페이드 */
+  .hero-banner-fade {
+    @apply pointer-events-none absolute inset-x-0 z-[1];
+    top: 0;
+    height: calc(var(--site-header-height) + min(28vh, 14rem));
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--page-bg)) 0%,
+      rgb(var(--page-bg) / 0.97) 10%,
+      rgb(var(--page-bg) / 0.9) 22%,
+      rgb(var(--page-bg) / 0.76) 38%,
+      rgb(var(--page-bg) / 0.52) 54%,
+      rgb(var(--page-bg) / 0.28) 70%,
+      rgb(var(--page-bg) / 0.1) 84%,
+      transparent 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-link,
+  .interactive-button,
+  .cta-primary,
+  .input-underline,
+  .input-panel,
+  .input-file-trigger,
+  .edit-control-delete,
+  .edit-highlight-box {
+    transition-duration: 0.01ms !important;
+  }
+}

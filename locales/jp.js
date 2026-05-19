@@ -1,0 +1,244 @@
+// 日本語 locale
+import { buildContactFormMessages } from "../lib/contact-form-schema.ts";
+import { serviceAreasSectionsJp } from "./content/service-areas.jp.js";
+import { servicesSectionsJp } from "./content/services.jp.js";
+
+const contactFormMessages = buildContactFormMessages("jp");
+
+export default {
+  "common": {
+    "siteName": "PHMH",
+    "logoAlt": "Peace & Hope メンタルヘルスサービス",
+    "scheduleConsultation": "カウンセリングを予約する",
+    "topOfSite": "ページトップ",
+    "send": "送信",
+    "back": "戻る",
+    "continue": "次へ",
+    "payNow": "お支払いへ",
+    "comingSoon": "準備中",
+    "settings": "設定",
+    "close": "閉じる"
+  },
+  "nav": {
+    "about": "私たちについて",
+    "whoWeAre": "私たちについて",
+    "ourVision": "ビジョン",
+    "services": "サービス",
+    "typesOfServices": "サービスの種類",
+    "serviceAreas": "対応分野",
+    "gettingStarted": "ご利用の流れ",
+    "fee": "料金",
+    "feePage": "料金",
+    "onlinePayment": "オンライン決済",
+    "contact": "お問い合わせ",
+    "koreaCenter": "韓国センター",
+    "philippinesCenter": "フィリピンセンター",
+    "menu": "メニュー"
+  },
+  "theme": {
+    "system": "システム",
+    "light": "ライト",
+    "dark": "ダーク"
+  },
+  "contactInfo": {
+    "email": "メール",
+    "address": "住所",
+    "tel": "電話"
+  },
+  "siteContact": {
+    "email": "hsj6831@gmail.com",
+    "korea": {
+      "address": "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea"
+    },
+    "philippines": {
+      "addressShort": "Abby's Apartelle, B10 L3 Unit C, Elvira St, Josefa Subd. Malabanias, Angeles",
+      "addressFull": "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
+      "phone": "+63 952 479 1119",
+      "phoneViber": "+63 952 479 1119 (Viber)"
+    }
+  },
+  "footer": {
+    "brand": "Peace & Hope メンタルヘルスサービス",
+    "menu": "メニュー",
+    "contact": "お問い合わせ",
+    "hoursWeekday": "月〜金：午前10:00〜午後7:00",
+    "hoursWeekend": "土・日：休業",
+    "virtualNote": "オンラインセッション対応可",
+    "virtualNotePh": "営業時間外もオンラインセッション対応可"
+  },
+  "pages": {
+    "whoWeAre": {
+      "title": "私たちについて",
+      "paragraphs": [
+        "誰もが人生のどこかで、心理的な困難に直面することがあります。その経験は、それぞれの歩んできた道のり、背景、個性によってさまざまな形で現れます。今、つらい思いをされていますか？あなたは一人ではありません。専門的なサポートを求めることは、癒しと成長への、勇気ある大切な一歩です。",
+        "Peace & Hope メンタルヘルスサービスは、皆さまが心のバランスを取り戻し、より豊かな日々を送り、日常生活を再び満ち足りたものにできるよう、お手伝いします。症状への対処だけでなく、あなたの中にある強さを見つけ、人生の意味や目的を見出し、困難な時期の中でも成長できるよう、共に歩んでいきます。",
+        "ご状況に合わせて、対面カウンセリングとオンラインカウンセリングの両方をご用意しています。世界のどこにいても、私たちとつながることができます。センターへのご来訪でも、ご自宅からのカウンセリングでも、安全でプライバシーが徹底的に守られる環境をご提供します。",
+        "カウンセリングの開始についてご不明な点や、もっと知りたいことがあれば、いつでもお気軽にご連絡ください。どんなに辛い瞬間にも、希望はあります。Peace & Hope メンタルヘルスサービスは、いつもあなたのそばにいます。",
+        "私たちがお力になります。",
+        "心を込めて、\nPeace & Hope メンタルヘルスサービス チーム一同"
+      ]
+    },
+    "ourVision": {
+      "title": "ビジョン",
+      "paragraphs": [
+        "画期的な発明や歴史に残る功績を通じて世界に影響を与えたいと願う人は多くいます。そうした努力はもちろん価値あるものです。しかし私たちは、少し違うアプローチを信じています——小さくても、深く意味のある変化を生み出す方法です。",
+        "何十億もの人が生きるこの世界で、たった一人の人生を変えることは、些細なことに思えるかもしれません。多くの人はその変化に気づかないかもしれない。しかしその一人にとっては、人生を変える出来事となり得ます。そして影響はそこで終わりません。一人が変わると、その波紋は大切な人たちへ、さらに広い世界へと広がっていきます。",
+        "Peace & Hope メンタルヘルスサービスは、一人の人が困難を乗り越え、自信を取り戻し、意味のある人生を歩んでいけるよう支えることが、世界を変える最初の一歩だと信じています。専門家たちの真摯な関わりを通じて、クライアントは癒え、成長する力を見つけます。そして彼らが輝くことで、周りの人にも同じ可能性を伝えていきます。",
+        "変化は一人から始まります。一人が二人に、二人が三人になる。一歩一歩進むたびに、その影響は広がっていきます。Peace & Hope メンタルヘルスサービスで、変化の旅はすでに始まっています。私たちは共に、その変化を作り続けています。"
+      ]
+    },
+    "gettingStarted": {
+      "title": "ご利用の流れ",
+      "steps": [
+        {
+          "number": "01",
+          "title": "情報収集",
+          "description": "気になることを質問し、予約を取りましょう"
+        },
+        {
+          "number": "02",
+          "title": "お問い合わせ",
+          "description": "専門家のサポートのもと、癒しへの一歩を踏み出しましょう"
+        },
+        {
+          "number": "03",
+          "title": "オンラインフォーム記入",
+          "description": "オンラインフォームにご記入ください"
+        },
+        {
+          "number": "04",
+          "title": "初回セッションへのご参加",
+          "description": "初回セッションにご参加ください"
+        },
+        {
+          "number": "05",
+          "title": "カウンセリング開始",
+          "description": "Peace & Hope メンタルヘルスサービス"
+        },
+        {
+          "number": "06",
+          "title": "課題の解決",
+          "description": "メンタルヘルスサービス"
+        }
+      ]
+    },
+    "fee": {
+      "title": "料金",
+      "paragraphs": [
+        "**ダイレクトビリングサービスをご提供しています！**",
+        "多くのクライアントの方は保険を利用してセッション費用をまかなっており、私たちは主要な国際保険を取り扱っています。保険の手続きはわかりにくく複雑に感じることもあるかと思いますが、ご安心ください——私たちがお手伝いします。ダイレクトビリングサービスを提供しており、保険請求などの煩雑な手続きはすべて私たちが代行します。面倒なことは私たちに任せて、カウンセリングに集中していただけます。",
+        "**保険プランをお持ちでない方へ**",
+        "**お問い合わせください。** その他のお支払い方法についてもご案内し、状況に応じてサポートいたします。なお、韓国の健康保険はメンタルヘルスサービスの適用外となりますのでご注意ください。",
+        "主要な国際保険を取り扱っています"
+      ]
+    },
+    "thankYou": {
+      "title": "ありがとうございます",
+      "paragraphs": [
+        "メッセージを受け取りました。Peace & Hope メンタルヘルスサービスへのご連絡、ありがとうございます。",
+        "担当チームがお問い合わせ内容を確認し、できる限り早くご返答いたします。"
+      ]
+    },
+    "paymentSuccess": {
+      "title": "お支払いが完了しました",
+      "paragraphs": [
+        "お支払いいただきありがとうございます。セッションや領収書に関するご質問は、お気軽にお問い合わせください。"
+      ]
+    },
+    "notFound": {
+      "title": "ページが見つかりません",
+      "description": "お探しのページは存在しないか、移動した可能性があります。",
+      "linksHeading": "便利なリンク",
+      "homeLink": "ホーム",
+      "homeCta": "ホームに戻る"
+    }
+  },
+  "services": {
+    "pageTitle": "サービス案内",
+    "sidebar": {
+      "top": "ページトップ",
+      "individual": "個人カウンセリング",
+      "couples": "カップルカウンセリング",
+      "family": "家族カウンセリング",
+      "play": "遊戯療法",
+      "group": "グループカウンセリング",
+      "christian": "キリスト教カウンセリング"
+    },
+    "sections": servicesSectionsJp,
+  },
+  "serviceAreas": {
+    "pageTitle": "対応分野",
+    "sidebar": {
+      "top": "ページトップ",
+      "depression": "うつ病",
+      "traumaPtsd": "トラウマ・PTSD",
+      "anxietyPanic": "不安・パニック発作",
+      "suicidalThoughts": "希死念慮",
+      "culturalIdentity": "文化的アイデンティティ",
+      "bipolar": "双極性障害",
+      "adhd": "ADHD",
+      "relationship": "関係カウンセリング",
+      "ocd": "強迫性障害（OCD）",
+      "eatingDisorders": "摂食障害",
+      "asd": "自閉スペクトラム症（ASD）",
+      "lifeStress": "生活ストレス",
+      "griefLoss": "悲嘆・喪失",
+      "sleep": "睡眠障害"
+    },
+    "sections": serviceAreasSectionsJp,
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "centerToggleLabel": "センター選択",
+    "centerKorea": "韓国",
+    "centerPhilippines": "フィリピン",
+    "form": contactFormMessages.form,
+    "insuranceOptions": contactFormMessages.insuranceOptions,
+    "seekingHelpOptions": contactFormMessages.seekingHelpOptions,
+    "korea": {
+      "addressTitle": "住所",
+      "contactTitle": "連絡先",
+      "hoursTitle": "営業時間",
+      "hoursWeekday": "月〜金 午前10:00〜午後7:00",
+      "hoursWeekend": "土・日 休業",
+      "virtualNote": "オンラインセッション対応可"
+    },
+    "philippines": {
+      "addressTitle": "住所",
+      "contactTitle": "連絡先",
+      "hoursTitle": "営業時間",
+      "hoursWeekday": "月〜金：午前10:00〜午後7:00",
+      "hoursWeekend": "土・日：休業",
+      "virtualNote": "営業時間外もオンラインセッション対応可"
+    }
+  },
+  "payment": {
+    "pageTitle": "お支払い",
+    "checkoutTitle": "お支払い手続き",
+    "stepDetails": "1. お客様情報",
+    "stepPayment": "2. お支払い情報",
+    "products": {
+      "individualSessionDbq": {
+        "label": "個人カウンセリング 1回 + DBQ"
+      }
+    },
+    "fields": {
+      "email": "メールアドレス",
+      "lastName": "姓",
+      "firstName": "名",
+      "country": "国",
+      "phone": "電話番号"
+    },
+    "continue": "次へ",
+    "payNow": "お支払いへ",
+    "back": "戻る",
+    "paypalNotice": "注文完了後、PayPalのページに移動してお支払いを完了してください。",
+    "sslBadge": "SSL セキュア決済",
+    "startPayment": "お支払い",
+    "providers": {
+      "paypal": "PayPal",
+      "stripe": "Stripe",
+      "toss": "Toss Payments"
+    }
+  }
+};

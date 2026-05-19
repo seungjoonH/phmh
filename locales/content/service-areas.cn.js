@@ -1,0 +1,941 @@
+export const serviceAreasSectionsCn = {
+  "depression": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        ""
+      ],
+      [
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "traumaPtsd": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "anxietyPanic": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "suicidalThoughts": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "culturalIdentity": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "bipolar": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "adhd": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "relationship": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "ocd": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "eatingDisorders": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "asd": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            "",
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "lifeStress": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "griefLoss": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      ""
+    ]
+  },
+  "sleep": {
+    "title": "",
+    "tagline": "",
+    "groups": [
+      [
+        "",
+        "",
+        ""
+      ]
+    ],
+    "subsections": [
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "",
+        "groups": [
+          [
+            ""
+          ]
+        ],
+        "lists": [
+          {
+            "lead": "",
+            "items": [
+              "",
+              ""
+            ]
+          },
+          {
+            "lead": "",
+            "items": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    ],
+    "closing": [
+      "",
+      "",
+      ""
+    ]
+  }
+};

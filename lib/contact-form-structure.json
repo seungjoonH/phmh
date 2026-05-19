@@ -1,0 +1,153 @@
+{
+  "fields": [
+    {
+      "id": "firstName",
+      "type": "text",
+      "required": true,
+      "mailLabel": "First name",
+      "mail": {
+        "kind": "inline"
+      },
+      "autoComplete": "given-name"
+    },
+    {
+      "id": "lastName",
+      "type": "text",
+      "required": true,
+      "mailLabel": "Last name",
+      "mail": {
+        "kind": "inline"
+      },
+      "autoComplete": "family-name"
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "required": true,
+      "mailLabel": "Email",
+      "mail": {
+        "kind": "inline"
+      },
+      "autoComplete": "email"
+    },
+    {
+      "id": "phone",
+      "type": "tel",
+      "required": true,
+      "mailLabel": "Phone",
+      "mail": {
+        "kind": "inline"
+      },
+      "autoComplete": "tel"
+    },
+    {
+      "id": "dateOfBirth",
+      "type": "date",
+      "mailLabel": "Date of birth",
+      "mail": {
+        "kind": "inline"
+      },
+      "autoComplete": "bday"
+    },
+    {
+      "id": "message",
+      "type": "textarea",
+      "required": true,
+      "rows": 3,
+      "mailLabel": "How can we help?",
+      "mail": {
+        "kind": "block"
+      }
+    },
+    {
+      "id": "scheduling",
+      "type": "textarea",
+      "required": true,
+      "rows": 2,
+      "mailLabel": "Scheduling availability",
+      "mail": {
+        "kind": "block"
+      }
+    },
+    {
+      "id": "insurance",
+      "type": "select",
+      "required": true,
+      "mailLabel": "Insurance",
+      "mail": {
+        "kind": "inline"
+      }
+    },
+    {
+      "id": "seekingHelp",
+      "type": "checkboxGroup",
+      "required": true,
+      "mailLabel": "Seeking help with",
+      "mail": {
+        "kind": "list"
+      }
+    },
+    {
+      "id": "othersDetail",
+      "type": "text",
+      "mailLabel": "Other details",
+      "mail": {
+        "kind": "block"
+      }
+    },
+    {
+      "id": "consent",
+      "type": "consent",
+      "required": true,
+      "mailLabel": "Consent",
+      "mail": {
+        "kind": "skip"
+      }
+    }
+  ],
+  "layout": [
+    {
+      "type": "row",
+      "fields": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    {
+      "type": "field",
+      "fieldId": "email"
+    },
+    {
+      "type": "field",
+      "fieldId": "phone"
+    },
+    {
+      "type": "field",
+      "fieldId": "dateOfBirth"
+    },
+    {
+      "type": "field",
+      "fieldId": "message"
+    },
+    {
+      "type": "field",
+      "fieldId": "scheduling"
+    },
+    {
+      "type": "field",
+      "fieldId": "insurance"
+    },
+    {
+      "type": "field",
+      "fieldId": "seekingHelp"
+    },
+    {
+      "type": "field",
+      "fieldId": "othersDetail"
+    },
+    {
+      "type": "field",
+      "fieldId": "consent"
+    }
+  ]
+}

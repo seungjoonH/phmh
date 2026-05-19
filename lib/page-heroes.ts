@@ -1,0 +1,9 @@
+// 페이지 상단 히어로 배너 이미지 경로
+export const pageHeroes = {
+  about: "/getting-started/01.png",
+  servicesTypes: "/services/02.png",
+  serviceAreas: "/service-areas/01.png",
+  gettingStarted: "/getting-started/01.png",
+  fee: "/fee/01.png",
+  contact: "/getting-started/01.png",
+} as const;

@@ -27,6 +27,14 @@ export type LocaleTextValues = Record<string, string>;
 
 export type LocaleStringArrays = Record<string, string[]>;
 
+export type GettingStartedStepPayload = {
+  number: string;
+  title: string;
+  description: string;
+};
+
+export type LocaleStepsArrays = Record<string, GettingStartedStepPayload[]>;
+
 export type LocaleManifestPayload = {
   order: string[];
   hidden: string[];
@@ -51,6 +59,18 @@ export async function fetchArrayRegistry(key: string): Promise<LocaleStringArray
 
 export async function patchStringArray(key: string, locales: LocaleStringArrays) {
   return editFetch("/patch/array", {
+    method: "POST",
+    body: JSON.stringify({ key, locales }),
+  });
+}
+
+export async function fetchStepsRegistry(key: string): Promise<LocaleStepsArrays> {
+  const data = await editFetch(`/registry/steps/${encodeURIComponent(key)}`);
+  return data.locales as LocaleStepsArrays;
+}
+
+export async function patchStepsArray(key: string, locales: LocaleStepsArrays) {
+  return editFetch("/patch/steps-array", {
     method: "POST",
     body: JSON.stringify({ key, locales }),
   });
@@ -153,6 +173,72 @@ export async function deployRelease(): Promise<DeployReleaseResult> {
 export async function fetchImageRegistry(key: string) {
   const data = await editFetch(`/registry/image/${encodeURIComponent(key)}`);
   return data as { key: string; file: string; publicPath: string; altKey?: string };
+}
+
+import type { TherapistRecord } from "@/lib/therapists/types";
+
+export async function fetchTherapistsManifest() {
+  return editFetch("/registry/therapists");
+}
+
+export async function patchTherapist(slug: string, record: TherapistRecord) {
+  return editFetch("/patch/therapist", {
+    method: "POST",
+    body: JSON.stringify({ slug, record }),
+  });
+}
+
+export async function renameTherapist(
+  oldSlug: string,
+  newSlug: string,
+  record: TherapistRecord,
+) {
+  return editFetch("/therapists/rename", {
+    method: "POST",
+    body: JSON.stringify({ oldSlug, newSlug, record }),
+  }) as Promise<{ ok: boolean; oldSlug: string; newSlug: string }>;
+}
+
+export async function createTherapist(displayName: string) {
+  return editFetch("/therapists/create", {
+    method: "POST",
+    body: JSON.stringify({ displayName }),
+  }) as Promise<{ ok: boolean; slug: string }>;
+}
+
+export async function deleteTherapist(slug: string) {
+  return editFetch("/therapists/delete", {
+    method: "POST",
+    body: JSON.stringify({ slug }),
+  });
+}
+
+export async function patchTherapistsOrder(order: string[]) {
+  return editFetch("/therapists/manifest/order", {
+    method: "PATCH",
+    body: JSON.stringify({ order }),
+  });
+}
+
+export async function fetchSitePagesRegistry() {
+  return editFetch("/registry/site-pages") as Promise<{
+    hidden: string[];
+    therapistSlugs: string[];
+  }>;
+}
+
+export async function patchSitePageVisibility(pageId: string, hidden: boolean) {
+  return editFetch("/site-pages/visibility", {
+    method: "PATCH",
+    body: JSON.stringify({ pageId, hidden }),
+  });
+}
+
+export async function putSitePagesVisibility(hidden: string[]) {
+  return editFetch("/site-pages/visibility", {
+    method: "PUT",
+    body: JSON.stringify({ hidden }),
+  }) as Promise<{ ok: boolean; hidden: string[] }>;
 }
 
 export async function writeImageFile(

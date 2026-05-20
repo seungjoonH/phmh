@@ -3,15 +3,19 @@
 // Contact 페이지 레이아웃
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { PageVisibilityGuard } from "@/components/site/PageVisibilityGuard";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   ContactCenterToggle,
   type ContactCenter,
 } from "./ContactCenterToggle";
 import { ContactForm } from "./ContactForm";
+import { ContactMapEmbed } from "./ContactMapEmbed";
+import { EditableBodyFlow } from "@/components/edit/EditableBodyFlow";
 import { EditableText } from "@/components/edit/EditableText";
 import { PageHeroBanner } from "@/components/ui/PageHeroBanner";
 import { editTextAttrs } from "@/lib/edit/attrs";
+import { isEditMode } from "@/lib/edit/env";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import {
   getContactEmailDisplay,
@@ -19,6 +23,7 @@ import {
   getPhilippinesAddressShort,
   getPhilippinesPhone,
 } from "@/lib/contact-info";
+import { getContactMapEmbedSrc } from "@/lib/contact-map-embed";
 import { pageHeroes } from "@/lib/page-heroes";
 import { siteConfig } from "@/lib/config";
 import { duration, motionTransition } from "@/lib/motion";
@@ -72,8 +77,10 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
   };
 
   const prefix = `contact.${center}`;
+  const pageId = center === "korea" ? "contact.korea" : "contact.philippines";
 
   return (
+    <PageVisibilityGuard pageId={pageId}>
     <article>
       <PageHeroBanner src={pageHeroes.contact} editKey="heroes.contact" />
       <div className="page-container">
@@ -83,16 +90,27 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
           </h1>
           <div className="page-title-rule" />
         </Reveal>
-        <Reveal delay={0.08} className="mx-auto mt-12 max-w-5xl border border-page-body/15 p-6 md:p-10">
-          <div className="flex flex-col gap-10 lg:flex-row">
-            <div className="lg:w-[70%]">
+        <Reveal
+          delay={0.08}
+          className={`mx-auto mt-12 max-w-5xl border border-page-body/15 p-6 md:p-10 ${
+            isEditMode() ? "pl-10 md:pl-12" : ""
+          }`}
+        >
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]">
+            <div className="min-w-0 w-full">
+              <EditableBodyFlow
+                sectionKey={`${prefix}.body`}
+                fallbackSection={{ paragraphs: [] }}
+                className="mb-8"
+              />
               <ContactForm center={center} />
             </div>
-            <aside className="lg:w-[30%] text-page-body">
+            <aside className="min-w-0 w-full text-page-body">
               <ContactCenterToggle value={center} onChange={switchCenter} />
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={center}
+                  className="w-full"
                   initial={reduce ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={reduce ? undefined : { opacity: 0 }}
@@ -106,13 +124,19 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
                     {t(`${prefix}.addressTitle`)}
                   </EditableText>
                   {center === "korea" ? (
-                    <EditableText
-                      as="p"
-                      className="text-sm"
-                      editKey="siteContact.korea.address"
-                    >
-                      {getKoreaAddress(messages)}
-                    </EditableText>
+                    <>
+                      <EditableText
+                        as="p"
+                        className="text-sm"
+                        editKey="siteContact.korea.address"
+                      >
+                        {getKoreaAddress(messages)}
+                      </EditableText>
+                      <ContactMapEmbed
+                        src={getContactMapEmbedSrc("korea", messages)}
+                        title={t("contact.mapTitleKorea")}
+                      />
+                    </>
                   ) : (
                     <>
                       <EditableText
@@ -122,16 +146,29 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
                       >
                         {getPhilippinesAddressShort(messages)}
                       </EditableText>
-                      <EditableText
-                        as="p"
-                        className="mt-4 text-sm"
-                        editKey="siteContact.philippines.phone"
-                      >
-                        {getPhilippinesPhone(messages)}
-                      </EditableText>
+                      <ContactMapEmbed
+                        src={getContactMapEmbedSrc("philippines", messages)}
+                        title={t("contact.mapTitlePhilippines")}
+                      />
                     </>
                   )}
-                  <p className="mt-4 text-sm">
+                  <EditableText
+                    as="h2"
+                    className="mb-2 mt-8 font-logo text-xl text-page-heading"
+                    editKey={`${prefix}.contactTitle`}
+                  >
+                    {t(`${prefix}.contactTitle`)}
+                  </EditableText>
+                  {center === "philippines" && (
+                    <EditableText
+                      as="p"
+                      className="text-sm"
+                      editKey="siteContact.philippines.phone"
+                    >
+                      {getPhilippinesPhone(messages)}
+                    </EditableText>
+                  )}
+                  <p className={center === "philippines" ? "mt-4 text-sm" : "text-sm"}>
                     <ContactEmailLink className="interactive-link hover:text-page-heading" />
                   </p>
                   <EditableText
@@ -169,5 +206,6 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
         </Reveal>
       </div>
     </article>
+    </PageVisibilityGuard>
   );
 }

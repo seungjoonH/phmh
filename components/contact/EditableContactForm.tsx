@@ -131,11 +131,12 @@ export function EditableContactForm({ locale, onStructureChange }: Props) {
           dragIndex={dragIndex}
           dropTarget={dropTarget}
           busy={busy}
+          fullWidth
           onDragStart={setDragIndex}
           onDropTarget={pickDropTarget}
           onDrop={handleDrop}
         >
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid w-full gap-6 md:grid-cols-2">
             {item.fields.map((fieldId) => {
               const field = getContactField(fieldId);
               if (!field) return null;
@@ -165,6 +166,7 @@ export function EditableContactForm({ locale, onStructureChange }: Props) {
         dragIndex={dragIndex}
         dropTarget={dropTarget}
         busy={busy}
+        fullWidth
         onDragStart={setDragIndex}
         onDropTarget={pickDropTarget}
         onDrop={handleDrop}

@@ -25,11 +25,11 @@ export function EditableTextBlock({
   }
 
   return (
-    <div className={`group relative ${className}`}>
-      {onDelete ? (
-        <EditInlineControls onDelete={onDelete} />
-      ) : null}
-      <div {...editTextAttrs(editKey, { longPress })}>{children}</div>
+    <div className={`group relative flex w-fit max-w-full items-start gap-1.5 ${className}`}>
+      <div className="min-w-0" {...editTextAttrs(editKey, { longPress })}>
+        {children}
+      </div>
+      {onDelete ? <EditInlineControls onDelete={onDelete} /> : null}
     </div>
   );
 }

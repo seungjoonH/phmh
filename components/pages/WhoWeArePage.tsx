@@ -1,5 +1,6 @@
 "use client";
 
+import { PageVisibilityGuard } from "@/components/site/PageVisibilityGuard";
 import { ProsePage } from "@/components/ui/ProsePage";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { coerceStringArray } from "@/lib/edit/get-message-array";
@@ -10,6 +11,7 @@ export function WhoWeArePage() {
   const p = messages.pages.whoWeAre;
 
   return (
+    <PageVisibilityGuard pageId="about.who-we-are">
     <ProsePage
       heroSrc={pageHeroes.about}
       heroEditKey="heroes.about"
@@ -17,5 +19,6 @@ export function WhoWeArePage() {
       paragraphs={coerceStringArray(p.paragraphs)}
       editKeyPrefix="pages.whoWeAre"
     />
+    </PageVisibilityGuard>
   );
 }

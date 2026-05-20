@@ -2,14 +2,10 @@
 
 // Prose 페이지 템플릿
 import { Reveal } from "@/components/motion/Reveal";
-import { EditArrayAddButton } from "@/components/edit/EditArrayAddButton";
-import { EditableStringArraySection } from "@/components/edit/EditableStringArraySection";
-import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
+import { EditableBodyFlow } from "@/components/edit/EditableBodyFlow";
 import { editTextAttrs } from "@/lib/edit/attrs";
-import { getStringArrayAtPath } from "@/lib/edit/get-message-array";
-import { isEditMode } from "@/lib/edit/env";
+import { coerceStringArray } from "@/lib/edit/get-message-array";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { MarkupText } from "./MarkupText";
 import { PageHeroBanner } from "./PageHeroBanner";
 
 type Props = {
@@ -36,12 +32,22 @@ export function ProsePage({
   children,
 }: Props) {
   const { messages } = useLocale();
-  const edit = useEditDraftOptional();
-  const arrayKey = editKeyPrefix ? `${editKeyPrefix}.paragraphs` : undefined;
-  const liveParagraphs =
-    arrayKey && (isEditMode() || edit)
-      ? (getStringArrayAtPath(messages, arrayKey) ?? paragraphs)
-      : paragraphs;
+  const section =
+    editKeyPrefix && messages
+      ? (() => {
+          const parts = editKeyPrefix.split(".");
+          let current: unknown = messages;
+          for (const part of parts) {
+            if (current === null || typeof current !== "object") return { paragraphs };
+            current = (current as Record<string, unknown>)[part];
+          }
+          const data = current as { paragraphs?: unknown; flow?: unknown };
+          return {
+            paragraphs: coerceStringArray(data?.paragraphs ?? paragraphs),
+            flow: Array.isArray(data?.flow) ? data.flow : undefined,
+          };
+        })()
+      : { paragraphs };
 
   return (
     <article>
@@ -61,22 +67,20 @@ export function ProsePage({
           </h1>
           <div className="page-title-rule" />
         </Reveal>
-        <div className="mx-auto mt-12 max-w-3xl space-y-7 font-body text-lg font-light leading-[1.75] tracking-[0.01em] text-page-body">
-          {arrayKey ? (
-            <EditableStringArraySection arrayKey={arrayKey} items={liveParagraphs} />
+        <div className="mx-auto mt-12 max-w-3xl font-body text-lg font-light leading-[1.75] tracking-[0.01em] text-page-body">
+          {editKeyPrefix ? (
+            <EditableBodyFlow
+              sectionKey={editKeyPrefix}
+              fallbackSection={{ paragraphs: section.paragraphs }}
+            />
           ) : (
-            liveParagraphs.map((p, i) => (
+            section.paragraphs.map((p, i) => (
               <Reveal key={i} delay={i * 0.06}>
-                <p>
-                  <MarkupText as="span">{p}</MarkupText>
-                </p>
+                <p className="mb-7">{p}</p>
               </Reveal>
             ))
           )}
-          {children ? (
-            <Reveal delay={liveParagraphs.length * 0.06}>{children}</Reveal>
-          ) : null}
-          {arrayKey ? <EditArrayAddButton arrayKey={arrayKey} /> : null}
+          {children ? <Reveal className="mt-7">{children}</Reveal> : null}
         </div>
       </div>
     </article>

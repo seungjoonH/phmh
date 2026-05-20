@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
         destination: "/about/who-we-are",
         permanent: true,
       },
+      {
+        source: "/fee/fee",
+        destination: "/fee",
+        permanent: true,
+      },
+      {
+        source: "/fee/online-payment",
+        destination: "/fee",
+        permanent: true,
+      },
     ];
   },
 };

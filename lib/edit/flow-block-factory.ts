@@ -1,5 +1,6 @@
 // 서비스 섹션 flow 블록 생성
-import { emptyLocaleTextValues, newArrayItemValues } from "@/lib/edit/locale-helpers";
+import { emptyLocaleTextValues } from "@/lib/edit/locale-helpers";
+import { getActiveLocaleIds } from "@/lib/site-locales";
 import type { FlowBlock, FlowBlockInsertType } from "@/lib/edit/section-flow";
 
 let blockSeq = 0;
@@ -68,13 +69,12 @@ export function createFlowBlock(
 
 export function draftEntryForNewFlowBlock(block: FlowBlock) {
   if (block.type === "p" || block.type === "heading") {
-    return newArrayItemValues();
+    return emptyLocaleTextValues();
   }
   if (block.type === "button") {
     const values = emptyLocaleTextValues();
-    const fallback = newArrayItemValues();
-    for (const id of Object.keys(values)) {
-      values[id] = block.text || fallback[id] || "";
+    for (const id of getActiveLocaleIds()) {
+      values[id] = block.text || "";
     }
     return values;
   }
@@ -83,8 +83,5 @@ export function draftEntryForNewFlowBlock(block: FlowBlock) {
 
 export function arrayDraftForNewFlowBlock(block: FlowBlock) {
   if (block.type !== "bullets") return null;
-  const placeholder = newArrayItemValues();
-  return Object.fromEntries(
-    Object.entries(placeholder).map(([id, text]) => [id, [text]]),
-  );
+  return Object.fromEntries(getActiveLocaleIds().map((id) => [id, [""]]));
 }

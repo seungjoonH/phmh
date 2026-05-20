@@ -3,25 +3,50 @@ import { arrayBufferToBase64 } from "@/lib/edit/array-buffer-to-base64";
 type ImageDraft = { previewUrl: string; file: File };
 import type { ContactFormStructurePayload } from "@/lib/edit/client";
 import {
+  commitOrphanStepFieldDrafts,
+  commitStepsArrayDrafts,
+} from "@/lib/edit/commit-steps";
+import {
   addContactFormField,
   createLocale,
   fetchArrayRegistry,
   fetchContactFormStructure,
+  fetchTherapistsManifest,
   patchContactFormStructure,
   patchLocaleManifest,
   patchStringArray,
   patchText,
+  patchTherapist,
+  putSitePagesVisibility,
   removeContactFormField,
+  renameTherapist,
   writeImageFile,
+  type LocaleStepsArrays,
   type LocaleStringArrays,
   type LocaleTextValues,
 } from "@/lib/edit/client";
+import type { ContentLocale } from "@/lib/content-blocks/types";
+import { getTherapistContentLocaleIds } from "@/lib/therapists/manifest";
+import { slugFromDisplayName } from "@/lib/therapists/slug";
+import type { TherapistRecord } from "@/lib/therapists/types";
 import {
   mergeArrayItemIntoLocales,
   parseArrayItemKey,
 } from "@/lib/edit/array-item-key";
 import { expandTextDraftsForCommit } from "@/lib/edit/linked-text-keys";
 import { emptyLocaleTextValues } from "@/lib/edit/locale-helpers";
+import {
+  applyTherapistFieldLocales,
+  applyTherapistNameLocales,
+  getTherapistLinkedTextKeys,
+  isTherapistEditKey,
+  parseTherapistFieldKey,
+} from "@/lib/edit/therapist-edit-key";
+import { getTherapistBySlug } from "@/lib/therapists/load";
+import {
+  renameTherapistRuntime,
+  setTherapistRuntime,
+} from "@/lib/therapists/runtime";
 import { getActiveLocaleIds } from "@/lib/site-locales";
 import { getImageRegistryEntry } from "@/lib/edit/image-registry";
 import type { LocaleManifest } from "@/lib/site-locales";
@@ -29,6 +54,7 @@ import type { LocaleManifest } from "@/lib/site-locales";
 export type PendingCommitInput = {
   drafts: Record<string, LocaleTextValues>;
   arrayDrafts: Record<string, Partial<LocaleStringArrays>>;
+  stepsDrafts: Record<string, Partial<LocaleStepsArrays>>;
   hiddenTextKeys: Record<string, true>;
   imageDrafts: Record<string, ImageDraft>;
   contactStructureDraft: ContactFormStructurePayload | null;
@@ -36,6 +62,8 @@ export type PendingCommitInput = {
   localeManifestDraft: LocaleManifest | null;
   localeManifestBaseline: LocaleManifest | null;
   pendingLocaleCreates: string[];
+  sitePagesHiddenDraft: string[] | null;
+  sitePagesHiddenBaseline: string[] | null;
 };
 
 async function mergeArrayItemTextDrafts(
@@ -75,14 +103,86 @@ async function mergeArrayItemTextDrafts(
   return { textDrafts, mergedArrayDrafts };
 }
 
-export async function commitPendingEdits(input: PendingCommitInput): Promise<void> {
+async function computeTherapistTargetSlug(
+  oldSlug: string,
+  record: TherapistRecord,
+): Promise<string> {
+  const locales = getTherapistContentLocaleIds() as ContentLocale[];
+  let name = "";
+  for (const id of locales) {
+    const v = record.list.name[id]?.trim();
+    if (v) {
+      name = v;
+      break;
+    }
+  }
+  if (!name) return oldSlug;
+  let allSlugs: string[];
+  try {
+    const manifest = (await fetchTherapistsManifest()) as { order?: string[] };
+    allSlugs = manifest.order ?? [];
+  } catch {
+    allSlugs = [oldSlug];
+  }
+  const others = allSlugs.filter((s) => s !== oldSlug);
+  return slugFromDisplayName(name, others);
+}
+
+export type PendingCommitResult = {
+  renamedSlugs: Record<string, string>;
+};
+
+export async function commitPendingEdits(
+  input: PendingCommitInput,
+): Promise<PendingCommitResult> {
   const { textDrafts, mergedArrayDrafts } = await mergeArrayItemTextDrafts(
     input.drafts,
     input.arrayDrafts,
   );
 
   for (const key of Object.keys(input.hiddenTextKeys)) {
+    if (isTherapistEditKey(key)) continue;
     await patchText(key, emptyLocaleTextValues());
+  }
+
+  const therapistSlugs = new Set<string>();
+  for (const key of Object.keys(textDrafts)) {
+    if (!isTherapistEditKey(key)) continue;
+    const ref = parseTherapistFieldKey(key);
+    if (ref) therapistSlugs.add(ref.slug);
+  }
+
+  const renamedSlugs: Record<string, string> = {};
+
+  for (const slug of therapistSlugs) {
+    let record = getTherapistBySlug(slug);
+    if (!record) continue;
+    let nameSynced = false;
+    for (const [key, entry] of Object.entries(textDrafts)) {
+      const ref = parseTherapistFieldKey(key);
+      if (!ref || ref.slug !== slug) continue;
+      if (getTherapistLinkedTextKeys(key)) {
+        if (!nameSynced) {
+          record = applyTherapistNameLocales(record, entry);
+          nameSynced = true;
+        }
+        delete textDrafts[key];
+        continue;
+      }
+      record = applyTherapistFieldLocales(record, ref, entry);
+      delete textDrafts[key];
+    }
+
+    const targetSlug = await computeTherapistTargetSlug(slug, record);
+    if (targetSlug !== slug) {
+      await renameTherapist(slug, targetSlug, record);
+      renameTherapistRuntime(slug, targetSlug);
+      setTherapistRuntime(targetSlug, { ...record, slug: targetSlug });
+      renamedSlugs[slug] = targetSlug;
+    } else {
+      await patchTherapist(slug, record);
+      setTherapistRuntime(slug, record);
+    }
   }
 
   for (const [key, locales] of expandTextDraftsForCommit(textDrafts)) {
@@ -91,6 +191,17 @@ export async function commitPendingEdits(input: PendingCommitInput): Promise<voi
 
   for (const [key, locales] of Object.entries(mergedArrayDrafts)) {
     await patchStringArray(key, locales);
+  }
+
+  await commitStepsArrayDrafts(input.stepsDrafts, textDrafts);
+
+  const stepsKeysWithStructureDraft = new Set(Object.keys(input.stepsDrafts));
+  for (const key of Object.keys(textDrafts)) {
+    const match = /^(.+\.steps)\.\d+\.(title|description)$/.exec(key);
+    if (match && !stepsKeysWithStructureDraft.has(match[1])) {
+      await commitOrphanStepFieldDrafts(match[1], textDrafts, input.stepsDrafts);
+      stepsKeysWithStructureDraft.add(match[1]);
+    }
   }
 
   for (const [key, draft] of Object.entries(input.imageDrafts)) {
@@ -135,6 +246,17 @@ export async function commitPendingEdits(input: PendingCommitInput): Promise<voi
   if (input.localeManifestDraft) {
     await patchLocaleManifest(input.localeManifestDraft);
   }
+
+  if (
+    isSitePagesHiddenDirty(
+      input.sitePagesHiddenDraft,
+      input.sitePagesHiddenBaseline,
+    )
+  ) {
+    await putSitePagesVisibility(input.sitePagesHiddenDraft ?? []);
+  }
+
+  return { renamedSlugs };
 }
 
 export function isLocaleManifestDirty(
@@ -156,4 +278,14 @@ export function isContactStructureDirty(
   if (!draft) return false;
   if (!baseline) return true;
   return JSON.stringify(draft) !== JSON.stringify(baseline);
+}
+
+export function isSitePagesHiddenDirty(
+  draft: string[] | null,
+  baseline: string[] | null,
+): boolean {
+  if (!draft) return false;
+  const a = [...draft].sort().join("\0");
+  const b = [...(baseline ?? [])].sort().join("\0");
+  return a !== b;
 }

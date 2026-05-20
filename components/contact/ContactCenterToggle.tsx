@@ -22,7 +22,7 @@ export function ContactCenterToggle({ value, onChange }: Props) {
 
   return (
     <motion.div
-      className="mb-6 flex gap-1.5 rounded-md border border-page-body/20 p-1"
+      className="mb-6 flex w-full gap-1.5 rounded-md border border-page-body/20 p-1"
       role="group"
       aria-label={t("contact.centerToggleLabel")}
     >

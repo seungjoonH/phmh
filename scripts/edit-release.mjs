@@ -42,11 +42,12 @@ export function writePackageVersion(pkgPath, raw, newVersion) {
 
 /**
  * @param {string} root
+ * @param {string} command
  * @param {string[]} args
  */
-export function runGit(root, args) {
+export function runCommand(root, command, args) {
   return new Promise((resolve, reject) => {
-    const child = spawn("git", args, { cwd: root });
+    const child = spawn(command, args, { cwd: root, shell: process.platform === "win32" });
     let stdout = "";
     let stderr = "";
     child.stdout?.on("data", (d) => {
@@ -60,7 +61,7 @@ export function runGit(root, args) {
       if (code === 0) {
         resolve({ stdout: stdout.trim(), stderr: stderr.trim() });
       } else {
-        reject(new Error(stderr || stdout || `git ${args.join(" ")} exited ${code}`));
+        reject(new Error(stderr || stdout || `${command} ${args.join(" ")} exited ${code}`));
       }
     });
   });
@@ -68,12 +69,25 @@ export function runGit(root, args) {
 
 /**
  * @param {string} root
+ * @param {string[]} args
+ */
+export function runGit(root, args) {
+  return runCommand(root, "git", args);
+}
+
+/**
+ * @param {string} root
  */
 export async function runReleaseDeploy(root) {
+  await runGit(root, ["switch", "main"]);
+  await runGit(root, ["pull", "origin", "main"]);
+
   const { pkgPath, raw, version: previousVersion } = readPackageJson(root);
   const version = bumpPatchVersion(previousVersion);
   writePackageVersion(pkgPath, raw, version);
   const commitMessage = `release: v${version}`;
+
+  await runCommand(root, "pnpm", ["install"]);
 
   await runGit(root, ["add", "."]);
   await runGit(root, ["commit", "-m", commitMessage]);

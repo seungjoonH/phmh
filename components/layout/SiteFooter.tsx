@@ -9,6 +9,7 @@ import { EditableText } from "@/components/edit/EditableText";
 import { editTextAttrs } from "@/lib/edit/attrs";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { getNavigation } from "@/lib/navigation";
+import { useVisibilityEpoch } from "@/lib/edit/use-visibility-epoch";
 import {
   getContactEmailDisplay,
   getKoreaAddress,
@@ -19,6 +20,7 @@ import {
 export function SiteFooter() {
   const t = useTranslations();
   const { locale, messages } = useLocale();
+  useVisibilityEpoch();
   const nav = getNavigation(locale);
   const email = getContactEmailDisplay(messages);
 

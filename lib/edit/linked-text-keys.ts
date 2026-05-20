@@ -1,5 +1,6 @@
 // 함께 동기화할 locale 텍스트 키 그룹 (내비·페이지 제목·사이드바·섹션 제목)
 import type { LocaleTextValues } from "@/lib/edit/client";
+import { getTherapistLinkedTextKeys } from "@/lib/edit/therapist-edit-key";
 const SERVICES_SECTION_IDS = [
   "individual",
   "couples",
@@ -38,10 +39,12 @@ function sidebarSectionLinkGroups(
 
 const LINK_GROUPS: string[][] = [
   ["nav.contact", "contact.title"],
+  ["nav.koreaCenter", "nav.philippinesCenter", "contact.title"],
+  ["nav.therapists", "therapists.list.pageTitle", "therapists.list.breadcrumb"],
   ["nav.whoWeAre", "pages.whoWeAre.title"],
   ["nav.ourVision", "pages.ourVision.title"],
   ["nav.gettingStarted", "pages.gettingStarted.title"],
-  ["nav.fee", "nav.feePage", "pages.fee.title"],
+  ["nav.fee", "pages.fee.title"],
   ["nav.services", "nav.typesOfServices", "services.pageTitle"],
   ["nav.serviceAreas", "serviceAreas.pageTitle"],
   ...sidebarSectionLinkGroups("services", SERVICES_SECTION_IDS),
@@ -57,6 +60,8 @@ for (let i = 0; i < LINK_GROUPS.length; i++) {
 
 /** 같은 그룹에 속한 모든 locale 키 (없으면 자기 자신만) */
 export function getLinkedTextKeys(key: string): string[] {
+  const therapist = getTherapistLinkedTextKeys(key);
+  if (therapist) return therapist;
   const idx = keyToGroupIndex.get(key);
   if (idx === undefined) return [key];
   return [...LINK_GROUPS[idx]];
@@ -64,6 +69,8 @@ export function getLinkedTextKeys(key: string): string[] {
 
 /** pending 카운트·중복 커밋 방지용 그룹 id */
 export function getLinkedTextKeyGroupId(key: string): string {
+  const therapist = getTherapistLinkedTextKeys(key);
+  if (therapist) return therapist.join("|");
   const idx = keyToGroupIndex.get(key);
   return idx === undefined ? key : `link-group:${idx}`;
 }

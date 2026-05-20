@@ -80,7 +80,7 @@ export function EditLanguageSettings({ selectedLocale, onSelectLocale }: Props) 
         dragIndex={dragIndex}
         pickDropTarget={pickDropTarget}
         onDrop={handleDrop}
-        className="flex flex-wrap gap-3"
+        className="flex gap-3"
       >
         {ordered.map((opt, index) => {
           const isHidden = manifest.hidden.includes(opt.id);
@@ -92,14 +92,14 @@ export function EditLanguageSettings({ selectedLocale, onSelectLocale }: Props) 
               dropTarget={dropTarget}
               busy={busy}
               orientation="horizontal"
-              className="min-w-[5.5rem] flex-1"
+              className="min-w-0 flex-1 basis-0"
               handleClassName="absolute -left-2 top-1 z-10"
               onDragStart={setDragIndex}
               onDropTarget={pickDropTarget}
               onDrop={handleDrop}
             >
               <div
-                className={`flex flex-col items-center gap-1.5 rounded-lg border px-2 py-2 text-center ${
+                className={`flex w-full flex-col items-center gap-1.5 rounded-lg border px-2 py-2 text-center ${
                   isHidden ? "border-page-body/10 opacity-50" : "border-page-body/20"
                 }`}
               >

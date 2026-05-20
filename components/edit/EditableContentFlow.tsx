@@ -2,7 +2,7 @@
 
 // 서비스 섹션 본문 — p·제목·불릿·구분선·이미지·버튼 블록 DnD·추가
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { EditableImage } from "@/components/edit/EditableImage";
 import { EditableText } from "@/components/edit/EditableText";
 import { EditFlowInsertBar } from "@/components/edit/EditFlowInsertBar";
@@ -20,66 +20,108 @@ import {
   type FlowBlockInsertType,
 } from "@/lib/edit/section-flow";
 import { isEditMode } from "@/lib/edit/env";
+import { useEditText } from "@/lib/edit/use-edit-text";
 import { MarkupText } from "@/components/ui/MarkupText";
 
 type Props = {
   sectionKey: string;
   blocks: FlowBlock[];
-  ctaLabel: string;
-  ctaHref: string;
+  ctaLabel?: string;
+  ctaHref?: string;
   ctaEditKey?: string;
   imageEditKey?: string;
   imageSrc?: string;
+  /** false면 flow 끝 CTA 버튼 블록을 붙이지 않음 */
+  appendCta?: boolean;
 };
 
-function renderBlockBody(
-  block: FlowBlock,
-  ctaHref: string,
-) {
+function FlowParagraphBlock({ block }: { block: Extract<FlowBlock, { type: "p" }> }) {
+  const text = useEditText(block.textKey, block.text);
+  return (
+    <EditableText as="p" editKey={block.textKey}>
+      {text}
+    </EditableText>
+  );
+}
+
+function FlowHeadingBlock({ block }: { block: Extract<FlowBlock, { type: "heading" }> }) {
+  const text = useEditText(block.textKey, block.text);
+  return (
+    <EditableText
+      as="p"
+      className="font-medium text-page-heading/90"
+      editKey={block.textKey}
+    >
+      {text}
+    </EditableText>
+  );
+}
+
+function FlowBulletItem({
+  listKey,
+  index,
+  committed,
+}: {
+  listKey: string;
+  index: number;
+  committed: string;
+}) {
+  const editKey = flowBulletItemEditKey(listKey, index);
+  const text = useEditText(editKey, committed.replace(/^[•\-–]\s*/, ""));
+  return (
+    <EditableText as="span" editKey={editKey}>
+      {text}
+    </EditableText>
+  );
+}
+
+function FlowBulletsBlock({ block }: { block: Extract<FlowBlock, { type: "bullets" }> }) {
+  return (
+    <ul className="list-disc w-fit max-w-full space-y-2 pl-6 marker:text-page-body">
+      {block.items.map((item, i) => (
+        <li key={i}>
+          <FlowBulletItem listKey={block.listKey} index={i} committed={item} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function FlowButtonBlock({
+  block,
+  ctaHref,
+}: {
+  block: Extract<FlowBlock, { type: "button" }>;
+  ctaHref?: string;
+}) {
+  const text = useEditText(block.textKey, block.text);
+  const attrs = editTextAttrs(block.textKey, { longPress: true });
+  if (ctaHref) {
+    return (
+      <Link href={ctaHref} className="cta-primary inline-block" {...attrs}>
+        <MarkupText as="span">{text}</MarkupText>
+      </Link>
+    );
+  }
+  return (
+    <span className="cta-primary inline-block" {...attrs}>
+      <MarkupText as="span">{text}</MarkupText>
+    </span>
+  );
+}
+
+function FlowBlockBody({ block, ctaHref }: { block: FlowBlock; ctaHref?: string }) {
   switch (block.type) {
     case "p":
-      return (
-        <EditableText as="p" editKey={block.textKey}>
-          {block.text}
-        </EditableText>
-      );
+      return <FlowParagraphBlock block={block} />;
     case "heading":
-      return (
-        <EditableText
-          as="p"
-          className="font-medium text-page-heading/90"
-          editKey={block.textKey}
-        >
-          {block.text}
-        </EditableText>
-      );
+      return <FlowHeadingBlock block={block} />;
     case "bullets":
-      return (
-        <ul className="list-disc space-y-2 pl-6 marker:text-page-body">
-          {block.items.map((item, i) => (
-            <li key={i}>
-              <EditableText
-                as="span"
-                editKey={flowBulletItemEditKey(block.listKey, i)}
-              >
-                {item.replace(/^[•\-–]\s*/, "")}
-              </EditableText>
-            </li>
-          ))}
-        </ul>
-      );
+      return <FlowBulletsBlock block={block} />;
     case "hr":
       return <div className="border-t border-page-body/10" aria-hidden />;
     case "button":
-      return (
-        <Link
-          href={ctaHref}
-          className="cta-primary inline-block"
-          {...editTextAttrs(block.textKey, { longPress: true })}
-        >
-          {block.text}
-        </Link>
-      );
+      return <FlowButtonBlock block={block} ctaHref={ctaHref} />;
     case "img":
       if (!getImageRegistryEntry(block.editKey)) {
         return (
@@ -104,7 +146,7 @@ function renderBlockBody(
   }
 }
 
-function renderBlockReadonly(block: FlowBlock, ctaHref: string) {
+function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
   switch (block.type) {
     case "p":
       return (
@@ -120,7 +162,7 @@ function renderBlockReadonly(block: FlowBlock, ctaHref: string) {
       );
     case "bullets":
       return (
-        <ul className="list-disc space-y-2 pl-6 marker:text-page-body">
+        <ul className="list-disc w-fit max-w-full space-y-2 pl-6 marker:text-page-body">
           {block.items.map((item, i) => (
             <li key={i}>
               <MarkupText as="span">{item.replace(/^[•\-–]\s*/, "")}</MarkupText>
@@ -131,10 +173,12 @@ function renderBlockReadonly(block: FlowBlock, ctaHref: string) {
     case "hr":
       return <div className="border-t border-page-body/10 pt-8" aria-hidden />;
     case "button":
-      return (
+      return ctaHref ? (
         <Link href={ctaHref} className="cta-primary inline-block">
           {block.text}
         </Link>
+      ) : (
+        <span className="cta-primary inline-block">{block.text}</span>
       );
     case "img":
       return (
@@ -156,13 +200,19 @@ export function EditableContentFlow({
   ctaEditKey,
   imageEditKey,
   imageSrc,
+  appendCta = true,
 }: Props) {
   const edit = useEditDraftOptional();
   const editing = isEditMode() && edit;
-  const displayBlocks = ensureFlowEndsWithCta(blocks, {
-    textKey: ctaEditKey ?? "common.scheduleConsultation",
-    label: ctaLabel,
-  });
+  const displayBlocks =
+    appendCta && ctaLabel && ctaHref
+      ? ensureFlowEndsWithCta(blocks, {
+          textKey: ctaEditKey ?? "common.scheduleConsultation",
+          label: ctaLabel,
+        })
+      : blocks;
+
+  const [openInsertIndex, setOpenInsertIndex] = useState<number | null>(null);
 
   const {
     dragIndex,
@@ -190,6 +240,7 @@ export function EditableContentFlow({
   });
 
   const handleInsert = (index: number, type: FlowBlockInsertType) => {
+    setOpenInsertIndex(null);
     void edit.insertFlowBlock(sectionKey, index, type, {
       ctaEditKey,
       ctaLabel,
@@ -211,6 +262,9 @@ export function EditableContentFlow({
             index={i}
             busy={busy}
             canInsertImage={canInsertImage}
+            isOpen={openInsertIndex === i}
+            onOpen={setOpenInsertIndex}
+            onClose={() => setOpenInsertIndex(null)}
             onInsert={handleInsert}
           />
           <EditReorderRow
@@ -230,7 +284,7 @@ export function EditableContentFlow({
               ) : undefined
             }
           >
-            {renderBlockBody(block, ctaHref)}
+            <FlowBlockBody block={block} ctaHref={ctaHref} />
           </EditReorderRow>
         </Fragment>
       ))}
@@ -238,6 +292,9 @@ export function EditableContentFlow({
         index={displayBlocks.length}
         busy={busy}
         canInsertImage={canInsertImage}
+        isOpen={openInsertIndex === displayBlocks.length}
+        onOpen={setOpenInsertIndex}
+        onClose={() => setOpenInsertIndex(null)}
         onInsert={handleInsert}
       />
     </EditReorderList>

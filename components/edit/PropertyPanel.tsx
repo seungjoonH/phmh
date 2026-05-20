@@ -1,11 +1,19 @@
 "use client";
 
 // locale 텍스트 속성 패널 — 초안 미리보기, 저장 시 디스크 반영
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useEditDraft } from "@/components/edit/EditDraftProvider";
 import { EditSidePanel } from "@/components/edit/EditSidePanel";
 import { emptyLocaleTextValues } from "@/lib/edit/locale-helpers";
 import type { LocaleTextValues } from "@/lib/edit/client";
+import { toggleInlineMarkup } from "@/lib/edit/inline-markup-edit";
+import {
+  createTextEditHistory,
+  pushTextEditHistory,
+  redoTextEditHistory,
+  resetTextEditHistory,
+  undoTextEditHistory,
+} from "@/lib/edit/text-edit-history";
 import { getActiveLocaleIds, resolveLocaleOption } from "@/lib/site-locales";
 
 function localeRows(): { id: string; label: string }[] {
@@ -31,11 +39,12 @@ export function PropertyPanel() {
     closeEditor,
     drafts,
     setDraftEntry,
+    revertDraft,
     panelBaseline,
     setPanelBaseline,
     commitTextKey,
     committing,
-    resolveTextRegistryValues,
+    resolveCommittedTextRegistryValues,
   } = useEditDraft();
 
   const key = selected?.kind === "text" ? selected.key : null;
@@ -43,27 +52,53 @@ export function PropertyPanel() {
   const [values, setValues] = useState<LocaleTextValues>(() => emptyLocaleTextValues());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const textareaRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
+  const focusedLocaleRef = useRef<string | null>(null);
+  const valuesRef = useRef(values);
+  const historyRef = useRef(createTextEditHistory());
+  const draftsRef = useRef(drafts);
+  draftsRef.current = drafts;
+
+  valuesRef.current = values;
+
+  const syncDraft = useCallback(
+    (next: LocaleTextValues) => {
+      if (!key) return;
+      if (!isTextDirty(next, panelBaseline)) {
+        revertDraft(key);
+      } else {
+        setDraftEntry(key, next);
+      }
+    },
+    [key, panelBaseline, revertDraft, setDraftEntry],
+  );
+
+  const applyValues = useCallback(
+    (next: LocaleTextValues, options?: { recordHistory?: boolean }) => {
+      if (!key) return;
+      if (options?.recordHistory !== false) {
+        pushTextEditHistory(historyRef.current, valuesRef.current);
+      }
+      setValues(next);
+      syncDraft(next);
+    },
+    [key, syncDraft],
+  );
 
   useEffect(() => {
     if (!key) return;
     let cancelled = false;
     setLoading(true);
     setError(null);
-    const existing = drafts[key];
-    if (existing) {
-      const merged = mergeTextValues(existing);
-      setValues(merged);
-      setPanelBaseline(merged);
-      setLoading(false);
-      return;
-    }
+    resetTextEditHistory(historyRef.current);
 
-    resolveTextRegistryValues(key)
-      .then((locales) => {
+    resolveCommittedTextRegistryValues(key)
+      .then((committed) => {
         if (cancelled) return;
-        const merged = mergeTextValues(locales);
-        setValues(merged);
-        setPanelBaseline(merged);
+        const baseline = mergeTextValues(committed);
+        setPanelBaseline(baseline);
+        const existing = draftsRef.current[key];
+        setValues(existing ? mergeTextValues(existing) : baseline);
       })
       .catch((err) => {
         if (!cancelled) {
@@ -77,15 +112,75 @@ export function PropertyPanel() {
     return () => {
       cancelled = true;
     };
-  }, [key, drafts, resolveTextRegistryValues, setPanelBaseline]);
+  }, [key, resolveCommittedTextRegistryValues, setPanelBaseline]);
 
-  const applyPreview = useCallback(
-    (next: LocaleTextValues) => {
-      if (!key) return;
-      setValues(next);
-      setDraftEntry(key, next);
+  const refocusTextarea = useCallback(() => {
+    requestAnimationFrame(() => {
+      const id = focusedLocaleRef.current;
+      if (!id) return;
+      const node = textareaRefs.current[id];
+      if (!node) return;
+      node.focus();
+      const end = node.value.length;
+      node.setSelectionRange(end, end);
+    });
+  }, []);
+
+  const handleUndo = useCallback(() => {
+    const prev = undoTextEditHistory(historyRef.current, valuesRef.current);
+    if (prev) {
+      applyValues(prev, { recordHistory: false });
+      refocusTextarea();
+    }
+  }, [applyValues, refocusTextarea]);
+
+  const handleRedo = useCallback(() => {
+    const next = redoTextEditHistory(historyRef.current, valuesRef.current);
+    if (next) {
+      applyValues(next, { recordHistory: false });
+      refocusTextarea();
+    }
+  }, [applyValues, refocusTextarea]);
+
+  const handleMarkupShortcut = useCallback(
+    (
+      localeId: string,
+      wrap: "bold" | "italic",
+      e: React.KeyboardEvent<HTMLTextAreaElement>,
+    ) => {
+      const el = e.currentTarget;
+      const current = valuesRef.current[localeId] ?? "";
+      const result = toggleInlineMarkup(
+        current,
+        el.selectionStart,
+        el.selectionEnd,
+        wrap,
+      );
+      e.preventDefault();
+      applyValues({ ...valuesRef.current, [localeId]: result.text });
+      requestAnimationFrame(() => {
+        const node = textareaRefs.current[localeId];
+        if (!node) return;
+        node.focus();
+        node.setSelectionRange(result.selectionStart, result.selectionEnd);
+      });
     },
-    [key, setDraftEntry],
+    [applyValues],
+  );
+
+  const handleKeyDown = useCallback(
+    (localeId: string, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.metaKey && e.key === "z") {
+        e.preventDefault();
+        if (e.shiftKey) handleRedo();
+        else handleUndo();
+        return;
+      }
+      if (!e.metaKey) return;
+      if (e.key === "b") handleMarkupShortcut(localeId, "bold", e);
+      if (e.key === "i") handleMarkupShortcut(localeId, "italic", e);
+    },
+    [handleRedo, handleUndo, handleMarkupShortcut],
   );
 
   const handleClose = () => {
@@ -94,7 +189,7 @@ export function PropertyPanel() {
 
   const handleApply = async () => {
     if (!key || committing) return;
-    setDraftEntry(key, values);
+    setDraftEntry(key, valuesRef.current);
     try {
       await commitTextKey(key);
       closeEditor();
@@ -105,7 +200,7 @@ export function PropertyPanel() {
 
   if (!key || selected?.kind !== "text") return null;
 
-  const isDirty = Boolean(key && drafts[key]) || isTextDirty(values, panelBaseline);
+  const isDirty = isTextDirty(values, panelBaseline);
 
   return (
     <EditSidePanel>
@@ -130,19 +225,30 @@ export function PropertyPanel() {
         {loading ? (
           <p className="text-sm text-page-body">불러오는 중…</p>
         ) : (
-          <div className="phmh-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain">
-            {rows.map(({ id, label }) => (
-              <label key={id} className="block">
-                <span className="mb-1 block text-sm font-medium text-page-heading">{label}</span>
-                <textarea
-                  className="input-panel w-full px-3 py-2"
-                  rows={id === "en" ? 4 : 3}
-                  value={values[id] ?? ""}
-                  onChange={(e) => applyPreview({ ...values, [id]: e.target.value })}
-                />
-              </label>
-            ))}
-          </div>
+          <>
+            <div className="phmh-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain">
+              {rows.map(({ id, label }) => (
+                <label key={id} className="block">
+                  <span className="mb-1 block text-sm font-medium text-page-heading">{label}</span>
+                  <textarea
+                    ref={(node) => {
+                      textareaRefs.current[id] = node;
+                    }}
+                    className="input-panel w-full px-3 py-2"
+                    rows={id === "en" ? 4 : 3}
+                    value={values[id] ?? ""}
+                    onFocus={() => {
+                      focusedLocaleRef.current = id;
+                    }}
+                    onChange={(e) =>
+                      applyValues({ ...valuesRef.current, [id]: e.target.value })
+                    }
+                    onKeyDown={(e) => handleKeyDown(id, e)}
+                  />
+                </label>
+              ))}
+            </div>
+          </>
         )}
 
         {error ? <p className="mt-3 shrink-0 text-sm text-red-600">{error}</p> : null}

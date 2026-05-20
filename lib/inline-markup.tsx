@@ -41,7 +41,7 @@ export function renderInlineMarkup(text: string): ReactNode {
   return tokenizeInlineMarkup(text).map((part, index) => {
     if (part.kind === "bold") {
       return (
-        <strong key={index} className="font-medium text-page-body">
+        <strong key={index} className="font-semibold text-page-body">
           {renderInlineMarkup(part.value)}
         </strong>
       );

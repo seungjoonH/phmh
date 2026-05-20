@@ -1,5 +1,9 @@
 // 편집 모드 — manifest 기준 locale 레코드 헬퍼
-import type { LocaleStringArrays, LocaleTextValues } from "@/lib/edit/client";
+import type {
+  LocaleStepsArrays,
+  LocaleStringArrays,
+  LocaleTextValues,
+} from "@/lib/edit/client";
 import { getActiveLocaleIds } from "@/lib/site-locales";
 
 const KNOWN_ARRAY_ITEM: Record<string, string> = {
@@ -30,6 +34,14 @@ export function isCompleteArrayRecord(
   record: Partial<LocaleStringArrays> | undefined,
   ids: string[] = getActiveLocaleIds(),
 ): record is LocaleStringArrays {
+  if (!record) return false;
+  return ids.every((id) => Array.isArray(record[id]));
+}
+
+export function isCompleteStepsRecord(
+  record: Partial<LocaleStepsArrays> | undefined,
+  ids: string[] = getActiveLocaleIds(),
+): record is LocaleStepsArrays {
   if (!record) return false;
   return ids.every((id) => Array.isArray(record[id]));
 }

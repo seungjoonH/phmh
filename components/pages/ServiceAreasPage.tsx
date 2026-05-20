@@ -1,5 +1,6 @@
 "use client";
 
+import { PageVisibilityGuard } from "@/components/site/PageVisibilityGuard";
 import { LongFormPage } from "@/components/ui/LongFormPage";
 import type { ContentSubsection, ListBlock } from "@/components/ui/ServiceSection";
 
@@ -69,6 +70,7 @@ export function ServiceAreasPage() {
   });
 
   return (
+    <PageVisibilityGuard pageId="services.areas">
     <LongFormPage
       heroSrc={pageHeroes.serviceAreas}
       heroEditKey="heroes.serviceAreas"
@@ -80,5 +82,6 @@ export function ServiceAreasPage() {
       ctaHref={getContactPath(locale)}
       ctaEditKey="common.scheduleConsultation"
     />
+    </PageVisibilityGuard>
   );
 }

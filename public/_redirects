@@ -6,6 +6,7 @@
 /services-2 /getting-started 301
 /%EB%B3%B5%EC%A0%9C-contact-us-2 /contact-us/korea-center 301
 /%EB%B3%B5%EC%A0%9C-contact-us-1 /contact-us/philippines-center 301
-/%EB%B3%B5%EC%A0%9C-fees /fee/fee 301
-/%EB%B3%B5%EC%A0%9C-fee /fee/fee 301
-/fee /fee/online-payment 301
+/%EB%B3%B5%EC%A0%9C-fees /fee 301
+/%EB%B3%B5%EC%A0%9C-fee /fee 301
+/fee/fee /fee 301
+/fee/online-payment /fee 301

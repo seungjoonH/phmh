@@ -5,13 +5,13 @@
 :root {
   /* SiteHeader: py-6 + h-10 + py-6 / md: py-8 + h-12 + py-8 */
   --site-header-height: 5.5rem;
-  --color-primary: #234f3c;
+  --color-primary: #1a3d2e;
   --color-primary-foreground: #f5f3ee;
-  --color-secondary: #4a6e78;
+  --color-secondary: #1f4d3a;
   --color-secondary-foreground: #ffffff;
   --color-tertiary: #f9f9f5;
   --page-bg: 249 249 245;
-  --page-heading: 74 124 147;
+  --page-heading: 26 61 46;
   --page-body: 75 75 75;
   --link-active: #b8c98e;
   --scrollbar-size: 6px;
@@ -26,13 +26,13 @@
 }
 
 .dark {
-  --color-primary: #2a5f48;
+  --color-primary: #234f3c;
   --color-primary-foreground: #f5f3ee;
-  --color-secondary: #6a909c;
+  --color-secondary: #3a7a5c;
   --color-secondary-foreground: #ffffff;
   --color-tertiary: #1a1f24;
   --page-bg: 26 31 36;
-  --page-heading: 126 184 201;
+  --page-heading: 168 210 186;
   --page-body: 200 200 200;
   --link-active: #c5d4a0;
   --scrollbar-thumb: rgb(var(--page-body) / 0.32);
@@ -189,45 +189,45 @@
 
   .edit-highlight-hover {
     @apply border-dashed border-page-bg;
-    background-color: rgb(35 79 60 / 0.18);
+    background-color: rgb(26 61 46 / 0.18);
   }
 
   .edit-highlight-selected {
     @apply border-solid border-page-bg;
-    background-color: rgb(35 79 60 / 0.24);
+    background-color: rgb(26 61 46 / 0.24);
   }
 
   .dark .edit-highlight-hover {
     border-color: rgb(var(--page-bg));
-    background-color: rgb(42 95 72 / 0.28);
+    background-color: rgb(35 79 60 / 0.28);
   }
 
   .dark .edit-highlight-selected {
     border-color: rgb(var(--page-bg));
-    background-color: rgb(42 95 72 / 0.34);
+    background-color: rgb(35 79 60 / 0.34);
   }
 
   /* 편집 패널 — 파일 선택 트리거 */
   .input-file-trigger {
     @apply inline-flex shrink-0 items-center rounded border border-page-body/20 bg-page-bg px-3 py-2 text-sm font-medium text-page-heading transition-[border-color,background-color] duration-200 ease-in-out;
-    background-color: rgb(35 79 60 / 0.12);
+    background-color: rgb(26 61 46 / 0.12);
   }
 
   label:hover .input-file-trigger,
   .input-file-trigger:hover {
     @apply border-secondary;
-    background-color: rgb(35 79 60 / 0.2);
+    background-color: rgb(26 61 46 / 0.2);
   }
 
   .dark .input-file-trigger {
     border-color: rgb(var(--page-bg));
-    background-color: rgb(42 95 72 / 0.22);
+    background-color: rgb(35 79 60 / 0.22);
   }
 
   .dark label:hover .input-file-trigger,
   .dark .input-file-trigger:hover {
     border-color: rgb(var(--page-body) / 0.35);
-    background-color: rgb(42 95 72 / 0.32);
+    background-color: rgb(35 79 60 / 0.32);
   }
 
   /* 편집 모드 — 인라인 삭제 버튼 */

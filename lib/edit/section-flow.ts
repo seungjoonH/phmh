@@ -1,5 +1,6 @@
 // 서비스 섹션 본문 — 통합 flow 블록 직렬화·역직렬화
 import type { ContentSubsection, ListBlock } from "@/components/ui/ServiceSection";
+import { paragraphsToFlow } from "@/lib/edit/prose-flow";
 
 export type FlowBlockInsertType = "p" | "heading" | "bullets" | "hr" | "button" | "img";
 
@@ -25,6 +26,7 @@ export type SectionContent = {
   lists?: ListBlock[];
   closing?: string[];
   subsections?: ContentSubsection[];
+  paragraphs?: string[];
   flow?: StoredFlowBlock[] | FlowBlock[];
 };
 
@@ -133,6 +135,10 @@ function normalizeStoredFlowBlock(block: StoredFlowBlock | FlowBlock): FlowBlock
 export function flattenSectionToFlow(section: SectionContent, keyPrefix: string): FlowBlock[] {
   if (section.flow?.length) {
     return section.flow.map((b) => normalizeStoredFlowBlock(b as StoredFlowBlock));
+  }
+
+  if (section.paragraphs?.length) {
+    return paragraphsToFlow(keyPrefix, section.paragraphs);
   }
 
   const blocks: FlowBlock[] = [];
@@ -275,21 +281,19 @@ export function hydrateFlowBlocks(
 ): FlowBlock[] {
   return blocks.map((block) => {
     if (block.type === "p" || block.type === "heading") {
-      const live = readText(block.textKey);
-      return live ? { ...block, text: live } : block;
+      return { ...block, text: readText(block.textKey) };
     }
     if (block.type === "bullets") {
       return {
         ...block,
         items: block.items.map((item, i) => {
           const live = readText(flowBulletItemEditKey(block.listKey, i));
-          return live || item;
+          return live !== "" ? live : item;
         }),
       };
     }
     if (block.type === "button") {
-      const live = readText(block.textKey);
-      return live ? { ...block, text: live } : block;
+      return { ...block, text: readText(block.textKey) };
     }
     return block;
   });

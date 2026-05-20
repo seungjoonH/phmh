@@ -1,0 +1,22 @@
+{
+  "contentLocales": ["en", "ko", "jp"],
+  "order": [
+    "dr-maya-han-ph-d",
+    "dr-erin-cho-ph-d",
+    "dr-noah-bennett-ph-d"
+  ],
+  "entries": {
+    "dr-maya-han-ph-d": {
+      "createdAt": "2026-05-19T00:00:00.000Z",
+      "sourceName": "Dr. Maya Han, Ph.D."
+    },
+    "dr-erin-cho-ph-d": {
+      "createdAt": "2026-05-19T00:00:00.000Z",
+      "sourceName": "Dr. Erin Cho, Ph.D."
+    },
+    "dr-noah-bennett-ph-d": {
+      "createdAt": "2026-05-19T00:00:00.000Z",
+      "sourceName": "Dr. Noah Bennett, Ph.D."
+    }
+  }
+}

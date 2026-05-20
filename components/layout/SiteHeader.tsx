@@ -8,10 +8,12 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
 import { EditableNavLabel } from "@/components/edit/EditableNavLabel";
+import { EditableTherapistNavLabel } from "@/components/edit/EditableTherapistNavLabel";
 import { useEditImageSrc } from "@/components/edit/useEditImageSrc";
 import { editImageAttrs, editTextAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
-import { getNavigation, type NavItem } from "@/lib/navigation";
+import { getNavigation, navChildLabel, type NavItem } from "@/lib/navigation";
+import { useVisibilityEpoch } from "@/lib/edit/use-visibility-epoch";
 import { siteAssets } from "@/lib/site-assets";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { SettingsModal } from "@/components/settings/SettingsModal";
@@ -147,6 +149,7 @@ function HeaderLogo({ alt }: { alt: string }) {
 export function SiteHeader() {
   const { locale } = useLocale();
   const t = useTranslations();
+  useVisibilityEpoch();
   const nav = getNavigation(locale);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -176,7 +179,13 @@ export function SiteHeader() {
             aria-label="Main"
           >
             {nav.map((item) => (
-              <DesktopNavItem key={item.labelKey} item={item} t={t} reduce={reduce} />
+              <DesktopNavItem
+                key={item.labelKey}
+                item={item}
+                t={t}
+                locale={locale}
+                reduce={reduce}
+              />
             ))}
             <motion.button
               type="button"
@@ -233,6 +242,7 @@ export function SiteHeader() {
                     key={item.labelKey}
                     item={item}
                     t={t}
+                    locale={locale}
                     reduce={reduce}
                     onNavigate={() => setMobileOpen(false)}
                   />
@@ -250,10 +260,12 @@ export function SiteHeader() {
 function DesktopNavItem({
   item,
   t,
+  locale,
   reduce,
 }: {
   item: NavItem;
   t: (k: string) => string;
+  locale: string;
   reduce: boolean | null;
 }) {
   const pathname = usePathname();
@@ -307,9 +319,15 @@ function DesktopNavItem({
                   className={`${navLinkClass} block w-full text-center`}
                   onClick={() => setOpen(false)}
                 >
-                  <EditableNavLabel labelKey={child.labelKey}>
-                    {t(child.labelKey)}
-                  </EditableNavLabel>
+                  {child.therapistSlug ? (
+                    <EditableTherapistNavLabel slug={child.therapistSlug} />
+                  ) : child.labelKey ? (
+                    <EditableNavLabel labelKey={child.labelKey}>
+                      {navChildLabel(child, t, locale)}
+                    </EditableNavLabel>
+                  ) : (
+                    <span>{navChildLabel(child, t, locale)}</span>
+                  )}
                 </NavAnchor>
               ))}
             </motion.div>
@@ -323,11 +341,13 @@ function DesktopNavItem({
 function MobileNavItem({
   item,
   t,
+  locale,
   reduce,
   onNavigate,
 }: {
   item: NavItem;
   t: (k: string) => string;
+  locale: string;
   reduce: boolean | null;
   onNavigate: () => void;
 }) {
@@ -371,9 +391,15 @@ function MobileNavItem({
                       onClick={onNavigate}
                       className="interactive-link block text-base"
                     >
-                      <EditableNavLabel labelKey={child.labelKey}>
-                        {t(child.labelKey)}
-                      </EditableNavLabel>
+                      {child.therapistSlug ? (
+                        <EditableTherapistNavLabel slug={child.therapistSlug} />
+                      ) : child.labelKey ? (
+                        <EditableNavLabel labelKey={child.labelKey}>
+                          {navChildLabel(child, t, locale)}
+                        </EditableNavLabel>
+                      ) : (
+                        <span>{navChildLabel(child, t, locale)}</span>
+                      )}
                     </NavAnchor>
                   ))}
                 </div>

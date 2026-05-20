@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEditDraft } from "@/components/edit/EditDraftProvider";
+import { SitePagesPanel } from "@/components/edit/SitePagesPanel";
 import { deployRelease } from "@/lib/edit/client";
 import { duration, motionTransition } from "@/lib/motion";
 
@@ -52,6 +53,7 @@ export function EditToolbar() {
   const [expanded, setExpanded] = useState(false);
   const [deployMsg, setDeployMsg] = useState<string | null>(null);
   const [deploying, setDeploying] = useState(false);
+  const [sitePagesOpen, setSitePagesOpen] = useState(false);
   const reduce = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -149,24 +151,41 @@ export function EditToolbar() {
             <div className="flex flex-col gap-2 px-4 py-3">
               <button
                 type="button"
-                onClick={() => void handleSave()}
-                className="interactive-button w-full rounded bg-primary-foreground px-3 py-2 text-sm font-medium text-primary disabled:opacity-50"
-                disabled={pendingCount === 0 || committing}
+                onClick={() => setSitePagesOpen(true)}
+                className="interactive-button w-full rounded px-3 py-2 text-left text-sm hover:bg-primary-foreground/15"
               >
-                {committing ? "저장 중…" : "저장"}
+                페이지 노출
               </button>
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="interactive-button w-full rounded px-3 py-2 text-left text-sm hover:bg-primary-foreground/15 disabled:opacity-50"
-                disabled={committing || pendingCount === 0}
-              >
-                취소
-              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="interactive-button flex-1 rounded px-3 py-2 text-sm hover:bg-primary-foreground/15 disabled:opacity-50"
+                  disabled={committing || pendingCount === 0}
+                >
+                  취소
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void handleSave()}
+                  className={
+                    pendingCount > 0
+                      ? "interactive-button flex-1 rounded bg-primary-foreground px-3 py-2 text-sm font-medium text-primary disabled:opacity-50"
+                      : "interactive-button flex-1 rounded px-3 py-2 text-sm hover:bg-primary-foreground/15 disabled:opacity-50"
+                  }
+                  disabled={pendingCount === 0 || committing}
+                >
+                  {committing ? "저장 중…" : "저장"}
+                </button>
+              </div>
               <button
                 type="button"
                 onClick={() => void handleDeploy()}
-                className="interactive-button w-full rounded px-3 py-2 text-left text-sm hover:bg-primary-foreground/15 disabled:opacity-50"
+                className={
+                  pendingCount === 0
+                    ? "interactive-button w-full rounded bg-primary-foreground px-3 py-2 text-sm font-medium text-primary disabled:opacity-50"
+                    : "interactive-button w-full rounded px-3 py-2 text-left text-sm hover:bg-primary-foreground/15 disabled:opacity-50"
+                }
                 disabled={committing || deploying}
               >
                 {deploying ? "배포 중…" : "배포"}
@@ -195,6 +214,7 @@ export function EditToolbar() {
           </span>
         ) : null}
       </button>
+      {sitePagesOpen ? <SitePagesPanel onClose={() => setSitePagesOpen(false)} /> : null}
     </motion.div>
   );
 }

@@ -102,7 +102,7 @@ export function ImagePropertyPanel() {
           <button
             type="button"
             onClick={handleClose}
-            className="rounded p-1 text-page-body hover:bg-page-body/10"
+            className="flex size-7 shrink-0 items-center justify-center rounded text-page-body hover:bg-page-body/10"
             aria-label="닫기"
           >
             ✕

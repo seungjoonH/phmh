@@ -18,6 +18,8 @@ type Props = {
   controls?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
+  /** true면 세로 정렬에서도 본문·입력이 컬럼 폭만큼 늘어남 (Contact 폼 등) */
+  fullWidth?: boolean;
 };
 
 export function EditReorderRow({
@@ -33,6 +35,7 @@ export function EditReorderRow({
   controls,
   children,
   className = "",
+  fullWidth = false,
 }: Props) {
   const isSource = dragIndex === index;
   const showBefore =
@@ -47,6 +50,7 @@ export function EditReorderRow({
       onDragOver={(e) => {
         if (dragIndex === null) return;
         e.preventDefault();
+        e.stopPropagation();
         e.dataTransfer.dropEffect = "move";
         const rect = e.currentTarget.getBoundingClientRect();
         const coord = orientation === "horizontal" ? e.clientX : e.clientY;
@@ -64,9 +68,19 @@ export function EditReorderRow({
         className={handleClassName}
         onDragStart={() => onDragStart(index)}
       />
-      <div className={`group relative min-w-0 ${isSource ? "opacity-50" : ""}`}>
+      <div
+        className={`group relative flex ${fullWidth || orientation === "horizontal" ? "w-full" : "w-fit"} max-w-full items-start gap-1.5 ${isSource ? "opacity-50" : ""}`}
+      >
+        <div
+          className={
+            fullWidth || orientation === "horizontal"
+              ? "min-w-0 w-full flex-1"
+              : "min-w-0"
+          }
+        >
+          {children}
+        </div>
         {controls}
-        {children}
       </div>
       {showAfter ? <EditDropGuide position="after" orientation={orientation} /> : null}
     </div>

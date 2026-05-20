@@ -1,6 +1,6 @@
 {
   "name": "phmh",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "imports": {
     "#phmh/contact-form-structure": {
@@ -17,7 +17,11 @@
     "scrape": "node scripts/scrape-wix-content.mjs",
     "locales": "node scripts/build-locales-from-scrape.mjs && node scripts/build-ko-locale.mjs",
     "images:placeholders": "node scripts/fetch-placeholder-images.mjs",
-    "test:locale": "node --experimental-strip-types scripts/check-locale-keys.mjs"
+    "test:locale": "node --experimental-strip-types scripts/check-locale-keys.mjs",
+    "test:therapists": "node scripts/check-therapists.mjs",
+    "test:inline-markup": "node --experimental-strip-types scripts/test-inline-markup-edit.mjs",
+    "test:pending-keys": "node --experimental-strip-types scripts/test-pending-keys.mjs",
+    "test:text-edit-history": "node --experimental-strip-types scripts/test-text-edit-history.mjs"
   },
   "dependencies": {
     "motion": "^12.38.0",

@@ -35,7 +35,14 @@ export default {
     "contact": "",
     "koreaCenter": "",
     "philippinesCenter": "",
+    "therapists": "",
     "menu": ""
+  },
+  "therapists": {
+    "list": {
+      "pageTitle": "",
+      "breadcrumb": ""
+    }
   },
   "theme": {
     "system": "",
@@ -94,6 +101,10 @@ export default {
     },
     "gettingStarted": {
       "title": "",
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "steps": [
         {
           "number": "",
@@ -197,10 +208,16 @@ export default {
     "centerToggleLabel": "",
     "centerKorea": "",
     "centerPhilippines": "",
+    "mapTitleKorea": "",
+    "mapTitlePhilippines": "",
     "form": contactFormMessages.form,
     "insuranceOptions": contactFormMessages.insuranceOptions,
     "seekingHelpOptions": contactFormMessages.seekingHelpOptions,
     "korea": {
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "addressTitle": "",
       "contactTitle": "",
       "hoursTitle": "",
@@ -209,6 +226,10 @@ export default {
       "virtualNote": ""
     },
     "philippines": {
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "addressTitle": "",
       "contactTitle": "",
       "hoursTitle": "",

@@ -349,6 +349,57 @@ export function replaceStringArray(source, keyPath, items) {
 }
 
 /**
+ * @param {{ number: string, title: string, description: string }} step
+ */
+function stepObjectToJs(step) {
+  return `{
+      number: "${escapeJsString(step.number)}",
+      title: "${escapeJsString(step.title)}",
+      description: "${escapeJsString(step.description)}"
+    }`;
+}
+
+/**
+ * @param {string} source
+ * @param {string} keyPath e.g. pages.gettingStarted.steps
+ * @param {{ number: string, title: string, description: string }[]} steps
+ */
+export function replaceStepsArray(source, keyPath, steps) {
+  const parts = keyPath.split(".");
+  const arrayKey = parts[parts.length - 1];
+  const parentKeys = parts.slice(0, -1);
+  const scopeStart = parentKeys.length ? findScopeStart(source, parentKeys) : 0;
+  const scope = source.slice(scopeStart);
+  const arrayRe = new RegExp(`${keyInSourcePattern(arrayKey)}\\s*:\\s*\\[`);
+  const match = arrayRe.exec(scope);
+  if (!match) {
+    throw new Error(`Steps array key not found: ${arrayKey} at ${keyPath}`);
+  }
+
+  const bracketIndex = scopeStart + match.index + match[0].length - 1;
+  let depth = 0;
+  let endBracket = bracketIndex;
+  for (let i = bracketIndex; i < source.length; i++) {
+    const ch = source[i];
+    if (ch === "[") depth += 1;
+    else if (ch === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        endBracket = i;
+        break;
+      }
+    }
+  }
+
+  const body =
+    steps.length === 0
+      ? ""
+      : `\n${steps.map((step) => `    ${stepObjectToJs(step)}`).join(",\n")}\n  `;
+  const replacement = `[${body}]`;
+  return `${source.slice(0, bracketIndex)}${replacement}${source.slice(endBracket + 1)}`;
+}
+
+/**
  * @param {import("../lib/edit/section-flow.ts").StoredFlowBlock} block
  */
 function storedFlowBlockToJs(block) {
@@ -373,13 +424,16 @@ function storedFlowBlockToJs(block) {
 }
 
 /**
- * 섹션 객체에 flow 배열 저장·교체 (예: couples.flow)
+ * 섹션 객체에 flow 배열 저장·교체 (예: couples.flow, pages.whoWeAre)
  * @param {string} source
- * @param {string} sectionId e.g. couples
+ * @param {string|string[]} sectionScope e.g. couples or ["pages","whoWeAre"]
  * @param {object[]} blocks StoredFlowBlock[]
  */
-export function replaceSectionFlow(source, sectionId, blocks) {
-  const scopeStart = resolveScopeStart(source, [sectionId]);
+export function replaceSectionFlow(source, sectionScope, blocks) {
+  const parentKeys = Array.isArray(sectionScope)
+    ? sectionScope
+    : [sectionScope];
+  const scopeStart = resolveScopeStartForPath(source, parentKeys);
   const scope = source.slice(scopeStart);
   const flowRe = /flow\s*:\s*\[/;
   const body =

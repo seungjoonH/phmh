@@ -33,7 +33,7 @@ function formatFieldValue(field: ContactFieldDefinition, values: ContactFormValu
 
 function row(label: string, value: string): string {
   if (!value) return "";
-  return `<tr><th align="left" style="padding:8px 12px 8px 0;vertical-align:top;color:#4a6e78;font-weight:600;white-space:nowrap">${escapeHtml(label)}</th><td style="padding:8px 0;vertical-align:top;color:#333">${escapeHtml(value).replace(/\n/g, "<br>")}</td></tr>`;
+  return `<tr><th align="left" style="padding:8px 12px 8px 0;vertical-align:top;color:#1f4d3a;font-weight:600;white-space:nowrap">${escapeHtml(label)}</th><td style="padding:8px 0;vertical-align:top;color:#333">${escapeHtml(value).replace(/\n/g, "<br>")}</td></tr>`;
 }
 
 export function buildContactEmail(values: ContactFormValues) {
@@ -66,7 +66,7 @@ export function buildContactEmail(values: ContactFormValues) {
       if (items.length === 0) continue;
       textLines.push("", `${label}:`, ...items.map((item) => `• ${item}`));
       htmlLists.push(
-        `<p style="margin:0 0 8px;font-weight:600;color:#4a6e78">${escapeHtml(label)}</p>`,
+        `<p style="margin:0 0 8px;font-weight:600;color:#1f4d3a">${escapeHtml(label)}</p>`,
         `<ul style="margin:0 0 20px;padding-left:20px">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`,
       );
       continue;
@@ -76,7 +76,7 @@ export function buildContactEmail(values: ContactFormValues) {
       if (!value) continue;
       textLines.push("", label, value);
       htmlBlocks.push(
-        `<p style="margin:0 0 8px;font-weight:600;color:#4a6e78">${escapeHtml(label)}</p>`,
+        `<p style="margin:0 0 8px;font-weight:600;color:#1f4d3a">${escapeHtml(label)}</p>`,
         `<p style="margin:0 0 20px;white-space:pre-wrap">${escapeHtml(value)}</p>`,
       );
     }

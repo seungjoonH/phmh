@@ -33,7 +33,14 @@ export default {
     "contact": "お問い合わせ",
     "koreaCenter": "韓国センター",
     "philippinesCenter": "フィリピンセンター",
+    "therapists": "",
     "menu": "メニュー"
+  },
+  "therapists": {
+    "list": {
+      "pageTitle": "",
+      "breadcrumb": ""
+    }
   },
   "theme": {
     "system": "システム",
@@ -89,6 +96,10 @@ export default {
     },
     "gettingStarted": {
       "title": "ご利用の流れ",
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "steps": [
         {
           "number": "01",
@@ -192,10 +203,16 @@ export default {
     "centerToggleLabel": "センター選択",
     "centerKorea": "韓国",
     "centerPhilippines": "フィリピン",
+    "mapTitleKorea": "韓国センター所在地の地図",
+    "mapTitlePhilippines": "フィリピンセンター所在地の地図",
     "form": contactFormMessages.form,
     "insuranceOptions": contactFormMessages.insuranceOptions,
     "seekingHelpOptions": contactFormMessages.seekingHelpOptions,
     "korea": {
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "addressTitle": "住所",
       "contactTitle": "連絡先",
       "hoursTitle": "営業時間",
@@ -204,6 +221,10 @@ export default {
       "virtualNote": "オンラインセッション対応可"
     },
     "philippines": {
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "addressTitle": "住所",
       "contactTitle": "連絡先",
       "hoursTitle": "営業時間",

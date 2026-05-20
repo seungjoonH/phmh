@@ -13,16 +13,17 @@ import {
 } from "react";
 import { LocaleContext, useLocale } from "@/components/i18n/LocaleProvider";
 import { tPath } from "@/lib/i18n/messages";
-import { newArrayItemValues } from "@/lib/edit/array-placeholders";
 import { commitSectionFlowDrafts } from "@/lib/edit/commit-section-flow";
 import {
   commitPendingEdits,
   isContactStructureDirty,
   isLocaleManifestDirty,
+  isSitePagesHiddenDirty,
 } from "@/lib/edit/commit-pending";
 import {
   emptyLocaleTextValues,
   isCompleteArrayRecord,
+  isCompleteStepsRecord,
 } from "@/lib/edit/locale-helpers";
 import {
   localeTextFromArrayItem,
@@ -34,7 +35,19 @@ import {
   applyArrayItemTextDraftsForLocale,
   applyDraftsForLocale,
   applyFlowDraftsForLocale,
+  applyStepFieldDraftsForLocale,
+  applyStepsDraftsForLocale,
 } from "@/lib/edit/messages";
+import {
+  defaultNewStep,
+  localeTextFromStepField,
+  mergeStepFieldIntoLocales,
+  parseStepFieldKey,
+  renumberSteps,
+  remapStepFieldDraftsAfterMove,
+  removeStepFieldDrafts,
+  shiftStepFieldDraftsOnInsert,
+} from "@/lib/edit/getting-started-step";
 import {
   arrayDraftForNewFlowBlock,
   createFlowBlock,
@@ -54,23 +67,44 @@ import {
   fetchArrayRegistry,
   fetchContactFormStructure,
   fetchLocaleManifest,
+  fetchSitePagesRegistry,
+  fetchStepsRegistry,
   fetchTextRegistry,
+  patchTherapist,
+  patchStepsArray,
   patchStringArray,
   patchText,
   writeImageFile,
   type ContactFormStructurePayload,
+  type LocaleStepsArrays,
   type LocaleStringArrays,
   type LocaleTextValues,
 } from "@/lib/edit/client";
+import {
+  clearRuntimeVisibility,
+  setRuntimeVisibility,
+} from "@/lib/site-pages-visibility";
 import { ensureLocaleLoaded } from "@/lib/i18n/load-locale";
 import { arrayBufferToBase64 } from "@/lib/edit/array-buffer-to-base64";
 import { getImageRegistryEntry } from "@/lib/edit/image-registry";
 import {
   findLinkedDraft,
-  getLinkedTextKeyGroupId,
   getLinkedTextKeys,
 } from "@/lib/edit/linked-text-keys";
-import { isEditKeyPending as checkEditKeyPending } from "@/lib/edit/pending-keys";
+import {
+  countPendingChanges,
+  isEditKeyPending as checkEditKeyPending,
+  type PendingCheckContext,
+} from "@/lib/edit/pending-keys";
+import {
+  applyTherapistFieldLocales,
+  applyTherapistNameLocales,
+  getTherapistLinkedTextKeys,
+  parseTherapistFieldKey,
+  readTherapistFieldLocales,
+} from "@/lib/edit/therapist-edit-key";
+import { getTherapistBySlug } from "@/lib/therapists/load";
+import { clearTherapistRuntime, setTherapistRuntime } from "@/lib/therapists/runtime";
 import {
   clearRuntimeContactFormStructure,
   getContactFormStructure,
@@ -113,6 +147,7 @@ type EditDraftContextValue = {
   commitAll: () => Promise<void>;
   commitTextKey: (key: string) => Promise<void>;
   resolveTextRegistryValues: (key: string) => Promise<LocaleTextValues>;
+  resolveCommittedTextRegistryValues: (key: string) => Promise<LocaleTextValues>;
   commitImageKey: (key: string) => Promise<void>;
   isEditKeyPending: (key: string) => boolean;
   panelBaseline: DraftEntry | null;
@@ -123,6 +158,10 @@ type EditDraftContextValue = {
   addArrayItem: (arrayKey: string) => Promise<void>;
   removeArrayItem: (arrayKey: string, index: number) => Promise<void>;
   moveArrayItem: (arrayKey: string, from: number, to: number) => Promise<void>;
+  stepsBusy: string | null;
+  insertStep: (arrayKey: string, index: number) => Promise<void>;
+  removeStep: (arrayKey: string, index: number) => Promise<void>;
+  moveStep: (arrayKey: string, from: number, to: number) => Promise<void>;
   flowBusy: string | null;
   resolveFlowBlocks: (sectionKey: string, section: SectionContent) => FlowBlock[];
   moveFlowBlock: (sectionKey: string, from: number, to: number) => Promise<void>;
@@ -141,6 +180,8 @@ type EditDraftContextValue = {
   createLocaleWithFiles: (id: string) => Promise<void>;
   localeCreateBusy: boolean;
   applyArrayDraft: (arrayKey: string, locales: LocaleStringArrays) => void;
+  sitePagesHiddenDraft: string[] | null;
+  setSitePagesHiddenDraft: (hidden: string[]) => void;
 };
 
 const EditDraftContext = createContext<EditDraftContextValue | null>(null);
@@ -174,7 +215,11 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   const [hiddenTextKeys, setHiddenTextKeys] = useState<Record<string, true>>({});
   const [arrayBusy, setArrayBusy] = useState<string | null>(null);
   const [flowDrafts, setFlowDrafts] = useState<Record<string, FlowBlock[]>>({});
+  const [stepsDrafts, setStepsDrafts] = useState<
+    Record<string, Partial<LocaleStepsArrays>>
+  >({});
   const [flowBusy, setFlowBusy] = useState<string | null>(null);
+  const [stepsBusy, setStepsBusy] = useState<string | null>(null);
   const [committing, setCommitting] = useState(false);
   const [contactStructureDraft, setContactStructureDraftState] =
     useState<ContactFormStructurePayload | null>(null);
@@ -182,9 +227,13 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     useState<LocaleManifest | null>(null);
   const [pendingLocaleCreates, setPendingLocaleCreates] = useState<string[]>([]);
   const [localeCreateBusy, setLocaleCreateBusy] = useState(false);
+  const [sitePagesHiddenDraft, setSitePagesHiddenDraftState] = useState<string[] | null>(
+    null,
+  );
 
   const contactStructureBaseline = useRef<ContactFormStructurePayload | null>(null);
   const localeManifestBaseline = useRef<LocaleManifest | null>(null);
+  const sitePagesHiddenBaseline = useRef<string[] | null>(null);
 
   useEffect(() => {
     fetchContactFormStructure()
@@ -201,6 +250,20 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       .catch(() => {
         localeManifestBaseline.current = getLocaleManifest();
       });
+    fetchSitePagesRegistry()
+      .then((data) => {
+        sitePagesHiddenBaseline.current = data.hidden ?? [];
+      })
+      .catch(() => {
+        sitePagesHiddenBaseline.current = [];
+      });
+  }, []);
+
+  const setSitePagesHiddenDraft = useCallback((hidden: string[]) => {
+    const next = [...new Set(hidden)];
+    setSitePagesHiddenDraftState(next);
+    setRuntimeVisibility(next);
+    window.dispatchEvent(new Event("phmh-edit-visibility-changed"));
   }, []);
 
   const setContactStructureDraft = useCallback((structure: ContactFormStructurePayload) => {
@@ -233,11 +296,13 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
 
   const displayMessages = useMemo(() => {
     let result = applyArrayDraftsForLocale(base.messages, base.locale, arrayDrafts);
+    result = applyStepsDraftsForLocale(result, base.locale, stepsDrafts);
     result = applyFlowDraftsForLocale(result, flowDrafts);
+    result = applyStepFieldDraftsForLocale(result, base.locale, drafts);
     result = applyArrayItemTextDraftsForLocale(result, base.locale, drafts);
     result = applyDraftsForLocale(result, base.locale, drafts);
     return result;
-  }, [base.messages, base.locale, arrayDrafts, flowDrafts, drafts]);
+  }, [base.messages, base.locale, arrayDrafts, stepsDrafts, flowDrafts, drafts]);
 
   const t = useCallback(
     (key: string) => tPath(displayMessages, key),
@@ -297,6 +362,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   const clearPendingState = useCallback(() => {
     setDrafts({});
     setArrayDrafts({});
+    setStepsDrafts({});
     setFlowDrafts({});
     setHiddenTextKeys({});
     setImageDrafts((prev) => {
@@ -306,10 +372,14 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     setContactStructureDraftState(null);
     setLocaleManifestDraft(null);
     setPendingLocaleCreates([]);
+    setSitePagesHiddenDraftState(null);
     clearRuntimeContactFormStructure();
     clearRuntimeLocaleManifest();
+    clearRuntimeVisibility();
+    clearTherapistRuntime();
     setSelected(null);
     setPanelBaseline(null);
+    window.dispatchEvent(new Event("phmh-edit-visibility-changed"));
   }, []);
 
   const revertAll = useCallback(() => {
@@ -333,16 +403,102 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
+  const applyStepsDraft = useCallback((arrayKey: string, locales: LocaleStepsArrays) => {
+    setStepsDrafts((prev) => ({
+      ...prev,
+      [arrayKey]: { ...locales },
+    }));
+  }, []);
+
+  const resolveStepsLocales = useCallback(
+    async (arrayKey: string): Promise<LocaleStepsArrays> => {
+      const draft = stepsDrafts[arrayKey];
+      if (isCompleteStepsRecord(draft)) return draft;
+      return fetchStepsRegistry(arrayKey);
+    },
+    [stepsDrafts],
+  );
+
+  const insertStep = useCallback(
+    async (arrayKey: string, index: number) => {
+      setStepsBusy(arrayKey);
+      try {
+        const current = await resolveStepsLocales(arrayKey);
+        const next: LocaleStepsArrays = Object.fromEntries(
+          getActiveLocaleIds().map((id) => {
+            const steps = [...(current[id] ?? [])];
+            steps.splice(index, 0, defaultNewStep(index));
+            return [id, renumberSteps(steps)];
+          }),
+        ) as LocaleStepsArrays;
+        applyStepsDraft(arrayKey, next);
+        setDrafts((prev) => shiftStepFieldDraftsOnInsert(prev, arrayKey, index));
+      } catch (err) {
+        window.alert(err instanceof Error ? err.message : String(err));
+      } finally {
+        setStepsBusy(null);
+      }
+    },
+    [resolveStepsLocales, applyStepsDraft],
+  );
+
+  const removeStep = useCallback(
+    async (arrayKey: string, index: number) => {
+      if (!window.confirm("이 스텝을 삭제할까요?")) return;
+      setStepsBusy(arrayKey);
+      try {
+        const current = await resolveStepsLocales(arrayKey);
+        const next: LocaleStepsArrays = Object.fromEntries(
+          getActiveLocaleIds().map((id) => [
+            id,
+            renumberSteps((current[id] ?? []).filter((_, i) => i !== index)),
+          ]),
+        ) as LocaleStepsArrays;
+        applyStepsDraft(arrayKey, next);
+        setDrafts((prev) => removeStepFieldDrafts(prev, arrayKey, index));
+      } catch (err) {
+        window.alert(err instanceof Error ? err.message : String(err));
+      } finally {
+        setStepsBusy(null);
+      }
+    },
+    [resolveStepsLocales, applyStepsDraft],
+  );
+
+  const moveStep = useCallback(
+    async (arrayKey: string, from: number, to: number) => {
+      if (from === to) return;
+      setStepsBusy(arrayKey);
+      try {
+        const current = await resolveStepsLocales(arrayKey);
+        const next: LocaleStepsArrays = Object.fromEntries(
+          getActiveLocaleIds().map((id) => {
+            const steps = [...(current[id] ?? [])];
+            const [moved] = steps.splice(from, 1);
+            steps.splice(to, 0, moved);
+            return [id, renumberSteps(steps)];
+          }),
+        ) as LocaleStepsArrays;
+        applyStepsDraft(arrayKey, next);
+        setDrafts((prev) => remapStepFieldDraftsAfterMove(prev, arrayKey, from, to));
+      } catch (err) {
+        window.alert(err instanceof Error ? err.message : String(err));
+      } finally {
+        setStepsBusy(null);
+      }
+    },
+    [resolveStepsLocales, applyStepsDraft],
+  );
+
   const addArrayItem = useCallback(
     async (arrayKey: string) => {
       setArrayBusy(arrayKey);
       try {
         const current = await resolveArrayLocales(arrayKey);
-        const placeholder = newArrayItemValues();
         const next: LocaleStringArrays = Object.fromEntries(
           getActiveLocaleIds().map((id) => [
             id,
-            [...(current[id] ?? []), placeholder[id] ?? ""],
+            [...(current[id] ?? []), ""],
           ]),
         );
         applyArrayDraft(arrayKey, next);
@@ -456,9 +612,16 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   const resolveFlowBlocks = useCallback(
     (sectionKey: string, section: SectionContent): FlowBlock[] => {
       const raw = flowDrafts[sectionKey] ?? flattenSectionToFlow(section, sectionKey);
-      return hydrateFlowBlocks(raw, (key) => tPath(displayMessages, key));
+      return hydrateFlowBlocks(raw, (key) => {
+        const direct = drafts[key]?.[base.locale];
+        if (typeof direct === "string") return direct;
+        const linked = findLinkedDraft(drafts, key);
+        const fromLinked = linked?.[base.locale];
+        if (typeof fromLinked === "string") return fromLinked;
+        return tPath(displayMessages, key);
+      });
     },
-    [flowDrafts, displayMessages],
+    [flowDrafts, displayMessages, drafts, base.locale],
   );
 
   const moveFlowBlock = useCallback(
@@ -559,9 +722,10 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         await commitSectionFlowDrafts(flowDrafts);
       }
 
-      await commitPendingEdits({
+      const { renamedSlugs } = await commitPendingEdits({
         drafts,
         arrayDrafts,
+        stepsDrafts,
         hiddenTextKeys,
         imageDrafts,
         contactStructureDraft,
@@ -569,6 +733,8 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         localeManifestDraft,
         localeManifestBaseline: localeManifestBaseline.current,
         pendingLocaleCreates,
+        sitePagesHiddenDraft,
+        sitePagesHiddenBaseline: sitePagesHiddenBaseline.current,
       });
 
       if (savedImageKeys.length > 0) {
@@ -584,6 +750,23 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         contactStructureDraft ?? (await fetchContactFormStructure().catch(() => getContactFormStructure()));
       localeManifestBaseline.current =
         localeManifestDraft ?? (await fetchLocaleManifest().catch(() => getLocaleManifest()));
+      if (sitePagesHiddenDraft) {
+        sitePagesHiddenBaseline.current = [...sitePagesHiddenDraft];
+      }
+
+      if (Object.keys(renamedSlugs).length > 0) {
+        const currentPath = window.location.pathname;
+        for (const [oldSlug, newSlug] of Object.entries(renamedSlugs)) {
+          const oldPath = `/therapists/${oldSlug}`;
+          if (currentPath === oldPath || currentPath.startsWith(`${oldPath}/`)) {
+            const nextPath = currentPath.replace(oldPath, `/therapists/${newSlug}`);
+            window.location.replace(nextPath + window.location.search + window.location.hash);
+            return;
+          }
+        }
+        window.location.reload();
+        return;
+      }
 
       clearPendingState();
       await base.reloadLocales();
@@ -597,12 +780,14 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   }, [
     drafts,
     arrayDrafts,
+    stepsDrafts,
     flowDrafts,
     hiddenTextKeys,
     imageDrafts,
     contactStructureDraft,
     localeManifestDraft,
     pendingLocaleCreates,
+    sitePagesHiddenDraft,
     clearPendingState,
     base,
   ]);
@@ -625,15 +810,57 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     window.dispatchEvent(new Event("phmh-edit-panel-closed"));
   }, []);
 
+  const pendingCtx = useMemo<PendingCheckContext>(
+    () => ({
+      locale: base.locale,
+      committedMessages: base.messages,
+      displayMessages,
+      drafts,
+      imageDrafts,
+      hiddenTextKeys,
+      arrayDrafts,
+      stepsDrafts,
+      flowDrafts,
+    }),
+    [
+      base.locale,
+      base.messages,
+      displayMessages,
+      drafts,
+      imageDrafts,
+      hiddenTextKeys,
+      arrayDrafts,
+      stepsDrafts,
+      flowDrafts,
+    ],
+  );
+
   const isEditKeyPending = useCallback(
-    (key: string) =>
-      checkEditKeyPending(key, {
-        drafts,
-        imageDrafts,
-        hiddenTextKeys,
-        arrayDrafts,
-      }),
-    [drafts, imageDrafts, hiddenTextKeys, arrayDrafts],
+    (key: string) => checkEditKeyPending(key, pendingCtx),
+    [pendingCtx],
+  );
+
+  const resolveCommittedTextRegistryValues = useCallback(
+    async (key: string): Promise<LocaleTextValues> => {
+      const therapistField = parseTherapistFieldKey(key);
+      if (therapistField) {
+        const record = getTherapistBySlug(therapistField.slug);
+        if (!record) return emptyLocaleTextValues();
+        return readTherapistFieldLocales(record, therapistField);
+      }
+      const parsed = parseArrayItemKey(key);
+      if (parsed) {
+        const arrays = await fetchArrayRegistry(parsed.arrayKey);
+        return localeTextFromArrayItem(arrays, parsed.index);
+      }
+      const stepField = parseStepFieldKey(key);
+      if (stepField) {
+        const arrays = await fetchStepsRegistry(stepField.arrayKey);
+        return localeTextFromStepField(arrays, stepField.index, stepField.field);
+      }
+      return fetchTextRegistry(key);
+    },
+    [],
   );
 
   const resolveTextRegistryValues = useCallback(
@@ -647,9 +874,22 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         return localeTextFromArrayItem(arrays, parsed.index);
       }
 
+      const stepField = parseStepFieldKey(key);
+      if (stepField) {
+        const arrays = await resolveStepsLocales(stepField.arrayKey);
+        return localeTextFromStepField(arrays, stepField.index, stepField.field);
+      }
+
+      const therapistField = parseTherapistFieldKey(key);
+      if (therapistField) {
+        const record = getTherapistBySlug(therapistField.slug);
+        if (!record) return emptyLocaleTextValues();
+        return readTherapistFieldLocales(record, therapistField);
+      }
+
       return fetchTextRegistry(key);
     },
-    [drafts, resolveArrayLocales],
+    [drafts, resolveArrayLocales, resolveStepsLocales],
   );
 
   const commitTextKey = useCallback(
@@ -664,6 +904,26 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
           const next = mergeArrayItemIntoLocales(current, parsed.index, entry);
           await patchStringArray(parsed.arrayKey, next);
           applyArrayDraft(parsed.arrayKey, next);
+        } else if (parseStepFieldKey(key)) {
+          const stepField = parseStepFieldKey(key)!;
+          const current = await resolveStepsLocales(stepField.arrayKey);
+          const next = mergeStepFieldIntoLocales(
+            current,
+            stepField.index,
+            stepField.field,
+            entry,
+          );
+          await patchStepsArray(stepField.arrayKey, next);
+          applyStepsDraft(stepField.arrayKey, next);
+        } else if (parseTherapistFieldKey(key)) {
+          const ref = parseTherapistFieldKey(key)!;
+          const current = getTherapistBySlug(ref.slug);
+          if (!current) return;
+          const updated = getTherapistLinkedTextKeys(key)
+            ? applyTherapistNameLocales(current, entry)
+            : applyTherapistFieldLocales(current, ref, entry);
+          await patchTherapist(ref.slug, updated);
+          setTherapistRuntime(ref.slug, updated);
         } else {
           for (const k of getLinkedTextKeys(key)) {
             await patchText(k, entry);
@@ -685,7 +945,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         setCommitting(false);
       }
     },
-    [drafts, resolveArrayLocales, applyArrayDraft, base],
+    [drafts, resolveArrayLocales, resolveStepsLocales, applyArrayDraft, applyStepsDraft, base],
   );
 
   const commitImageKey = useCallback(
@@ -731,23 +991,12 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     [imageDrafts, imageCacheBust],
   );
 
-  const uniqueTextDraftCount = useMemo(() => {
-    const groups = new Set<string>();
-    for (const key of Object.keys(drafts)) {
-      groups.add(getLinkedTextKeyGroupId(key));
-    }
-    return groups.size;
-  }, [drafts]);
-
   const pendingCount =
-    uniqueTextDraftCount +
-    Object.keys(imageDrafts).length +
-    Object.keys(hiddenTextKeys).length +
-    Object.keys(arrayDrafts).length +
-    Object.keys(flowDrafts).length +
+    countPendingChanges(pendingCtx) +
     pendingLocaleCreates.length +
     (isContactStructureDirty(contactStructureDraft, contactStructureBaseline.current) ? 1 : 0) +
-    (isLocaleManifestDirty(localeManifestDraft, localeManifestBaseline.current) ? 1 : 0);
+    (isLocaleManifestDirty(localeManifestDraft, localeManifestBaseline.current) ? 1 : 0) +
+    (isSitePagesHiddenDirty(sitePagesHiddenDraft, sitePagesHiddenBaseline.current) ? 1 : 0);
 
   const draftCtx = useMemo(
     () => ({
@@ -768,6 +1017,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       commitAll,
       commitTextKey,
       resolveTextRegistryValues,
+      resolveCommittedTextRegistryValues,
       commitImageKey,
       isEditKeyPending,
       panelBaseline,
@@ -778,6 +1028,10 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       addArrayItem,
       removeArrayItem,
       moveArrayItem,
+      stepsBusy,
+      insertStep,
+      removeStep,
+      moveStep,
       flowBusy,
       resolveFlowBlocks,
       moveFlowBlock,
@@ -791,6 +1045,8 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       createLocaleWithFiles,
       localeCreateBusy,
       applyArrayDraft,
+      sitePagesHiddenDraft,
+      setSitePagesHiddenDraft,
     }),
     [
       drafts,
@@ -810,6 +1066,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       commitAll,
       commitTextKey,
       resolveTextRegistryValues,
+      resolveCommittedTextRegistryValues,
       commitImageKey,
       isEditKeyPending,
       panelBaseline,
@@ -819,6 +1076,10 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       addArrayItem,
       removeArrayItem,
       moveArrayItem,
+      stepsBusy,
+      insertStep,
+      removeStep,
+      moveStep,
       flowBusy,
       resolveFlowBlocks,
       moveFlowBlock,
@@ -832,6 +1093,8 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       createLocaleWithFiles,
       localeCreateBusy,
       applyArrayDraft,
+      sitePagesHiddenDraft,
+      setSitePagesHiddenDraft,
     ],
   );
 

@@ -33,7 +33,14 @@ export default {
     "contact": "문의하기",
     "koreaCenter": "한국 센터",
     "philippinesCenter": "필리핀 센터",
+    "therapists": "상담사",
     "menu": "메뉴"
+  },
+  "therapists": {
+    "list": {
+      "pageTitle": "상담사",
+      "breadcrumb": "상담사"
+    }
   },
   "theme": {
     "system": "시스템",
@@ -91,6 +98,10 @@ export default {
     },
     "gettingStarted": {
       "title": "시작하기",
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "steps": [
         {
           "number": "01",
@@ -194,10 +205,16 @@ export default {
     "centerToggleLabel": "센터 선택",
     "centerKorea": "한국",
     "centerPhilippines": "필리핀",
+    "mapTitleKorea": "한국 센터 위치 지도",
+    "mapTitlePhilippines": "필리핀 센터 위치 지도",
     "form": contactFormMessages.form,
     "insuranceOptions": contactFormMessages.insuranceOptions,
     "seekingHelpOptions": contactFormMessages.seekingHelpOptions,
     "korea": {
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "addressTitle": "주소",
       "contactTitle": "연락처",
       "hoursTitle": "운영 시간",
@@ -206,6 +223,10 @@ export default {
       "virtualNote": "화상 상담 가능"
     },
     "philippines": {
+      "body": {
+        "flow": [],
+        "paragraphs": []
+      },
       "addressTitle": "주소",
       "contactTitle": "연락처",
       "hoursTitle": "운영 시간",

@@ -8,6 +8,7 @@ import { spawn } from "child_process";
 import {
   patchLocaleFile,
   replaceSectionFlow,
+  replaceStepsArray,
   replaceStringArray,
 } from "./edit-locale-patch.mjs";
 import { getTextLocaleFile, resolveTextTarget } from "./edit-text-resolve.mjs";
@@ -24,6 +25,20 @@ import {
 import { EDIT_SERVER_PORT } from "../lib/edit/ports.mjs";
 import { runReleaseDeploy } from "./edit-release.mjs";
 import { buildImageHistoryBackupPath } from "../lib/edit/image-write-path.mjs";
+import {
+  archiveTherapistImages,
+  createTherapistTemplate,
+  deleteTherapistFiles,
+  ensurePortraitPlaceholder,
+  makeSlug,
+  readManifest,
+  readTherapist,
+  readVisibility,
+  renameTherapistFiles,
+  writeManifest,
+  writeTherapist,
+  writeVisibility,
+} from "./therapist-io.mjs";
 
 /** @type {Record<string, { file: string; publicPath: string; altKey?: string }>} */
 let IMAGE_REGISTRY = {};
@@ -65,6 +80,14 @@ async function loadImageRegistry() {
       Object.entries(areaImages).map(([k, v]) => [`area.${k}`, fromPublic(v)]),
     ),
   };
+
+  const manifest = readManifest(ROOT);
+  for (const slug of manifest.order) {
+    IMAGE_REGISTRY[`therapists.${slug}.portrait`] = fromPublic(
+      `/therapists/${slug}/portrait.png`,
+    );
+  }
+
   return IMAGE_REGISTRY;
 }
 
@@ -162,6 +185,45 @@ async function readStringArrayFromLocaleFile(file, exportName, innerPath) {
   const value = getStringArrayAtPath(root, innerPath);
   if (!value) {
     throw new Error(`Key ${innerPath} is not a string array in ${file}`);
+  }
+  return value;
+}
+
+/**
+ * @param {unknown} obj
+ * @param {string} keyPath
+ */
+function getStepsArrayAtPath(obj, keyPath) {
+  const parts = keyPath.split(".");
+  let current = obj;
+  for (const part of parts) {
+    if (current === null || current === undefined) return undefined;
+    if (typeof current !== "object") return undefined;
+    current = /** @type {Record<string, unknown>} */ (current)[part];
+  }
+  if (!Array.isArray(current)) return undefined;
+  return /** @type {{ number: string, title: string, description: string }[]} */ (
+    current.filter(
+      (item) =>
+        item &&
+        typeof item === "object" &&
+        typeof item.number === "string" &&
+        typeof item.title === "string" &&
+        typeof item.description === "string",
+    )
+  );
+}
+
+/**
+ * @param {string} file
+ * @param {string} exportName
+ * @param {string} innerPath
+ */
+async function readStepsArrayFromLocaleFile(file, exportName, innerPath) {
+  const root = await importLocaleModule(file, exportName);
+  const value = getStepsArrayAtPath(root, innerPath);
+  if (!value) {
+    throw new Error(`Key ${innerPath} is not a steps array in ${file}`);
   }
   return value;
 }
@@ -275,10 +337,10 @@ async function patchTextRegistry(keyPath, locales) {
  */
 async function patchSectionFlowRegistry(sectionKey, flow) {
   const target = resolveTextTarget(sectionKey);
-  if (target.kind !== "content") {
-    throw new Error(`Section flow patch requires content section: ${sectionKey}`);
-  }
-  const sectionId = target.innerPath.split(".")[0];
+  const sectionScope =
+    target.kind === "content"
+      ? [target.innerPath.split(".")[0]]
+      : target.innerPath.split(".");
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
   const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
   /** @type {Record<string, string>} */
@@ -294,7 +356,7 @@ async function patchSectionFlowRegistry(sectionKey, flow) {
       touchedFiles.push(file);
     }
     const current = fs.readFileSync(file, "utf8");
-    const patched = replaceSectionFlow(current, sectionId, flow);
+    const patched = replaceSectionFlow(current, sectionScope, flow);
     fs.writeFileSync(file, patched, "utf8");
   }
 
@@ -327,6 +389,60 @@ async function readArrayRegistry(keyPath) {
  * @param {string} keyPath
  * @param {Record<string, string[]>} locales
  */
+/**
+ * @param {string} keyPath
+ */
+async function readStepsRegistry(keyPath) {
+  const target = resolveTextTarget(keyPath);
+  /** @type {Record<string, { number: string, title: string, description: string }[]>} */
+  const locales = {};
+  for (const id of getLocaleIds()) {
+    const { file, exportName, patchPath } = getTextLocaleFile(ROOT, id, target);
+    locales[id] = await readStepsArrayFromLocaleFile(file, exportName, patchPath);
+  }
+  return locales;
+}
+
+/**
+ * @param {string} keyPath
+ * @param {Record<string, { number: string, title: string, description: string }[]>} locales
+ */
+async function patchStepsRegistry(keyPath, locales) {
+  const target = resolveTextTarget(keyPath);
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+  /** @type {Record<string, string>} */
+  const beforePatch = {};
+  /** @type {string[]} */
+  const touchedFiles = [];
+
+  for (const id of getLocaleIds()) {
+    const nextSteps = locales[id];
+    if (!Array.isArray(nextSteps)) {
+      throw new Error(`Missing locale steps: ${id}`);
+    }
+    const { file, patchPath } = getTextLocaleFile(ROOT, id, target);
+    if (!(file in beforePatch)) {
+      beforePatch[file] = fs.readFileSync(file, "utf8");
+      backupFile(file, backupDir);
+      touchedFiles.push(file);
+    }
+    const current = fs.readFileSync(file, "utf8");
+    const patched = replaceStepsArray(current, patchPath, nextSteps);
+    fs.writeFileSync(file, patched, "utf8");
+  }
+
+  const check = await runLocaleTest();
+  if (!check.ok) {
+    for (const file of touchedFiles) {
+      fs.writeFileSync(file, beforePatch[file], "utf8");
+    }
+    throw new Error(check.error ?? "Locale key check failed");
+  }
+
+  return { backupDir, files: touchedFiles };
+}
+
 async function patchArrayRegistry(keyPath, locales) {
   const target = resolveTextTarget(keyPath);
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
@@ -364,14 +480,28 @@ async function patchArrayRegistry(keyPath, locales) {
 }
 
 function runLocaleTest() {
+  return runPnpmScript("test:locale");
+}
+
+function runTherapistsTest() {
+  return runPnpmScript("test:therapists");
+}
+
+/**
+ * @param {string} script
+ */
+function runPnpmScript(script) {
   return new Promise((resolve) => {
-    const child = spawn("pnpm", ["run", "test:locale"], {
+    const child = spawn("pnpm", ["run", script], {
       cwd: ROOT,
       stdio: ["ignore", "pipe", "pipe"],
       shell: true,
     });
     let err = "";
     child.stderr?.on("data", (d) => {
+      err += d.toString();
+    });
+    child.stdout?.on("data", (d) => {
       err += d.toString();
     });
     child.on("close", (code) => {
@@ -403,7 +533,7 @@ function sendJson(res, status, data) {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": `Content-Type, ${EDIT_HEADER}`,
-    "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
   });
   res.end(JSON.stringify(data));
 }
@@ -452,6 +582,14 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    const stepsRegistryMatch = url.pathname.match(/^\/registry\/steps\/(.+)$/);
+    if (req.method === "GET" && stepsRegistryMatch) {
+      const key = decodeURIComponent(stepsRegistryMatch[1]);
+      const locales = await readStepsRegistry(key);
+      sendJson(res, 200, { key, locales });
+      return;
+    }
+
     if (req.method === "POST" && url.pathname === "/patch/text") {
       const body = await readJsonBody(req);
       const { key, locales } = body;
@@ -472,6 +610,18 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       const result = await patchArrayRegistry(key, locales);
+      sendJson(res, 200, { ok: true, ...result });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/steps-array") {
+      const body = await readJsonBody(req);
+      const { key, locales } = body;
+      if (!key || !locales) {
+        sendJson(res, 400, { error: "key and locales required" });
+        return;
+      }
+      const result = await patchStepsRegistry(key, locales);
       sendJson(res, 200, { ok: true, ...result });
       return;
     }
@@ -681,7 +831,233 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (req.method === "GET" && url.pathname === "/registry/therapists") {
+      const manifest = readManifest(ROOT);
+      sendJson(res, 200, { manifest });
+      return;
+    }
+
+    if (req.method === "GET" && url.pathname === "/registry/site-pages") {
+      const manifest = readManifest(ROOT);
+      const visibility = readVisibility(ROOT);
+      sendJson(res, 200, {
+        hidden: visibility.hidden ?? [],
+        therapistSlugs: manifest.order,
+      });
+      return;
+    }
+
+    if (req.method === "PATCH" && url.pathname === "/site-pages/visibility") {
+      const body = await readJsonBody(req);
+      const { pageId, hidden: isHidden } = body;
+      if (!pageId || typeof isHidden !== "boolean") {
+        sendJson(res, 400, { error: "pageId and hidden boolean required" });
+        return;
+      }
+      const visibility = readVisibility(ROOT);
+      const hiddenSet = new Set(visibility.hidden ?? []);
+      if (isHidden) hiddenSet.add(pageId);
+      else hiddenSet.delete(pageId);
+
+      if (pageId === "therapists.list" && isHidden) {
+        const manifest = readManifest(ROOT);
+        for (const slug of manifest.order) {
+          hiddenSet.add(`therapists.profile.${slug}`);
+        }
+      }
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const visPath = path.join(ROOT, "data/site-pages-visibility.json");
+      backupFile(visPath, backupDir);
+      writeVisibility(ROOT, { hidden: [...hiddenSet] });
+      sendJson(res, 200, { ok: true, hidden: [...hiddenSet], backupDir });
+      return;
+    }
+
+    if (req.method === "PUT" && url.pathname === "/site-pages/visibility") {
+      const body = await readJsonBody(req);
+      const hiddenList = body.hidden;
+      if (!Array.isArray(hiddenList) || !hiddenList.every((id) => typeof id === "string")) {
+        sendJson(res, 400, { error: "hidden string array required" });
+        return;
+      }
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const visPath = path.join(ROOT, "data/site-pages-visibility.json");
+      backupFile(visPath, backupDir);
+      writeVisibility(ROOT, { hidden: [...new Set(hiddenList)] });
+      sendJson(res, 200, { ok: true, hidden: [...new Set(hiddenList)], backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/therapists/create") {
+      const body = await readJsonBody(req);
+      const displayName = body.displayName?.trim();
+      if (!displayName) {
+        sendJson(res, 400, { error: "displayName required" });
+        return;
+      }
+      const manifest = readManifest(ROOT);
+      const slug = makeSlug(displayName, manifest.order);
+      const record = createTherapistTemplate(ROOT, slug, displayName);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      writeTherapist(ROOT, slug, record);
+      manifest.order.push(slug);
+      manifest.entries[slug] = {
+        createdAt: new Date().toISOString(),
+        sourceName: displayName,
+      };
+      writeManifest(ROOT, manifest);
+      ensurePortraitPlaceholder(ROOT, slug);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      const check = await runTherapistsTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, slug, backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/therapists/delete") {
+      const body = await readJsonBody(req);
+      const { slug } = body;
+      if (!slug) {
+        sendJson(res, 400, { error: "slug required" });
+        return;
+      }
+      const manifest = readManifest(ROOT);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const jsPath = path.join(ROOT, "data/therapists", `${slug}.js`);
+      if (fs.existsSync(jsPath)) backupFile(jsPath, backupDir);
+      backupFile(path.join(ROOT, "data/therapists/manifest.json"), backupDir);
+      archiveTherapistImages(ROOT, slug);
+      deleteTherapistFiles(ROOT, slug);
+      manifest.order = manifest.order.filter((s) => s !== slug);
+      delete manifest.entries[slug];
+      writeManifest(ROOT, manifest);
+      const visibility = readVisibility(ROOT);
+      visibility.hidden = (visibility.hidden ?? []).filter(
+        (id) => id !== `therapists.profile.${slug}`,
+      );
+      writeVisibility(ROOT, visibility);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, backupDir });
+      return;
+    }
+
+    if (req.method === "PATCH" && url.pathname === "/therapists/manifest/order") {
+      const body = await readJsonBody(req);
+      const { order } = body;
+      if (!Array.isArray(order)) {
+        sendJson(res, 400, { error: "order array required" });
+        return;
+      }
+      const manifest = readManifest(ROOT);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      backupFile(path.join(ROOT, "data/therapists/manifest.json"), backupDir);
+      manifest.order = order;
+      writeManifest(ROOT, manifest);
+      const check = await runTherapistsTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/therapist") {
+      const body = await readJsonBody(req);
+      const { slug, record } = body;
+      if (!slug || !record) {
+        sendJson(res, 400, { error: "slug and record required" });
+        return;
+      }
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const jsPath = path.join(ROOT, "data/therapists", `${slug}.js`);
+      if (fs.existsSync(jsPath)) backupFile(jsPath, backupDir);
+      writeTherapist(ROOT, slug, { ...record, slug });
+      const check = await runTherapistsTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/therapists/rename") {
+      const body = await readJsonBody(req);
+      const { oldSlug, newSlug, record } = body;
+      if (!oldSlug || !newSlug || !record) {
+        sendJson(res, 400, { error: "oldSlug, newSlug, record required" });
+        return;
+      }
+      if (oldSlug === newSlug) {
+        sendJson(res, 400, { error: "oldSlug and newSlug must differ" });
+        return;
+      }
+      const manifest = readManifest(ROOT);
+      if (!manifest.order.includes(oldSlug)) {
+        sendJson(res, 404, { error: `Unknown slug: ${oldSlug}` });
+        return;
+      }
+      if (manifest.order.includes(newSlug)) {
+        sendJson(res, 409, { error: `Slug already exists: ${newSlug}` });
+        return;
+      }
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      backupFile(path.join(ROOT, "data/therapists/manifest.json"), backupDir);
+      const visPath = path.join(ROOT, "data/site-pages-visibility.json");
+      if (fs.existsSync(visPath)) backupFile(visPath, backupDir);
+
+      renameTherapistFiles(ROOT, oldSlug, newSlug);
+
+      const portraitPath = `/therapists/${newSlug}/portrait.png`;
+      const nextRecord = {
+        ...record,
+        slug: newSlug,
+        profile: { ...record.profile, portrait: portraitPath },
+      };
+      writeTherapist(ROOT, newSlug, nextRecord);
+
+      delete IMAGE_REGISTRY[`therapists.${oldSlug}.portrait`];
+      IMAGE_REGISTRY[`therapists.${newSlug}.portrait`] = {
+        file: `public/therapists/${newSlug}/portrait.png`,
+        publicPath: portraitPath,
+      };
+
+      const check = await runTherapistsTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, oldSlug, newSlug, backupDir });
+      return;
+    }
+
     if (req.method === "POST" && url.pathname === "/git/deploy") {
+      const localeCheck = await runLocaleTest();
+      if (!localeCheck.ok) {
+        sendJson(res, 500, { error: `test:locale failed\n${localeCheck.error}` });
+        return;
+      }
+      const therapistsCheck = await runTherapistsTest();
+      if (!therapistsCheck.ok) {
+        sendJson(res, 500, {
+          error: `test:therapists failed\n${therapistsCheck.error}`,
+        });
+        return;
+      }
       const result = await runReleaseDeploy(ROOT);
       sendJson(res, 200, { ok: true, ...result });
       return;

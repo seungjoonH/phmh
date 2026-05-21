@@ -62,7 +62,7 @@ export default {
     "email": "hsj6831@gmail.com",
     "korea": {
       "address": "경기도 광주시 초월읍 진새골길 81-1",
-      "phone": "",
+      "phone": "01092474802",
       "email": "hsj6831@gmail.com"
     },
     "philippines": {

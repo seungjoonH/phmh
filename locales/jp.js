@@ -62,7 +62,7 @@ export default {
     "email": "hsj6831@gmail.com",
     "korea": {
       "address": "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea",
-      "phone": "",
+      "phone": "01092474802",
       "email": "hsj6831@gmail.com"
     },
     "philippines": {

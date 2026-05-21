@@ -14,6 +14,7 @@ function nextBlockId(): string {
 export type CreateFlowBlockOptions = {
   ctaEditKey?: string;
   ctaLabel?: string;
+  sourceBlocks?: FlowBlock[];
 };
 
 export function createFlowBlock(

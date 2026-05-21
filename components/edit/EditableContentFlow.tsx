@@ -285,6 +285,8 @@ export function EditableContentFlow({
           label: ctaLabel,
         })
       : blocks;
+  const sourceBlocks =
+    displayBlocks.length !== blocks.length ? displayBlocks : undefined;
 
   const [openInsertIndex, setOpenInsertIndex] = useState<number | null>(null);
   const insertTypes = isServiceSectionKey(sectionKey)
@@ -337,7 +339,7 @@ export function EditableContentFlow({
   const busy = edit.flowBusy === sectionKey;
 
   createDropHandler((from, insertAt) => {
-    return edit.moveFlowBlock(sectionKey, from, insertAt);
+    return edit.moveFlowBlock(sectionKey, from, insertAt, sourceBlocks);
   });
 
   const handleInsert = (index: number, type: FlowBlockInsertType) => {
@@ -345,6 +347,7 @@ export function EditableContentFlow({
     void edit.insertFlowBlock(sectionKey, index, type, {
       ctaEditKey,
       ctaLabel,
+      sourceBlocks,
     });
   };
 
@@ -388,7 +391,9 @@ export function EditableContentFlow({
                     isPrepend ? undefined : (
                       <EditInlineControls
                         busy={busy}
-                        onDelete={() => void edit.removeFlowBlock(sectionKey, i)}
+                        onDelete={() =>
+                          void edit.removeFlowBlock(sectionKey, i, sourceBlocks)
+                        }
                       />
                     )
                   }

@@ -198,6 +198,16 @@ function isGeneratedFlowTextKey(key: string): boolean {
   return /\.flowText\.[^.]+\.(p|heading|sectionTitle|button)$/.test(key);
 }
 
+function addedLongFormSectionOrderKey(key: string): string | null {
+  const match = /^(services|serviceAreas)\.sections\.(sec_[^.]+)\.title$/.exec(key);
+  if (!match) return null;
+  return match[1] === "services" ? "services.sectionOrder" : "serviceAreas.sectionOrder";
+}
+
+function addedLongFormSectionSlug(key: string): string | null {
+  return /^(?:services|serviceAreas)\.sections\.(sec_[^.]+)\.title$/.exec(key)?.[1] ?? null;
+}
+
 function findFlowBlockBySectionAndList(
   flowDrafts: Record<string, FlowBlock[]>,
   listKey: string,
@@ -262,8 +272,17 @@ type EditDraftContextValue = {
     section: SectionContent,
     options?: { prepend?: FlowBlock[] },
   ) => FlowBlock[];
-  moveFlowBlock: (sectionKey: string, from: number, to: number) => Promise<void>;
-  removeFlowBlock: (sectionKey: string, index: number) => Promise<void>;
+  moveFlowBlock: (
+    sectionKey: string,
+    from: number,
+    to: number,
+    sourceBlocks?: FlowBlock[],
+  ) => Promise<void>;
+  removeFlowBlock: (
+    sectionKey: string,
+    index: number,
+    sourceBlocks?: FlowBlock[],
+  ) => Promise<void>;
   insertFlowBlock: (
     sectionKey: string,
     index: number,
@@ -384,6 +403,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   const [longFormSectionDrafts, setLongFormSectionDrafts] = useState<
     Record<string, LongFormSectionsDraftEntry>
   >({});
+  const longFormSectionDraftsRef = useRef(longFormSectionDrafts);
   const [longFormSectionBusy, setLongFormSectionBusy] = useState<string | null>(
     null,
   );
@@ -434,6 +454,10 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     stepsDraftsRef.current = stepsDrafts;
   }, [stepsDrafts]);
+
+  useEffect(() => {
+    longFormSectionDraftsRef.current = longFormSectionDrafts;
+  }, [longFormSectionDrafts]);
 
   useEffect(() => {
     fetchContactFormStructure()
@@ -1197,11 +1221,16 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   );
 
   const moveFlowBlock = useCallback(
-    async (sectionKey: string, from: number, to: number) => {
+    async (
+      sectionKey: string,
+      from: number,
+      to: number,
+      sourceBlocks?: FlowBlock[],
+    ) => {
       if (from === to) return;
       setFlowBusy(sectionKey);
       try {
-        const current = getFlowBlocksForEdit(sectionKey);
+        const current = sourceBlocks ?? getFlowBlocksForEdit(sectionKey);
         const next = [...current];
         const [moved] = next.splice(from, 1);
         next.splice(to, 0, moved);
@@ -1214,11 +1243,11 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   );
 
   const removeFlowBlock = useCallback(
-    async (sectionKey: string, index: number) => {
+    async (sectionKey: string, index: number, sourceBlocks?: FlowBlock[]) => {
       if (!(await showConfirm({ message: "이 블록을 삭제할까요?", danger: true }))) return;
       setFlowBusy(sectionKey);
       try {
-        const current = getFlowBlocksForEdit(sectionKey);
+        const current = sourceBlocks ?? getFlowBlocksForEdit(sectionKey);
         saveFlowDraft(
           sectionKey,
           current.filter((_, i) => i !== index),
@@ -1235,11 +1264,11 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       sectionKey: string,
       index: number,
       type: FlowBlockInsertType,
-      options: CreateFlowBlockOptions = {},
-    ) => {
+        options: CreateFlowBlockOptions = {},
+      ) => {
       setFlowBusy(sectionKey);
       try {
-        const current = getFlowBlocksForEdit(sectionKey);
+        const current = options.sourceBlocks ?? getFlowBlocksForEdit(sectionKey);
         const block = createFlowBlock(sectionKey, type, options);
 
         const next = [...current];
@@ -1542,6 +1571,25 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     async (key: string): Promise<LocaleTextValues> => {
       if (isGeneratedFlowTextKey(key) && draftsRef.current[key]) {
         return emptyLocaleTextValues();
+      }
+      const longFormOrderKey = addedLongFormSectionOrderKey(key);
+      const longFormSlug = addedLongFormSectionSlug(key);
+      if (
+        longFormOrderKey &&
+        longFormSlug &&
+        longFormSectionDraftsRef.current[longFormOrderKey]?.added[longFormSlug]
+      ) {
+        return {
+          ...emptyLocaleTextValues(),
+          ...Object.fromEntries(
+            getActiveLocaleIds().map((id) => [
+              id,
+              longFormSectionDraftsRef.current[longFormOrderKey]?.added[longFormSlug]?.[
+                id
+              ]?.title ?? "",
+            ]),
+          ),
+        };
       }
       const therapistField = parseTherapistFieldKey(key);
       if (therapistField) {

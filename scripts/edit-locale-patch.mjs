@@ -516,8 +516,14 @@ function storedFlowBlockToJs(block) {
       return `{ type: "p", textKey: "${escapeJsString(block.textKey)}" }`;
     case "heading":
       return `{ type: "heading", textKey: "${escapeJsString(block.textKey)}" }`;
+    case "sectionTitle":
+      return `{ type: "sectionTitle", textKey: "${escapeJsString(block.textKey)}" }`;
     case "button":
       return `{ type: "button", textKey: "${escapeJsString(block.textKey)}" }`;
+    case "list":
+      return block.lead
+        ? `{ type: "list", listKey: "${escapeJsString(block.listKey)}", ordered: ${Boolean(block.ordered)}, lead: "${escapeJsString(block.lead)}" }`
+        : `{ type: "list", listKey: "${escapeJsString(block.listKey)}", ordered: ${Boolean(block.ordered)} }`;
     case "bullets":
       return block.lead
         ? `{ type: "bullets", listKey: "${escapeJsString(block.listKey)}", lead: "${escapeJsString(block.lead)}" }`

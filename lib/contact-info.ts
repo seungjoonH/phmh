@@ -1,4 +1,4 @@
-// 연락처 표시 헬퍼 — UI는 locales siteContact.*, 메일 발송 SSOT는 .env (lib/contact-mail.ts)
+// 연락처 표시 헬퍼 — 이메일은 env SSOT, 주소·전화는 locales siteContact.*
 import type { Messages } from "@/lib/i18n/messages";
 import {
   siteContactEmail,

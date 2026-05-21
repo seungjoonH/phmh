@@ -43,12 +43,8 @@ function isResendSandbox(): boolean {
   );
 }
 
-/** Resend 수신 — 센터별 `*_CONTACT_EMAIL` (샌드박스 시 `RESEND_SANDBOX_TO` 선택) */
+/** Resend 수신 — 센터별 `*_CONTACT_EMAIL` */
 export function getContactMailTo(center: ContactCenter): string {
-  const sandboxTo = readEnv("RESEND_SANDBOX_TO");
-  if (isResendSandbox() && sandboxTo) {
-    return sandboxTo;
-  }
   return getCenterEmail(center);
 }
 

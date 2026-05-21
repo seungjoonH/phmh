@@ -71,7 +71,6 @@ export function SiteFooter() {
                   address={getKoreaAddress(messages)}
                   phoneKey="siteContact.korea.phone"
                   phone={getKoreaPhone(messages)}
-                  emailKey="siteContact.korea.email"
                   email={getKoreaEmail(messages)}
                 />
                 <ContactCenterBlock
@@ -80,7 +79,6 @@ export function SiteFooter() {
                   address={getPhilippinesAddressFull(messages)}
                   phoneKey="siteContact.philippines.phoneViber"
                   phone={getPhilippinesPhoneViber(messages)}
-                  emailKey="siteContact.philippines.email"
                   email={getPhilippinesEmail(messages)}
                 />
               </div>
@@ -98,7 +96,6 @@ function ContactCenterBlock({
   address,
   phoneKey,
   phone,
-  emailKey,
   email,
 }: {
   centerLabel: string;
@@ -106,7 +103,6 @@ function ContactCenterBlock({
   address: string;
   phoneKey: string;
   phone: string;
-  emailKey: string;
   email: string;
 }) {
   const editMode = isEditMode();
@@ -131,9 +127,7 @@ function ContactCenterBlock({
           href={`mailto:${email}`}
           className="interactive-link hover:text-link-active"
         >
-          <EditableText editKey={emailKey} as="span" longPress={false}>
-            {email}
-          </EditableText>
+          {email}
         </a>
       </p>
     </div>

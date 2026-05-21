@@ -49,13 +49,9 @@ function ContactEmailLink({
   const { messages } = useLocale();
   const email =
     center === "korea" ? getKoreaEmail(messages) : getPhilippinesEmail(messages);
-  const emailKey =
-    center === "korea" ? "siteContact.korea.email" : "siteContact.philippines.email";
   return (
     <a href={`mailto:${email}`} className={className}>
-      <EditableText editKey={emailKey} as="span" longPress={false}>
-        {email}
-      </EditableText>
+      {email}
     </a>
   );
 }

@@ -49,7 +49,7 @@ export async function POST(request: Request) {
       {
         error:
           devHint ??
-          "Failed to send message. Please try again or email us directly.",
+          "Failed to send message. Please try again.",
       },
       { status: 502 },
     );

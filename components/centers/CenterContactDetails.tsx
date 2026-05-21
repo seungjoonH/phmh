@@ -45,13 +45,19 @@ export function CenterContactDetails({ center, locale, messages }: Props) {
           <dt className="text-sm font-semibold uppercase tracking-wide text-page-heading">
             {row.label}
           </dt>
-          <EditableText
-            as="dd"
-            className="mt-2 whitespace-pre-line text-sm leading-6 text-page-body"
-            editKey={row.editKey}
-          >
-            {row.value}
-          </EditableText>
+          {row.label === "EMAIL" ? (
+            <dd className="mt-2 whitespace-pre-line text-sm leading-6 text-page-body">
+              {row.value}
+            </dd>
+          ) : (
+            <EditableText
+              as="dd"
+              className="mt-2 whitespace-pre-line text-sm leading-6 text-page-body"
+              editKey={row.editKey}
+            >
+              {row.value}
+            </EditableText>
+          )}
         </div>
       ))}
     </dl>

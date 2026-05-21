@@ -14,7 +14,8 @@ export function siteContactKoreaPhone(messages: Messages): string {
 }
 
 export function siteContactKoreaEmail(messages: Messages): string {
-  return tPath(messages, "siteContact.korea.email") || siteContactEmail(messages);
+  void messages;
+  return process.env.KOREA_CONTACT_EMAIL?.trim() ?? "";
 }
 
 export function siteContactPhilippinesAddressShort(messages: Messages): string {
@@ -34,5 +35,6 @@ export function siteContactPhilippinesPhoneViber(messages: Messages): string {
 }
 
 export function siteContactPhilippinesEmail(messages: Messages): string {
-  return tPath(messages, "siteContact.philippines.email") || siteContactEmail(messages);
+  void messages;
+  return process.env.PHILIPPINES_CONTACT_EMAIL?.trim() ?? "";
 }

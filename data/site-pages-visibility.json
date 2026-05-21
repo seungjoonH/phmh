@@ -1,5 +1,8 @@
 {
-  "hidden": [],
+  "hidden": [
+    "centers.list",
+    "therapists.list"
+  ],
   "topOrder": [
     "about",
     "services",

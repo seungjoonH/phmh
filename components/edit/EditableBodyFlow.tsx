@@ -19,8 +19,6 @@ type Props = {
   ctaLabel?: string;
   ctaHref?: string;
   ctaEditKey?: string;
-  imageEditKey?: string;
-  imageSrc?: string;
   appendCta?: boolean;
 };
 
@@ -45,8 +43,6 @@ export function EditableBodyFlow({
   ctaLabel,
   ctaHref,
   ctaEditKey,
-  imageEditKey,
-  imageSrc,
   appendCta = false,
 }: Props) {
   const { messages } = useLocale();
@@ -73,8 +69,6 @@ export function EditableBodyFlow({
         ctaLabel={ctaLabel}
         ctaHref={ctaHref}
         ctaEditKey={ctaEditKey}
-        imageEditKey={imageEditKey}
-        imageSrc={imageSrc}
         appendCta={appendCta}
       />
     </div>

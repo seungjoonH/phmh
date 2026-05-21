@@ -1,13 +1,14 @@
 "use client";
 
 // Contact 페이지 레이아웃
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { PageVisibilityGuard } from "@/components/site/PageVisibilityGuard";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   ContactCenterToggle,
   type ContactCenter,
+  type ContactCenterToggleHandle,
 } from "./ContactCenterToggle";
 import { ContactForm } from "./ContactForm";
 import { ContactMapEmbed } from "./ContactMapEmbed";
@@ -18,9 +19,11 @@ import { editTextAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import {
-  getContactEmailDisplay,
   getKoreaAddress,
+  getKoreaEmail,
+  getKoreaPhone,
   getPhilippinesAddressShort,
+  getPhilippinesEmail,
   getPhilippinesPhone,
 } from "@/lib/contact-info";
 import { getContactMapEmbedSrc } from "@/lib/contact-map-embed";
@@ -36,12 +39,21 @@ type Props = {
   center: ContactCenter;
 };
 
-function ContactEmailLink({ className }: { className?: string }) {
+function ContactEmailLink({
+  center,
+  className,
+}: {
+  center: ContactCenter;
+  className?: string;
+}) {
   const { messages } = useLocale();
-  const email = getContactEmailDisplay(messages);
+  const email =
+    center === "korea" ? getKoreaEmail(messages) : getPhilippinesEmail(messages);
+  const emailKey =
+    center === "korea" ? "siteContact.korea.email" : "siteContact.philippines.email";
   return (
     <a href={`mailto:${email}`} className={className}>
-      <EditableText editKey="siteContact.email" as="span" longPress={false}>
+      <EditableText editKey={emailKey} as="span" longPress={false}>
         {email}
       </EditableText>
     </a>
@@ -53,6 +65,7 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
   const { messages } = useLocale();
   const reduce = useReducedMotion();
   const [center, setCenter] = useState<ContactCenter>(initialCenter);
+  const toggleRef = useRef<ContactCenterToggleHandle>(null);
 
   useEffect(() => {
     setCenter(initialCenter);
@@ -103,10 +116,17 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
                 fallbackSection={{ paragraphs: [] }}
                 className="mb-8"
               />
-              <ContactForm center={center} />
+              <ContactForm
+                center={center}
+                onResidencyDecline={() => toggleRef.current?.highlight()}
+              />
             </div>
             <aside className="min-w-0 w-full text-page-body">
-              <ContactCenterToggle value={center} onChange={switchCenter} />
+              <ContactCenterToggle
+                ref={toggleRef}
+                value={center}
+                onChange={switchCenter}
+              />
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={center}
@@ -159,18 +179,37 @@ export function ContactPageLayout({ center: initialCenter }: Props) {
                   >
                     {t(`${prefix}.contactTitle`)}
                   </EditableText>
-                  {center === "philippines" && (
-                    <EditableText
-                      as="p"
-                      className="text-sm"
-                      editKey="siteContact.philippines.phone"
-                    >
-                      {getPhilippinesPhone(messages)}
-                    </EditableText>
-                  )}
-                  <p className={center === "philippines" ? "mt-4 text-sm" : "text-sm"}>
-                    <ContactEmailLink className="interactive-link hover:text-page-heading" />
-                  </p>
+                  {(() => {
+                    const phoneKey =
+                      center === "korea"
+                        ? "siteContact.korea.phone"
+                        : "siteContact.philippines.phone";
+                    const phoneValue =
+                      center === "korea"
+                        ? getKoreaPhone(messages)
+                        : getPhilippinesPhone(messages);
+                    const showPhone =
+                      isEditMode() || phoneValue.trim() !== "";
+                    return (
+                      <>
+                        {showPhone && (
+                          <EditableText
+                            as="p"
+                            className="text-sm"
+                            editKey={phoneKey}
+                          >
+                            {phoneValue}
+                          </EditableText>
+                        )}
+                        <p className={showPhone ? "mt-4 text-sm" : "text-sm"}>
+                          <ContactEmailLink
+                            center={center}
+                            className="interactive-link hover:text-page-heading"
+                          />
+                        </p>
+                      </>
+                    );
+                  })()}
                   <EditableText
                     as="h2"
                     className="mb-2 mt-8 font-logo text-xl text-page-heading"

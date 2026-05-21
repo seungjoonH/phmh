@@ -1,19 +1,12 @@
-// Contact 폼 → Resend (Reply-To = 문의자 이메일)
+// Contact 폼 → Resend (센터별 API 키, Reply-To = 문의자 이메일)
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { buildContactEmail, parseContactPayload } from "@/lib/contact-email";
+import { getContactResendApiKey } from "@/lib/contact-mail";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "Email service is not configured" },
-      { status: 503 },
-    );
-  }
-
   let body: unknown;
   try {
     body = await request.json();
@@ -24,6 +17,14 @@ export async function POST(request: Request) {
   const parsed = parseContactPayload(body);
   if (!parsed.ok) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
+  }
+
+  const apiKey = getContactResendApiKey(parsed.data.center);
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "Email service is not configured" },
+      { status: 503 },
+    );
   }
 
   const email = buildContactEmail(parsed.data);

@@ -70,7 +70,7 @@ export function flowToProseSection(flow: FlowBlock[]): ProseSectionContent {
         flushList();
         pendingList = { lead: block.text, items: [] };
         break;
-      case "bullets":
+      case "list":
         if (pendingList && pendingList.items.length === 0) {
           pendingList.items = [...block.items];
         } else {
@@ -79,6 +79,7 @@ export function flowToProseSection(flow: FlowBlock[]): ProseSectionContent {
           pendingList = null;
         }
         break;
+      case "sectionTitle":
       case "hr":
       case "button":
       case "img":

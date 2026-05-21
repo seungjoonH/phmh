@@ -1,13 +1,13 @@
 "use client";
 
 // Contact 스키마 필드 → UI (문구 SSOT: lib/contact-form-schema.ts)
+// 필드 텍스트/구조 편집은 EditInlineControls 의 「설정」 패널에서 단독 관리한다.
 import type { ContactFormLocaleKey } from "@/lib/contact-form-schema";
 import {
   getContactFieldCopy,
   getFieldOptions,
   type ContactFieldDefinition,
 } from "@/lib/contact-form-schema";
-import { editTextAttrs } from "@/lib/edit/attrs";
 import {
   useContactFieldLabel,
   useContactFieldPlaceholder,
@@ -20,25 +20,15 @@ type Props = {
   locale: ContactFormLocaleKey;
 };
 
-function fieldLabelKey(fieldId: string) {
-  return `contactForm.fields.${fieldId}.label`;
-}
-
-function fieldPlaceholderKey(fieldId: string) {
-  return `contactForm.fields.${fieldId}.placeholder`;
-}
-
 export function ContactFieldRenderer({ field, locale }: Props) {
   const copy = getContactFieldCopy(locale, field.id);
   const label = useContactFieldLabel(locale, field.id);
   const placeholder = useContactFieldPlaceholder(locale, field.id);
-  const labelKey = fieldLabelKey(field.id);
-  const placeholderKey = fieldPlaceholderKey(field.id);
 
   switch (field.type) {
     case "text":
       return (
-        <ContactFieldShell label={label} required={field.required} labelEditKey={labelKey}>
+        <ContactFieldShell label={label} required={field.required}>
           <input
             name={field.id}
             type="text"
@@ -46,14 +36,13 @@ export function ContactFieldRenderer({ field, locale }: Props) {
             autoComplete={field.autoComplete}
             className="input-underline"
             placeholder={placeholder}
-            {...(placeholder ? editTextAttrs(placeholderKey, { longPress: true }) : {})}
           />
         </ContactFieldShell>
       );
 
     case "email":
       return (
-        <ContactFieldShell label={label} required={field.required} labelEditKey={labelKey}>
+        <ContactFieldShell label={label} required={field.required}>
           <input
             name={field.id}
             type="email"
@@ -66,7 +55,7 @@ export function ContactFieldRenderer({ field, locale }: Props) {
 
     case "tel":
       return (
-        <ContactFieldShell label={label} required={field.required} labelEditKey={labelKey}>
+        <ContactFieldShell label={label} required={field.required}>
           <input
             name={field.id}
             type="tel"
@@ -84,21 +73,18 @@ export function ContactFieldRenderer({ field, locale }: Props) {
           locale={locale}
           label={label}
           placeholder={placeholder ?? ""}
-          labelEditKey={labelKey}
-          placeholderEditKey={placeholderKey}
         />
       );
 
     case "textarea":
       return (
-        <ContactFieldShell label={label} required={field.required} labelEditKey={labelKey}>
+        <ContactFieldShell label={label} required={field.required}>
           <textarea
             name={field.id}
             required={field.required}
             rows={field.rows ?? 3}
             placeholder={placeholder}
             className="input-underline resize-none"
-            {...(placeholder ? editTextAttrs(placeholderKey, { longPress: true }) : {})}
           />
         </ContactFieldShell>
       );
@@ -106,7 +92,7 @@ export function ContactFieldRenderer({ field, locale }: Props) {
     case "select": {
       const options = getFieldOptions(locale, field.id);
       return (
-        <ContactFieldShell label={label} required={field.required} labelEditKey={labelKey}>
+        <ContactFieldShell label={label} required={field.required}>
           <select name={field.id} required={field.required} className="input-underline">
             <option value="">—</option>
             {options.map((opt) => (
@@ -123,10 +109,7 @@ export function ContactFieldRenderer({ field, locale }: Props) {
       const options = getFieldOptions(locale, field.id);
       return (
         <fieldset>
-          <legend
-            className="mb-3 font-medium"
-            {...editTextAttrs(labelKey)}
-          >
+          <legend className="mb-3 font-medium">
             {label}
             {field.required ? " *" : ""}
           </legend>
@@ -150,18 +133,12 @@ export function ContactFieldRenderer({ field, locale }: Props) {
     case "consent":
       return (
         <fieldset>
-          <legend
-            className="mb-2 font-medium"
-            {...editTextAttrs(labelKey)}
-          >
+          <legend className="mb-2 font-medium">
             {label}
             {field.required ? " *" : ""}
           </legend>
           {copy?.body ? (
-            <p
-              className="mb-3 whitespace-pre-line text-sm text-page-body/80"
-              {...editTextAttrs(`contactForm.fields.${field.id}.body`)}
-            >
+            <p className="mb-3 whitespace-pre-line text-sm text-page-body/80">
               {copy.body}
             </p>
           ) : null}
@@ -172,9 +149,7 @@ export function ContactFieldRenderer({ field, locale }: Props) {
               required={field.required}
               className="input-checkbox"
             />
-            <span {...editTextAttrs(`contactForm.fields.${field.id}.checkbox`)}>
-              {copy?.checkbox ?? label}
-            </span>
+            <span>{copy?.checkbox ?? label}</span>
           </label>
         </fieldset>
       );

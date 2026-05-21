@@ -7,7 +7,8 @@ export default {
       "Dialectical Behavior Therapy",
       "Adults and university students",
       "English, Korean",
-      "Expertise: emotional regulation, anxiety, depression, burnout, identity concerns, family conflict, and cultural adjustment."
+      "Expertise: emotional regulation, anxiety, depression, burnout, identity concerns, family conflict, and cultural adjustment.",
+      "asdfawerasdfasdgaer"
     ],
     "ctaLabel": "View bio and expertise"
   },

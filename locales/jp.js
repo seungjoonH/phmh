@@ -28,8 +28,7 @@ export default {
     "serviceAreas": "対応分野",
     "gettingStarted": "ご利用の流れ",
     "fee": "料金",
-    "feePage": "料金",
-    "onlinePayment": "オンライン決済",
+    "center": "センター",
     "contact": "お問い合わせ",
     "koreaCenter": "韓国センター",
     "philippinesCenter": "フィリピンセンター",
@@ -40,6 +39,13 @@ export default {
     "list": {
       "pageTitle": "",
       "breadcrumb": ""
+    }
+  },
+  "centers": {
+    "list": {
+      "pageTitle": "センター",
+      "intro": "対面ケアを受けられる相談センターと地域拠点をご確認ください。",
+      "viewCenter": "センターを見る"
     }
   },
   "theme": {
@@ -55,13 +61,16 @@ export default {
   "siteContact": {
     "email": "hsj6831@gmail.com",
     "korea": {
-      "address": "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea"
+      "address": "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea",
+      "phone": "",
+      "email": "hsj6831@gmail.com"
     },
     "philippines": {
       "addressShort": "Abby's Apartelle, B10 L3 Unit C, Elvira St, Josefa Subd. Malabanias, Angeles",
       "addressFull": "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
-      "phoneViber": "+63 952 479 1119 (Viber)"
+      "phoneViber": "+63 952 479 1119 (Viber)",
+      "email": "hsj6831@gmail.com"
     }
   },
   "footer": {
@@ -77,13 +86,13 @@ export default {
     "whoWeAre": {
       "title": "私たちについて",
       "paragraphs": [
-        "誰もが人生のどこかで、心理的な困難に直面することがあります。その経験は、それぞれの歩んできた道のり、背景、個性によってさまざまな形で現れます。今、つらい思いをされていますか？あなたは一人ではありません。専門的なサポートを求めることは、癒しと成長への、勇気ある大切な一歩です。",
-        "Peace & Hope メンタルヘルスサービスは、皆さまが心のバランスを取り戻し、より豊かな日々を送り、日常生活を再び満ち足りたものにできるよう、お手伝いします。症状への対処だけでなく、あなたの中にある強さを見つけ、人生の意味や目的を見出し、困難な時期の中でも成長できるよう、共に歩んでいきます。",
-        "ご状況に合わせて、対面カウンセリングとオンラインカウンセリングの両方をご用意しています。世界のどこにいても、私たちとつながることができます。センターへのご来訪でも、ご自宅からのカウンセリングでも、安全でプライバシーが徹底的に守られる環境をご提供します。",
-        "カウンセリングの開始についてご不明な点や、もっと知りたいことがあれば、いつでもお気軽にご連絡ください。どんなに辛い瞬間にも、希望はあります。Peace & Hope メンタルヘルスサービスは、いつもあなたのそばにいます。",
-        "私たちがお力になります。",
-        "心を込めて、\nPeace & Hope メンタルヘルスサービス チーム一同"
-      ]
+    "誰もが人生のどこかで、心理的な困難に直面することがあります。その経験は、それぞれの歩んできた道のり、背景、個性によってさまざまな形で現れます。今、つらい思いをされていますか？あなたは一人ではありません。専門的なサポートを求めることは、癒しと成長への、勇気ある大切な一歩です。",
+    "Peace & Hope メンタルヘルスサービスは、皆さまが心のバランスを取り戻し、より豊かな日々を送り、日常生活を再び満ち足りたものにできるよう、お手伝いします。症状への対処だけでなく、あなたの中にある強さを見つけ、人生の意味や目的を見出し、困難な時期の中でも成長できるよう、共に歩んでいきます。",
+    "ご状況に合わせて、対面カウンセリングとオンラインカウンセリングの両方をご用意しています。世界のどこにいても、私たちとつながることができます。センターへのご来訪でも、ご自宅からのカウンセリングでも、安全でプライバシーが徹底的に守られる環境をご提供します。",
+    "カウンセリングの開始についてご不明な点や、もっと知りたいことがあれば、いつでもお気軽にご連絡ください。どんなに辛い瞬間にも、希望はあります。Peace & Hope メンタルヘルスサービスは、いつもあなたのそばにいます。",
+    "私たちがお力になります。",
+    "心を込めて、\nPeace & Hope メンタルヘルスサービス チーム一同"
+  ]
     },
     "ourVision": {
       "title": "ビジョン",
@@ -133,15 +142,22 @@ export default {
         }
       ]
     },
-    "fee": {
+    "fee": {    flow: [
+      { type: "p", textKey: "pages.fee.paragraphs.1" },
+      { type: "p", textKey: "pages.fee.paragraphs.0" },
+      { type: "p", textKey: "pages.fee.paragraphs.2" },
+      { type: "p", textKey: "pages.fee.paragraphs.3" },
+      { type: "p", textKey: "pages.fee.paragraphs.4" }
+    ],
+
       "title": "料金",
       "paragraphs": [
-        "**ダイレクトビリングサービスをご提供しています！**",
-        "多くのクライアントの方は保険を利用してセッション費用をまかなっており、私たちは主要な国際保険を取り扱っています。保険の手続きはわかりにくく複雑に感じることもあるかと思いますが、ご安心ください——私たちがお手伝いします。ダイレクトビリングサービスを提供しており、保険請求などの煩雑な手続きはすべて私たちが代行します。面倒なことは私たちに任せて、カウンセリングに集中していただけます。",
-        "**保険プランをお持ちでない方へ**",
-        "**お問い合わせください。** その他のお支払い方法についてもご案内し、状況に応じてサポートいたします。なお、韓国の健康保険はメンタルヘルスサービスの適用外となりますのでご注意ください。",
-        "主要な国際保険を取り扱っています"
-      ]
+    "**ダイレクトビリングサービスをご提供しています！**",
+    "多くのクライアントの方は保険を利用してセッション費用をまかなっており、私たちは主要な国際保険を取り扱っています。保険の手続きはわかりにくく複雑に感じることもあるかと思いますが、ご安心ください——私たちがお手伝いします。ダイレクトビリングサービスを提供しており、保険請求などの煩雑な手続きはすべて私たちが代行します。面倒なことは私たちに任せて、カウンセリングに集中していただけます。",
+    "**保険プランをお持ちでない方へ**",
+    "**お問い合わせください。** その他のお支払い方法についてもご案内し、状況に応じてサポートいたします。なお、韓国の健康保険はメンタルヘルスサービスの適用外となりますのでご注意ください。",
+    "主要な国際保険を取り扱っています"
+  ]
     },
     "thankYou": {
       "title": "ありがとうございます",
@@ -167,35 +183,39 @@ export default {
   "services": {
     "pageTitle": "サービス案内",
     "sidebar": {
-      "top": "ページトップ",
-      "individual": "個人カウンセリング",
-      "couples": "カップルカウンセリング",
-      "family": "家族カウンセリング",
-      "play": "遊戯療法",
-      "group": "グループカウンセリング",
-      "christian": "キリスト教カウンセリング"
+      "top": "ページトップ"
     },
+    "sectionOrder": [
+      "individual",
+      "couples",
+      "family",
+      "play",
+      "group",
+      "christian"
+    ],
     "sections": servicesSectionsJp,
   },
   "serviceAreas": {
     "pageTitle": "対応分野",
     "sidebar": {
-      "top": "ページトップ",
-      "depression": "うつ病",
-      "traumaPtsd": "トラウマ・PTSD",
-      "anxietyPanic": "不安・パニック発作",
-      "suicidalThoughts": "希死念慮",
-      "culturalIdentity": "文化的アイデンティティ",
-      "bipolar": "双極性障害",
-      "adhd": "ADHD",
-      "relationship": "関係カウンセリング",
-      "ocd": "強迫性障害（OCD）",
-      "eatingDisorders": "摂食障害",
-      "asd": "自閉スペクトラム症（ASD）",
-      "lifeStress": "生活ストレス",
-      "griefLoss": "悲嘆・喪失",
-      "sleep": "睡眠障害"
+      "top": "ページトップ"
     },
+    "sectionOrder": [
+      "depression",
+      "traumaPtsd",
+      "anxietyPanic",
+      "suicidalThoughts",
+      "culturalIdentity",
+      "bipolar",
+      "adhd",
+      "relationship",
+      "ocd",
+      "eatingDisorders",
+      "asd",
+      "lifeStress",
+      "griefLoss",
+      "sleep"
+    ],
     "sections": serviceAreasSectionsJp,
   },
   "contact": {
@@ -231,35 +251,6 @@ export default {
       "hoursWeekday": "月〜金：午前10:00〜午後7:00",
       "hoursWeekend": "土・日：休業",
       "virtualNote": "営業時間外もオンラインセッション対応可"
-    }
-  },
-  "payment": {
-    "pageTitle": "お支払い",
-    "checkoutTitle": "お支払い手続き",
-    "stepDetails": "1. お客様情報",
-    "stepPayment": "2. お支払い情報",
-    "products": {
-      "individualSessionDbq": {
-        "label": "個人カウンセリング 1回 + DBQ"
-      }
-    },
-    "fields": {
-      "email": "メールアドレス",
-      "lastName": "姓",
-      "firstName": "名",
-      "country": "国",
-      "phone": "電話番号"
-    },
-    "continue": "次へ",
-    "payNow": "お支払いへ",
-    "back": "戻る",
-    "paypalNotice": "注文完了後、PayPalのページに移動してお支払いを完了してください。",
-    "sslBadge": "SSL セキュア決済",
-    "startPayment": "お支払い",
-    "providers": {
-      "paypal": "PayPal",
-      "stripe": "Stripe",
-      "toss": "Toss Payments"
     }
   }
 };

@@ -6,7 +6,17 @@ import { isEditMode } from "@/lib/edit/env";
 import { EditEmptyPlaceholder } from "@/components/edit/EditEmptyPlaceholder";
 import { MarkupText } from "@/components/ui/MarkupText";
 
-type Tag = "p" | "span" | "h1" | "h2" | "h3" | "li";
+type Tag =
+  | "p"
+  | "span"
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "li"
+  | "dd";
 
 type Props = {
   editKey?: string;

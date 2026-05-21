@@ -44,6 +44,12 @@ export type ContactFormLocaleBlock = {
     sending: string;
     error: string;
     openCalendar: string;
+    residencyConfirmTitle: string;
+    residencyConfirmMessage: string;
+    residencyConfirmConfirm: string;
+    residencyConfirmCancel: string;
+    residencyKorea: string;
+    residencyPhilippines: string;
   };
   fields: Record<string, ContactFormFieldCopy>;
 };

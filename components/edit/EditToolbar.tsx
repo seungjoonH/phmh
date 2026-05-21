@@ -7,6 +7,7 @@ import { useEditDraft } from "@/components/edit/EditDraftProvider";
 import { SitePagesPanel } from "@/components/edit/SitePagesPanel";
 import { deployRelease } from "@/lib/edit/client";
 import { duration, motionTransition } from "@/lib/motion";
+import { confirm as showConfirm } from "@/components/ui/AppDialog";
 
 function ChevronIcon({ up }: { up?: boolean }) {
   return (
@@ -66,9 +67,16 @@ export function EditToolbar() {
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     if (committing) return;
-    if (pendingCount > 0 && !window.confirm("저장하지 않은 변경을 모두 취소할까요?")) return;
+    if (
+      pendingCount > 0 &&
+      !(await showConfirm({
+        message: "저장하지 않은 변경을 모두 취소할까요?",
+        danger: true,
+      }))
+    )
+      return;
     revertAll();
     setExpanded(false);
   };
@@ -76,9 +84,11 @@ export function EditToolbar() {
   const handleDeploy = async () => {
     if (committing || deploying) return;
     if (
-      !window.confirm(
-        "package.json 버전을 올리고 release 커밋 후 origin/main에 push합니다. 계속할까요?",
-      )
+      !(await showConfirm({
+        title: "배포",
+        message:
+          "package.json 버전을 올리고 release 커밋 후 origin/main에 push합니다. 계속할까요?",
+      }))
     ) {
       return;
     }
@@ -159,7 +169,7 @@ export function EditToolbar() {
               <div className="flex gap-2">
                 <button
                   type="button"
-                  onClick={handleCancel}
+                  onClick={() => void handleCancel()}
                   className="interactive-button flex-1 rounded px-3 py-2 text-sm hover:bg-primary-foreground/15 disabled:opacity-50"
                   disabled={committing || pendingCount === 0}
                 >

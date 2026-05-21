@@ -9,6 +9,14 @@ export function siteContactKoreaAddress(messages: Messages): string {
   return tPath(messages, "siteContact.korea.address");
 }
 
+export function siteContactKoreaPhone(messages: Messages): string {
+  return tPath(messages, "siteContact.korea.phone");
+}
+
+export function siteContactKoreaEmail(messages: Messages): string {
+  return tPath(messages, "siteContact.korea.email") || siteContactEmail(messages);
+}
+
 export function siteContactPhilippinesAddressShort(messages: Messages): string {
   return tPath(messages, "siteContact.philippines.addressShort");
 }
@@ -23,4 +31,8 @@ export function siteContactPhilippinesPhone(messages: Messages): string {
 
 export function siteContactPhilippinesPhoneViber(messages: Messages): string {
   return tPath(messages, "siteContact.philippines.phoneViber");
+}
+
+export function siteContactPhilippinesEmail(messages: Messages): string {
+  return tPath(messages, "siteContact.philippines.email") || siteContactEmail(messages);
 }

@@ -28,8 +28,7 @@ export default {
     "serviceAreas": "Service Areas",
     "gettingStarted": "Getting Started",
     "fee": "Fee",
-    "feePage": "Fee",
-    "onlinePayment": "Online payment",
+    "center": "Center",
     "contact": "Contact Us",
     "koreaCenter": "Korea Center",
     "philippinesCenter": "Philippines Center",
@@ -40,6 +39,13 @@ export default {
     "list": {
       "pageTitle": "Therapists",
       "breadcrumb": "Therapists"
+    }
+  },
+  "centers": {
+    "list": {
+      "pageTitle": "Centers",
+      "intro": "Explore our counseling centers and local spaces for in-person care.",
+      "viewCenter": "View center"
     }
   },
   "theme": {
@@ -56,7 +62,9 @@ export default {
     "email": "hsj6831@gmail.com",
     "korea": {
       "address":
-        "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea"
+        "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea",
+      "phone": "",
+      "email": "hsj6831@gmail.com"
     },
     "philippines": {
       "addressShort":
@@ -64,7 +72,8 @@ export default {
       "addressFull":
         "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
-      "phoneViber": "+63 952 479 1119 (Viber)"
+      "phoneViber": "+63 952 479 1119 (Viber)",
+      "email": "hsj6831@gmail.com"
     }
   },
   "footer": {
@@ -80,13 +89,13 @@ export default {
     "whoWeAre": {
       "title": "Who We Are",
       "paragraphs": [
-        "Everyone faces psychological challenges at some point in life, shaped by their unique experiences, background, and personality. If you're struggling, know that you’re not alone. Seeking professional support is a courageous and vital step toward healing and growth.",
-        "At Peace & Hope Mental Health Services, our goal is to help you regain balance, improve well-being, and restore your ability to navigate daily life. Our approach goes beyond simply addressing symptoms—we help you recognize your strengths, discover meaning and purpose, and unlock your potential for personal growth, even in difficult times.",
-        "To accommodate your needs, we offer both in-person and online counseling. No matter where you are in the world, you can connect with us. Whether you prefer visiting our center or receiving counseling from the comfort of your home, we provide a confidential and secure platform for your sessions.",
-        "If you have any questions or would like to learn more about starting therapy, don’t hesitate to reach out. Even in your hardest moments, there is hope. Peace & Hope Mental Health Services is here to support you every step of the way.",
-        "We’re here to help.",
-        "With best wishes,\nThe Peace & Hope Mental Health Services Team"
-      ]
+    "Everyone faces psychological challenges at some point in life, shaped by their unique experiences, background, and personality. If you're struggling, know that you’re not alone. Seeking professional support is a courageous and vital step toward healing and growth.",
+    "At Peace & Hope Mental Health Services, our goal is to help you regain balance, improve well-being, and restore your ability to navigate daily life. Our approach goes beyond simply addressing symptoms—we help you recognize your strengths, discover meaning and purpose, and unlock your potential for personal growth, even in difficult times.",
+    "To accommodate your needs, we offer both in-person and online counseling. No matter where you are in the world, you can connect with us. Whether you prefer visiting our center or receiving counseling from the comfort of your home, we provide a confidential and secure platform for your sessions.",
+    "If you have any questions or would like to learn more about starting therapy, don’t hesitate to reach out. Even in your hardest moments, there is hope. Peace & Hope Mental Health Services is here to support you every step of the way.",
+    "We’re here to help.",
+    "With best wishes,\nThe Peace & Hope Mental Health Services Team"
+  ]
     },
     "ourVision": {
       "title": "Our Vision",
@@ -136,15 +145,22 @@ export default {
         }
       ]
     },
-    "fee": {
+    "fee": {    flow: [
+      { type: "p", textKey: "pages.fee.paragraphs.1" },
+      { type: "p", textKey: "pages.fee.paragraphs.0" },
+      { type: "p", textKey: "pages.fee.paragraphs.2" },
+      { type: "p", textKey: "pages.fee.paragraphs.3" },
+      { type: "p", textKey: "pages.fee.paragraphs.4" }
+    ],
+
       "title": "Fees",
       "paragraphs": [
-        "**We provide direct billing services!**",
-        "Most of our clients use their insurance to pay for sessions and we accept major international insurances. We know it is confusing and complicated to navigate the insurance process, but don’t worry, we are here to help you! We offer direct billing services, meaning that we will take care of submitting claims and other hassles so you can be in therapy without the headaches!",
-        "**Don’t have an insurance plan?**",
-        "**Please contact us.** We will inform you of other options and assist you accordingly. Please be aware that Korean health insurance does not cover mental health services.",
-        "We accept major international insurance"
-      ]
+    "**We provide direct billing services!**",
+    "Most of our clients use their insurance to pay for sessions and we accept major international insurances. We know it is confusing and complicated to navigate the insurance process, but don’t worry, we are here to help you! We offer direct billing services, meaning that we will take care of submitting claims and other hassles so you can be in therapy without the headaches!",
+    "**Don’t have an insurance plan?**",
+    "**Please contact us.** We will inform you of other options and assist you accordingly. Please be aware that Korean health insurance does not cover mental health services.",
+    "We accept major international insurance"
+  ]
     },
     "thankYou": {
       "title": "Thank You",
@@ -170,35 +186,39 @@ export default {
   "services": {
     "pageTitle": "Our Services",
     "sidebar": {
-      "top": "Top of site",
-      "individual": "Individual Therapy",
-      "couples": "Couples Therapy",
-      "family": "Family Therapy",
-      "play": "Play Therapy",
-      "group": "Group Therapy",
-      "christian": "Christian Counseling"
+      "top": "Top of site"
     },
+    "sectionOrder": [
+      "individual",
+      "couples",
+      "family",
+      "play",
+      "group",
+      "christian"
+    ],
     "sections": servicesSectionsEn,
   },
   "serviceAreas": {
     "pageTitle": "Service Areas",
     "sidebar": {
-      "top": "Top of site",
-      "depression": "Depression",
-      "traumaPtsd": "Trauma & PTSD",
-      "anxietyPanic": "Anxiety Panic Attacks",
-      "suicidalThoughts": "Suicidal Thoughts",
-      "culturalIdentity": "Cultural Identity",
-      "bipolar": "Bipolar Disorder",
-      "adhd": "ADHD",
-      "relationship": "Relationship Counseling",
-      "ocd": "Obsessive-Compulsive Disorder (OCD)",
-      "eatingDisorders": "Eating Disorders",
-      "asd": "Autism Spectrum Disorder (ASD)",
-      "lifeStress": "Life Stress",
-      "griefLoss": "Grief & Loss",
-      "sleep": "Sleep Disturbances"
+      "top": "Top of site"
     },
+    "sectionOrder": [
+      "depression",
+      "traumaPtsd",
+      "anxietyPanic",
+      "suicidalThoughts",
+      "culturalIdentity",
+      "bipolar",
+      "adhd",
+      "relationship",
+      "ocd",
+      "eatingDisorders",
+      "asd",
+      "lifeStress",
+      "griefLoss",
+      "sleep"
+    ],
     "sections": serviceAreasSectionsEn,
   },
   "contact": {
@@ -234,35 +254,6 @@ export default {
       "hoursWeekday": "Mon - Fri: 10:00 am – 7:00 pm",
       "hoursWeekend": "Saturday & Sunday: Office closed",
       "virtualNote": "Virtual sessions are available outside of office hours"
-    }
-  },
-  "payment": {
-    "pageTitle": "Payment",
-    "checkoutTitle": "Checkout",
-    "stepDetails": "1. Your Details",
-    "stepPayment": "2. Payment Details",
-    "products": {
-      "individualSessionDbq": {
-        "label": "1 Session for Individual Therapy + DBQ"
-      }
-    },
-    "fields": {
-      "email": "Email",
-      "lastName": "Last Name",
-      "firstName": "First Name",
-      "country": "Country",
-      "phone": "Phone"
-    },
-    "continue": "Continue",
-    "payNow": "Pay Now",
-    "back": "Back",
-    "paypalNotice": "After placing the order, you'll be redirected to PayPal to complete payment.",
-    "sslBadge": "SSL Secure Payment",
-    "startPayment": "Payment",
-    "providers": {
-      "paypal": "PayPal",
-      "stripe": "Stripe",
-      "toss": "Toss Payments"
     }
   }
 };

@@ -13,6 +13,7 @@ import {
   fetchContactFormStructure,
   fetchTherapistsManifest,
   patchContactFormStructure,
+  patchCenter,
   patchLocaleManifest,
   patchStringArray,
   patchText,
@@ -20,6 +21,8 @@ import {
   putSitePagesVisibility,
   removeContactFormField,
   renameTherapist,
+  restoreTherapistDefaultPortrait,
+  setImageHidden,
   writeImageFile,
   type LocaleStepsArrays,
   type LocaleStringArrays,
@@ -36,19 +39,31 @@ import {
 import { expandTextDraftsForCommit } from "@/lib/edit/linked-text-keys";
 import { emptyLocaleTextValues } from "@/lib/edit/locale-helpers";
 import {
+  applyCenterFieldLocales,
+  applyCenterTitleLocales,
+  getCenterLinkedTextKeys,
+  isCenterEditKey,
+  parseCenterFieldKey,
+} from "@/lib/edit/center-edit-key";
+import {
+  applyTherapistArrayLocales,
   applyTherapistFieldLocales,
   applyTherapistNameLocales,
   getTherapistLinkedTextKeys,
   isTherapistEditKey,
+  parseTherapistArrayKey,
   parseTherapistFieldKey,
 } from "@/lib/edit/therapist-edit-key";
 import { getTherapistBySlug } from "@/lib/therapists/load";
+import { getCenterBySlug } from "@/lib/centers/load";
+import { setCenterRuntime } from "@/lib/centers/runtime";
 import {
   renameTherapistRuntime,
   setTherapistRuntime,
 } from "@/lib/therapists/runtime";
 import { getActiveLocaleIds } from "@/lib/site-locales";
 import { getImageRegistryEntry } from "@/lib/edit/image-registry";
+import { therapistSlugFromPortraitKey } from "@/lib/therapists/default-portrait";
 import type { LocaleManifest } from "@/lib/site-locales";
 
 export type PendingCommitInput = {
@@ -57,6 +72,7 @@ export type PendingCommitInput = {
   stepsDrafts: Record<string, Partial<LocaleStepsArrays>>;
   hiddenTextKeys: Record<string, true>;
   imageDrafts: Record<string, ImageDraft>;
+  imageDeleteDrafts: Record<string, true>;
   contactStructureDraft: ContactFormStructurePayload | null;
   contactStructureBaseline: ContactFormStructurePayload | null;
   localeManifestDraft: LocaleManifest | null;
@@ -64,6 +80,7 @@ export type PendingCommitInput = {
   pendingLocaleCreates: string[];
   sitePagesHiddenDraft: string[] | null;
   sitePagesHiddenBaseline: string[] | null;
+  therapistDirtySlugs?: string[];
 };
 
 async function mergeArrayItemTextDrafts(
@@ -84,6 +101,7 @@ async function mergeArrayItemTextDrafts(
   }
 
   for (const [key, entry] of Object.entries(drafts)) {
+    if (isTherapistEditKey(key) || isCenterEditKey(key)) continue;
     const parsed = parseArrayItemKey(key);
     if (!parsed) continue;
     delete textDrafts[key];
@@ -103,7 +121,7 @@ async function mergeArrayItemTextDrafts(
   return { textDrafts, mergedArrayDrafts };
 }
 
-async function computeTherapistTargetSlug(
+export async function computeTherapistTargetSlug(
   oldSlug: string,
   record: TherapistRecord,
 ): Promise<string> {
@@ -141,7 +159,7 @@ export async function commitPendingEdits(
   );
 
   for (const key of Object.keys(input.hiddenTextKeys)) {
-    if (isTherapistEditKey(key)) continue;
+    if (isTherapistEditKey(key) || isCenterEditKey(key)) continue;
     await patchText(key, emptyLocaleTextValues());
   }
 
@@ -150,6 +168,9 @@ export async function commitPendingEdits(
     if (!isTherapistEditKey(key)) continue;
     const ref = parseTherapistFieldKey(key);
     if (ref) therapistSlugs.add(ref.slug);
+  }
+  for (const slug of input.therapistDirtySlugs ?? []) {
+    therapistSlugs.add(slug);
   }
 
   const renamedSlugs: Record<string, string> = {};
@@ -175,14 +196,43 @@ export async function commitPendingEdits(
 
     const targetSlug = await computeTherapistTargetSlug(slug, record);
     if (targetSlug !== slug) {
-      await renameTherapist(slug, targetSlug, record);
+      const result = await renameTherapist(slug, targetSlug, record);
       renameTherapistRuntime(slug, targetSlug);
-      setTherapistRuntime(targetSlug, { ...record, slug: targetSlug });
+      setTherapistRuntime(targetSlug, result.record ?? { ...record, slug: targetSlug });
       renamedSlugs[slug] = targetSlug;
     } else {
-      await patchTherapist(slug, record);
-      setTherapistRuntime(slug, record);
+      const result = await patchTherapist(slug, record);
+      setTherapistRuntime(slug, result.record ?? record);
     }
+  }
+
+  const centerSlugs = new Set<string>();
+  for (const key of Object.keys(textDrafts)) {
+    if (!isCenterEditKey(key)) continue;
+    const ref = parseCenterFieldKey(key);
+    if (ref) centerSlugs.add(ref.slug);
+  }
+
+  for (const slug of centerSlugs) {
+    let record = getCenterBySlug(slug);
+    if (!record) continue;
+    let titleSynced = false;
+    for (const [key, entry] of Object.entries(textDrafts)) {
+      const ref = parseCenterFieldKey(key);
+      if (!ref || ref.slug !== slug) continue;
+      if (getCenterLinkedTextKeys(key)) {
+        if (!titleSynced) {
+          record = applyCenterTitleLocales(record, entry);
+          titleSynced = true;
+        }
+        delete textDrafts[key];
+        continue;
+      }
+      record = applyCenterFieldLocales(record, ref, entry);
+      delete textDrafts[key];
+    }
+    const result = await patchCenter(slug, record);
+    setCenterRuntime(slug, result.record ?? record);
   }
 
   for (const [key, locales] of expandTextDraftsForCommit(textDrafts)) {
@@ -190,6 +240,15 @@ export async function commitPendingEdits(
   }
 
   for (const [key, locales] of Object.entries(mergedArrayDrafts)) {
+    const therapistArray = parseTherapistArrayKey(key);
+    if (therapistArray) {
+      let record = getTherapistBySlug(therapistArray.slug);
+      if (!record) continue;
+      record = applyTherapistArrayLocales(record, therapistArray, locales);
+      const result = await patchTherapist(therapistArray.slug, record);
+      setTherapistRuntime(therapistArray.slug, result.record ?? record);
+      continue;
+    }
     await patchStringArray(key, locales);
   }
 
@@ -210,6 +269,16 @@ export async function commitPendingEdits(
     const buffer = await draft.file.arrayBuffer();
     const base64 = arrayBufferToBase64(buffer);
     await writeImageFile(entry.file, base64, draft.file.type);
+  }
+
+  for (const key of Object.keys(input.imageDeleteDrafts)) {
+    if (input.imageDrafts[key]) continue;
+    const slug = therapistSlugFromPortraitKey(key);
+    if (slug) {
+      await restoreTherapistDefaultPortrait(slug);
+      continue;
+    }
+    await setImageHidden(key, true);
   }
 
   if (input.contactStructureDraft) {
@@ -288,4 +357,39 @@ export function isSitePagesHiddenDirty(
   const a = [...draft].sort().join("\0");
   const b = [...(baseline ?? [])].sort().join("\0");
   return a !== b;
+}
+
+export function isSitePagesOrderDirty(
+  draft: { topOrder: string[] | null; groupOrder: Record<string, string[]> | null },
+  baseline: {
+    topOrder: string[] | null;
+    groupOrder: Record<string, string[]> | null;
+  },
+): boolean {
+  if (draft.topOrder) {
+    const a = draft.topOrder.join("\0");
+    const b = (baseline.topOrder ?? []).join("\0");
+    if (a !== b) return true;
+  }
+  if (draft.groupOrder) {
+    const baseGroups = baseline.groupOrder ?? {};
+    const keys = new Set([
+      ...Object.keys(draft.groupOrder),
+      ...Object.keys(baseGroups),
+    ]);
+    for (const key of keys) {
+      const a = (draft.groupOrder[key] ?? []).join("\0");
+      const b = (baseGroups[key] ?? []).join("\0");
+      if (a !== b) return true;
+    }
+  }
+  return false;
+}
+
+export function isTherapistOrderDirty(
+  draft: string[] | null,
+  baseline: string[] | null,
+): boolean {
+  if (!draft) return false;
+  return draft.join("\0") !== (baseline ?? []).join("\0");
 }

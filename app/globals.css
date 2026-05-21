@@ -14,6 +14,8 @@
   --page-heading: 26 61 46;
   --page-body: 75 75 75;
   --link-active: #b8c98e;
+  --nav-link: 22 88 66;
+  --nav-link-hover: 15 70 52;
   --scrollbar-size: 6px;
   --scrollbar-thumb: rgb(var(--page-body) / 0.28);
   --scrollbar-thumb-hover: rgb(var(--page-body) / 0.42);
@@ -35,6 +37,8 @@
   --page-heading: 168 210 186;
   --page-body: 200 200 200;
   --link-active: #c5d4a0;
+  --nav-link: 134 210 168;
+  --nav-link-hover: 197 212 160;
   --scrollbar-thumb: rgb(var(--page-body) / 0.32);
   --scrollbar-thumb-hover: rgb(var(--page-body) / 0.5);
 }
@@ -126,6 +130,15 @@
   }
   .interactive-link {
     @apply transition-[color,opacity,transform] duration-300 ease-out hover:opacity-80 active:scale-[0.98];
+  }
+  .nav-link {
+    @apply interactive-link cursor-pointer whitespace-nowrap text-[0.9375rem] font-semibold tracking-wide md:text-base;
+    color: rgb(var(--nav-link));
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: rgb(var(--nav-link-hover));
+    @apply opacity-100;
   }
   .interactive-button {
     @apply transition-[color,background-color,opacity,transform,box-shadow] duration-300 ease-out active:scale-[0.97];
@@ -232,7 +245,7 @@
 
   /* 편집 모드 — 인라인 삭제 버튼 */
   .edit-control-delete {
-    @apply interactive-button rounded border border-page-body/20 px-1.5 py-0.5 text-xs text-page-body/80 outline-none transition-[border-color,background-color,color] duration-200 ease-in-out;
+    @apply interactive-button whitespace-nowrap rounded border border-page-body/20 px-1.5 py-0.5 text-xs text-page-body/80 outline-none transition-[border-color,background-color,color] duration-200 ease-in-out;
     @apply hover:border-red-400/40 hover:text-red-600 disabled:opacity-40;
     background-color: rgb(var(--page-bg));
   }

@@ -1,4 +1,4 @@
-// Dr. Noah Bennett, Ph.D. — ja locale
+// Dr. Noah Bennett, Ph.D. — jp locale
 export default {
   "list": {
     "name": "Dr. Noah Bennett, Ph.D.",
@@ -27,45 +27,45 @@ export default {
         "id": "blk-noah-about-h",
         "type": "heading",
         "level": 2,
-        "text": "自己紹介"
+        "text": "About Me"
       },
       {
         "id": "blk-noah-about-p",
         "type": "paragraph",
-        "text": "私は、子ども、青年、家族のメンタルヘルスを専門とする認定臨床心理士です。不安、学校に関するストレス、行動上の課題、家族間コミュニケーションの困難を抱えるクライアントを支援しています。"
+        "text": "I am a licensed clinical psychologist specializing in child, adolescent, and family mental health. I support clients with anxiety, school-related stress, behavioral concerns, and family communication challenges."
       },
       {
         "id": "blk-noah-phil-h",
         "type": "heading",
         "level": 2,
-        "text": "治療理念とアプローチ"
+        "text": "Philosophy and Therapeutic Approach"
       },
       {
         "id": "blk-noah-phil-p1",
         "type": "paragraph",
-        "text": "子ども、保護者、セラピストが明確な目標と実践的な方法を共有しながら協力するとき、治療は最も効果的になると考えています。"
+        "text": "I believe therapy is most effective when children, caregivers, and clinicians work together with clear goals and practical strategies."
       },
       {
         "id": "blk-noah-phil-p2",
         "type": "paragraph",
-        "text": "私のアプローチは、認知行動療法、保護者支援、遊びを用いた介入、家族システムの視点を取り入れ、家庭や学校での変化を支援します。"
+        "text": "My approach draws from Cognitive Behavioral Therapy, parent consultation, play-based interventions, and family systems work to support change across home and school settings."
       },
       {
         "id": "blk-noah-exp-h",
         "type": "heading",
         "level": 2,
-        "text": "専門分野"
+        "text": "Areas of Expertise"
       },
       {
         "id": "blk-noah-exp-p",
         "type": "paragraph",
-        "text": "不安、学校適応、行動上の課題、子育てストレス、家族間コミュニケーション、感情調整、友人関係、学習意欲"
+        "text": "anxiety, school adjustment, behavioral concerns, parenting stress, family communication, emotional regulation, peer relationships, and academic motivation."
       },
       {
         "id": "blk-noah-edu-h",
         "type": "heading",
         "level": 2,
-        "text": "学歴"
+        "text": "Education"
       },
       {
         "id": "blk-noah-edu-p1",

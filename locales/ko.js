@@ -28,8 +28,7 @@ export default {
     "serviceAreas": "서비스 분야",
     "gettingStarted": "시작하기",
     "fee": "비용",
-    "feePage": "비용",
-    "onlinePayment": "온라인 결제",
+    "center": "센터",
     "contact": "문의하기",
     "koreaCenter": "한국 센터",
     "philippinesCenter": "필리핀 센터",
@@ -40,6 +39,13 @@ export default {
     "list": {
       "pageTitle": "상담사",
       "breadcrumb": "상담사"
+    }
+  },
+  "centers": {
+    "list": {
+      "pageTitle": "센터",
+      "intro": "대면 상담을 받을 수 있는 센터와 현지 공간을 확인하세요.",
+      "viewCenter": "센터 보기"
     }
   },
   "theme": {
@@ -55,7 +61,9 @@ export default {
   "siteContact": {
     "email": "hsj6831@gmail.com",
     "korea": {
-      "address": "경기도 광주시 초월읍 진새골길 81-1"
+      "address": "경기도 광주시 초월읍 진새골길 81-1",
+      "phone": "",
+      "email": "hsj6831@gmail.com"
     },
     "philippines": {
       "addressShort":
@@ -63,7 +71,8 @@ export default {
       "addressFull":
         "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
-      "phoneViber": "+63 952 479 1119 (Viber)"
+      "phoneViber": "+63 952 479 1119 (Viber)",
+      "email": "hsj6831@gmail.com"
     }
   },
   "footer": {
@@ -79,13 +88,13 @@ export default {
     "whoWeAre": {
       "title": "회사 소개",
       "paragraphs": [
-        "누구나 살면서 한 번쯤은 심리적인 어려움을 겪습니다. 그 어려움은 저마다의 경험, 배경, 성격에 따라 다양한 모습으로 나타납니다. 지금 힘드신가요? 당신은 혼자가 아닙니다. 전문적인 도움을 구하는 것은 치유와 성장을 향한 용기 있고 소중한 첫걸음입니다.",
-        "Peace & Hope 정신건강 서비스는 여러분이 삶의 균형을 되찾고, 더 나은 삶을 살아가며, 일상을 다시 온전히 누릴 수 있도록 돕습니다. 저희는 단순히 증상을 해소하는 것을 넘어, 여러분 안에 있는 강점을 발견하고, 삶의 의미와 목적을 찾으며, 어려운 시간 속에서도 성장할 수 있도록 함께합니다.",
-        "여러분의 상황에 맞게 대면 상담과 온라인 상담을 모두 제공하고 있습니다. 세계 어디에 계시든 저희와 연결될 수 있습니다. 센터를 직접 방문하시거나, 편안한 공간에서 상담을 받으시거나—어떤 방식이든 안전하고 철저하게 비밀이 보장되는 환경을 제공합니다.",
-        "상담 시작에 대해 궁금한 점이 있으시거나 더 알고 싶으신 내용이 있다면 언제든지 연락 주세요. 가장 힘든 순간에도 희망은 있습니다. Peace & Hope 정신건강 서비스가 언제나 여러분 곁에 있겠습니다.",
-        "감사드리며,",
-        "Peace & Hope 정신건강 서비스 팀 드림."
-      ]
+    "누구나 살면서 한 번쯤은 심리적인 어려움을 겪습니다. 그 어려움은 저마다의 경험, 배경, 성격에 따라 다양한 모습으로 나타납니다. 지금 힘드신가요? 당신은 혼자가 아닙니다. 전문적인 도움을 구하는 것은 치유와 성장을 향한 용기 있고 소중한 첫걸음입니다.",
+    "Peace & Hope 정신건강 서비스는 여러분이 삶의 균형을 되찾고, 더 나은 삶을 살아가며, 일상을 다시 온전히 누릴 수 있도록 돕습니다. 저희는 단순히 증상을 해소하는 것을 넘어, 여러분 안에 있는 강점을 발견하고, 삶의 의미와 목적을 찾으며, 어려운 시간 속에서도 성장할 수 있도록 함께합니다.",
+    "여러분의 상황에 맞게 대면 상담과 온라인 상담을 모두 제공하고 있습니다. 세계 어디에 계시든 저희와 연결될 수 있습니다. 센터를 직접 방문하시거나, 편안한 공간에서 상담을 받으시거나—어떤 방식이든 안전하고 철저하게 비밀이 보장되는 환경을 제공합니다.",
+    "상담 시작에 대해 궁금한 점이 있으시거나 더 알고 싶으신 내용이 있다면 언제든지 연락 주세요. 가장 힘든 순간에도 희망은 있습니다. Peace & Hope 정신건강 서비스가 언제나 여러분 곁에 있겠습니다.",
+    "감사드리며,",
+    "Peace & Hope 정신건강 서비스 팀 드림."
+  ]
     },
     "ourVision": {
       "title": "우리의 비전",
@@ -135,15 +144,22 @@ export default {
         }
       ]
     },
-    "fee": {
+    "fee": {    flow: [
+      { type: "p", textKey: "pages.fee.paragraphs.1" },
+      { type: "p", textKey: "pages.fee.paragraphs.0" },
+      { type: "p", textKey: "pages.fee.paragraphs.2" },
+      { type: "p", textKey: "pages.fee.paragraphs.3" },
+      { type: "p", textKey: "pages.fee.paragraphs.4" }
+    ],
+
       "title": "비용",
       "paragraphs": [
-        "**직접 청구 서비스를 제공합니다!**",
-        "대부분의 내담자분들은 보험을 통해 상담 비용을 처리하시며, 저희는 주요 국제 보험을 수락하고 있습니다. 보험 처리 과정이 복잡하고 어렵게 느껴지실 수 있다는 점 잘 알고 있습니다. 걱정하지 마세요, 저희가 도와드리겠습니다! 저희는 직접 청구 서비스를 제공하여 보험 청구 및 관련 절차를 저희가 대신 처리해 드립니다. 복잡한 일들은 저희에게 맡기고, 상담에만 집중하세요.",
-        "**보험 플랜이 없으신가요?**",
-        "**문의해 주세요.** 다른 결제 방법에 대해서도 안내해 드리며, 상황에 맞게 도움을 드리겠습니다. 단, 한국 건강보험은 정신건강 서비스를 보장하지 않는다는 점 참고해 주시기 바랍니다.",
-        "주요 국제 보험을 수락하고 있습니다"
-      ]
+    "**직접 청구 서비스를 제공합니다!**",
+    "대부분의 내담자분들은 보험을 통해 상담 비용을 처리하시며, 저희는 주요 국제 보험을 수락하고 있습니다. 보험 처리 과정이 복잡하고 어렵게 느껴지실 수 있다는 점 잘 알고 있습니다. 걱정하지 마세요, 저희가 도와드리겠습니다! 저희는 직접 청구 서비스를 제공하여 보험 청구 및 관련 절차를 저희가 대신 처리해 드립니다. 복잡한 일들은 저희에게 맡기고, 상담에만 집중하세요.",
+    "**보험 플랜이 없으신가요?**",
+    "**문의해 주세요.** 다른 결제 방법에 대해서도 안내해 드리며, 상황에 맞게 도움을 드리겠습니다. 단, 한국 건강보험은 정신건강 서비스를 보장하지 않는다는 점 참고해 주시기 바랍니다.",
+    "주요 국제 보험을 수락하고 있습니다"
+  ]
     },
     "thankYou": {
       "title": "감사합니다",
@@ -169,35 +185,39 @@ export default {
   "services": {
     "pageTitle": "서비스 안내",
     "sidebar": {
-      "top": "페이지 상단",
-      "individual": "개인 상담",
-      "couples": "커플 상담",
-      "family": "가족 상담",
-      "play": "놀이 치료",
-      "group": "그룹 상담",
-      "christian": "기독교 상담"
+      "top": "페이지 상단"
     },
+    "sectionOrder": [
+      "individual",
+      "couples",
+      "family",
+      "play",
+      "group",
+      "christian"
+    ],
     "sections": servicesSectionsKo,
   },
   "serviceAreas": {
     "pageTitle": "서비스 분야",
     "sidebar": {
-      "top": "페이지 상단",
-      "depression": "우울증",
-      "traumaPtsd": "트라우마 & PTSD",
-      "anxietyPanic": "불안 및 공황 발작",
-      "suicidalThoughts": "자살 충동",
-      "culturalIdentity": "문화적 정체성",
-      "bipolar": "양극성 장애",
-      "adhd": "ADHD",
-      "relationship": "관계 상담",
-      "ocd": "강박장애(OCD)",
-      "eatingDisorders": "섭식 장애",
-      "asd": "자폐 스펙트럼 장애(ASD)",
-      "lifeStress": "생활 스트레스",
-      "griefLoss": "슬픔 & 상실",
-      "sleep": "수면 장애"
+      "top": "페이지 상단"
     },
+    "sectionOrder": [
+      "depression",
+      "traumaPtsd",
+      "anxietyPanic",
+      "suicidalThoughts",
+      "culturalIdentity",
+      "bipolar",
+      "adhd",
+      "relationship",
+      "ocd",
+      "eatingDisorders",
+      "asd",
+      "lifeStress",
+      "griefLoss",
+      "sleep"
+    ],
     "sections": serviceAreasSectionsKo,
   },
   "contact": {
@@ -233,35 +253,6 @@ export default {
       "hoursWeekday": "월 - 금: 오전 10:00 – 오후 7:00",
       "hoursWeekend": "토요일 및 일요일: 휴무",
       "virtualNote": "진료 시간 외 화상 상담 가능"
-    }
-  },
-  "payment": {
-    "pageTitle": "결제",
-    "checkoutTitle": "결제하기",
-    "stepDetails": "1. 개인 정보",
-    "stepPayment": "2. 결제 정보",
-    "products": {
-      "individualSessionDbq": {
-        "label": "개인 상담 1회 + DBQ"
-      }
-    },
-    "fields": {
-      "email": "이메일",
-      "lastName": "성",
-      "firstName": "이름",
-      "country": "국가",
-      "phone": "전화번호"
-    },
-    "continue": "다음",
-    "payNow": "결제하기",
-    "back": "뒤로",
-    "paypalNotice": "주문 완료 후 PayPal 페이지로 이동하여 결제를 완료하게 됩니다.",
-    "sslBadge": "SSL 보안 결제",
-    "startPayment": "결제",
-    "providers": {
-      "paypal": "PayPal",
-      "stripe": "Stripe",
-      "toss": "토스페이먼츠"
     }
   }
 };

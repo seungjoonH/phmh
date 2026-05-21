@@ -7,7 +7,6 @@ import {
   type ContactFieldDefinition,
   type ContactFormLocaleKey,
 } from "@/lib/contact-form-schema";
-import { editTextAttrs } from "@/lib/edit/attrs";
 import { ContactFieldShell } from "./ContactFieldShell";
 
 type Props = {
@@ -15,8 +14,6 @@ type Props = {
   locale: ContactFormLocaleKey;
   label: string;
   placeholder: string;
-  labelEditKey?: string;
-  placeholderEditKey?: string;
 };
 
 type ParsedDateParts = { y: number; m: number; d: number };
@@ -74,8 +71,6 @@ export function ContactFieldDate({
   locale,
   label,
   placeholder,
-  labelEditKey,
-  placeholderEditKey,
 }: Props) {
   const openCalendarLabel = getContactFormUi(locale, "openCalendar");
   const textRef = useRef<HTMLInputElement>(null);
@@ -105,7 +100,7 @@ export function ContactFieldDate({
   };
 
   return (
-    <ContactFieldShell label={label} required={field.required} labelEditKey={labelEditKey}>
+    <ContactFieldShell label={label} required={field.required}>
       <div className="relative">
         <input
           ref={textRef}
@@ -122,9 +117,6 @@ export function ContactFieldDate({
             e.preventDefault();
           }}
           onPaste={(e) => e.preventDefault()}
-          {...(placeholderEditKey
-            ? editTextAttrs(placeholderEditKey, { longPress: true })
-            : {})}
         />
         <button
           type="button"

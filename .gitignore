@@ -28,6 +28,10 @@ public/getting-started/*/
 public/fee/*/
 public/logo/
 public/logo-light/
+public/centers/hero/
+public/centers/*/hero/
+public/centers/*/gallery/*/
+public/centers/_archived/
 .DS_Store
 *.pem
 .env*.local

@@ -19,6 +19,8 @@ export type TherapistRecord = {
   profile: {
     header: TherapistProfileHeader;
     portrait: string;
+    /** true면 portrait 파일이 자동 복사된 기본 placeholder 상태 */
+    defaultPortrait?: boolean;
     blocks: ContentBlock[];
   };
 };

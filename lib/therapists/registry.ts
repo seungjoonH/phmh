@@ -1,16 +1,16 @@
 // manifest 순서에 맞춘 상담사 모듈 정적 import (빌드 번들용)
-import drErinEn from "@/data/therapists/dr-erin-cho-ph-d/en.js";
-import drErinJp from "@/data/therapists/dr-erin-cho-ph-d/jp.js";
-import drErinKo from "@/data/therapists/dr-erin-cho-ph-d/ko.js";
-import drErinMeta from "@/data/therapists/dr-erin-cho-ph-d/meta.js";
-import drMayaEn from "@/data/therapists/dr-maya-han-ph-d/en.js";
-import drMayaJp from "@/data/therapists/dr-maya-han-ph-d/jp.js";
-import drMayaKo from "@/data/therapists/dr-maya-han-ph-d/ko.js";
-import drMayaMeta from "@/data/therapists/dr-maya-han-ph-d/meta.js";
-import drNoahEn from "@/data/therapists/dr-noah-bennett-ph-d/en.js";
-import drNoahJp from "@/data/therapists/dr-noah-bennett-ph-d/jp.js";
-import drNoahKo from "@/data/therapists/dr-noah-bennett-ph-d/ko.js";
-import drNoahMeta from "@/data/therapists/dr-noah-bennett-ph-d/meta.js";
+import drErinChoPhDEn from "@/data/therapists/dr-erin-cho-ph-d/en.js";
+import drErinChoPhDJp from "@/data/therapists/dr-erin-cho-ph-d/jp.js";
+import drErinChoPhDKo from "@/data/therapists/dr-erin-cho-ph-d/ko.js";
+import drErinChoPhDMeta from "@/data/therapists/dr-erin-cho-ph-d/meta.js";
+import drMayaHanEn from "@/data/therapists/dr-maya-han/en.js";
+import drMayaHanJp from "@/data/therapists/dr-maya-han/jp.js";
+import drMayaHanKo from "@/data/therapists/dr-maya-han/ko.js";
+import drMayaHanMeta from "@/data/therapists/dr-maya-han/meta.js";
+import drNoahBennettPhDEn from "@/data/therapists/dr-noah-bennett-ph-d/en.js";
+import drNoahBennettPhDJp from "@/data/therapists/dr-noah-bennett-ph-d/jp.js";
+import drNoahBennettPhDKo from "@/data/therapists/dr-noah-bennett-ph-d/ko.js";
+import drNoahBennettPhDMeta from "@/data/therapists/dr-noah-bennett-ph-d/meta.js";
 import { mergeTherapistRecord } from "@/lib/therapists/merge-record";
 import type { TherapistLocaleSlice, TherapistMeta } from "@/lib/therapists/merge-record";
 import type { TherapistRecord } from "@/lib/therapists/types";
@@ -22,21 +22,21 @@ function loadTherapist(
   return mergeTherapistRecord(meta, locales);
 }
 
-/** edit로 slug 추가 시 meta·{locale}.js import(manifest contentLocales)와 여기 항목 추가 후 `pnpm run build` */
+/** edit-server가 상담사 추가·삭제·이름변경 시 이 파일을 자동 재생성한다. 수동 편집 금지. */
 export const therapistRecordsBySlug: Record<string, TherapistRecord> = {
-  "dr-maya-han-ph-d": loadTherapist(drMayaMeta, {
-    en: drMayaEn as TherapistLocaleSlice,
-    ko: drMayaKo as TherapistLocaleSlice,
-    jp: drMayaJp as TherapistLocaleSlice,
+  "dr-noah-bennett-ph-d": loadTherapist(drNoahBennettPhDMeta, {
+    en: drNoahBennettPhDEn as TherapistLocaleSlice,
+    ko: drNoahBennettPhDKo as TherapistLocaleSlice,
+    jp: drNoahBennettPhDJp as TherapistLocaleSlice,
   }),
-  "dr-erin-cho-ph-d": loadTherapist(drErinMeta, {
-    en: drErinEn as TherapistLocaleSlice,
-    ko: drErinKo as TherapistLocaleSlice,
-    jp: drErinJp as TherapistLocaleSlice,
+  "dr-maya-han": loadTherapist(drMayaHanMeta, {
+    en: drMayaHanEn as TherapistLocaleSlice,
+    ko: drMayaHanKo as TherapistLocaleSlice,
+    jp: drMayaHanJp as TherapistLocaleSlice,
   }),
-  "dr-noah-bennett-ph-d": loadTherapist(drNoahMeta, {
-    en: drNoahEn as TherapistLocaleSlice,
-    ko: drNoahKo as TherapistLocaleSlice,
-    jp: drNoahJp as TherapistLocaleSlice,
+  "dr-erin-cho-ph-d": loadTherapist(drErinChoPhDMeta, {
+    en: drErinChoPhDEn as TherapistLocaleSlice,
+    ko: drErinChoPhDKo as TherapistLocaleSlice,
+    jp: drErinChoPhDJp as TherapistLocaleSlice,
   }),
 };

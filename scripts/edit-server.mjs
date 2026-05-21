@@ -6,10 +6,13 @@ import * as path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { spawn } from "child_process";
 import {
+  insertContentSectionKey,
   patchLocaleFile,
+  removeContentSectionKey,
   replaceSectionFlow,
   replaceStepsArray,
   replaceStringArray,
+  sectionContentToJs,
 } from "./edit-locale-patch.mjs";
 import { getTextLocaleFile, resolveTextTarget } from "./edit-text-resolve.mjs";
 import { readLocaleManifest, writeLocaleManifest } from "./locale-manifest-io.mjs";
@@ -26,7 +29,21 @@ import { EDIT_SERVER_PORT } from "../lib/edit/ports.mjs";
 import { runReleaseDeploy } from "./edit-release.mjs";
 import { buildImageHistoryBackupPath } from "../lib/edit/image-write-path.mjs";
 import {
+  archiveCenterImages,
+  clearDefaultCenterHeroFlag,
+  createCenterTemplate,
+  deleteCenterFiles,
+  makeCenterSlug,
+  readCenter,
+  readCentersManifest,
+  regenerateCenterRegistry,
+  restoreDefaultCenterHero,
+  writeCenter,
+  writeCentersManifest,
+} from "./center-io.mjs";
+import {
   archiveTherapistImages,
+  clearDefaultPortraitFlag,
   createTherapistTemplate,
   deleteTherapistFiles,
   ensurePortraitPlaceholder,
@@ -34,7 +51,9 @@ import {
   readManifest,
   readTherapist,
   readVisibility,
+  regenerateTherapistRegistry,
   renameTherapistFiles,
+  restoreDefaultPortrait,
   writeManifest,
   writeTherapist,
   writeVisibility,
@@ -42,6 +61,31 @@ import {
 
 /** @type {Record<string, { file: string; publicPath: string; altKey?: string }>} */
 let IMAGE_REGISTRY = {};
+
+const IMAGE_HIDDEN_FILE = "data/image-hidden.json";
+
+function readImageHiddenSet() {
+  try {
+    const raw = fs.readFileSync(path.join(ROOT, IMAGE_HIDDEN_FILE), "utf8");
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed?.hidden)) {
+      return new Set(parsed.hidden.filter((k) => typeof k === "string"));
+    }
+  } catch {
+    /* 파일 없거나 손상 — 빈 set 으로 시작 */
+  }
+  return new Set();
+}
+
+/** @param {Set<string>} set */
+function writeImageHiddenSet(set) {
+  const sorted = [...set].sort();
+  fs.writeFileSync(
+    path.join(ROOT, IMAGE_HIDDEN_FILE),
+    `${JSON.stringify({ hidden: sorted }, null, 2)}\n`,
+    "utf8",
+  );
+}
 
 async function loadImageRegistry() {
   if (Object.keys(IMAGE_REGISTRY).length > 0) return IMAGE_REGISTRY;
@@ -86,6 +130,21 @@ async function loadImageRegistry() {
     IMAGE_REGISTRY[`therapists.${slug}.portrait`] = fromPublic(
       `/therapists/${slug}/portrait.png`,
     );
+  }
+
+  try {
+    const centersManifest = readCentersManifest(ROOT);
+    for (const slug of centersManifest.order) {
+      IMAGE_REGISTRY[`centers.${slug}.hero`] = fromPublic(
+        `/centers/${slug}/hero.png`,
+      );
+      const center = await readCenter(ROOT, slug);
+      for (const image of center.gallery ?? []) {
+        IMAGE_REGISTRY[`centers.${slug}.gallery.${image.id}`] = fromPublic(image.src);
+      }
+    }
+  } catch {
+    /* Center 데이터가 없으면 이미지 registry 확장을 건너뜀 */
   }
 
   return IMAGE_REGISTRY;
@@ -335,6 +394,81 @@ async function patchTextRegistry(keyPath, locales) {
  * @param {string} sectionKey e.g. services.sections.couples
  * @param {object[]} flow StoredFlowBlock[]
  */
+/**
+ * @param {{ orderKey: string, added?: Record<string, Record<string, object>>, removed?: string[] }} payload
+ */
+async function patchLongFormSectionsRegistry(payload) {
+  const { orderKey, added = {}, removed = [] } = payload;
+  const sectionsPrefix =
+    orderKey === "services.sectionOrder"
+      ? "services.sections"
+      : orderKey === "serviceAreas.sectionOrder"
+        ? "serviceAreas.sections"
+        : null;
+  if (!sectionsPrefix) {
+    throw new Error(`Unknown order key: ${orderKey}`);
+  }
+
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+  /** @type {Record<string, string>} */
+  const beforePatch = {};
+  /** @type {string[]} */
+  const touchedFiles = [];
+
+  const slugSet = new Set([
+    ...Object.keys(added),
+    ...removed,
+  ]);
+
+  for (const id of getLocaleIds()) {
+    const probeKey = `${sectionsPrefix}.${slugSet.values().next().value ?? "x"}`;
+    const target = resolveTextTarget(probeKey);
+    const { file } = getTextLocaleFile(ROOT, id, target);
+    if (!(file in beforePatch)) {
+      beforePatch[file] = fs.readFileSync(file, "utf8");
+      backupFile(file, backupDir);
+      touchedFiles.push(file);
+    }
+    let current = fs.readFileSync(file, "utf8");
+
+    for (const slug of removed) {
+      if (added[slug]) continue;
+      try {
+        current = removeContentSectionKey(current, slug);
+      } catch {
+        /* 이번 세션에서 추가했다가 삭제한 slug — 파일에 없음 */
+      }
+    }
+
+    for (const [slug, byLocale] of Object.entries(added)) {
+      const section = byLocale[id];
+      if (!section || typeof section !== "object") {
+        throw new Error(`Missing added section for ${id}: ${slug}`);
+      }
+      const sectionJs = sectionContentToJs(section);
+      try {
+        current = removeContentSectionKey(current, slug);
+      } catch {
+        /* 신규 키 */
+      }
+      current = insertContentSectionKey(current, slug, sectionJs);
+    }
+
+    fs.writeFileSync(file, current, "utf8");
+  }
+
+  const check = await runLocaleTest();
+  if (!check.ok) {
+    for (const file of touchedFiles) {
+      fs.writeFileSync(file, beforePatch[file], "utf8");
+    }
+    throw new Error(check.error ?? "Locale key check failed");
+  }
+
+  return { backupDir, files: touchedFiles };
+}
+
 async function patchSectionFlowRegistry(sectionKey, flow) {
   const target = resolveTextTarget(sectionKey);
   const sectionScope =
@@ -487,6 +621,10 @@ function runTherapistsTest() {
   return runPnpmScript("test:therapists");
 }
 
+function runCentersTest() {
+  return runPnpmScript("test:centers");
+}
+
 /**
  * @param {string} script
  */
@@ -533,7 +671,7 @@ function sendJson(res, status, data) {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": `Content-Type, ${EDIT_HEADER}`,
-    "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
   });
   res.end(JSON.stringify(data));
 }
@@ -565,12 +703,78 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && imageRegistryMatch) {
       const key = decodeURIComponent(imageRegistryMatch[1]);
       const registry = await loadImageRegistry();
+      let entry = registry[key];
+      if (!entry) {
+        const flowMatch = /^flow\.(.+)\.([a-z0-9]+)\.img$/i.exec(key);
+        if (flowMatch) {
+          const [, sectionSlug, blockId] = flowMatch;
+          const safeSlug = String(sectionSlug).replace(/[^a-zA-Z0-9._-]/g, "_");
+          const publicPath = `/flow-uploads/${safeSlug}/${blockId}.png`;
+          entry = { file: `public${publicPath}`, publicPath };
+        }
+      }
+      if (!entry) {
+        const longFormMatch = /^(therapy|area)\.(sec_[a-z0-9]+)$/.exec(key);
+        if (longFormMatch) {
+          const [, domain, slug] = longFormMatch;
+          const folder = domain === "therapy" ? "services" : "service-areas";
+          const publicPath = `/${folder}/${slug}.png`;
+          entry = { file: `public${publicPath}`, publicPath };
+        }
+      }
+      if (!entry) {
+        sendJson(res, 404, { error: `Unknown image key: ${key}` });
+        return;
+      }
+      const hiddenSet = readImageHiddenSet();
+      sendJson(res, 200, { key, ...entry, hidden: hiddenSet.has(key) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/therapists/restore-default-portrait") {
+      const body = await readJsonBody(req);
+      const { slug } = body;
+      if (typeof slug !== "string" || !slug) {
+        sendJson(res, 400, { error: "slug required" });
+        return;
+      }
+      await restoreDefaultPortrait(ROOT, slug);
+      const hiddenSet = readImageHiddenSet();
+      const portraitKey = `therapists.${slug}.portrait`;
+      if (hiddenSet.delete(portraitKey)) writeImageHiddenSet(hiddenSet);
+      await regenerateTherapistRegistry(ROOT);
+      sendJson(res, 200, { ok: true, slug });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/image/hidden") {
+      const body = await readJsonBody(req);
+      const { key, hidden } = body;
+      if (typeof key !== "string" || typeof hidden !== "boolean") {
+        sendJson(res, 400, { error: "key (string) and hidden (boolean) required" });
+        return;
+      }
+      const registry = await loadImageRegistry();
       const entry = registry[key];
       if (!entry) {
         sendJson(res, 404, { error: `Unknown image key: ${key}` });
         return;
       }
-      sendJson(res, 200, { key, ...entry });
+      const set = readImageHiddenSet();
+      if (hidden) {
+        set.add(key);
+        const abs = resolveSafePath(entry.file);
+        if (fs.existsSync(abs)) {
+          const archiveRel = buildImageHistoryBackupPath(entry.file);
+          const archiveAbs = resolveSafePath(archiveRel);
+          fs.mkdirSync(path.dirname(archiveAbs), { recursive: true });
+          fs.renameSync(abs, archiveAbs);
+        }
+      } else {
+        set.delete(key);
+      }
+      writeImageHiddenSet(set);
+      sendJson(res, 200, { ok: true, key, hidden });
       return;
     }
 
@@ -634,6 +838,22 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       const result = await patchSectionFlowRegistry(sectionKey, flow);
+      sendJson(res, 200, { ok: true, ...result });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/long-form-sections") {
+      const body = await readJsonBody(req);
+      const { orderKey, added, removed } = body;
+      if (!orderKey) {
+        sendJson(res, 400, { error: "orderKey required" });
+        return;
+      }
+      const result = await patchLongFormSectionsRegistry({
+        orderKey,
+        added,
+        removed,
+      });
       sendJson(res, 200, { ok: true, ...result });
       return;
     }
@@ -788,6 +1008,13 @@ const server = http.createServer(async (req, res) => {
       fs.mkdirSync(path.dirname(abs), { recursive: true });
 
       if (writeKind === "image" && encoding === "base64") {
+        const buf = Buffer.from(content, "base64");
+        if (!buf.length) {
+          sendJson(res, 400, { error: "empty image payload" });
+          return;
+        }
+        const tmpAbs = `${abs}.upload-tmp`;
+        fs.writeFileSync(tmpAbs, buf);
         let archivedPath;
         if (fs.existsSync(abs)) {
           const archiveRel = buildImageHistoryBackupPath(relPosix);
@@ -796,7 +1023,32 @@ const server = http.createServer(async (req, res) => {
           fs.renameSync(abs, archiveAbs);
           archivedPath = archiveRel;
         }
-        fs.writeFileSync(abs, Buffer.from(content, "base64"));
+        fs.renameSync(tmpAbs, abs);
+        // 새 이미지 업로드 시 해당 키의 'hidden' 상태 자동 해제
+        const registry = await loadImageRegistry();
+        const matchedKey = Object.entries(registry).find(
+          ([, e]) => e.file === relPosix,
+        )?.[0];
+        if (matchedKey) {
+          const set = readImageHiddenSet();
+          if (set.delete(matchedKey)) writeImageHiddenSet(set);
+        }
+        // 상담사 portrait 업로드 → defaultPortrait 플래그 해제
+        const therapistPortraitMatch = relPosix.match(
+          /^public\/therapists\/([^/]+)\/portrait\.png$/,
+        );
+        if (therapistPortraitMatch) {
+          await clearDefaultPortraitFlag(ROOT, therapistPortraitMatch[1]);
+        }
+        const centerHeroMatch = relPosix.match(
+          /^public\/centers\/([^/]+)\/hero\.png$/,
+        );
+        if (centerHeroMatch) {
+          await clearDefaultCenterHeroFlag(ROOT, centerHeroMatch[1]);
+          await regenerateCenterRegistry(ROOT);
+          IMAGE_REGISTRY = {};
+          await loadImageRegistry();
+        }
         sendJson(res, 200, { ok: true, path: relPosix, archivedPath });
         return;
       }
@@ -837,11 +1089,21 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (req.method === "GET" && url.pathname === "/registry/centers") {
+      const manifest = readCentersManifest(ROOT);
+      sendJson(res, 200, { manifest });
+      return;
+    }
+
     if (req.method === "GET" && url.pathname === "/registry/site-pages") {
       const manifest = readManifest(ROOT);
+      const centersManifest = readCentersManifest(ROOT);
       const visibility = readVisibility(ROOT);
       sendJson(res, 200, {
         hidden: visibility.hidden ?? [],
+        topOrder: visibility.topOrder ?? [],
+        groupOrder: visibility.groupOrder ?? {},
+        centerSlugs: centersManifest.order,
         therapistSlugs: manifest.order,
       });
       return;
@@ -865,12 +1127,18 @@ const server = http.createServer(async (req, res) => {
           hiddenSet.add(`therapists.profile.${slug}`);
         }
       }
+      if (pageId === "centers.list" && isHidden) {
+        const manifest = readCentersManifest(ROOT);
+        for (const slug of manifest.order) {
+          hiddenSet.add(`centers.profile.${slug}`);
+        }
+      }
 
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
       const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
       const visPath = path.join(ROOT, "data/site-pages-visibility.json");
       backupFile(visPath, backupDir);
-      writeVisibility(ROOT, { hidden: [...hiddenSet] });
+      writeVisibility(ROOT, { ...visibility, hidden: [...hiddenSet] });
       sendJson(res, 200, { ok: true, hidden: [...hiddenSet], backupDir });
       return;
     }
@@ -886,8 +1154,463 @@ const server = http.createServer(async (req, res) => {
       const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
       const visPath = path.join(ROOT, "data/site-pages-visibility.json");
       backupFile(visPath, backupDir);
-      writeVisibility(ROOT, { hidden: [...new Set(hiddenList)] });
-      sendJson(res, 200, { ok: true, hidden: [...new Set(hiddenList)], backupDir });
+      const existing = readVisibility(ROOT);
+      const unique = [...new Set(hiddenList)];
+      writeVisibility(ROOT, { ...existing, hidden: unique });
+      sendJson(res, 200, { ok: true, hidden: unique, backupDir });
+      return;
+    }
+
+    if (req.method === "PUT" && url.pathname === "/site-pages/order") {
+      const body = await readJsonBody(req);
+      const { topOrder, groupOrder } = body;
+      if (
+        !Array.isArray(topOrder) ||
+        !topOrder.every((id) => typeof id === "string") ||
+        typeof groupOrder !== "object" ||
+        groupOrder === null
+      ) {
+        sendJson(res, 400, { error: "topOrder array and groupOrder object required" });
+        return;
+      }
+      for (const [group, list] of Object.entries(groupOrder)) {
+        if (!Array.isArray(list) || !list.every((id) => typeof id === "string")) {
+          sendJson(res, 400, { error: `groupOrder.${group} must be a string array` });
+          return;
+        }
+      }
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const visPath = path.join(ROOT, "data/site-pages-visibility.json");
+      backupFile(visPath, backupDir);
+      const existing = readVisibility(ROOT);
+      writeVisibility(ROOT, { ...existing, topOrder, groupOrder });
+      sendJson(res, 200, { ok: true, topOrder, groupOrder, backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/create") {
+      const body = await readJsonBody(req);
+      const displayName = body.displayName?.trim();
+      if (!displayName) {
+        sendJson(res, 400, { error: "displayName required" });
+        return;
+      }
+      const manifest = readCentersManifest(ROOT);
+      const slug = makeCenterSlug(displayName, manifest.order);
+      const record = createCenterTemplate(ROOT, slug, displayName);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      writeCenter(ROOT, slug, record);
+      manifest.order.push(slug);
+      manifest.entries[slug] = {
+        createdAt: new Date().toISOString(),
+        sourceName: displayName,
+      };
+      writeCentersManifest(ROOT, manifest);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      const check = await runCentersTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, slug, backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/delete") {
+      const body = await readJsonBody(req);
+      const { slug } = body;
+      if (!slug) {
+        sendJson(res, 400, { error: "slug required" });
+        return;
+      }
+      const manifest = readCentersManifest(ROOT);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const dataDir = path.join(ROOT, "data/centers", slug);
+      if (fs.existsSync(dataDir)) {
+        fs.mkdirSync(backupDir, { recursive: true });
+        fs.cpSync(dataDir, path.join(backupDir, `center-${slug}`), { recursive: true });
+      }
+      backupFile(path.join(ROOT, "data/centers/manifest.json"), backupDir);
+      archiveCenterImages(ROOT, slug);
+      deleteCenterFiles(ROOT, slug);
+      manifest.order = manifest.order.filter((s) => s !== slug);
+      delete manifest.entries[slug];
+      writeCentersManifest(ROOT, manifest);
+      const visibility = readVisibility(ROOT);
+      visibility.hidden = (visibility.hidden ?? []).filter(
+        (id) => id !== `centers.profile.${slug}`,
+      );
+      writeVisibility(ROOT, visibility);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, backupDir });
+      return;
+    }
+
+    if (req.method === "PATCH" && url.pathname === "/centers/manifest/order") {
+      const body = await readJsonBody(req);
+      const { order } = body;
+      if (!Array.isArray(order)) {
+        sendJson(res, 400, { error: "order array required" });
+        return;
+      }
+      const manifest = readCentersManifest(ROOT);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      backupFile(path.join(ROOT, "data/centers/manifest.json"), backupDir);
+      manifest.order = order;
+      writeCentersManifest(ROOT, manifest);
+      await regenerateCenterRegistry(ROOT);
+      const check = await runCentersTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, backupDir });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/center") {
+      const body = await readJsonBody(req);
+      const { slug, record } = body;
+      if (!slug || !record) {
+        sendJson(res, 400, { error: "slug and record required" });
+        return;
+      }
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+      const dir = path.join(ROOT, "data/centers", slug);
+      if (fs.existsSync(dir)) {
+        fs.mkdirSync(backupDir, { recursive: true });
+        fs.cpSync(dir, path.join(backupDir, `center-${slug}`), { recursive: true });
+      }
+      writeCenter(ROOT, slug, record);
+      await regenerateCenterRegistry(ROOT);
+      const check = await runCentersTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, backupDir, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/restore-default-hero") {
+      const body = await readJsonBody(req);
+      const { slug } = body;
+      if (typeof slug !== "string" || !slug) {
+        sendJson(res, 400, { error: "slug required" });
+        return;
+      }
+      await restoreDefaultCenterHero(ROOT, slug);
+      const hiddenSet = readImageHiddenSet();
+      const heroKey = `centers.${slug}.hero`;
+      if (hiddenSet.delete(heroKey)) writeImageHiddenSet(hiddenSet);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, slug });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/gallery/add") {
+      const body = await readJsonBody(req);
+      const { slug, id, src } = body;
+      if (!slug || !id || !src) {
+        sendJson(res, 400, { error: "slug, id and src required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      if (record.gallery.some((image) => image.id === id)) {
+        sendJson(res, 400, { error: `Gallery image already exists: ${id}` });
+        return;
+      }
+      const next =
+        record.defaultHero && record.gallery.length === 0
+          ? { ...record, hero: src, defaultHero: false, gallery: [] }
+          : { ...record, gallery: [...record.gallery, { id, src }] };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/gallery/promote") {
+      const body = await readJsonBody(req);
+      const { slug, imageId } = body;
+      if (!slug || !imageId) {
+        sendJson(res, 400, { error: "slug and imageId required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const selected = record.gallery.find((image) => image.id === imageId);
+      if (!selected) {
+        sendJson(res, 404, { error: "gallery image not found" });
+        return;
+      }
+      const timestamp = Date.now().toString(36);
+      const gallery = record.gallery.filter((image) => image.id !== imageId);
+      if (!record.defaultHero) {
+        gallery.unshift({ id: `hero-${timestamp}`, src: record.hero });
+      }
+      const next = {
+        ...record,
+        hero: selected.src,
+        defaultHero: false,
+        gallery,
+      };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      const check = await runCentersTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/images/delete") {
+      const body = await readJsonBody(req);
+      const { slug, id } = body;
+      if (!slug || !id) {
+        sendJson(res, 400, { error: "slug and id required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const archivePublicImage = (src) => {
+        if (!src || !src.startsWith("/centers/")) return;
+        const rel = `public${src}`;
+        const abs = resolveSafePath(rel);
+        if (!fs.existsSync(abs)) return;
+        const archiveRel = buildImageHistoryBackupPath(rel);
+        const archiveAbs = resolveSafePath(archiveRel);
+        fs.mkdirSync(path.dirname(archiveAbs), { recursive: true });
+        fs.renameSync(abs, archiveAbs);
+      };
+
+      let next = record;
+      if (id === "hero") {
+        if (!record.defaultHero) archivePublicImage(record.hero);
+        const [first, ...rest] = record.gallery;
+        next = first
+          ? { ...record, hero: first.src, defaultHero: false, gallery: rest }
+          : { ...record, defaultHero: true, gallery: [] };
+      } else {
+        const target = record.gallery.find((image) => image.id === id);
+        if (target) archivePublicImage(target.src);
+        next = {
+          ...record,
+          gallery: record.gallery.filter((image) => image.id !== id),
+        };
+      }
+
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/images/delete-all") {
+      const body = await readJsonBody(req);
+      const { slug } = body;
+      if (!slug) {
+        sendJson(res, 400, { error: "slug required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const archivePublicImage = (src) => {
+        if (!src || !src.startsWith("/centers/")) return;
+        const rel = `public${src}`;
+        const abs = resolveSafePath(rel);
+        if (!fs.existsSync(abs)) return;
+        const archiveRel = buildImageHistoryBackupPath(rel);
+        const archiveAbs = resolveSafePath(archiveRel);
+        fs.mkdirSync(path.dirname(archiveAbs), { recursive: true });
+        fs.renameSync(abs, archiveAbs);
+      };
+      if (!record.defaultHero) archivePublicImage(record.hero);
+      for (const image of record.gallery) archivePublicImage(image.src);
+      const next = { ...record, defaultHero: true, gallery: [] };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/images/apply-draft") {
+      const body = await readJsonBody(req);
+      const { slug, items } = body;
+      if (!slug || !Array.isArray(items)) {
+        sendJson(res, 400, { error: "slug and items required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const nextItems = items
+        .filter((item) => item && typeof item.id === "string" && typeof item.src === "string")
+        .map((item) => ({ id: item.id, src: item.src }));
+      const kept = new Set(nextItems.map((item) => item.src));
+      const archivePublicImage = (src) => {
+        if (!src || !src.startsWith("/centers/")) return;
+        if (kept.has(src)) return;
+        const rel = `public${src}`;
+        const abs = resolveSafePath(rel);
+        if (!fs.existsSync(abs)) return;
+        const archiveRel = buildImageHistoryBackupPath(rel);
+        const archiveAbs = resolveSafePath(archiveRel);
+        fs.mkdirSync(path.dirname(archiveAbs), { recursive: true });
+        fs.renameSync(abs, archiveAbs);
+      };
+      for (const image of record.gallery) archivePublicImage(image.src);
+
+      const next = {
+        ...record,
+        gallery: nextItems,
+      };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      const check = await runCentersTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/centers/gallery/delete") {
+      const body = await readJsonBody(req);
+      const { slug, id } = body;
+      if (!slug || !id) {
+        sendJson(res, 400, { error: "slug and id required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const target = record.gallery.find((image) => image.id === id);
+      if (target?.src) {
+        const rel = `public${target.src}`;
+        const abs = resolveSafePath(rel);
+        if (fs.existsSync(abs)) {
+          const archiveRel = buildImageHistoryBackupPath(rel);
+          const archiveAbs = resolveSafePath(archiveRel);
+          fs.mkdirSync(path.dirname(archiveAbs), { recursive: true });
+          fs.renameSync(abs, archiveAbs);
+        }
+      }
+      const next = {
+        ...record,
+        gallery: record.gallery.filter((image) => image.id !== id),
+      };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "PATCH" && url.pathname === "/centers/images/order") {
+      const body = await readJsonBody(req);
+      const { slug, order } = body;
+      if (!slug || !Array.isArray(order)) {
+        sendJson(res, 400, { error: "slug and order required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const galleryById = new Map(record.gallery.map((image) => [image.id, image]));
+      const first = order[0] ?? "hero";
+      const nextGallery = [];
+      let nextHero = record.hero;
+      let nextDefaultHero = Boolean(record.defaultHero);
+      const timestamp = Date.now().toString(36);
+
+      if (first !== "hero") {
+        const selected = galleryById.get(first);
+        if (!selected) {
+          sendJson(res, 400, { error: "first image id not found" });
+          return;
+        }
+        nextHero = selected.src;
+        nextDefaultHero = false;
+      }
+
+      const pushed = new Set([first]);
+      for (const id of order.slice(1)) {
+        if (id === "hero") {
+          if (!record.defaultHero) {
+            nextGallery.push({ id: `hero-${timestamp}`, src: record.hero });
+          }
+          pushed.add(id);
+          continue;
+        }
+        const image = galleryById.get(id);
+        if (image) {
+          nextGallery.push(image);
+          pushed.add(id);
+        }
+      }
+      for (const image of record.gallery) {
+        if (!pushed.has(image.id)) nextGallery.push(image);
+      }
+
+      const next = {
+        ...record,
+        hero: nextHero,
+        ...(nextDefaultHero ? { defaultHero: true } : { defaultHero: false }),
+        gallery: nextGallery,
+      };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      const check = await runCentersTest();
+      if (!check.ok) {
+        sendJson(res, 500, { error: check.error });
+        return;
+      }
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
+      return;
+    }
+
+    if (req.method === "PATCH" && url.pathname === "/centers/gallery/order") {
+      const body = await readJsonBody(req);
+      const { slug, order } = body;
+      if (!slug || !Array.isArray(order)) {
+        sendJson(res, 400, { error: "slug and order array required" });
+        return;
+      }
+      const record = await readCenter(ROOT, slug);
+      const byId = new Map(record.gallery.map((image) => [image.id, image]));
+      const seen = new Set();
+      const gallery = [];
+      for (const id of order) {
+        const image = byId.get(id);
+        if (image && !seen.has(id)) {
+          seen.add(id);
+          gallery.push(image);
+        }
+      }
+      for (const image of record.gallery) {
+        if (!seen.has(image.id)) gallery.push(image);
+      }
+      const next = { ...record, gallery };
+      writeCenter(ROOT, slug, next);
+      await regenerateCenterRegistry(ROOT);
+      IMAGE_REGISTRY = {};
+      await loadImageRegistry();
+      sendJson(res, 200, { ok: true, record: await readCenter(ROOT, slug) });
       return;
     }
 
@@ -911,6 +1634,7 @@ const server = http.createServer(async (req, res) => {
       };
       writeManifest(ROOT, manifest);
       ensurePortraitPlaceholder(ROOT, slug);
+      regenerateTherapistRegistry(ROOT);
       IMAGE_REGISTRY = {};
       await loadImageRegistry();
       const check = await runTherapistsTest();
@@ -945,6 +1669,7 @@ const server = http.createServer(async (req, res) => {
         (id) => id !== `therapists.profile.${slug}`,
       );
       writeVisibility(ROOT, visibility);
+      regenerateTherapistRegistry(ROOT);
       IMAGE_REGISTRY = {};
       await loadImageRegistry();
       sendJson(res, 200, { ok: true, backupDir });
@@ -985,12 +1710,13 @@ const server = http.createServer(async (req, res) => {
       const jsPath = path.join(ROOT, "data/therapists", `${slug}.js`);
       if (fs.existsSync(jsPath)) backupFile(jsPath, backupDir);
       writeTherapist(ROOT, slug, { ...record, slug });
+      const savedRecord = await readTherapist(ROOT, slug);
       const check = await runTherapistsTest();
       if (!check.ok) {
         sendJson(res, 500, { error: check.error });
         return;
       }
-      sendJson(res, 200, { ok: true, backupDir });
+      sendJson(res, 200, { ok: true, backupDir, record: savedRecord });
       return;
     }
 
@@ -1029,6 +1755,7 @@ const server = http.createServer(async (req, res) => {
         profile: { ...record.profile, portrait: portraitPath },
       };
       writeTherapist(ROOT, newSlug, nextRecord);
+      const savedRecord = await readTherapist(ROOT, newSlug);
 
       delete IMAGE_REGISTRY[`therapists.${oldSlug}.portrait`];
       IMAGE_REGISTRY[`therapists.${newSlug}.portrait`] = {
@@ -1036,12 +1763,13 @@ const server = http.createServer(async (req, res) => {
         publicPath: portraitPath,
       };
 
+      regenerateTherapistRegistry(ROOT);
       const check = await runTherapistsTest();
       if (!check.ok) {
         sendJson(res, 500, { error: check.error });
         return;
       }
-      sendJson(res, 200, { ok: true, oldSlug, newSlug, backupDir });
+      sendJson(res, 200, { ok: true, oldSlug, newSlug, backupDir, record: savedRecord });
       return;
     }
 

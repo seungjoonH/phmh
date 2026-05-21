@@ -2,12 +2,20 @@
 import type { ContentSubsection, ListBlock } from "@/components/ui/ServiceSection";
 import { paragraphsToFlow } from "@/lib/edit/prose-flow";
 
-export type FlowBlockInsertType = "p" | "heading" | "bullets" | "hr" | "button" | "img";
+export type FlowBlockInsertType =
+  | "p"
+  | "heading"
+  | "sectionTitle"
+  | "list"
+  | "hr"
+  | "button"
+  | "img";
 
 export type FlowBlock =
   | { type: "p"; text: string; textKey: string }
   | { type: "heading"; text: string; textKey: string }
-  | { type: "bullets"; lead?: string; items: string[]; listKey: string }
+  | { type: "sectionTitle"; text: string; textKey: string }
+  | { type: "list"; ordered: boolean; lead?: string; items: string[]; listKey: string }
   | { type: "hr" }
   | { type: "button"; text: string; textKey: string }
   | { type: "img"; editKey: string; src: string; alt?: string };
@@ -16,7 +24,8 @@ export type FlowBlock =
 export type StoredFlowBlock =
   | { type: "p"; textKey: string }
   | { type: "heading"; textKey: string }
-  | { type: "bullets"; listKey: string; lead?: string }
+  | { type: "sectionTitle"; textKey: string }
+  | { type: "list"; listKey: string; ordered: boolean; lead?: string }
   | { type: "hr" }
   | { type: "button"; textKey: string }
   | { type: "img"; editKey: string; src: string };
@@ -43,7 +52,8 @@ function flattenLists(lists: ListBlock[], keyPrefix: string): FlowBlock[] {
     }
     if (list.items.length > 0) {
       blocks.push({
-        type: "bullets",
+        type: "list",
+        ordered: false,
         items: [...list.items],
         listKey,
       });
@@ -94,7 +104,9 @@ function flattenSubsections(
   return blocks;
 }
 
-function normalizeStoredFlowBlock(block: StoredFlowBlock | FlowBlock): FlowBlock {
+function normalizeStoredFlowBlock(
+  block: StoredFlowBlock | FlowBlock | { type: "bullets"; listKey: string; lead?: string; items?: string[] },
+): FlowBlock {
   switch (block.type) {
     case "p":
       return { type: "p", text: "text" in block ? block.text : "", textKey: block.textKey };
@@ -104,9 +116,24 @@ function normalizeStoredFlowBlock(block: StoredFlowBlock | FlowBlock): FlowBlock
         text: "text" in block ? block.text : "",
         textKey: block.textKey,
       };
+    case "sectionTitle":
+      return {
+        type: "sectionTitle",
+        text: "text" in block ? block.text : "",
+        textKey: block.textKey,
+      };
+    case "list":
+      return {
+        type: "list",
+        ordered: Boolean(block.ordered),
+        lead: block.lead,
+        items: "items" in block && block.items?.length ? [...block.items] : [""],
+        listKey: block.listKey,
+      };
     case "bullets":
       return {
-        type: "bullets",
+        type: "list",
+        ordered: false,
         lead: block.lead,
         items: "items" in block && block.items?.length ? [...block.items] : [""],
         listKey: block.listKey,
@@ -131,17 +158,28 @@ function normalizeStoredFlowBlock(block: StoredFlowBlock | FlowBlock): FlowBlock
   }
 }
 
+export type FlattenFlowOptions = {
+  /** section.flow가 없을 때만 앞에 끼워넣을 블록 (예: 섹션 이미지, 섹션 타이틀) */
+  prepend?: FlowBlock[];
+};
+
 /** groups/lists/closing/subsections → 편집·DnD용 단일 블록 배열 */
-export function flattenSectionToFlow(section: SectionContent, keyPrefix: string): FlowBlock[] {
+export function flattenSectionToFlow(
+  section: SectionContent,
+  keyPrefix: string,
+  options: FlattenFlowOptions = {},
+): FlowBlock[] {
   if (section.flow?.length) {
     return section.flow.map((b) => normalizeStoredFlowBlock(b as StoredFlowBlock));
   }
 
+  const prefixed = options.prepend ?? [];
+
   if (section.paragraphs?.length) {
-    return paragraphsToFlow(keyPrefix, section.paragraphs);
+    return [...prefixed, ...paragraphsToFlow(keyPrefix, section.paragraphs)];
   }
 
-  const blocks: FlowBlock[] = [];
+  const blocks: FlowBlock[] = [...prefixed];
 
   (section.groups ?? []).forEach((group, gi) => {
     group.forEach((text, i) => {
@@ -169,7 +207,7 @@ export function flattenSectionToFlow(section: SectionContent, keyPrefix: string)
 }
 
 function cloneFlowBlock(block: FlowBlock): FlowBlock {
-  if (block.type === "bullets") {
+  if (block.type === "list") {
     return { ...block, items: [...block.items] };
   }
   return { ...block };
@@ -181,8 +219,15 @@ export function stripFlowBlockForStorage(block: FlowBlock): StoredFlowBlock {
       return { type: "p", textKey: block.textKey };
     case "heading":
       return { type: "heading", textKey: block.textKey };
-    case "bullets":
-      return { type: "bullets", listKey: block.listKey, lead: block.lead };
+    case "sectionTitle":
+      return { type: "sectionTitle", textKey: block.textKey };
+    case "list":
+      return {
+        type: "list",
+        listKey: block.listKey,
+        ordered: block.ordered,
+        lead: block.lead,
+      };
     case "button":
       return { type: "button", textKey: block.textKey };
     case "img":
@@ -195,6 +240,49 @@ export function stripFlowBlockForStorage(block: FlowBlock): StoredFlowBlock {
 }
 
 /** 편집 UI용 — CTA 버튼이 flow 끝에 없으면 기본 블록 추가 */
+export function flowBlockLeadKey(block: FlowBlock): string {
+  switch (block.type) {
+    case "p":
+    case "heading":
+    case "sectionTitle":
+    case "button":
+      return `${block.type}:${block.textKey}`;
+    case "list":
+      return `list:${block.listKey}`;
+    case "img":
+      return `img:${block.editKey}`;
+    case "hr":
+      return "hr";
+  }
+}
+
+/**
+ * ServiceSection prepend(섹션 타이틀·이미지)는 사용자 mutation 대상이 아니다.
+ * draft 에 prepend 와 같은 key 가 어디에든 들어 있으면 모두 제거하고 head 에만 prepend 를 박는다.
+ * (이전 버전은 head 만 검사해서 prepend 가 중간에 끼면 중복으로 추가되는 버그가 있었음.)
+ */
+export function ensurePrependBlocks(
+  blocks: FlowBlock[],
+  prepend: FlowBlock[],
+): FlowBlock[] {
+  if (prepend.length === 0) return blocks;
+  const prependKeys = new Set<string>();
+  for (const p of prepend) prependKeys.add(flowBlockLeadKey(p));
+  const cleaned = blocks.filter((b) => !prependKeys.has(flowBlockLeadKey(b)));
+  return [...prepend, ...cleaned];
+}
+
+/** 저장용 — prepend 와 같은 key 인 블록을 모두 제거 (draft 에 prepend 가 새 들지 않게) */
+export function stripPrependBlocks(
+  blocks: FlowBlock[],
+  prepend: FlowBlock[],
+): FlowBlock[] {
+  if (prepend.length === 0) return blocks;
+  const prependKeys = new Set<string>();
+  for (const p of prepend) prependKeys.add(flowBlockLeadKey(p));
+  return blocks.filter((b) => !prependKeys.has(flowBlockLeadKey(b)));
+}
+
 export function ensureFlowEndsWithCta(
   blocks: FlowBlock[],
   cta: { textKey: string; label: string },
@@ -237,7 +325,7 @@ export function flowToSectionContent(flow: FlowBlock[]): SectionContent {
         flushList();
         pendingList = { lead: block.text, items: [] };
         break;
-      case "bullets": {
+      case "list": {
         flushParagraphs();
         if (pendingList && pendingList.items.length === 0) {
           pendingList.items = [...block.items];
@@ -248,6 +336,7 @@ export function flowToSectionContent(flow: FlowBlock[]): SectionContent {
         }
         break;
       }
+      case "sectionTitle":
       case "hr":
       case "button":
       case "img":
@@ -278,12 +367,21 @@ export function flowBulletItemEditKey(listKey: string, itemIndex: number): strin
 export function hydrateFlowBlocks(
   blocks: FlowBlock[],
   readText: (key: string) => string,
+  readArray?: (key: string) => string[] | undefined,
 ): FlowBlock[] {
   return blocks.map((block) => {
-    if (block.type === "p" || block.type === "heading") {
+    if (
+      block.type === "p" ||
+      block.type === "heading" ||
+      block.type === "sectionTitle"
+    ) {
       return { ...block, text: readText(block.textKey) };
     }
-    if (block.type === "bullets") {
+    if (block.type === "list") {
+      const liveItems = readArray?.(`${block.listKey}.items`);
+      if (liveItems && liveItems.length > 0) {
+        return { ...block, items: [...liveItems] };
+      }
       return {
         ...block,
         items: block.items.map((item, i) => {

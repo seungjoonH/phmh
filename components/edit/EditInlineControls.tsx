@@ -13,11 +13,12 @@ export const editControlDeleteClass = "edit-control-delete";
 type Props = {
   onSettings?: () => void;
   onDelete?: () => void;
+  onExtract?: () => void;
   busy?: boolean;
 };
 
-export function EditInlineControls({ onSettings, onDelete, busy }: Props) {
-  if (!onSettings && !onDelete) return null;
+export function EditInlineControls({ onSettings, onDelete, onExtract, busy }: Props) {
+  if (!onSettings && !onDelete && !onExtract) return null;
 
   return (
     <div
@@ -33,6 +34,18 @@ export function EditInlineControls({ onSettings, onDelete, busy }: Props) {
           aria-label="설정"
         >
           설정
+        </button>
+      ) : null}
+      {onExtract ? (
+        <button
+          type="button"
+          disabled={busy}
+          onClick={onExtract}
+          className={editControlButtonClass}
+          aria-label="행에서 분리"
+          title="행에서 분리"
+        >
+          분리
         </button>
       ) : null}
       {onDelete ? (

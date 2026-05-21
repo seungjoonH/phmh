@@ -1,6 +1,6 @@
 // 상담사 data/*.js 필드 — dot-path 편집 키
 import type { ContentLocale } from "@/lib/content-blocks/types";
-import type { LocaleTextValues } from "@/lib/edit/client";
+import type { LocaleStringArrays, LocaleTextValues } from "@/lib/edit/client";
 import { getTherapistContentLocaleIds } from "@/lib/therapists/manifest";
 import type { TherapistRecord } from "@/lib/therapists/types";
 
@@ -12,7 +12,10 @@ export type TherapistScalarField =
   | "list.ctaLabel"
   | "profile.header.name";
 
-export type TherapistArrayField = "list.bullets" | "profile.header.lines";
+export type TherapistArrayField =
+  | "list.bullets"
+  | "profile.header.lines"
+  | "profile.blocks.items";
 
 export type TherapistBlockTextField = {
   kind: "block-text";
@@ -40,9 +43,23 @@ export type TherapistArrayItemRef = {
   index: number;
 };
 
+export type TherapistArrayRef =
+  | {
+      kind: "therapist-array";
+      slug: string;
+      field: "list.bullets" | "profile.header.lines";
+    }
+  | {
+      kind: "therapist-array";
+      slug: string;
+      field: "profile.blocks.items";
+      blockId: string;
+    };
+
 export type TherapistFieldRef =
   | TherapistScalarRef
   | TherapistArrayItemRef
+  | TherapistArrayRef
   | TherapistBlockTextField
   | TherapistBlockListItemField;
 
@@ -57,12 +74,22 @@ export function therapistListBulletKey(slug: string, index: number): string {
   return `${PREFIX}${slug}.list.bullets.${index}`;
 }
 
+/** 목록 통합 편집 — list.bullets 전체 */
+export function therapistListBulletsArrayKey(slug: string): string {
+  return `${PREFIX}${slug}.list.bullets`;
+}
+
 export function therapistHeaderNameKey(slug: string): string {
   return `${PREFIX}${slug}.profile.header.name`;
 }
 
 export function therapistHeaderLineKey(slug: string, index: number): string {
   return `${PREFIX}${slug}.profile.header.lines.${index}`;
+}
+
+/** 목록 통합 편집 — profile.header.lines 전체 */
+export function therapistHeaderLinesArrayKey(slug: string): string {
+  return `${PREFIX}${slug}.profile.header.lines`;
 }
 
 export function therapistBlockTextKey(slug: string, blockId: string): string {
@@ -77,11 +104,48 @@ export function therapistBlockListItemKey(
   return `${PREFIX}${slug}.blocks.${blockId}.items.${index}`;
 }
 
+/** 목록 통합 편집 — profile.blocks[].items 전체 */
+export function therapistBlockListItemsArrayKey(
+  slug: string,
+  blockId: string,
+): string {
+  return `${PREFIX}${slug}.blocks.${blockId}.items`;
+}
+
 export function isTherapistEditKey(key: string): boolean {
   return key.startsWith(PREFIX);
 }
 
+export function parseTherapistArrayKey(key: string): TherapistArrayRef | null {
+  if (!key.startsWith(PREFIX)) return null;
+  const rest = key.slice(PREFIX.length);
+  if (rest.endsWith(".list.bullets")) {
+    const slug = rest.slice(0, -".list.bullets".length);
+    if (slug) return { kind: "therapist-array", slug, field: "list.bullets" };
+  }
+  if (rest.endsWith(".profile.header.lines")) {
+    const slug = rest.slice(0, -".profile.header.lines".length);
+    if (slug) return { kind: "therapist-array", slug, field: "profile.header.lines" };
+  }
+  const blockItems = /^(.+)\.blocks\.([^.]+)\.items$/.exec(rest);
+  if (blockItems) {
+    return {
+      kind: "therapist-array",
+      slug: blockItems[1],
+      field: "profile.blocks.items",
+      blockId: blockItems[2],
+    };
+  }
+  return null;
+}
+
+export function isTherapistArrayKey(key: string): boolean {
+  return parseTherapistArrayKey(key) !== null;
+}
+
 export function parseTherapistFieldKey(key: string): TherapistFieldRef | null {
+  const array = parseTherapistArrayKey(key);
+  if (array) return array;
   if (!key.startsWith(PREFIX)) return null;
   const rest = key.slice(PREFIX.length);
   const parts = rest.split(".");
@@ -255,6 +319,56 @@ export function getTherapistLinkedTextKeys(key: string): string[] | null {
     return [therapistListKey(ref.slug, "name"), therapistHeaderNameKey(ref.slug)];
   }
   return null;
+}
+
+export function readTherapistArrayLocales(
+  record: TherapistRecord,
+  ref: TherapistArrayRef,
+): LocaleStringArrays {
+  const locales = therapistContentLocales();
+  if (ref.field === "list.bullets") {
+    return Object.fromEntries(
+      locales.map((id) => [id, [...(record.list.bullets[id] ?? [])]]),
+    ) as LocaleStringArrays;
+  }
+  if (ref.field === "profile.blocks.items") {
+    const block = record.profile.blocks.find((b) => b.id === ref.blockId);
+    return Object.fromEntries(
+      locales.map((id) => [
+        id,
+        block?.type === "list" ? [...(block.items[id] ?? [])] : [],
+      ]),
+    ) as LocaleStringArrays;
+  }
+  return Object.fromEntries(
+    locales.map((id) => [id, [...(record.profile.header.lines[id] ?? [])]]),
+  ) as LocaleStringArrays;
+}
+
+export function applyTherapistArrayLocales(
+  record: TherapistRecord,
+  ref: TherapistArrayRef,
+  entry: LocaleStringArrays,
+  ordered?: boolean,
+): TherapistRecord {
+  const next = structuredClone(record) as TherapistRecord;
+  if (ref.field === "profile.blocks.items") {
+    const block = next.profile.blocks.find((b) => b.id === ref.blockId);
+    if (block?.type === "list") {
+      for (const id of therapistContentLocales()) {
+        if (Array.isArray(entry[id])) block.items[id] = [...entry[id]!];
+      }
+      if (ordered !== undefined) block.ordered = ordered;
+    }
+    return next;
+  }
+
+  const target =
+    ref.field === "list.bullets" ? next.list.bullets : next.profile.header.lines;
+  for (const id of therapistContentLocales()) {
+    if (Array.isArray(entry[id])) target[id] = [...entry[id]!];
+  }
+  return next;
 }
 
 export function applyTherapistNameLocales(

@@ -42,7 +42,6 @@ export function PropertyPanel() {
     revertDraft,
     panelBaseline,
     setPanelBaseline,
-    commitTextKey,
     committing,
     resolveCommittedTextRegistryValues,
   } = useEditDraft();
@@ -187,15 +186,13 @@ export function PropertyPanel() {
     closeEditor();
   };
 
-  const handleApply = async () => {
-    if (!key || committing) return;
-    setDraftEntry(key, valuesRef.current);
-    try {
-      await commitTextKey(key);
-      closeEditor();
-    } catch {
-      /* alert in commitTextKey */
+  const handleCancel = () => {
+    if (!key) return;
+    if (panelBaseline) {
+      setValues(panelBaseline);
+      revertDraft(key);
     }
+    closeEditor();
   };
 
   if (!key || selected?.kind !== "text") return null;
@@ -255,19 +252,19 @@ export function PropertyPanel() {
         <div className="mt-4 flex shrink-0 justify-end gap-2 border-t border-page-body/10 pt-4">
           <button
             type="button"
+            onClick={handleCancel}
+            className="rounded px-4 py-2 text-sm text-page-body hover:bg-page-body/10"
+            disabled={committing || loading}
+          >
+            취소
+          </button>
+          <button
+            type="button"
             onClick={handleClose}
             className="rounded px-4 py-2 text-sm text-page-body hover:bg-page-body/10"
             disabled={committing}
           >
             닫기
-          </button>
-          <button
-            type="button"
-            onClick={() => void handleApply()}
-            className="rounded bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
-            disabled={loading || committing || !isDirty}
-          >
-            {committing ? "저장 중…" : "적용"}
           </button>
         </div>
       </div>

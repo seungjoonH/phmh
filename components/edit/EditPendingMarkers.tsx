@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import { useEditDraft } from "@/components/edit/EditDraftProvider";
 
 export function EditPendingMarkers() {
-  const { isEditKeyPending, drafts, imageDrafts, pendingCount } = useEditDraft();
+  const { isEditKeyPending, drafts, imageDrafts, centerImageDrafts, pendingCount } =
+    useEditDraft();
 
   useEffect(() => {
     const nodes = document.querySelectorAll<HTMLElement>("[data-phmh-key]");
@@ -18,7 +19,7 @@ export function EditPendingMarkers() {
         el.classList.remove("phmh-edit-pending");
       }
     }
-  }, [isEditKeyPending, drafts, imageDrafts, pendingCount]);
+  }, [isEditKeyPending, drafts, imageDrafts, centerImageDrafts, pendingCount]);
 
   return null;
 }

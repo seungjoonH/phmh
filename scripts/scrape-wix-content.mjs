@@ -15,7 +15,6 @@ const PAGES = {
   serviceAreas: "https://www.phmhservices.com/%EB%B3%B5%EC%A0%9C-services",
   gettingStarted: "https://www.phmhservices.com/services-2",
   fee: "https://www.phmhservices.com/%EB%B3%B5%EC%A0%9C-fee",
-  onlinePayment: "https://www.phmhservices.com/fee",
   koreaCenter: "https://www.phmhservices.com/%EB%B3%B5%EC%A0%9C-contact-us-2",
   philippinesCenter: "https://www.phmhservices.com/%EB%B3%B5%EC%A0%9C-contact-us-1",
 };

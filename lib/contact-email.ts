@@ -100,8 +100,8 @@ export function buildContactEmail(values: ContactFormValues) {
 </html>`;
 
   return {
-    from: getContactMailFrom(),
-    to: [getContactMailTo()],
+    from: getContactMailFrom(values.center),
+    to: [getContactMailTo(values.center)],
     replyTo,
     subject,
     text: textLines.join("\n"),

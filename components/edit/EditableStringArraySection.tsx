@@ -27,9 +27,9 @@ export function EditableStringArraySection({
   const {
     dragIndex,
     dropTarget,
-    setDragIndex,
-    pickDropTarget,
+    beginDrag,
     createDropHandler,
+    getRowShift,
   } = useEditReorderDrag();
 
   if (!editing) {
@@ -48,27 +48,21 @@ export function EditableStringArraySection({
 
   const busy = edit.arrayBusy === arrayKey;
 
-  const handleDrop = createDropHandler((from, insertAt) => {
-    void edit.moveArrayItem(arrayKey, from, insertAt);
+  createDropHandler((from, insertAt) => {
+    return edit.moveArrayItem(arrayKey, from, insertAt);
   });
 
   return (
-    <EditReorderList
-      dragIndex={dragIndex}
-      pickDropTarget={pickDropTarget}
-      onDrop={handleDrop}
-      className="space-y-7"
-    >
+    <EditReorderList className="space-y-7">
       {items.map((p, i) => (
         <EditReorderRow
           key={`${arrayKey}-${i}-${p.slice(0, 12)}`}
           index={i}
           dragIndex={dragIndex}
           dropTarget={dropTarget}
+          rowShift={getRowShift(i)}
           busy={busy}
-          onDragStart={setDragIndex}
-          onDropTarget={pickDropTarget}
-          onDrop={handleDrop}
+          onDragStart={beginDrag}
           controls={
             <EditInlineControls
               busy={busy}

@@ -9,8 +9,8 @@ import { setRuntimeLocaleManifest } from "@/lib/site-locales";
 import { EditToolbar } from "@/components/edit/EditToolbar";
 import { EditHighlightLayer } from "@/components/edit/EditHighlightLayer";
 import { EditPanels } from "@/components/edit/EditPanels";
-import { EditPanelDismiss } from "@/components/edit/EditPanelDismiss";
 import { EditPendingMarkers } from "@/components/edit/EditPendingMarkers";
+import { AppDialogHost } from "@/components/ui/AppDialog";
 import {
   clearLongPressPointer,
   markLongPressPointer,
@@ -45,7 +45,7 @@ function findEditableTarget(node: EventTarget | null): HTMLElement | null {
 }
 
 function EditInteractionLayer() {
-  const { openTextEditor, openImageEditor } = useEditDraft();
+  const { openTextEditor, openImageEditor, openListEditor } = useEditDraft();
 
   useEffect(() => {
     type PendingLongPress = {
@@ -73,6 +73,9 @@ function EditInteractionLayer() {
       } else if (kind === "image") {
         dispatchSelected(el);
         openImageEditor(key);
+      } else if (kind === "list") {
+        dispatchSelected(el);
+        openListEditor(key);
       }
     };
 
@@ -99,7 +102,9 @@ function EditInteractionLayer() {
     };
 
     const shouldCaptureLongPress = (el: HTMLElement) =>
-      el.dataset.phmhInteraction === "long-press" || el.dataset.phmhEdit === "image";
+      el.dataset.phmhInteraction === "long-press" ||
+      el.dataset.phmhEdit === "image" ||
+      el.dataset.phmhEdit === "list";
 
     const onPointerDown = (e: PointerEvent) => {
       const el = findEditableTarget(e.target);
@@ -195,7 +200,7 @@ function EditInteractionLayer() {
       document.removeEventListener("click", onClick, true);
       document.removeEventListener("contextmenu", onContextMenu, true);
     };
-  }, [openTextEditor, openImageEditor]);
+  }, [openTextEditor, openImageEditor, openListEditor]);
 
   return null;
 }
@@ -208,9 +213,9 @@ function EditChromeInner() {
       <EditHighlightLayer />
       <EditInteractionLayer />
       <EditPanels />
-      <EditPanelDismiss />
       <EditPendingMarkers />
       <EditBodyClass />
+      <AppDialogHost />
     </>
   );
 }

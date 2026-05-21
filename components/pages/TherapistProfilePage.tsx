@@ -3,8 +3,8 @@
 // 상담사 개인 프로필 페이지
 import { notFound } from "next/navigation";
 import { EditableTherapistBlocks } from "@/components/edit/EditableTherapistBlocks";
-import { EditableImage } from "@/components/edit/EditableImage";
 import { EditableText } from "@/components/edit/EditableText";
+import { TherapistPortraitMedia } from "@/components/therapists/TherapistPortraitMedia";
 import { editImageAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
 import { PageVisibilityGuard } from "@/components/site/PageVisibilityGuard";
@@ -13,9 +13,10 @@ import { PageHeroBanner } from "@/components/ui/PageHeroBanner";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useTherapistEditText } from "@/lib/edit/use-therapist-edit-text";
 import {
-  therapistHeaderLineKey,
+  therapistHeaderLinesArrayKey,
   therapistHeaderNameKey,
 } from "@/lib/edit/therapist-edit-key";
+import { EditableTherapistStringList } from "@/components/therapists/EditableTherapistStringList";
 import { getTherapistBySlug, pickLocale } from "@/lib/therapists/load";
 import { therapistProfilePageId } from "@/lib/site-pages";
 import { isTherapistProfileHidden } from "@/lib/site-pages-visibility";
@@ -49,15 +50,13 @@ export function TherapistProfilePage({ slug }: Props) {
           <Reveal>
             <div className="mx-auto max-w-3xl">
               <div
-                className="relative mx-auto mb-10 aspect-[3/4] max-w-sm overflow-hidden rounded-sm shadow-md"
+                className="relative mx-auto mb-10 aspect-[3/4] max-w-sm overflow-hidden rounded-t-full shadow-md"
                 {...(edit ? editImageAttrs(portraitKey) : {})}
               >
-                <EditableImage
-                  editKey={portraitKey}
-                  src={therapist.profile.portrait}
-                  alt=""
-                  fill
-                  className="object-cover object-top"
+                <TherapistPortraitMedia
+                  slug={slug}
+                  portraitSrc={therapist.profile.portrait}
+                  defaultPortrait={therapist.profile.defaultPortrait}
                   sizes="(max-width: 768px) 80vw, 384px"
                   priority
                   editClipBounds
@@ -67,16 +66,11 @@ export function TherapistProfilePage({ slug }: Props) {
                 {name}
               </EditableText>
               <div className="page-title-rule mx-auto" />
-              <ul className="mt-6 space-y-1 text-center font-body text-base font-medium text-secondary/90">
-                {lines.map((line, i) => (
-                  <TherapistHeaderLine
-                    key={`${slug}-line-${i}`}
-                    slug={slug}
-                    index={i}
-                    committed={line}
-                  />
-                ))}
-              </ul>
+              <EditableTherapistStringList
+                arrayKey={therapistHeaderLinesArrayKey(slug)}
+                items={lines}
+                variant="profile-line"
+              />
             </div>
           </Reveal>
           <div className="mx-auto mt-14 max-w-3xl">
@@ -85,25 +79,5 @@ export function TherapistProfilePage({ slug }: Props) {
         </div>
       </article>
     </PageVisibilityGuard>
-  );
-}
-
-function TherapistHeaderLine({
-  slug,
-  index,
-  committed,
-}: {
-  slug: string;
-  index: number;
-  committed: string;
-}) {
-  const editKey = therapistHeaderLineKey(slug, index);
-  const text = useTherapistEditText(editKey, committed);
-  return (
-    <li>
-      <EditableText as="span" editKey={editKey}>
-        {text}
-      </EditableText>
-    </li>
   );
 }

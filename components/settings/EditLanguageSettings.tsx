@@ -32,9 +32,9 @@ export function EditLanguageSettings({ selectedLocale, onSelectLocale }: Props) 
   const {
     dragIndex,
     dropTarget,
-    setDragIndex,
-    pickDropTarget,
+    beginDrag,
     createDropHandler,
+    getRowShift,
   } = useEditReorderDrag({ axis: "x" });
 
   const manifest = localeManifestDraft ?? getLocaleManifest();
@@ -54,7 +54,7 @@ export function EditLanguageSettings({ selectedLocale, onSelectLocale }: Props) 
     applyLocaleManifestDraft({ ...manifest, hidden: [...hidden] });
   };
 
-  const handleDrop = createDropHandler((from, insertAt) => {
+  createDropHandler((from, insertAt) => {
     const order = [...manifest.order];
     const [item] = order.splice(from, 1);
     order.splice(insertAt, 0, item);
@@ -75,13 +75,7 @@ export function EditLanguageSettings({ selectedLocale, onSelectLocale }: Props) 
   return (
     <div>
       <p className="mb-3 text-sm font-medium text-page-heading">Language</p>
-      <EditReorderList
-        axis="x"
-        dragIndex={dragIndex}
-        pickDropTarget={pickDropTarget}
-        onDrop={handleDrop}
-        className="flex gap-3"
-      >
+      <EditReorderList className="flex gap-3">
         {ordered.map((opt, index) => {
           const isHidden = manifest.hidden.includes(opt.id);
           return (
@@ -90,13 +84,12 @@ export function EditLanguageSettings({ selectedLocale, onSelectLocale }: Props) 
               index={index}
               dragIndex={dragIndex}
               dropTarget={dropTarget}
+              rowShift={getRowShift(index)}
               busy={busy}
               orientation="horizontal"
               className="min-w-0 flex-1 basis-0"
               handleClassName="absolute -left-2 top-1 z-10"
-              onDragStart={setDragIndex}
-              onDropTarget={pickDropTarget}
-              onDrop={handleDrop}
+              onDragStart={beginDrag}
             >
               <div
                 className={`flex w-full flex-col items-center gap-1.5 rounded-lg border px-2 py-2 text-center ${

@@ -17,7 +17,14 @@ function findEditableTarget(node: EventTarget | null): HTMLElement | null {
   return el;
 }
 
+function isHoverBridge(node: EventTarget | null): boolean {
+  if (!(node instanceof Element)) return false;
+  return Boolean(node.closest("[data-edit-hover-bridge]"));
+}
+
 const FADE_MS = 200;
+// insert bar expand(200ms) + debounce(80ms) 완료 시점에 highlight 가 뜨도록
+const HOVER_IN_DELAY_MS = 280;
 
 export function EditHighlightLayer() {
   const [highlight, setHighlight] = useState<HighlightBox | null>(null);
@@ -25,6 +32,8 @@ export function EditHighlightLayer() {
   const [visible, setVisible] = useState(false);
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fadeInRafRef = useRef<number | null>(null);
+  const showTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingTargetRef = useRef<HTMLElement | null>(null);
   const visibleRef = useRef(false);
   const highlightRef = useRef<HighlightBox | null>(null);
   highlightRef.current = highlight;
@@ -40,6 +49,13 @@ export function EditHighlightLayer() {
     if (fadeInRafRef.current !== null) {
       cancelAnimationFrame(fadeInRafRef.current);
       fadeInRafRef.current = null;
+    }
+  }, []);
+
+  const clearShowTimer = useCallback(() => {
+    if (showTimerRef.current !== null) {
+      clearTimeout(showTimerRef.current);
+      showTimerRef.current = null;
     }
   }, []);
 
@@ -60,6 +76,8 @@ export function EditHighlightLayer() {
   );
 
   const hideHighlight = useCallback(() => {
+    pendingTargetRef.current = null;
+    clearShowTimer();
     clearFadeInRaf();
     visibleRef.current = false;
     setVisible(false);
@@ -69,7 +87,7 @@ export function EditHighlightLayer() {
       setPresent(false);
       setHighlight(null);
     }, FADE_MS);
-  }, [clearHideTimer, clearFadeInRaf]);
+  }, [clearHideTimer, clearFadeInRaf, clearShowTimer]);
 
   const updateFromElement = useCallback(
     (el: HTMLElement | null, selected = false) => {
@@ -77,22 +95,52 @@ export function EditHighlightLayer() {
         hideHighlight();
         return;
       }
-      const rect = el.getBoundingClientRect();
-      showHighlight({
-        top: rect.top,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-        selected,
-      });
+      // selected(click) 또는 이미 노출 중 상태에서 다른 element 진입 → 즉시 갱신
+      if (selected || visibleRef.current) {
+        pendingTargetRef.current = el;
+        clearShowTimer();
+        const rect = el.getBoundingClientRect();
+        showHighlight({
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+          selected,
+        });
+        return;
+      }
+      // 새로 hover 시작 — insert bar 가 다 펼쳐진 뒤 표시되도록 delay
+      if (
+        pendingTargetRef.current === el &&
+        showTimerRef.current !== null
+      ) {
+        return;
+      }
+      pendingTargetRef.current = el;
+      clearShowTimer();
+      showTimerRef.current = setTimeout(() => {
+        showTimerRef.current = null;
+        const target = pendingTargetRef.current;
+        if (!target) return;
+        const rect = target.getBoundingClientRect();
+        showHighlight({
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+          selected: false,
+        });
+      }, HOVER_IN_DELAY_MS);
     },
-    [hideHighlight, showHighlight],
+    [hideHighlight, showHighlight, clearShowTimer],
   );
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       const target = findEditableTarget(e.target);
       if (!target) {
+        // 드래그 핸들/추가 bar 주변은 editable 자체가 아니지만 같은 hover 영역으로 취급한다.
+        if (isHoverBridge(e.target)) return;
         if (!highlightRef.current?.selected) hideHighlight();
         return;
       }
@@ -112,7 +160,7 @@ export function EditHighlightLayer() {
     };
 
     const onScroll = () => {
-      if (!highlightRef.current?.selected) hideHighlight();
+      hideHighlight();
     };
 
     document.addEventListener("mousemove", onMove);
@@ -128,8 +176,15 @@ export function EditHighlightLayer() {
       window.removeEventListener("phmh-edit-panel-closed", onClearSelected);
       clearHideTimer();
       clearFadeInRaf();
+      clearShowTimer();
     };
-  }, [updateFromElement, hideHighlight, clearHideTimer, clearFadeInRaf]);
+  }, [
+    updateFromElement,
+    hideHighlight,
+    clearHideTimer,
+    clearFadeInRaf,
+    clearShowTimer,
+  ]);
 
   if (!present || !highlight) return null;
 

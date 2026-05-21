@@ -13,13 +13,14 @@ type StructuredSection = {
 };
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getContactPath } from "@/lib/contact";
+import { isImageKeyHidden } from "@/lib/image-hidden";
 import { pageHeroes } from "@/lib/page-heroes";
 import {
   therapyAnchors,
   therapyImages,
 } from "@/lib/service-images";
 
-const keys = [
+const defaultKeys = [
   "individual",
   "couples",
   "family",
@@ -31,6 +32,11 @@ const keys = [
 export function ServicesTypesPage() {
   const { locale, messages, t } = useLocale();
   const data = messages.services;
+  const sectionsMap = data.sections as unknown as Record<string, StructuredSection>;
+  const rawOrder = (data as { sectionOrder?: unknown }).sectionOrder;
+  const order: string[] = Array.isArray(rawOrder)
+    ? (rawOrder.filter((v): v is string => typeof v === "string"))
+    : [...defaultKeys];
 
   const sidebar = [
     {
@@ -39,21 +45,32 @@ export function ServicesTypesPage() {
       href: "#top",
       labelEditKey: "services.sidebar.top",
     },
-    ...keys.map((k) => ({
-      id: therapyAnchors[k],
-      label: data.sidebar[k],
-      href: `#${therapyAnchors[k]}`,
-      labelEditKey: `services.sidebar.${k}`,
-    })),
+    ...order.map((k) => {
+      const anchor = therapyAnchors[k] ?? k;
+      const sec = sectionsMap[k];
+      return {
+        id: anchor,
+        label: sec?.title ?? "",
+        href: `#${anchor}`,
+        labelEditKey: `services.sections.${k}.title`,
+        orderKey: k,
+      };
+    }),
   ];
 
-  const sections = keys.map((k) => {
-    const sec = data.sections[k] as StructuredSection;
+  const sections = order.map((k) => {
+    const sec = sectionsMap[k] ?? ({ title: "" } as StructuredSection);
+    const anchor = therapyAnchors[k] ?? k;
+    const imageKey = `therapy.${k}`;
+    const hasDefaultImage = k in therapyImages && !isImageKeyHidden(imageKey);
     return {
-      id: therapyAnchors[k],
+      id: anchor,
       title: sec.title,
-      imageSrc: k === "individual" ? undefined : therapyImages[k],
-      imageEditKey: k === "individual" ? undefined : `therapy.${k}`,
+      imageSrc: hasDefaultImage ? therapyImages[k] : undefined,
+      // 모든 섹션이 헤더 이미지 자리(0 or 1)를 가진다. 이미지가 없는 섹션은 edit 모드에서만
+      // dashed placeholder 가 보이고, dev/prod 에서는 ParallaxMedia 분기 자체가 렌더되지 않아
+      // 빈 공간을 차지하지 않는다(ServiceSection 의 `!useFlowLayout && imageSrc` 조건).
+      imageEditKey: `therapy.${k}`,
       textKeyPrefix: `services.sections.${k}`,
       groups: sec.groups ?? [],
       lists: sec.lists ?? [],
@@ -71,6 +88,7 @@ export function ServicesTypesPage() {
       pageTitle={data.pageTitle}
       sidebar={sidebar}
       sections={sections}
+      sectionOrderKey="services.sectionOrder"
       ctaLabel={t("common.scheduleConsultation")}
       ctaHref={getContactPath(locale)}
       ctaEditKey="common.scheduleConsultation"

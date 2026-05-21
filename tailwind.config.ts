@@ -46,6 +46,10 @@ const config: Config = {
           heading: "rgb(var(--page-heading) / <alpha-value>)",
           body: "rgb(var(--page-body) / <alpha-value>)",
         },
+        nav: {
+          link: "rgb(var(--nav-link) / <alpha-value>)",
+          "link-hover": "rgb(var(--nav-link-hover) / <alpha-value>)",
+        },
       },
     },
   },

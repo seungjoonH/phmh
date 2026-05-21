@@ -43,6 +43,7 @@
     {
       "id": "dateOfBirth",
       "type": "date",
+      "required": true,
       "mailLabel": "Date of birth",
       "mail": {
         "kind": "inline"

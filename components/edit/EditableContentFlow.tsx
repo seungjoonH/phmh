@@ -1,6 +1,6 @@
 "use client";
 
-// 서비스 섹션 본문 — p·제목·불릿·구분선·이미지·버튼 블록 DnD·추가
+// 서비스 섹션 본문 — p·제목·목록·구분선·이미지·버튼 블록 DnD·추가
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { EditableImage } from "@/components/edit/EditableImage";
@@ -9,13 +9,12 @@ import { EditFlowInsertBar } from "@/components/edit/EditFlowInsertBar";
 import { EditInlineControls } from "@/components/edit/EditInlineControls";
 import { EditReorderList } from "@/components/edit/EditReorderList";
 import { EditReorderRow } from "@/components/edit/EditReorderRow";
+import { useDebouncedHoverIndex } from "@/components/edit/useDebouncedHoverIndex";
 import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
 import { useEditReorderDrag } from "@/components/edit/useEditReorderDrag";
-import { editTextAttrs } from "@/lib/edit/attrs";
-import { getImageRegistryEntry } from "@/lib/edit/image-registry";
+import { editImageAttrs, editListAttrs, editTextAttrs } from "@/lib/edit/attrs";
 import {
   ensureFlowEndsWithCta,
-  flowBulletItemEditKey,
   type FlowBlock,
   type FlowBlockInsertType,
 } from "@/lib/edit/section-flow";
@@ -29,11 +28,32 @@ type Props = {
   ctaLabel?: string;
   ctaHref?: string;
   ctaEditKey?: string;
-  imageEditKey?: string;
-  imageSrc?: string;
   /** false면 flow 끝 CTA 버튼 블록을 붙이지 않음 */
   appendCta?: boolean;
+  /**
+   * blocks 의 처음 N 개는 prepend(섹션 헤더 — 이미지·섹션 타이틀).
+   * 이 영역은 본문 내에서 이동 불가 → 핸들·인서트바·삭제 컨트롤을 숨긴다.
+   * 섹션간 이동은 사이드바에서 처리한다.
+   */
+  prependCount?: number;
 };
+
+// 버튼 블록은 Services / Service Areas 본문에서만 의미가 있다.
+// Who We Are 같은 prose 영역에서는 + 메뉴에서 버튼을 노출하지 않는다.
+const NON_SERVICE_INSERT_TYPES: readonly FlowBlockInsertType[] = [
+  "p",
+  "heading",
+  "img",
+  "hr",
+  "list",
+];
+
+function isServiceSectionKey(sectionKey: string): boolean {
+  return (
+    sectionKey.startsWith("services.sections.") ||
+    sectionKey.startsWith("serviceAreas.sections.")
+  );
+}
 
 function FlowParagraphBlock({ block }: { block: Extract<FlowBlock, { type: "p" }> }) {
   const text = useEditText(block.textKey, block.text);
@@ -57,33 +77,48 @@ function FlowHeadingBlock({ block }: { block: Extract<FlowBlock, { type: "headin
   );
 }
 
-function FlowBulletItem({
-  listKey,
-  index,
-  committed,
+function FlowSectionTitleBlock({
+  block,
 }: {
-  listKey: string;
-  index: number;
-  committed: string;
+  block: Extract<FlowBlock, { type: "sectionTitle" }>;
 }) {
-  const editKey = flowBulletItemEditKey(listKey, index);
-  const text = useEditText(editKey, committed.replace(/^[•\-–]\s*/, ""));
+  const text = useEditText(block.textKey, block.text);
   return (
-    <EditableText as="span" editKey={editKey}>
-      {text}
-    </EditableText>
+    <h2 className="font-logo text-3xl text-page-heading">
+      <span className="mr-2 text-secondary">|</span>
+      <EditableText as="span" editKey={block.textKey}>
+        {text}
+      </EditableText>
+    </h2>
   );
 }
 
-function FlowBulletsBlock({ block }: { block: Extract<FlowBlock, { type: "bullets" }> }) {
+function FlowListBlock({ block }: { block: Extract<FlowBlock, { type: "list" }> }) {
+  const items = block.items.filter((item) => item.trim() !== "");
+  const isEmpty = items.length === 0;
+  const attrs = editListAttrs(block.listKey, { longPress: !isEmpty });
+  const Tag = block.ordered ? "ol" : "ul";
+  const listStyle = block.ordered
+    ? "list-decimal space-y-2 pl-6 marker:text-page-body"
+    : "list-disc space-y-2 pl-6 marker:text-page-body";
   return (
-    <ul className="list-disc w-fit max-w-full space-y-2 pl-6 marker:text-page-body">
-      {block.items.map((item, i) => (
-        <li key={i}>
-          <FlowBulletItem listKey={block.listKey} index={i} committed={item} />
-        </li>
-      ))}
-    </ul>
+    <div {...attrs} className="cursor-pointer rounded-sm">
+      <Tag className={`${listStyle} w-fit max-w-full`}>
+        {isEmpty ? (
+          <li>
+            <span className="inline-flex h-7 min-w-10 items-center justify-center rounded border border-dashed border-page-body/35 px-2 text-sm leading-none text-page-body/50">
+              +
+            </span>
+          </li>
+        ) : (
+          items.map((item, i) => (
+            <li key={i}>
+              <MarkupText as="span">{item.replace(/^([•\-–]|\d+\.)\s*/, "")}</MarkupText>
+            </li>
+          ))
+        )}
+      </Tag>
+    </div>
   );
 }
 
@@ -110,37 +145,51 @@ function FlowButtonBlock({
   );
 }
 
+function FlowImageBlock({ block }: { block: Extract<FlowBlock, { type: "img" }> }) {
+  if (!block.src) {
+    return (
+      <div
+        className="relative flex aspect-[16/10] w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm border-2 border-dashed border-page-body/30 bg-page-body/5 text-3xl leading-none text-page-body/45"
+        {...editImageAttrs(block.editKey, { longPress: false })}
+        aria-label="이미지 추가"
+      >
+        +
+      </div>
+    );
+  }
+  return (
+    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
+      <EditableImage
+        editKey={block.editKey}
+        src={block.src}
+        alt={block.alt ?? ""}
+        fill
+        className="object-cover"
+      />
+    </div>
+  );
+}
+
 function FlowBlockBody({ block, ctaHref }: { block: FlowBlock; ctaHref?: string }) {
   switch (block.type) {
     case "p":
       return <FlowParagraphBlock block={block} />;
     case "heading":
       return <FlowHeadingBlock block={block} />;
-    case "bullets":
-      return <FlowBulletsBlock block={block} />;
+    case "sectionTitle":
+      return <FlowSectionTitleBlock block={block} />;
+    case "list":
+      return <FlowListBlock block={block} />;
     case "hr":
-      return <div className="border-t border-page-body/10" aria-hidden />;
+      return (
+        <div className="w-full py-6" aria-hidden>
+          <div className="border-t border-page-body/15" />
+        </div>
+      );
     case "button":
       return <FlowButtonBlock block={block} ctaHref={ctaHref} />;
     case "img":
-      if (!getImageRegistryEntry(block.editKey)) {
-        return (
-          <p className="text-sm text-page-body/70">
-            이미지 키가 등록되지 않았습니다 ({block.editKey})
-          </p>
-        );
-      }
-      return (
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
-          <EditableImage
-            editKey={block.editKey}
-            src={block.src}
-            alt={block.alt ?? ""}
-            fill
-            className="object-cover"
-          />
-        </div>
-      );
+      return <FlowImageBlock block={block} />;
     default:
       return null;
   }
@@ -160,18 +209,35 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
           <MarkupText as="span">{block.text}</MarkupText>
         </p>
       );
-    case "bullets":
+    case "sectionTitle":
       return (
-        <ul className="list-disc w-fit max-w-full space-y-2 pl-6 marker:text-page-body">
-          {block.items.map((item, i) => (
+        <h2 className="font-logo text-3xl text-page-heading">
+          <span className="mr-2 text-secondary">|</span>
+          <MarkupText as="span">{block.text}</MarkupText>
+        </h2>
+      );
+    case "list": {
+      const items = block.items.filter((item) => item.trim() !== "");
+      const Tag = block.ordered ? "ol" : "ul";
+      const listStyle = block.ordered
+        ? "list-decimal space-y-2 pl-6 marker:text-page-body"
+        : "list-disc space-y-2 pl-6 marker:text-page-body";
+      return (
+        <Tag className={`${listStyle} w-fit max-w-full`}>
+          {items.map((item, i) => (
             <li key={i}>
-              <MarkupText as="span">{item.replace(/^[•\-–]\s*/, "")}</MarkupText>
+              <MarkupText as="span">{item.replace(/^([•\-–]|\d+\.)\s*/, "")}</MarkupText>
             </li>
           ))}
-        </ul>
+        </Tag>
       );
+    }
     case "hr":
-      return <div className="border-t border-page-body/10 pt-8" aria-hidden />;
+      return (
+        <div className="w-full py-6" aria-hidden>
+          <div className="border-t border-page-body/15" />
+        </div>
+      );
     case "button":
       return ctaHref ? (
         <Link href={ctaHref} className="cta-primary inline-block">
@@ -181,6 +247,7 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
         <span className="cta-primary inline-block">{block.text}</span>
       );
     case "img":
+      if (!block.src) return null;
       return (
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -192,15 +259,22 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
   }
 }
 
+function shouldRowBeFullWidth(block: FlowBlock): boolean {
+  return (
+    block.type === "hr" ||
+    block.type === "img" ||
+    block.type === "sectionTitle"
+  );
+}
+
 export function EditableContentFlow({
   sectionKey,
   blocks,
   ctaLabel,
   ctaHref,
   ctaEditKey,
-  imageEditKey,
-  imageSrc,
   appendCta = true,
+  prependCount = 0,
 }: Props) {
   const edit = useEditDraftOptional();
   const editing = isEditMode() && edit;
@@ -213,14 +287,42 @@ export function EditableContentFlow({
       : blocks;
 
   const [openInsertIndex, setOpenInsertIndex] = useState<number | null>(null);
+  const insertTypes = isServiceSectionKey(sectionKey)
+    ? undefined
+    : NON_SERVICE_INSERT_TYPES;
 
   const {
     dragIndex,
     dropTarget,
-    setDragIndex,
-    pickDropTarget,
+    beginDrag,
     createDropHandler,
+    getRowShift,
   } = useEditReorderDrag();
+
+  // 80ms hover-in / 260ms hover-out (= highlight fade 200ms + buffer)
+  // 드래그 중에는 hover 가 발동하지 않도록 disabled.
+  const { hoveredIndex, scheduleEnter, scheduleLeave } = useDebouncedHoverIndex(
+    { inDelayMs: 80, outDelayMs: 260, disabled: dragIndex !== null },
+  );
+
+  // bar i 는 row(i-1)의 아래 / row(i)의 위 위치. menu open 시에는 항상 노출.
+  // 단, prepend(섹션 헤더) 사이/위의 bar 는 본문 추가 의미가 모호하므로 항상 숨김.
+  const isBarVisible = (i: number): boolean => {
+    if (i < prependCount) return false;
+    if (openInsertIndex === i) return true;
+    if (hoveredIndex === null) return false;
+    return hoveredIndex === i - 1 || hoveredIndex === i;
+  };
+
+  /**
+   * + 버튼을 어느 방향(현재 hover 중인 row 의 위/아래) 으로 띄울지 결정.
+   * - hoveredIndex === i: bar[i] 는 row[i] 의 "윗 추가" → 위로 (above)
+   * - hoveredIndex === i - 1: bar[i] 는 row[i-1] 의 "아랫 추가" → 아래로 (below)
+   */
+  const barPlacement = (i: number): "above" | "below" => {
+    if (hoveredIndex === i - 1) return "below";
+    return "above";
+  };
 
   if (!editing) {
     return (
@@ -233,10 +335,9 @@ export function EditableContentFlow({
   }
 
   const busy = edit.flowBusy === sectionKey;
-  const canInsertImage = Boolean(imageEditKey && imageSrc && getImageRegistryEntry(imageEditKey));
 
-  const handleDrop = createDropHandler((from, insertAt) => {
-    void edit.moveFlowBlock(sectionKey, from, insertAt);
+  createDropHandler((from, insertAt) => {
+    return edit.moveFlowBlock(sectionKey, from, insertAt);
   });
 
   const handleInsert = (index: number, type: FlowBlockInsertType) => {
@@ -244,59 +345,78 @@ export function EditableContentFlow({
     void edit.insertFlowBlock(sectionKey, index, type, {
       ctaEditKey,
       ctaLabel,
-      imageEditKey,
-      imageSrc,
     });
   };
 
   return (
-    <EditReorderList
-      dragIndex={dragIndex}
-      pickDropTarget={pickDropTarget}
-      onDrop={handleDrop}
-      className="space-y-2"
-    >
-      {displayBlocks.map((block, i) => (
-        <Fragment key={`${sectionKey}-${i}-${block.type}-${"textKey" in block ? block.textKey : "listKey" in block ? block.listKey : i}`}>
-          <EditFlowInsertBar
-            index={i}
-            busy={busy}
-            canInsertImage={canInsertImage}
-            isOpen={openInsertIndex === i}
-            onOpen={setOpenInsertIndex}
-            onClose={() => setOpenInsertIndex(null)}
-            onInsert={handleInsert}
-          />
-          <EditReorderRow
-            index={i}
-            dragIndex={dragIndex}
-            dropTarget={dropTarget}
-            busy={busy}
-            onDragStart={setDragIndex}
-            onDropTarget={pickDropTarget}
-            onDrop={handleDrop}
-            controls={
-              block.type !== "hr" ? (
-                <EditInlineControls
+    <div onMouseLeave={scheduleLeave}>
+      {/* row 간격 — 40px gap 으로 + 추가 버튼이 위/아래 row 어디와도 겹치지 않게 충분히 분리 */}
+      <EditReorderList className="space-y-10">
+        {displayBlocks.map((block, i) => {
+          // prepend 영역(섹션 헤더 이미지·섹션 타이틀)은 본문 내에서 이동/삭제 불가.
+          const isPrepend = i < prependCount;
+          return (
+            <Fragment
+              key={`${sectionKey}-${i}-${block.type}-${"textKey" in block ? block.textKey : "listKey" in block ? block.listKey : "editKey" in block ? block.editKey : i}`}
+            >
+              <EditFlowInsertBar
+                index={i}
+                busy={busy}
+                isOpen={openInsertIndex === i}
+                visible={isBarVisible(i)}
+                placement={barPlacement(i)}
+                insertTypes={insertTypes}
+                onWrapperMouseEnter={() => {
+                  if (hoveredIndex === i - 1 || hoveredIndex === i) return;
+                  scheduleEnter(Math.max(0, i - 1));
+                }}
+                onOpen={setOpenInsertIndex}
+                onClose={() => setOpenInsertIndex(null)}
+                onInsert={handleInsert}
+              />
+              <div onMouseEnter={() => scheduleEnter(i)}>
+                <EditReorderRow
+                  index={i}
+                  dragIndex={dragIndex}
+                  dropTarget={dropTarget}
+                  rowShift={getRowShift(i)}
                   busy={busy}
-                  onDelete={() => void edit.removeFlowBlock(sectionKey, i)}
-                />
-              ) : undefined
-            }
-          >
-            <FlowBlockBody block={block} ctaHref={ctaHref} />
-          </EditReorderRow>
-        </Fragment>
-      ))}
-      <EditFlowInsertBar
-        index={displayBlocks.length}
-        busy={busy}
-        canInsertImage={canInsertImage}
-        isOpen={openInsertIndex === displayBlocks.length}
-        onOpen={setOpenInsertIndex}
-        onClose={() => setOpenInsertIndex(null)}
-        onInsert={handleInsert}
-      />
-    </EditReorderList>
+                  fullWidth={shouldRowBeFullWidth(block)}
+                  hideHandle={isPrepend}
+                  onDragStart={beginDrag}
+                  controls={
+                    isPrepend ? undefined : (
+                      <EditInlineControls
+                        busy={busy}
+                        onDelete={() => void edit.removeFlowBlock(sectionKey, i)}
+                      />
+                    )
+                  }
+                >
+                  <FlowBlockBody block={block} ctaHref={ctaHref} />
+                </EditReorderRow>
+              </div>
+            </Fragment>
+          );
+        })}
+        <EditFlowInsertBar
+          index={displayBlocks.length}
+          busy={busy}
+          isOpen={openInsertIndex === displayBlocks.length}
+          visible={isBarVisible(displayBlocks.length)}
+          placement={barPlacement(displayBlocks.length)}
+          insertTypes={insertTypes}
+          onWrapperMouseEnter={() => {
+            const last = displayBlocks.length - 1;
+            if (hoveredIndex === last || hoveredIndex === displayBlocks.length)
+              return;
+            scheduleEnter(Math.max(0, last));
+          }}
+          onOpen={setOpenInsertIndex}
+          onClose={() => setOpenInsertIndex(null)}
+          onInsert={handleInsert}
+        />
+      </EditReorderList>
+    </div>
   );
 }

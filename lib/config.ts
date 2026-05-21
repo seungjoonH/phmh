@@ -1,12 +1,10 @@
-// 사이트 전역 설정 (연락처·결제·메일·언어 SSOT)
+// 사이트 전역 설정 (연락처·언어) — Contact 메일 SSOT는 .env (lib/contact-mail.ts)
 import {
   defaultLocale,
   getVisibleLocaleOptions,
   isLocaleId,
   type LocaleId,
 } from "@/lib/site-locales";
-
-const CONTACT_EMAIL = "hsj6831@gmail.com";
 
 /** 번역 파일 locale id */
 export type MessageLocaleKey = LocaleId;
@@ -20,15 +18,7 @@ export const siteConfig = {
     default: defaultLocale,
     locales: getVisibleLocaleOptions(),
   },
-  /** Contact 폼 Resend — 수신·발신 SSOT (개발·배포 동일) */
-  mail: {
-    to: CONTACT_EMAIL,
-    from: `PHMH Contact <contact@${CONTACT_EMAIL.split("@")[1] ?? "phmhservices.com"}>`,
-    /** 도메인 인증 전 — Resend 제공 테스트 발신 (로컬 기본) */
-    fromSandbox: "PHMH Contact <onboarding@resend.dev>",
-  },
   contact: {
-    email: CONTACT_EMAIL,
     koreaPath: "/contact-us/korea-center",
     philippinesPath: "/contact-us/philippines-center",
     korea: {
@@ -44,19 +34,5 @@ export const siteConfig = {
       phone: "+63 952 479 1119",
       phoneViber: "+63 952 479 1119 (Viber)",
     },
-  },
-  payment: {
-    products: [
-      {
-        id: "individual-therapy-dbq",
-        amountUsd: 250,
-        currency: "USD",
-      },
-    ],
-    providers: [
-      { id: "paypal", enabled: false },
-      { id: "stripe", enabled: false },
-      { id: "toss", enabled: false },
-    ],
   },
 } as const;

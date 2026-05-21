@@ -8,7 +8,7 @@ import { EditableText } from "@/components/edit/EditableText";
 import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
 import { editTextAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
-import type { SectionContent } from "@/lib/edit/section-flow";
+import type { FlowBlock, SectionContent } from "@/lib/edit/section-flow";
 import { MarkupText } from "./MarkupText";
 
 export type ListBlock = {
@@ -176,32 +176,59 @@ export function ServiceSection({
   const useFlowLayout =
     Boolean(textKeyPrefix) && hasStructuredContent && Boolean(edit) && isEditMode();
 
+  // 삭제 예약된 섹션 헤더 이미지는 라이브 프리뷰에서 빈 자리로 보여 준다.
+  const pendingDelete = Boolean(
+    imageEditKey && edit?.isImagePendingDelete(imageEditKey),
+  );
+  const effectiveImageSrc = pendingDelete ? undefined : imageSrc;
+
+  const prepend: FlowBlock[] = [];
+  // 섹션 헤더 이미지(0 or 1) — imageEditKey 가 있는 섹션은 src 가 비어 있어도 placeholder 자리를 둔다.
+  // imageEditKey 자체가 없는 섹션(예: 첫 섹션)은 헤더 이미지 자리를 만들지 않는다.
+  if (imageEditKey) {
+    prepend.push({
+      type: "img",
+      editKey: imageEditKey,
+      src: effectiveImageSrc ?? "",
+      alt: imageAlt || title,
+    });
+  }
+  if (textKeyPrefix) {
+    prepend.push({
+      type: "sectionTitle",
+      text: title,
+      textKey: `${textKeyPrefix}.title`,
+    });
+  }
+
   return (
     <section
       id={id}
-      className="scroll-mt-28 border-b border-page-body/10 py-16 last:border-0"
+      className="scroll-mt-28 py-16"
     >
-      {imageSrc && (
+      {!useFlowLayout && effectiveImageSrc ? (
         <ParallaxMedia className="group relative mb-8 aspect-[16/10] w-full overflow-hidden rounded-sm">
           <EditableImage
             editKey={imageEditKey}
-            src={imageSrc}
+            src={effectiveImageSrc}
             alt={imageAlt || title}
             fill
             className="object-cover transition-transform duration-700 ease-calm group-hover:scale-[1.03]"
           />
         </ParallaxMedia>
-      )}
+      ) : null}
       <Reveal delay={revealDelay}>
-        <h2 className="font-logo text-3xl text-page-heading">
-          <span className="mr-2 text-secondary">|</span>
-          <EditableText
-            as="span"
-            editKey={textKeyPrefix ? `${textKeyPrefix}.title` : undefined}
-          >
-            {title}
-          </EditableText>
-        </h2>
+        {!useFlowLayout ? (
+          <h2 className="font-logo text-3xl text-page-heading">
+            <span className="mr-2 text-secondary">|</span>
+            <EditableText
+              as="span"
+              editKey={textKeyPrefix ? `${textKeyPrefix}.title` : undefined}
+            >
+              {title}
+            </EditableText>
+          </h2>
+        ) : null}
         {tagline ? (
           <EditableText
             as="p"
@@ -215,12 +242,13 @@ export function ServiceSection({
           {useFlowLayout && textKeyPrefix && edit ? (
             <EditableContentFlow
               sectionKey={textKeyPrefix}
-              blocks={edit.resolveFlowBlocks(textKeyPrefix, sectionContent)}
+              blocks={edit.resolveFlowBlocks(textKeyPrefix, sectionContent, {
+                prepend,
+              })}
+              prependCount={prepend.length}
               ctaLabel={ctaLabel}
               ctaHref={ctaHref}
               ctaEditKey={ctaEditKey}
-              imageEditKey={imageEditKey}
-              imageSrc={imageSrc}
             />
           ) : (
             <>

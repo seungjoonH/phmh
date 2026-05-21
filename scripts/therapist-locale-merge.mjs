@@ -57,12 +57,12 @@ function mergeBlocks(slices, contentLocales) {
         return [loc, b?.type === "list" ? b.items : []];
       }),
     );
-    return { id: ref.id, type: "list", items };
+    return { id: ref.id, type: "list", ordered: ref.ordered ?? false, items };
   });
 }
 
 /**
- * @param {{ slug: string; portrait: string }} meta
+ * @param {{ slug: string; portrait: string; defaultPortrait?: boolean }} meta
  * @param {Partial<Record<string, { list: object; profile: { header: object; blocks: unknown[] } }>>} slices
  * @param {readonly string[]} contentLocales
  */
@@ -101,6 +101,7 @@ export function mergeTherapistRecord(meta, slices, contentLocales) {
         ),
       },
       portrait: meta.portrait,
+      ...(meta.defaultPortrait ? { defaultPortrait: true } : {}),
       blocks: mergeBlocks(slices, contentLocales),
     },
   };
@@ -135,6 +136,7 @@ export function extractTherapistLocaleSlice(record, locale, contentLocales) {
     return {
       id: block.id,
       type: "list",
+      ...(block.ordered ? { ordered: true } : {}),
       items: pickArr(block.items),
     };
   });

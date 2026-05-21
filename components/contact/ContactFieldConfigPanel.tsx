@@ -1,13 +1,14 @@
 "use client";
 
 // Contact 필드 종합 설정 패널 (구조·locale 문구·옵션)
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useEditDraft } from "@/components/edit/EditDraftProvider";
 import { EditSidePanel } from "@/components/edit/EditSidePanel";
 import { editControlDeleteClass } from "@/components/edit/EditInlineControls";
 import {
   fetchArrayRegistry,
   fetchTextRegistry,
+  type ContactFormStructurePayload,
   type LocaleTextValues,
 } from "@/lib/edit/client";
 import {
@@ -58,8 +59,10 @@ export function ContactFieldConfigPanel() {
     applyArrayDraft,
     contactStructureDraft,
     setContactStructureDraft,
+    removeContactFieldDrafts,
   } = useEditDraft();
   const fieldId = selected?.kind === "contactField" ? selected.fieldId : null;
+  const structureAtOpenRef = useRef<ContactFormStructurePayload | null>(null);
 
   const [field, setField] = useState<ContactFieldDefinition | null>(null);
   const [copy, setCopy] = useState<FieldCopyState | null>(null);
@@ -108,6 +111,9 @@ export function ContactFieldConfigPanel() {
       );
 
       if (cancelled) return;
+      structureAtOpenRef.current = contactStructureDraft
+        ? structuredClone(contactStructureDraft)
+        : null;
       setField({ ...def } as ContactFieldDefinition);
       setCopy({ label, placeholder, body, checkbox, options });
     };
@@ -188,9 +194,14 @@ export function ContactFieldConfigPanel() {
     [field, pushCopyToDrafts],
   );
 
-  const handleApply = () => {
-    if (!fieldId || !field || !copy) return;
-    pushCopyToDrafts(copy, field);
+  const handleClose = () => {
+    closeEditor();
+  };
+
+  const handleCancel = () => {
+    if (!fieldId) return;
+    removeContactFieldDrafts(fieldId);
+    setContactStructureDraft(structureAtOpenRef.current);
     closeEditor();
   };
 
@@ -208,7 +219,7 @@ export function ContactFieldConfigPanel() {
           </div>
           <button
             type="button"
-            onClick={closeEditor}
+            onClick={handleClose}
             className="rounded p-1 text-page-body hover:bg-page-body/10"
             aria-label="닫기"
           >
@@ -335,18 +346,19 @@ export function ContactFieldConfigPanel() {
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              onClick={closeEditor}
+              onClick={handleCancel}
               className="rounded px-4 py-2 text-sm text-page-body hover:bg-page-body/10"
+              disabled={loading}
             >
-              닫기
+              취소
             </button>
             <button
               type="button"
-              onClick={handleApply}
-              className="rounded bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
-              disabled={loading || !field}
+              onClick={handleClose}
+              className="rounded px-4 py-2 text-sm text-page-body hover:bg-page-body/10"
+              disabled={loading}
             >
-              적용
+              닫기
             </button>
           </div>
         </div>

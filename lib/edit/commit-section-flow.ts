@@ -38,10 +38,17 @@ async function commitServiceSectionFlow(
   const listItemKeys = new Set<string>();
   const listLeadKeys = new Set<string>();
   const closingKeys = new Set<string>();
-  const buttonKeys = new Set<string>();
+  const textKeys = new Set<string>();
 
   for (const block of flow) {
-    if (block.type === "button") buttonKeys.add(block.textKey);
+    if (
+      block.type === "p" ||
+      block.type === "heading" ||
+      block.type === "sectionTitle" ||
+      block.type === "button"
+    ) {
+      textKeys.add(block.textKey);
+    }
   }
 
   for (const id of getActiveLocaleIds()) {
@@ -117,13 +124,26 @@ async function commitServiceSectionFlow(
     await patchText(key, locales);
   }
 
-  for (const key of buttonKeys) {
+  for (const key of textKeys) {
     const locales: LocaleTextValues = {};
     for (const id of getActiveLocaleIds()) {
       const messages = await messagesForLocale(id);
       const hydrated = hydrateFlowForLocale(flow, messages);
-      const block = hydrated.find((b) => b.type === "button" && b.textKey === key);
-      locales[id] = block?.type === "button" ? block.text : "";
+      const block = hydrated.find(
+        (b) =>
+          (b.type === "p" ||
+            b.type === "heading" ||
+            b.type === "sectionTitle" ||
+            b.type === "button") &&
+          b.textKey === key,
+      );
+      locales[id] =
+        block?.type === "p" ||
+        block?.type === "heading" ||
+        block?.type === "sectionTitle" ||
+        block?.type === "button"
+          ? block.text
+          : "";
     }
     await patchText(key, locales);
   }
@@ -140,12 +160,17 @@ async function commitProseSectionFlow(
 ): Promise<void> {
   const listLeadKeys = new Set<string>();
   const listItemKeys = new Set<string>();
-  const headingKeys = new Set<string>();
-  const buttonKeys = new Set<string>();
+  const textKeys = new Set<string>();
 
   for (const block of flow) {
-    if (block.type === "heading") headingKeys.add(block.textKey);
-    if (block.type === "button") buttonKeys.add(block.textKey);
+    if (
+      block.type === "p" ||
+      block.type === "heading" ||
+      block.type === "sectionTitle" ||
+      block.type === "button"
+    ) {
+      textKeys.add(block.textKey);
+    }
   }
 
   for (const id of getActiveLocaleIds()) {
@@ -197,24 +222,26 @@ async function commitProseSectionFlow(
     await patchStringArray(`${listKey}.items`, locales);
   }
 
-  for (const key of headingKeys) {
+  for (const key of textKeys) {
     const locales: LocaleTextValues = {};
     for (const id of getActiveLocaleIds()) {
       const messages = await messagesForLocale(id);
       const hydrated = hydrateFlowForLocale(flow, messages);
-      const block = hydrated.find((b) => b.type === "heading" && b.textKey === key);
-      locales[id] = block?.type === "heading" ? block.text : "";
-    }
-    await patchText(key, locales);
-  }
-
-  for (const key of buttonKeys) {
-    const locales: LocaleTextValues = {};
-    for (const id of getActiveLocaleIds()) {
-      const messages = await messagesForLocale(id);
-      const hydrated = hydrateFlowForLocale(flow, messages);
-      const block = hydrated.find((b) => b.type === "button" && b.textKey === key);
-      locales[id] = block?.type === "button" ? block.text : "";
+      const block = hydrated.find(
+        (b) =>
+          (b.type === "p" ||
+            b.type === "heading" ||
+            b.type === "sectionTitle" ||
+            b.type === "button") &&
+          b.textKey === key,
+      );
+      locales[id] =
+        block?.type === "p" ||
+        block?.type === "heading" ||
+        block?.type === "sectionTitle" ||
+        block?.type === "button"
+          ? block.text
+          : "";
     }
     await patchText(key, locales);
   }

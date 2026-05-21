@@ -7,7 +7,8 @@ export default {
       "CBT and family systems approaches",
       "Children, adolescents, parents, and families",
       "English",
-      "Expertise: anxiety, school adjustment, behavioral concerns, parenting stress, family communication, and emotional regulation."
+      "Expertise: anxiety, school adjustment, behavioral concerns, parenting stress, family communication, and emotional regulation.",
+      "asdfasdfasdfasdfasdf"
     ],
     "ctaLabel": "View bio and expertise"
   },

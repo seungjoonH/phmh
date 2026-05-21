@@ -21,6 +21,7 @@ export type ParagraphBlock = {
 export type ListBlock = {
   id: string;
   type: "list";
+  ordered?: boolean;
   items: LocaleMap<string[]>;
 };
 

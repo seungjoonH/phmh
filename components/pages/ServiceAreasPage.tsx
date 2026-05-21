@@ -14,10 +14,11 @@ type StructuredSection = {
 };
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getContactPath } from "@/lib/contact";
+import { isImageKeyHidden } from "@/lib/image-hidden";
 import { pageHeroes } from "@/lib/page-heroes";
 import { areaAnchors, areaImages } from "@/lib/service-images";
 
-const keys = [
+const defaultKeys = [
   "depression",
   "traumaPtsd",
   "anxietyPanic",
@@ -37,6 +38,11 @@ const keys = [
 export function ServiceAreasPage() {
   const { locale, messages, t } = useLocale();
   const data = messages.serviceAreas;
+  const sectionsMap = data.sections as unknown as Record<string, StructuredSection>;
+  const rawOrder = (data as { sectionOrder?: unknown }).sectionOrder;
+  const order: string[] = Array.isArray(rawOrder)
+    ? (rawOrder.filter((v): v is string => typeof v === "string"))
+    : [...defaultKeys];
 
   const sidebar = [
     {
@@ -45,21 +51,31 @@ export function ServiceAreasPage() {
       href: "#top",
       labelEditKey: "serviceAreas.sidebar.top",
     },
-    ...keys.map((k) => ({
-      id: areaAnchors[k],
-      label: data.sidebar[k],
-      href: `#${areaAnchors[k]}`,
-      labelEditKey: `serviceAreas.sidebar.${k}`,
-    })),
+    ...order.map((k) => {
+      const anchor = areaAnchors[k] ?? k;
+      const sec = sectionsMap[k];
+      return {
+        id: anchor,
+        label: sec?.title ?? "",
+        href: `#${anchor}`,
+        labelEditKey: `serviceAreas.sections.${k}.title`,
+        orderKey: k,
+      };
+    }),
   ];
 
-  const sections = keys.map((k) => {
-    const sec = data.sections[k] as StructuredSection;
+  const sections = order.map((k) => {
+    const sec = sectionsMap[k] ?? ({ title: "" } as StructuredSection);
+    const anchor = areaAnchors[k] ?? k;
+    const imageKey = `area.${k}`;
+    const hasDefaultImage = k in areaImages && !isImageKeyHidden(imageKey);
     return {
-      id: areaAnchors[k],
+      id: anchor,
       title: sec.title,
-      imageSrc: k === "depression" ? undefined : areaImages[k],
-      imageEditKey: k === "depression" ? undefined : `area.${k}`,
+      imageSrc: hasDefaultImage ? areaImages[k] : undefined,
+      // 모든 섹션이 헤더 이미지 자리(0 or 1)를 가진다 — edit 모드에서만 placeholder 표시,
+      // dev/prod 에서는 imageSrc 가 없으면 ParallaxMedia 분기가 렌더되지 않는다.
+      imageEditKey: `area.${k}`,
       textKeyPrefix: `serviceAreas.sections.${k}`,
       tagline: sec.tagline || undefined,
       groups: sec.groups ?? [],
@@ -78,6 +94,7 @@ export function ServiceAreasPage() {
       pageTitle={data.pageTitle}
       sidebar={sidebar}
       sections={sections}
+      sectionOrderKey="serviceAreas.sectionOrder"
       ctaLabel={t("common.scheduleConsultation")}
       ctaHref={getContactPath(locale)}
       ctaEditKey="common.scheduleConsultation"

@@ -3,12 +3,13 @@
 // 편집 모드 상담사 블록 — long-press 사이드 패널용 표시
 import { EditableText } from "@/components/edit/EditableText";
 import { MarkupText } from "@/components/ui/MarkupText";
-import { editTextAttrs } from "@/lib/edit/attrs";
+import { editListAttrs, editTextAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
 import type { ContentBlock, ContentLocale } from "@/lib/content-blocks/types";
+import { useTherapistArrayItems } from "@/lib/edit/use-therapist-array";
 import { useTherapistEditText } from "@/lib/edit/use-therapist-edit-text";
 import {
-  therapistBlockListItemKey,
+  therapistBlockListItemsArrayKey,
   therapistBlockTextKey,
 } from "@/lib/edit/therapist-edit-key";
 import { pickLocale } from "@/lib/therapists/load";
@@ -87,40 +88,34 @@ function TherapistListBlockEdit({
   block: Extract<ContentBlock, { type: "list" }>;
   locale: ContentLocale;
 }) {
-  const items = pickLocale(block.items, locale);
+  const arrayKey = therapistBlockListItemsArrayKey(slug, block.id);
+  const items = useTherapistArrayItems(arrayKey, pickLocale(block.items, locale));
+  const visibleItems = items.filter((item) => item.trim() !== "");
+  const isEmpty = visibleItems.length === 0;
+  const edit = isEditMode();
+  const attrs = edit ? editListAttrs(arrayKey, { longPress: !isEmpty }) : {};
+  const Tag = block.ordered ? "ol" : "ul";
+  const listClass = block.ordered ? "list-decimal" : "list-disc";
   return (
-    <ul className="list-disc space-y-3 pl-6 font-body text-lg font-light leading-[1.75] text-page-body">
-      {items.map((item, i) => (
-        <TherapistListItemEdit
-          key={`${block.id}-${i}`}
-          slug={slug}
-          blockId={block.id}
-          index={i}
-          committed={item}
-        />
-      ))}
-    </ul>
-  );
-}
-
-function TherapistListItemEdit({
-  slug,
-  blockId,
-  index,
-  committed,
-}: {
-  slug: string;
-  blockId: string;
-  index: number;
-  committed: string;
-}) {
-  const editKey = therapistBlockListItemKey(slug, blockId, index);
-  const text = useTherapistEditText(editKey, committed);
-  return (
-    <li>
-      <EditableText as="span" editKey={editKey}>
-        <MarkupText as="span">{text}</MarkupText>
-      </EditableText>
-    </li>
+    <Tag
+      {...attrs}
+      className={`${listClass} space-y-3 pl-6 font-body text-lg font-light leading-[1.75] text-page-body${
+        edit ? " cursor-pointer rounded-sm" : ""
+      }`}
+    >
+      {isEmpty && edit ? (
+        <li>
+          <span className="inline-flex h-7 min-w-10 items-center justify-center rounded border border-dashed border-page-body/35 px-2 text-sm leading-none text-page-body/50">
+            +
+          </span>
+        </li>
+      ) : (
+        visibleItems.map((item, i) => (
+          <li key={`${block.id}-${i}`}>
+            <MarkupText as="span">{item.replace(/^([•\-–]|\d+\.)\s*/, "")}</MarkupText>
+          </li>
+        ))
+      )}
+    </Tag>
   );
 }

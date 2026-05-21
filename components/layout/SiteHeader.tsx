@@ -25,8 +25,7 @@ import {
   motionTransition,
 } from "@/lib/motion";
 
-const navLinkClass =
-  "interactive-link cursor-pointer text-base font-medium tracking-wide text-secondary whitespace-nowrap";
+const navLinkClass = "nav-link";
 
 function isCurrentNavPath(pathname: string, href: string) {
   return pathname === href.split("#")[0];
@@ -163,7 +162,7 @@ export function SiteHeader() {
           mobileOpen ? "bg-page-bg" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between overflow-visible px-6 py-6 md:py-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between overflow-visible px-6 py-6 md:py-8">
           <Link
             href="/about/who-we-are"
             className="interactive-link shrink-0"
@@ -175,7 +174,7 @@ export function SiteHeader() {
           </Link>
 
           <nav
-            className="hidden items-center gap-10 overflow-visible lg:flex xl:gap-12"
+            className="hidden items-center gap-4 overflow-visible lg:flex xl:gap-6"
             aria-label="Main"
           >
             {nav.map((item) => (
@@ -190,7 +189,7 @@ export function SiteHeader() {
             <motion.button
               type="button"
               onClick={() => setSettingsOpen(true)}
-              className="interactive-button rounded p-2 text-secondary hover:bg-secondary/10"
+              className="interactive-button rounded p-2 text-nav-link hover:bg-nav-link/10"
               aria-label={t("common.settings")}
               whileTap={reduce ? undefined : { scale: 0.94 }}
               {...(edit ? editTextAttrs("common.settings", { longPress: true }) : {})}
@@ -203,7 +202,7 @@ export function SiteHeader() {
             <motion.button
               type="button"
               onClick={() => setSettingsOpen(true)}
-              className="interactive-button rounded p-2 text-secondary"
+              className="interactive-button rounded p-2 text-nav-link"
               aria-label={t("common.settings")}
               whileTap={reduce ? undefined : { scale: 0.94 }}
               {...(edit ? editTextAttrs("common.settings", { longPress: true }) : {})}
@@ -213,7 +212,7 @@ export function SiteHeader() {
             <motion.button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
-              className="interactive-button rounded p-2 text-secondary"
+              className="interactive-button rounded p-2 text-nav-link"
               aria-expanded={mobileOpen}
               aria-label="Menu"
               whileTap={reduce ? undefined : { scale: 0.94 }}
@@ -359,7 +358,7 @@ function MobileNavItem({
         <>
           <motion.button
             type="button"
-            className="interactive-button flex w-full justify-between text-base text-secondary"
+            className="interactive-button nav-link flex w-full justify-between"
             onClick={() => setOpen((o) => !o)}
             whileTap={reduce ? undefined : { scale: 0.99 }}
           >
@@ -389,7 +388,7 @@ function MobileNavItem({
                       key={child.href}
                       href={child.href}
                       onClick={onNavigate}
-                      className="interactive-link block text-base"
+                      className="nav-link block"
                     >
                       {child.therapistSlug ? (
                         <EditableTherapistNavLabel slug={child.therapistSlug} />
@@ -411,7 +410,7 @@ function MobileNavItem({
         <NavAnchor
           href={item.href}
           onClick={onNavigate}
-          className="interactive-link text-base text-secondary"
+          className="nav-link"
         >
           <EditableNavLabel labelKey={item.labelKey}>{t(item.labelKey)}</EditableNavLabel>
         </NavAnchor>

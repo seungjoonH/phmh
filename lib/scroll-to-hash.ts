@@ -1,5 +1,5 @@
 // 앵커 해시 스크롤 — 섹션 이미지가 아닌 제목(h1/h2)으로 이동
-export function scrollToHash(href: string): void {
+export function scrollToHash(href: string, options?: { focus?: boolean }): void {
   if (!href.startsWith("#")) return;
 
   const id = href.slice(1);
@@ -23,6 +23,7 @@ export function scrollToHash(href: string): void {
   target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   window.history.replaceState(null, "", href);
 
+  if (options?.focus === false) return;
   if (!target.hasAttribute("tabindex")) {
     target.setAttribute("tabindex", "-1");
   }

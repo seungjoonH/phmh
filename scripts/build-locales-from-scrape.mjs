@@ -226,8 +226,6 @@ const messagesEn = {
     serviceAreas: "Service Areas",
     gettingStarted: "Getting Started",
     fee: "Fee",
-    feePage: "Fee",
-    onlinePayment: "Online payment",
     contact: "Contact Us",
     koreaCenter: "Korea Center",
     philippinesCenter: "Philippines Center",
@@ -375,36 +373,6 @@ const messagesEn = {
       hoursWeekday: "Mon - Fri: 10:00 am – 7:00 pm",
       hoursWeekend: "Saturday & Sunday: Office closed",
       virtualNote: "Virtual sessions are available outside of office hours",
-    },
-  },
-  payment: {
-    pageTitle: "Payment",
-    checkoutTitle: "Checkout",
-    stepDetails: "1. Your Details",
-    stepPayment: "2. Payment Details",
-    products: {
-      individualSessionDbq: {
-        label: "1 Session for Individual Therapy + DBQ",
-      },
-    },
-    fields: {
-      email: "Email",
-      lastName: "Last Name",
-      firstName: "First Name",
-      country: "Country",
-      phone: "Phone",
-    },
-    continue: "Continue",
-    payNow: "Pay Now",
-    back: "Back",
-    paypalNotice:
-      "After placing the order, you'll be redirected to PayPal to complete payment.",
-    sslBadge: "SSL Secure Payment",
-    startPayment: "Payment",
-    providers: {
-      paypal: "PayPal",
-      stripe: "Stripe",
-      toss: "Toss Payments",
     },
   },
 };

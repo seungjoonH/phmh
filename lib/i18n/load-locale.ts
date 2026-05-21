@@ -72,6 +72,13 @@ export async function ensureLocaleLoaded(localeId: string): Promise<Messages> {
   }
 }
 
+export async function reloadLocale(localeId: string): Promise<Messages> {
+  if (isEditMode()) {
+    return loadLocaleFromEditServer(localeId);
+  }
+  return ensureLocaleLoaded(localeId);
+}
+
 export function getCachedMessages(localeId: string): Messages | undefined {
   return messageCache[localeId];
 }

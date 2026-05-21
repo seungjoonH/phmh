@@ -1,3 +1,13 @@
 {
-  "hidden": []
+  "hidden": [],
+  "topOrder": [
+    "about",
+    "services",
+    "getting-started",
+    "fee",
+    "contact",
+    "center",
+    "therapists.list"
+  ],
+  "groupOrder": {}
 }

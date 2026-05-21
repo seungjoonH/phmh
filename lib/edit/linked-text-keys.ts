@@ -1,5 +1,6 @@
 // 함께 동기화할 locale 텍스트 키 그룹 (내비·페이지 제목·사이드바·섹션 제목)
 import type { LocaleTextValues } from "@/lib/edit/client";
+import { getCenterLinkedTextKeys } from "@/lib/edit/center-edit-key";
 import { getTherapistLinkedTextKeys } from "@/lib/edit/therapist-edit-key";
 const SERVICES_SECTION_IDS = [
   "individual",
@@ -60,6 +61,8 @@ for (let i = 0; i < LINK_GROUPS.length; i++) {
 
 /** 같은 그룹에 속한 모든 locale 키 (없으면 자기 자신만) */
 export function getLinkedTextKeys(key: string): string[] {
+  const center = getCenterLinkedTextKeys(key);
+  if (center) return center;
   const therapist = getTherapistLinkedTextKeys(key);
   if (therapist) return therapist;
   const idx = keyToGroupIndex.get(key);
@@ -69,6 +72,8 @@ export function getLinkedTextKeys(key: string): string[] {
 
 /** pending 카운트·중복 커밋 방지용 그룹 id */
 export function getLinkedTextKeyGroupId(key: string): string {
+  const center = getCenterLinkedTextKeys(key);
+  if (center) return center.join("|");
   const therapist = getTherapistLinkedTextKeys(key);
   if (therapist) return therapist.join("|");
   const idx = keyToGroupIndex.get(key);

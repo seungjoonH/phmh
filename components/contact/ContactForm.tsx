@@ -18,13 +18,15 @@ import { useContactFormUi } from "@/lib/edit/useContactFieldCopy";
 import { buildSubmitPayload, isFormComplete } from "@/lib/contact-form-values";
 import { EditableContactForm } from "@/components/contact/EditableContactForm";
 import { ContactFieldRenderer } from "./ContactFieldRenderer";
+import { ResidencyConfirmDialog } from "./ResidencyConfirmDialog";
 import { isEditMode } from "@/lib/edit/env";
 
 type Props = {
   center: "korea" | "philippines";
+  onResidencyDecline?: () => void;
 };
 
-export function ContactForm({ center }: Props) {
+export function ContactForm({ center, onResidencyDecline }: Props) {
   const router = useRouter();
   const { locale } = useLocale();
   const formLocale: ContactFormLocaleKey = isLocaleId(locale) ? locale : "en";
@@ -35,6 +37,25 @@ export function ContactForm({ center }: Props) {
   const [canSubmit, setCanSubmit] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [residencyOpen, setResidencyOpen] = useState(false);
+
+  const countryLabel = useContactFormUi(
+    formLocale,
+    center === "korea" ? "residencyKorea" : "residencyPhilippines",
+  );
+  const residencyTitle = useContactFormUi(formLocale, "residencyConfirmTitle");
+  const residencyMessage = useContactFormUi(
+    formLocale,
+    "residencyConfirmMessage",
+  );
+  const residencyConfirm = useContactFormUi(
+    formLocale,
+    "residencyConfirmConfirm",
+  );
+  const residencyCancel = useContactFormUi(
+    formLocale,
+    "residencyConfirmCancel",
+  );
 
   const syncCanSubmit = useCallback(() => {
     const form = formRef.current;
@@ -42,14 +63,17 @@ export function ContactForm({ center }: Props) {
     setCanSubmit(isFormComplete(form));
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = formRef.current;
-    if (!form || !canSubmit || submitting) return;
+    if (!formRef.current || !canSubmit || submitting) return;
+    setResidencyOpen(true);
+  };
 
+  const submitToServer = async () => {
+    const form = formRef.current;
+    if (!form) return;
     setSubmitting(true);
     setError(null);
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -69,6 +93,16 @@ export function ContactForm({ center }: Props) {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleResidencyConfirm = () => {
+    setResidencyOpen(false);
+    void submitToServer();
+  };
+
+  const handleResidencyCancel = () => {
+    setResidencyOpen(false);
+    onResidencyDecline?.();
   };
 
   return (
@@ -133,6 +167,17 @@ export function ContactForm({ center }: Props) {
       >
         {submitting ? sendingLabel : submitLabel}
       </motion.button>
+
+      <ResidencyConfirmDialog
+        open={residencyOpen}
+        country={countryLabel}
+        title={residencyTitle}
+        message={residencyMessage}
+        confirmLabel={residencyConfirm}
+        cancelLabel={residencyCancel}
+        onConfirm={handleResidencyConfirm}
+        onCancel={handleResidencyCancel}
+      />
     </form>
   );
 }

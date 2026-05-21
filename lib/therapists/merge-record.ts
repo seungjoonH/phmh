@@ -7,7 +7,7 @@ import type { TherapistRecord } from "@/lib/therapists/types";
 export type TherapistLocaleBlock =
   | { id: string; type: "heading"; level: 1 | 2 | 3 | 4 | 5 | 6; text: string }
   | { id: string; type: "paragraph"; text: string }
-  | { id: string; type: "list"; items: string[] };
+  | { id: string; type: "list"; ordered?: boolean; items: string[] };
 
 export type TherapistLocaleSlice = {
   list: {
@@ -28,6 +28,7 @@ export type TherapistLocaleSlice = {
 export type TherapistMeta = {
   slug: string;
   portrait: string;
+  defaultPortrait?: boolean;
 };
 
 function primaryContentLocale(): ContentLocale {
@@ -105,7 +106,7 @@ function mergeBlocks(
         return [loc, b?.type === "list" ? b.items : []];
       }),
     ) as Record<ContentLocale, string[]>;
-    return { id: ref.id, type: "list", items };
+    return { id: ref.id, type: "list", ordered: ref.ordered ?? false, items };
   });
 }
 
@@ -147,6 +148,7 @@ export function mergeTherapistRecord(
         ) as Record<ContentLocale, string[]>,
       },
       portrait: meta.portrait,
+      ...(meta.defaultPortrait ? { defaultPortrait: true } : {}),
       blocks: mergeBlocks(slices, contentLocales),
     },
   };
@@ -175,6 +177,7 @@ export function extractTherapistLocaleSlice(
     return {
       id: block.id,
       type: "list",
+      ...(block.ordered ? { ordered: true } : {}),
       items: pickLocaleArray(block.items, locale),
     };
   });

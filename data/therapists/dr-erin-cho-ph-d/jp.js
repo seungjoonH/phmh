@@ -1,4 +1,4 @@
-// Dr. Erin Cho, Ph.D. — ja locale
+// Dr. Erin Cho, Ph.D. — jp locale
 export default {
   "list": {
     "name": "Dr. Erin Cho, Ph.D.",
@@ -27,45 +27,45 @@ export default {
         "id": "blk-erin-about-h",
         "type": "heading",
         "level": 2,
-        "text": "自己紹介"
+        "text": "About Me"
       },
       {
         "id": "blk-erin-about-p",
         "type": "paragraph",
-        "text": "私は、成人および大学生が感情面の困難、燃え尽き、不安、うつ、アイデンティティの悩み、家族に関するストレスに向き合えるよう支援してきた認定心理士です。英語と韓国語でカウンセリングを提供しています。"
+        "text": "I am a licensed psychologist with experience helping adults and university students navigate emotional difficulties, burnout, anxiety, depression, identity concerns, and family-related stress. I provide therapy in English and Korean."
       },
       {
         "id": "blk-erin-phil-h",
         "type": "heading",
         "level": 2,
-        "text": "治療理念とアプローチ"
+        "text": "Philosophy and Therapeutic Approach"
       },
       {
         "id": "blk-erin-phil-p1",
         "type": "paragraph",
-        "text": "クライアントが批判されたり急かされたりすることなく、困難な感情を見つめられるよう、安定した協働的な治療関係を築くことを重視しています。"
+        "text": "I focus on building a steady and collaborative therapeutic relationship where clients can examine difficult emotions without feeling judged or rushed."
       },
       {
         "id": "blk-erin-phil-p2",
         "type": "paragraph",
-        "text": "私のアプローチは、弁証法的行動療法、認知行動療法、マインドフルネスに基づく方法を統合し、クライアントの文化的背景と個人の価値観を大切にします。"
+        "text": "My approach integrates Dialectical Behavior Therapy, Cognitive Behavioral Therapy, and mindfulness-based strategies with attention to each client's cultural background and personal values."
       },
       {
         "id": "blk-erin-exp-h",
         "type": "heading",
         "level": 2,
-        "text": "専門分野"
+        "text": "Areas of Expertise"
       },
       {
         "id": "blk-erin-exp-p",
         "type": "paragraph",
-        "text": "感情調整、不安、うつ、燃え尽き、アイデンティティの悩み、家族間の葛藤、学業ストレス、文化適応、対人関係の困難"
+        "text": "emotional regulation, anxiety, depression, burnout, identity concerns, family conflict, academic stress, cultural adjustment, and relationship difficulties."
       },
       {
         "id": "blk-erin-edu-h",
         "type": "heading",
         "level": 2,
-        "text": "学歴"
+        "text": "Education"
       },
       {
         "id": "blk-erin-edu-p1",

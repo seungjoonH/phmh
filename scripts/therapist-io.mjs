@@ -1,9 +1,31 @@
 // data/therapists 파일 읽기·쓰기 (edit-server)
+import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
 import { pathToFileURL } from "url";
 import { buildImageHistoryBackupPath } from "../lib/edit/image-write-path.mjs";
 import { extractTherapistLocaleSlice, mergeTherapistRecord } from "./therapist-locale-merge.mjs";
+
+/** portrait.png가 기본 placeholder(light/dark)와 byte-identical이면 true. */
+function portraitMatchesDefault(root, slug) {
+  const portraitPath = path.join(root, "public/therapists", slug, "portrait.png");
+  if (!fs.existsSync(portraitPath)) return false;
+  const portraitHash = crypto
+    .createHash("md5")
+    .update(fs.readFileSync(portraitPath))
+    .digest("hex");
+  const defaults = [
+    "public/therapists/_default-portrait-light.png",
+    "public/therapists/_default-portrait-dark.png",
+  ];
+  for (const rel of defaults) {
+    const abs = path.join(root, rel);
+    if (!fs.existsSync(abs)) continue;
+    const hash = crypto.createHash("md5").update(fs.readFileSync(abs)).digest("hex");
+    if (hash === portraitHash) return true;
+  }
+  return false;
+}
 
 /**
  * @param {string} displayName
@@ -149,10 +171,31 @@ export function writeTherapist(root, slug, record) {
   const contentLocales = getTherapistContentLocales(root);
   const primary = contentLocales[0] ?? "en";
   const label = record.list?.name?.[primary] ?? slug;
+  // defaultPortrait는 이미지 업로드(clearDefaultPortraitFlag) / 복원(restoreDefaultPortrait)으로만
+  // 변경되어야 하고, 텍스트 편집 저장이 stale 한 client record로 이 플래그를 떨어뜨리면 안 된다.
+  // 1) 디스크 meta.js의 값을 우선 보존
+  // 2) 그래도 false면, portrait.png가 default placeholder와 byte-identical일 때 self-heal로 true 복원
+  const metaPath = path.join(dir, "meta.js");
+  let defaultPortrait = record.profile?.defaultPortrait === true;
+  if (fs.existsSync(metaPath)) {
+    try {
+      const text = fs.readFileSync(metaPath, "utf8");
+      if (/["']?defaultPortrait["']?\s*:\s*true\b/.test(text)) {
+        defaultPortrait = true;
+      }
+    } catch {}
+  }
+  if (!defaultPortrait && portraitMatchesDefault(root, slug)) {
+    defaultPortrait = true;
+  }
   writeJsModule(
-    path.join(dir, "meta.js"),
+    metaPath,
     `${label} — 공통 메타`,
-    { slug: record.slug, portrait: record.profile.portrait },
+    {
+      slug: record.slug,
+      portrait: record.profile.portrait,
+      ...(defaultPortrait ? { defaultPortrait: true } : {}),
+    },
   );
 
   for (const loc of contentLocales) {
@@ -199,6 +242,7 @@ export function createTherapistTemplate(root, slug, displayName) {
     profile: {
       header: { name, lines: emptyListMap() },
       portrait: `/therapists/${slug}/portrait.png`,
+      defaultPortrait: true,
       blocks: [
         {
           id: `blk-${Date.now().toString(36)}`,
@@ -225,10 +269,76 @@ export function ensurePortraitPlaceholder(root, slug) {
   fs.mkdirSync(dir, { recursive: true });
   const dest = path.join(dir, "portrait.png");
   if (fs.existsSync(dest)) return;
-  const fallback = path.join(root, "public/getting-started/01.png");
-  if (fs.existsSync(fallback)) {
-    fs.copyFileSync(fallback, dest);
+  const candidates = [
+    path.join(root, "public/therapists/_default-portrait-light.png"),
+    path.join(root, "public/getting-started/01.png"),
+  ];
+  for (const src of candidates) {
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      return;
+    }
   }
+}
+
+/**
+ * portrait가 사용자 업로드본으로 교체되었을 때 meta.js의 defaultPortrait 플래그 제거.
+ * @param {string} root
+ * @param {string} slug
+ */
+export async function clearDefaultPortraitFlag(root, slug) {
+  const dir = therapistDataDir(root, slug);
+  const metaPath = path.join(dir, "meta.js");
+  if (!fs.existsSync(metaPath)) return false;
+  const mod = await import(`${pathToFileURL(metaPath).href}?t=${Date.now()}`);
+  const current = mod.default ?? {};
+  if (!current.defaultPortrait) return false;
+  const text = fs.readFileSync(metaPath, "utf8");
+  const commentMatch = text.match(/^\/\/\s*(.*)/);
+  const comment = commentMatch?.[1]?.trim() || `${slug} — 공통 메타`;
+  const next = { ...current };
+  delete next.defaultPortrait;
+  writeJsModule(metaPath, comment, next);
+  return true;
+}
+
+/**
+ * 업로드된 portrait 를 제거하고 기본 placeholder 로 되돌린다.
+ * @param {string} root
+ * @param {string} slug
+ */
+export async function restoreDefaultPortrait(root, slug) {
+  const dir = path.join(root, "public/therapists", slug);
+  fs.mkdirSync(dir, { recursive: true });
+  const dest = path.join(dir, "portrait.png");
+  if (fs.existsSync(dest)) {
+    const rel = `public/therapists/${slug}/portrait.png`;
+    const archiveRel = buildImageHistoryBackupPath(rel);
+    const archiveAbs = path.join(root, archiveRel);
+    fs.mkdirSync(path.dirname(archiveAbs), { recursive: true });
+    fs.renameSync(dest, archiveAbs);
+  }
+  const lightDefault = path.join(root, "public/therapists/_default-portrait-light.png");
+  if (fs.existsSync(lightDefault)) {
+    fs.copyFileSync(lightDefault, dest);
+  } else {
+    ensurePortraitPlaceholder(root, slug);
+  }
+
+  const metaPath = path.join(therapistDataDir(root, slug), "meta.js");
+  if (!fs.existsSync(metaPath)) return;
+  const mod = await import(`${pathToFileURL(metaPath).href}?t=${Date.now()}`);
+  const current = mod.default ?? {};
+  const text = fs.readFileSync(metaPath, "utf8");
+  const commentMatch = text.match(/^\/\/\s*(.*)/);
+  const comment = commentMatch?.[1]?.trim() || `${slug} — 공통 메타`;
+  const portrait = `/therapists/${slug}/portrait.png`;
+  writeJsModule(metaPath, comment, {
+    ...current,
+    slug: current.slug ?? slug,
+    portrait,
+    defaultPortrait: true,
+  });
 }
 
 /**
@@ -290,6 +400,79 @@ export function renameTherapistFiles(root, oldSlug, newSlug) {
     const hidden = (visibility.hidden ?? []).map((id) => (id === oldId ? newId : id));
     writeVisibility(root, { hidden });
   }
+}
+
+/**
+ * @param {string} slug
+ */
+function slugToIdentifier(slug) {
+  return slug
+    .split("-")
+    .filter(Boolean)
+    .map((seg, i) =>
+      i === 0 ? seg : seg.charAt(0).toUpperCase() + seg.slice(1),
+    )
+    .join("");
+}
+
+/**
+ * 매니페스트와 contentLocales 기준으로 lib/therapists/registry.ts 재생성.
+ * edit-server가 상담사 추가·삭제·이름변경 후 매번 호출.
+ * @param {string} root
+ */
+export function regenerateTherapistRegistry(root) {
+  const manifest = readManifest(root);
+  const locales = getTherapistContentLocales(root);
+  const order = manifest.order ?? [];
+
+  const importLines = [];
+  const entryLines = [];
+
+  for (const slug of order) {
+    const id = slugToIdentifier(slug);
+    importLines.push(
+      `import ${id}Meta from "@/data/therapists/${slug}/meta.js";`,
+    );
+    for (const loc of locales) {
+      const cap = loc.charAt(0).toUpperCase() + loc.slice(1);
+      importLines.push(
+        `import ${id}${cap} from "@/data/therapists/${slug}/${loc}.js";`,
+      );
+    }
+
+    const slices = locales
+      .map((loc) => {
+        const cap = loc.charAt(0).toUpperCase() + loc.slice(1);
+        return `    ${loc}: ${id}${cap} as TherapistLocaleSlice,`;
+      })
+      .join("\n");
+    entryLines.push(
+      `  "${slug}": loadTherapist(${id}Meta, {\n${slices}\n  }),`,
+    );
+  }
+
+  importLines.sort();
+
+  const body = `// manifest 순서에 맞춘 상담사 모듈 정적 import (빌드 번들용)
+${importLines.join("\n")}
+import { mergeTherapistRecord } from "@/lib/therapists/merge-record";
+import type { TherapistLocaleSlice, TherapistMeta } from "@/lib/therapists/merge-record";
+import type { TherapistRecord } from "@/lib/therapists/types";
+
+function loadTherapist(
+  meta: TherapistMeta,
+  locales: Record<string, TherapistLocaleSlice>,
+): TherapistRecord {
+  return mergeTherapistRecord(meta, locales);
+}
+
+/** edit-server가 상담사 추가·삭제·이름변경 시 이 파일을 자동 재생성한다. 수동 편집 금지. */
+export const therapistRecordsBySlug: Record<string, TherapistRecord> = {
+${entryLines.join("\n")}
+};
+`;
+
+  fs.writeFileSync(path.join(root, "lib/therapists/registry.ts"), body, "utf8");
 }
 
 /**

@@ -9,7 +9,11 @@ import {
   useMemo,
   useState,
 } from "react";
-import { ensureLocaleLoaded, getCachedMessages } from "@/lib/i18n/load-locale";
+import {
+  ensureLocaleLoaded,
+  getCachedMessages,
+  reloadLocale,
+} from "@/lib/i18n/load-locale";
 import { tPath, type Messages } from "@/lib/i18n/messages";
 import {
   defaultLocale,
@@ -46,8 +50,15 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [localeEpoch, setLocaleEpoch] = useState(0);
 
   const reloadLocales = useCallback(async () => {
+    const loaded = await reloadLocale(locale);
+    setMessages(loaded);
+    await Promise.all(
+      getVisibleLocaleIds()
+        .filter((id) => id !== locale)
+        .map((id) => reloadLocale(id).catch(() => undefined)),
+    );
     setLocaleEpoch((n) => n + 1);
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     setLocaleState(readStoredLocale());

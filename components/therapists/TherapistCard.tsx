@@ -1,15 +1,18 @@
-// 상담사 목록 카드
+"use client";
+
+// 상담사 목록 카드 — 클릭 시 프로필 이동, 편집 영역 클릭은 예외
 import Link from "next/link";
-import { EditableImage } from "@/components/edit/EditableImage";
 import { EditableText } from "@/components/edit/EditableText";
+import { TherapistPortraitMedia } from "@/components/therapists/TherapistPortraitMedia";
 import { editImageAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
 import type { ContentLocale } from "@/lib/content-blocks/types";
 import { useTherapistEditText } from "@/lib/edit/use-therapist-edit-text";
 import {
-  therapistListBulletKey,
+  therapistListBulletsArrayKey,
   therapistListKey,
 } from "@/lib/edit/therapist-edit-key";
+import { EditableTherapistStringList } from "@/components/therapists/EditableTherapistStringList";
 import { pickLocale } from "@/lib/therapists/load";
 import type { TherapistRecord } from "@/lib/therapists/types";
 
@@ -35,19 +38,30 @@ export function TherapistCard({ therapist, locale }: Props) {
   );
   const portraitKey = `therapists.${slug}.portrait`;
   const edit = isEditMode();
+  const profileHref = `/therapists/${slug}`;
+
+  const stopEditNavigate = (e: React.MouseEvent) => {
+    if (!edit) return;
+    const target = e.target as HTMLElement;
+    if (target.closest("[data-phmh-edit], [data-phmh-key], button")) {
+      e.preventDefault();
+    }
+  };
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-sm border border-page-body/10 bg-page-bg shadow-sm transition hover:border-secondary/30">
+    <Link
+      href={profileHref}
+      onClick={stopEditNavigate}
+      className="group/card flex h-full flex-col overflow-hidden rounded-sm border border-page-body/10 bg-page-bg shadow-sm transition hover:border-secondary/30"
+    >
       <div
-        className="relative aspect-[4/3] w-full bg-page-body/5"
+        className="relative z-0 aspect-[3/4] w-full bg-page-body/5"
         {...(edit ? editImageAttrs(portraitKey) : {})}
       >
-        <EditableImage
-          editKey={portraitKey}
-          src={profile.portrait}
-          alt=""
-          fill
-          className="object-cover object-top"
+        <TherapistPortraitMedia
+          slug={slug}
+          portraitSrc={profile.portrait}
+          defaultPortrait={profile.defaultPortrait}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           editClipBounds
         />
@@ -69,51 +83,20 @@ export function TherapistCard({ therapist, locale }: Props) {
             {subtitleRaw}
           </EditableText>
         </div>
-        <ul className="space-y-1 text-sm font-light leading-relaxed text-page-body">
-          {bullets.map((item, i) => (
-            <TherapistCardBullet
-              key={`${slug}-bullet-${i}`}
-              slug={slug}
-              index={i}
-              committed={item}
-            />
-          ))}
-        </ul>
+        <EditableTherapistStringList
+          arrayKey={therapistListBulletsArrayKey(slug)}
+          items={bullets}
+          variant="card-bullet"
+        />
         <div className="mt-auto pt-2">
-          <Link
-            href={`/therapists/${slug}`}
-            className="interactive-link inline-flex items-center gap-2 text-sm font-medium text-secondary underline-offset-4 hover:underline"
-          >
+          <span className="interactive-link inline-flex items-center gap-2 text-sm font-medium text-secondary underline-offset-4 group-hover/card:underline">
             <EditableText as="span" editKey={therapistListKey(slug, "ctaLabel")}>
               {cta}
             </EditableText>
             <span aria-hidden>→</span>
-          </Link>
+          </span>
         </div>
       </div>
-    </article>
-  );
-}
-
-function TherapistCardBullet({
-  slug,
-  index,
-  committed,
-}: {
-  slug: string;
-  index: number;
-  committed: string;
-}) {
-  const editKey = therapistListBulletKey(slug, index);
-  const text = useTherapistEditText(editKey, committed);
-  return (
-    <li className="flex gap-2">
-      <span className="text-secondary" aria-hidden>
-        –
-      </span>
-      <EditableText as="span" editKey={editKey}>
-        {text}
-      </EditableText>
-    </li>
+    </Link>
   );
 }

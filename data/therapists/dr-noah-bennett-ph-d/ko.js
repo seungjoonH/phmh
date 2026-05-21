@@ -27,45 +27,45 @@ export default {
         "id": "blk-noah-about-h",
         "type": "heading",
         "level": 2,
-        "text": "소개"
+        "text": "About Me"
       },
       {
         "id": "blk-noah-about-p",
         "type": "paragraph",
-        "text": "저는 아동, 청소년, 가족 정신건강을 전문으로 하는 공인 임상심리전문가입니다. 불안, 학교 관련 스트레스, 행동 문제, 가족 간 의사소통의 어려움을 다루는 내담자를 지원합니다."
+        "text": "I am a licensed clinical psychologist specializing in child, adolescent, and family mental health. I support clients with anxiety, school-related stress, behavioral concerns, and family communication challenges."
       },
       {
         "id": "blk-noah-phil-h",
         "type": "heading",
         "level": 2,
-        "text": "상담 철학 및 치료 접근"
+        "text": "Philosophy and Therapeutic Approach"
       },
       {
         "id": "blk-noah-phil-p1",
         "type": "paragraph",
-        "text": "저는 아동, 보호자, 치료자가 명확한 목표와 실제적인 전략을 바탕으로 함께 협력할 때 상담이 가장 효과적이라고 믿습니다."
+        "text": "I believe therapy is most effective when children, caregivers, and clinicians work together with clear goals and practical strategies."
       },
       {
         "id": "blk-noah-phil-p2",
         "type": "paragraph",
-        "text": "저의 접근은 인지행동치료, 부모 상담, 놀이 기반 개입, 가족체계 치료를 바탕으로 하며, 가정과 학교 환경 전반에서 변화가 이어질 수 있도록 돕습니다."
+        "text": "My approach draws from Cognitive Behavioral Therapy, parent consultation, play-based interventions, and family systems work to support change across home and school settings."
       },
       {
         "id": "blk-noah-exp-h",
         "type": "heading",
         "level": 2,
-        "text": "전문 분야"
+        "text": "Areas of Expertise"
       },
       {
         "id": "blk-noah-exp-p",
         "type": "paragraph",
-        "text": "불안, 학교 적응, 행동 문제, 양육 스트레스, 가족 간 의사소통, 정서 조절, 또래 관계, 학업 동기"
+        "text": "anxiety, school adjustment, behavioral concerns, parenting stress, family communication, emotional regulation, peer relationships, and academic motivation."
       },
       {
         "id": "blk-noah-edu-h",
         "type": "heading",
         "level": 2,
-        "text": "학력"
+        "text": "Education"
       },
       {
         "id": "blk-noah-edu-p1",

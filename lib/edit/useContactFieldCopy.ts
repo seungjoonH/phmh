@@ -38,7 +38,17 @@ export function useContactFieldPlaceholder(
   return getContactFieldCopy(locale, fieldId)?.placeholder;
 }
 
-type FormUiKey = "submit" | "sending" | "error" | "openCalendar";
+type FormUiKey =
+  | "submit"
+  | "sending"
+  | "error"
+  | "openCalendar"
+  | "residencyConfirmTitle"
+  | "residencyConfirmMessage"
+  | "residencyConfirmConfirm"
+  | "residencyConfirmCancel"
+  | "residencyKorea"
+  | "residencyPhilippines";
 
 export function useContactFormUi(
   locale: ContactFormLocaleKey,

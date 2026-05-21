@@ -136,6 +136,109 @@ function resolveScopeStart(source, parentKeys) {
 
 /**
  * @param {string} source
+ * @param {number} openBraceIndex index right after `{`
+ */
+function findClosingBrace(source, openBraceIndex) {
+  let depth = 1;
+  let i = openBraceIndex;
+  while (i < source.length) {
+    const ch = source[i];
+    if (ch === '"' || ch === "'") {
+      const quote = ch;
+      i += 1;
+      while (i < source.length) {
+        if (source[i] === "\\") {
+          i += 2;
+          continue;
+        }
+        if (source[i] === quote) {
+          i += 1;
+          break;
+        }
+        i += 1;
+      }
+      continue;
+    }
+    if (ch === "{") depth += 1;
+    else if (ch === "}") {
+      depth -= 1;
+      if (depth === 0) return i;
+    }
+    i += 1;
+  }
+  throw new Error("Unclosed object");
+}
+
+function lineIndentBefore(source, index) {
+  const lineStart = source.lastIndexOf("\n", index) + 1;
+  const match = /^[ \t]*/.exec(source.slice(lineStart, index));
+  return match?.[0] ?? "";
+}
+
+function findRootObjectBodyStart(source) {
+  const defaultMatch = /export\s+default\s*\{/.exec(source);
+  if (defaultMatch) return defaultMatch.index + defaultMatch[0].length;
+  const namedMatch = /=\s*\{/.exec(source);
+  if (namedMatch) return namedMatch.index + namedMatch[0].length;
+  throw new Error("Root locale object not found");
+}
+
+/**
+ * 새 flowText 문구처럼 기존 locale 파일에 아직 없는 문자열 leaf를 추가한다.
+ * @param {string} source
+ * @param {number} objectBodyStart index right after `{`
+ * @param {string[]} parts
+ * @param {string} newValue
+ */
+function insertNestedStringPath(source, objectBodyStart, parts, newValue) {
+  const close = findClosingBrace(source, objectBodyStart);
+  const indent = `${lineIndentBefore(source, close)}  `;
+  const valueJs = parts
+    .slice(1)
+    .reduceRight(
+      (body, key, idx) =>
+        `{\n${indent}${"  ".repeat(idx + 1)}"${key}": ${body}\n${indent}${"  ".repeat(idx)}}`,
+      `"${escapeJsString(newValue)}"`,
+    );
+  const comma = source.slice(objectBodyStart, close).trim() ? "," : "";
+  const insert = `${comma}\n${indent}"${parts[0]}": ${valueJs}`;
+  return `${source.slice(0, close)}${insert}${source.slice(close)}`;
+}
+
+/**
+ * @param {string} source
+ * @param {string[]} parts
+ * @param {string} newValue
+ */
+function upsertObjectStringPath(source, parts, newValue) {
+  let objectBodyStart = findRootObjectBodyStart(source);
+  for (let i = 0; i < parts.length - 1; i++) {
+    const key = parts[i];
+    const close = findClosingBrace(source, objectBodyStart);
+    const scope = source.slice(objectBodyStart, close);
+    const re = new RegExp(`${keyInSourcePattern(key)}\\s*:\\s*\\{`);
+    const match = re.exec(scope);
+    if (!match) {
+      return insertNestedStringPath(source, objectBodyStart, parts.slice(i), newValue);
+    }
+    objectBodyStart += match.index + match[0].length;
+  }
+
+  const leafKey = parts[parts.length - 1];
+  const close = findClosingBrace(source, objectBodyStart);
+  const scope = source.slice(objectBodyStart, close);
+  const leafRe = new RegExp(`${keyInSourcePattern(leafKey)}\\s*:\\s*"`);
+  const match = leafRe.exec(scope);
+  if (match) {
+    const quoteIndex = objectBodyStart + match.index + match[0].length - 1;
+    const { endIndex } = readJsStringLiteral(source, quoteIndex);
+    return `${source.slice(0, quoteIndex)}"${escapeJsString(newValue)}"${source.slice(endIndex + 1)}`;
+  }
+  return insertNestedStringPath(source, objectBodyStart, [leafKey], newValue);
+}
+
+/**
+ * @param {string} source
  * @param {number} openBracket index of `[`
  * @returns {number}
  */
@@ -231,6 +334,9 @@ function patchNestedStringArrayItem(
  */
 export function patchLocaleFile(source, keyPath, newValue) {
   const parts = keyPath.split(".");
+  if (parts.includes("flowText")) {
+    return upsertObjectStringPath(source, parts, newValue);
+  }
   const last = parts[parts.length - 1];
   const secondLast = parts[parts.length - 2];
 
@@ -433,7 +539,7 @@ export function replaceSectionFlow(source, sectionScope, blocks) {
   const parentKeys = Array.isArray(sectionScope)
     ? sectionScope
     : [sectionScope];
-  const scopeStart = resolveScopeStartForPath(source, parentKeys);
+  const scopeStart = resolveScopeStart(source, parentKeys);
   const scope = source.slice(scopeStart);
   const flowRe = /flow\s*:\s*\[/;
   const body =
@@ -468,4 +574,90 @@ export function replaceSectionFlow(source, sectionScope, blocks) {
     : scopeStart;
   const insert = `    flow: [${body}],\n`;
   return `${source.slice(0, insertAt)}${insert}${source.slice(insertAt)}`;
+}
+
+/**
+ * @param {string[][] | undefined} groups
+ */
+function groupsToJs(groups) {
+  if (!groups?.length) return "[]";
+  const inner = groups
+    .map(
+      (group) =>
+        `[\n        ${group.map((line) => `"${escapeJsString(line)}"`).join(",\n        ")}\n      ]`,
+    )
+    .join(",\n      ");
+  return `[\n      ${inner}\n    ]`;
+}
+
+/**
+ * @param {{ title: string, tagline?: string, groups?: string[][], lists?: unknown[], subsections?: unknown[], closing?: string[] }} section
+ */
+export function sectionContentToJs(section) {
+  const lines = [`title: "${escapeJsString(section.title)}"`];
+  if (section.tagline !== undefined) {
+    lines.push(`tagline: "${escapeJsString(section.tagline)}"`);
+  }
+  lines.push(`groups: ${groupsToJs(section.groups)}`);
+  if (section.subsections !== undefined) {
+    lines.push("subsections: []");
+  }
+  lines.push("lists: []");
+  lines.push(
+    `closing: ${section.closing?.length ? `[\n      "${escapeJsString(section.closing[0] ?? "")}"\n    ]` : "[]"}`,
+  );
+  return `{\n    ${lines.join(",\n    ")}\n  }`;
+}
+
+/**
+ * locales/content/services.*.js 루트 객체에 섹션 키 추가
+ * @param {string} source
+ * @param {string} sectionKey
+ * @param {string} sectionJs
+ */
+export function insertContentSectionKey(source, sectionKey, sectionJs) {
+  const bodyStart = findRootObjectBodyStart(source);
+  const close = findClosingBrace(source, bodyStart);
+  const indent = lineIndentBefore(source, close);
+  const keyPart = /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(sectionKey)
+    ? sectionKey
+    : `"${escapeJsString(sectionKey)}"`;
+  const trimmed = source.slice(bodyStart, close).trim();
+  const insert = `${trimmed ? "," : ""}\n${indent}  ${keyPart}: ${sectionJs}`;
+  return `${source.slice(0, close)}${insert}\n${source.slice(close)}`;
+}
+
+/**
+ * locales/content/* sections export 에서 최상위 섹션 키 제거
+ * @param {string} source
+ * @param {string} sectionKey
+ */
+export function removeContentSectionKey(source, sectionKey) {
+  const bodyStart = findRootObjectBodyStart(source);
+  const scope = source.slice(bodyStart);
+  const keyRe = new RegExp(`${keyInSourcePattern(sectionKey)}\\s*:\\s*\\{`);
+  const match = keyRe.exec(scope);
+  if (!match) {
+    throw new Error(`Section key not found in content: ${sectionKey}`);
+  }
+  const keyStart = bodyStart + match.index;
+  const openBrace = keyStart + match[0].length - 1;
+  const closeBrace = findClosingBrace(source, openBrace);
+  let end = closeBrace + 1;
+  while (end < source.length && /[ \t\r\n]/.test(source[end])) end++;
+  if (source[end] === ",") end++;
+  let start = keyStart;
+  while (start > bodyStart) {
+    const prev = source[start - 1];
+    if (prev === ",") {
+      start -= 1;
+      break;
+    }
+    if (prev === "\n" || prev === "\r" || prev === " " || prev === "\t") {
+      start -= 1;
+      continue;
+    }
+    break;
+  }
+  return `${source.slice(0, start)}${source.slice(end)}`;
 }

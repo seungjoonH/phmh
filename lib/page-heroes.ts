@@ -6,5 +6,6 @@ export const pageHeroes = {
   gettingStarted: "/getting-started/01.png",
   fee: "/fee/01.png",
   contact: "/getting-started/01.png",
+  centers: "/centers/hero.png",
   therapists: "/therapists/hero.png",
 } as const;

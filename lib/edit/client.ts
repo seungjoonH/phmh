@@ -79,7 +79,8 @@ export async function patchStepsArray(key: string, locales: LocaleStepsArrays) {
 export type StoredFlowBlock =
   | { type: "p"; textKey: string }
   | { type: "heading"; textKey: string }
-  | { type: "bullets"; listKey: string; lead?: string }
+  | { type: "sectionTitle"; textKey: string }
+  | { type: "list"; listKey: string; ordered: boolean; lead?: string }
   | { type: "hr" }
   | { type: "button"; textKey: string }
   | { type: "img"; editKey: string; src: string };
@@ -88,6 +89,19 @@ export async function patchSectionFlow(sectionKey: string, flow: StoredFlowBlock
   return editFetch("/patch/section-flow", {
     method: "POST",
     body: JSON.stringify({ sectionKey, flow }),
+  });
+}
+
+export type LongFormSectionPatchPayload = {
+  orderKey: string;
+  added?: Record<string, Record<string, Record<string, unknown>>>;
+  removed?: string[];
+};
+
+export async function patchLongFormSections(payload: LongFormSectionPatchPayload) {
+  return editFetch("/patch/long-form-sections", {
+    method: "POST",
+    body: JSON.stringify(payload),
   });
 }
 
@@ -172,10 +186,17 @@ export async function deployRelease(): Promise<DeployReleaseResult> {
 
 export async function fetchImageRegistry(key: string) {
   const data = await editFetch(`/registry/image/${encodeURIComponent(key)}`);
-  return data as { key: string; file: string; publicPath: string; altKey?: string };
+  return data as {
+    key: string;
+    file: string;
+    publicPath: string;
+    altKey?: string;
+    hidden?: boolean;
+  };
 }
 
 import type { TherapistRecord } from "@/lib/therapists/types";
+import type { CenterRecord } from "@/lib/centers/types";
 
 export async function fetchTherapistsManifest() {
   return editFetch("/registry/therapists");
@@ -185,7 +206,7 @@ export async function patchTherapist(slug: string, record: TherapistRecord) {
   return editFetch("/patch/therapist", {
     method: "POST",
     body: JSON.stringify({ slug, record }),
-  });
+  }) as Promise<{ ok: boolean; backupDir?: string; record: TherapistRecord }>;
 }
 
 export async function renameTherapist(
@@ -196,7 +217,13 @@ export async function renameTherapist(
   return editFetch("/therapists/rename", {
     method: "POST",
     body: JSON.stringify({ oldSlug, newSlug, record }),
-  }) as Promise<{ ok: boolean; oldSlug: string; newSlug: string }>;
+  }) as Promise<{
+    ok: boolean;
+    oldSlug: string;
+    newSlug: string;
+    backupDir?: string;
+    record: TherapistRecord;
+  }>;
 }
 
 export async function createTherapist(displayName: string) {
@@ -220,11 +247,26 @@ export async function patchTherapistsOrder(order: string[]) {
   });
 }
 
+export type SitePagesRegistry = {
+  hidden: string[];
+  topOrder: string[];
+  groupOrder: Record<string, string[]>;
+  centerSlugs: string[];
+  therapistSlugs: string[];
+};
+
 export async function fetchSitePagesRegistry() {
-  return editFetch("/registry/site-pages") as Promise<{
-    hidden: string[];
-    therapistSlugs: string[];
-  }>;
+  return editFetch("/registry/site-pages") as Promise<SitePagesRegistry>;
+}
+
+export async function putSitePagesOrder(
+  topOrder: string[],
+  groupOrder: Record<string, string[]>,
+) {
+  return editFetch("/site-pages/order", {
+    method: "PUT",
+    body: JSON.stringify({ topOrder, groupOrder }),
+  }) as Promise<{ ok: boolean }>;
 }
 
 export async function patchSitePageVisibility(pageId: string, hidden: boolean) {
@@ -256,4 +298,116 @@ export async function writeImageFile(
       writeKind: "image",
     }),
   });
+}
+
+export async function setImageHidden(key: string, hidden: boolean) {
+  return editFetch("/image/hidden", {
+    method: "POST",
+    body: JSON.stringify({ key, hidden }),
+  }) as Promise<{ ok: boolean; key: string; hidden: boolean }>;
+}
+
+export async function restoreTherapistDefaultPortrait(slug: string) {
+  return editFetch("/therapists/restore-default-portrait", {
+    method: "POST",
+    body: JSON.stringify({ slug }),
+  }) as Promise<{ ok: boolean; slug: string }>;
+}
+
+export async function fetchCentersManifest() {
+  return editFetch("/registry/centers");
+}
+
+export async function createCenter(displayName: string) {
+  return editFetch("/centers/create", {
+    method: "POST",
+    body: JSON.stringify({ displayName }),
+  }) as Promise<{ ok: boolean; slug: string }>;
+}
+
+export async function deleteCenter(slug: string) {
+  return editFetch("/centers/delete", {
+    method: "POST",
+    body: JSON.stringify({ slug }),
+  });
+}
+
+export async function patchCentersOrder(order: string[]) {
+  return editFetch("/centers/manifest/order", {
+    method: "PATCH",
+    body: JSON.stringify({ order }),
+  });
+}
+
+export async function patchCenter(slug: string, record: CenterRecord) {
+  return editFetch("/patch/center", {
+    method: "POST",
+    body: JSON.stringify({ slug, record }),
+  }) as Promise<{ ok: boolean; backupDir?: string; record: CenterRecord }>;
+}
+
+export async function patchCenterImagesOrder(slug: string, order: string[]) {
+  return editFetch("/centers/images/order", {
+    method: "PATCH",
+    body: JSON.stringify({ slug, order }),
+  });
+}
+
+export async function promoteCenterGalleryImage(slug: string, imageId: string) {
+  return editFetch("/centers/gallery/promote", {
+    method: "POST",
+    body: JSON.stringify({ slug, imageId }),
+  });
+}
+
+export async function deleteCenterImage(slug: string, id: string) {
+  return editFetch("/centers/images/delete", {
+    method: "POST",
+    body: JSON.stringify({ slug, id }),
+  });
+}
+
+export async function deleteAllCenterImages(slug: string) {
+  return editFetch("/centers/images/delete-all", {
+    method: "POST",
+    body: JSON.stringify({ slug }),
+  });
+}
+
+export async function applyCenterImagesDraft(
+  slug: string,
+  items: Array<{ id: string; src: string }>,
+) {
+  return editFetch("/centers/images/apply-draft", {
+    method: "POST",
+    body: JSON.stringify({ slug, items }),
+  }) as Promise<{ ok: boolean; record: CenterRecord }>;
+}
+
+export async function addCenterGalleryImage(slug: string, id: string, src: string) {
+  return editFetch("/centers/gallery/add", {
+    method: "POST",
+    body: JSON.stringify({ slug, id, src }),
+  });
+}
+
+export async function deleteCenterGalleryImage(slug: string, id: string) {
+  return editFetch("/centers/gallery/delete", {
+    method: "POST",
+    body: JSON.stringify({ slug, id }),
+  });
+}
+
+export async function patchCenterGalleryOrder(slug: string, order: string[]) {
+  return editFetch("/centers/gallery/order", {
+    method: "PATCH",
+    body: JSON.stringify({ slug, order }),
+  });
+}
+
+export async function restoreCenterDefaultHero(slug: string) {
+  return editFetch("/centers/restore-default-hero", {
+    method: "POST",
+    body: JSON.stringify({ slug }),
+  }) as Promise<{ ok: boolean; slug: string }>;
 }

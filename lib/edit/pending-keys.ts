@@ -6,7 +6,11 @@ import { getStepsAtPath } from "@/lib/edit/get-message-steps";
 import { parseStepFieldKey } from "@/lib/edit/getting-started-step";
 import { getLinkedTextKeyGroupId } from "@/lib/edit/linked-text-keys";
 import { findLinkedDraft } from "@/lib/edit/linked-text-keys";
-import { isTherapistEditKey } from "@/lib/edit/therapist-edit-key";
+import {
+  isTherapistArrayKey,
+  isTherapistEditKey,
+} from "@/lib/edit/therapist-edit-key";
+import { isCenterEditKey, parseCenterImagesKey } from "@/lib/edit/center-edit-key";
 import {
   flowBulletItemEditKey,
   type FlowBlock,
@@ -19,6 +23,8 @@ export type PendingCheckContext = {
   displayMessages: Messages;
   drafts: Record<string, LocaleTextValues>;
   imageDrafts: Record<string, unknown>;
+  centerImageDrafts?: Record<string, unknown>;
+  imageDeleteDrafts?: Record<string, true>;
   hiddenTextKeys: Record<string, true>;
   arrayDrafts?: Record<string, unknown>;
   stepsDrafts?: Record<string, unknown>;
@@ -89,11 +95,23 @@ function flowSectionDiffers(
 }
 
 export function isEditKeyPending(key: string, ctx: PendingCheckContext): boolean {
-  if (ctx.hiddenTextKeys[key] || ctx.imageDrafts[key]) {
+  if (ctx.hiddenTextKeys[key] || ctx.imageDrafts[key] || ctx.imageDeleteDrafts?.[key]) {
     return true;
   }
 
-  if (isTherapistEditKey(key) && findLinkedDraft(ctx.drafts, key)) {
+  const centerImageSlug = parseCenterImagesKey(key);
+  if (centerImageSlug && ctx.centerImageDrafts?.[centerImageSlug]) {
+    return true;
+  }
+
+  if (
+    (isTherapistEditKey(key) || isCenterEditKey(key)) &&
+    findLinkedDraft(ctx.drafts, key)
+  ) {
+    return true;
+  }
+
+  if (isTherapistArrayKey(key) && ctx.arrayDrafts?.[key]) {
     return true;
   }
 
@@ -103,10 +121,15 @@ export function isEditKeyPending(key: string, ctx: PendingCheckContext): boolean
 function collectFlowTextKeys(flow: FlowBlock[]): string[] {
   const keys: string[] = [];
   for (const block of flow) {
-    if (block.type === "p" || block.type === "heading" || block.type === "button") {
+    if (
+      block.type === "p" ||
+      block.type === "heading" ||
+      block.type === "sectionTitle" ||
+      block.type === "button"
+    ) {
       keys.push(block.textKey);
     }
-    if (block.type === "bullets") {
+    if (block.type === "list") {
       block.items.forEach((_, i) => {
         keys.push(flowBulletItemEditKey(block.listKey, i));
       });
@@ -143,6 +166,10 @@ export function countDirtyTextKeyGroups(ctx: PendingCheckContext): number {
   }
 
   for (const arrayKey of Object.keys(ctx.arrayDrafts ?? {})) {
+    if (isTherapistArrayKey(arrayKey)) {
+      markIfDirty(arrayKey);
+      continue;
+    }
     const arr = getStringArrayAtPath(ctx.displayMessages, arrayKey);
     arr?.forEach((_, i) => markIfDirty(`${arrayKey}.${i}`));
   }
@@ -171,6 +198,10 @@ export function countStructuralDrafts(ctx: PendingCheckContext): number {
   }
 
   for (const arrayKey of Object.keys(ctx.arrayDrafts ?? {})) {
+    if (isTherapistArrayKey(arrayKey)) {
+      count++;
+      continue;
+    }
     if (!stringArrayDiffers(ctx.committedMessages, ctx.displayMessages, arrayKey)) {
       continue;
     }
@@ -197,6 +228,8 @@ export function countPendingChanges(ctx: PendingCheckContext): number {
   return (
     countDirtyTextKeyGroups(ctx) +
     countStructuralDrafts(ctx) +
-    Object.keys(ctx.hiddenTextKeys).length
+    Object.keys(ctx.hiddenTextKeys).length +
+    Object.keys(ctx.imageDrafts).length +
+    Object.keys(ctx.imageDeleteDrafts ?? {}).length
   );
 }

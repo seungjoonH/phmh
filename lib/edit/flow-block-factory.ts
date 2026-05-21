@@ -1,5 +1,6 @@
 // 서비스 섹션 flow 블록 생성
 import { emptyLocaleTextValues } from "@/lib/edit/locale-helpers";
+import { flowImageKey } from "@/lib/edit/image-registry";
 import { getActiveLocaleIds } from "@/lib/site-locales";
 import type { FlowBlock, FlowBlockInsertType } from "@/lib/edit/section-flow";
 
@@ -13,8 +14,6 @@ function nextBlockId(): string {
 export type CreateFlowBlockOptions = {
   ctaEditKey?: string;
   ctaLabel?: string;
-  imageEditKey?: string;
-  imageSrc?: string;
 };
 
 export function createFlowBlock(
@@ -29,19 +28,26 @@ export function createFlowBlock(
       return {
         type: "p",
         text: "",
-        textKey: `${sectionKey}.flow.${id}.p`,
+        textKey: `${sectionKey}.flowText.${id}.p`,
       };
     case "heading":
       return {
         type: "heading",
         text: "",
-        textKey: `${sectionKey}.flow.${id}.heading`,
+        textKey: `${sectionKey}.flowText.${id}.heading`,
+      };
+    case "sectionTitle":
+      return {
+        type: "sectionTitle",
+        text: "",
+        textKey: `${sectionKey}.flowText.${id}.sectionTitle`,
       };
     case "hr":
       return { type: "hr" };
-    case "bullets":
+    case "list":
       return {
-        type: "bullets",
+        type: "list",
+        ordered: false,
         items: [""],
         listKey: `${sectionKey}.flow.${id}.list`,
       };
@@ -51,24 +57,30 @@ export function createFlowBlock(
         text: options.ctaLabel ?? "",
         textKey: options.ctaEditKey ?? `${sectionKey}.flow.${id}.button`,
       };
-    case "img":
+    case "img": {
+      const editKey = flowImageKey(sectionKey, id);
       return {
         type: "img",
-        editKey: options.imageEditKey ?? `${sectionKey}.flow.${id}.img`,
-        src: options.imageSrc ?? "/services/02.png",
+        editKey,
+        src: "",
         alt: "",
       };
+    }
     default:
       return {
         type: "p",
         text: "",
-        textKey: `${sectionKey}.flow.${id}.p`,
+        textKey: `${sectionKey}.flowText.${id}.p`,
       };
   }
 }
 
 export function draftEntryForNewFlowBlock(block: FlowBlock) {
-  if (block.type === "p" || block.type === "heading") {
+  if (
+    block.type === "p" ||
+    block.type === "heading" ||
+    block.type === "sectionTitle"
+  ) {
     return emptyLocaleTextValues();
   }
   if (block.type === "button") {
@@ -82,6 +94,6 @@ export function draftEntryForNewFlowBlock(block: FlowBlock) {
 }
 
 export function arrayDraftForNewFlowBlock(block: FlowBlock) {
-  if (block.type !== "bullets") return null;
+  if (block.type !== "list") return null;
   return Object.fromEntries(getActiveLocaleIds().map((id) => [id, [""]]));
 }

@@ -10,9 +10,13 @@ import { parseArrayItemKey } from "@/lib/edit/array-item-key";
 import { getStringArrayAtPath } from "@/lib/edit/get-message-array";
 import { getStepsAtPath } from "@/lib/edit/get-message-steps";
 import {
-  flowToSectionContent,
+  stripFlowBlockForStorage,
   type FlowBlock,
 } from "@/lib/edit/section-flow";
+import {
+  sectionsPathFromOrderKey,
+  type LongFormSectionsDraftEntry,
+} from "@/lib/edit/long-form-section";
 import type { Messages } from "@/lib/i18n/messages";
 
 export function setStepsAtPath(
@@ -227,14 +231,60 @@ export function setObjectAtPath(
   return clone as Messages;
 }
 
+/**
+ * flow draft 를 messages 에 반영 — `section.flow` 만 저장하고 `groups`/`lists`/`closing` 은 절대
+ * 건드리지 않는다. flow 블록의 textKey 가 가리키는 원본 좌표(`groups.0.1` 등)가 유지되어야
+ * 본문 텍스트를 정확히 hydrate 할 수 있다.
+ *
+ * (이전 버전은 `flowToSectionContent` 로 groups/lists/closing 을 재구성해서 덮어썼는데,
+ *  그 결과 mutation 으로 순서가 바뀌면 textKey 가 가리키는 messages 좌표가 다른 텍스트를 지시하게
+ *  되어 데이터 손실/뒤바뀜 버그가 발생했다.)
+ */
+export function applyLongFormSectionDraftsForLocale(
+  base: Messages,
+  locale: string,
+  drafts: Record<string, LongFormSectionsDraftEntry>,
+): Messages {
+  let result = base;
+  for (const [orderKey, draft] of Object.entries(drafts)) {
+    if (!draft.removed.length && !Object.keys(draft.added).length) continue;
+    const sectionsPath = sectionsPathFromOrderKey(orderKey);
+    const parts = sectionsPath.split(".");
+    const clone = structuredClone(result) as Record<string, unknown>;
+    let current: Record<string, unknown> = clone;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const part = parts[i];
+      const next = current[part];
+      if (next === null || typeof next !== "object") {
+        continue;
+      }
+      current[part] = { ...(next as Record<string, unknown>) };
+      current = current[part] as Record<string, unknown>;
+    }
+    const leaf = parts[parts.length - 1];
+    const prev = (current[leaf] ?? {}) as Record<string, unknown>;
+    const nextSections = { ...prev };
+    for (const key of draft.removed) {
+      delete nextSections[key];
+    }
+    for (const [slug, byLocale] of Object.entries(draft.added)) {
+      const content = byLocale[locale];
+      if (content) nextSections[slug] = content;
+    }
+    current[leaf] = nextSections;
+    result = clone as Messages;
+  }
+  return result;
+}
+
 export function applyFlowDraftsForLocale(
   base: Messages,
   flowDrafts: Record<string, FlowBlock[]>,
 ): Messages {
   let result = base;
   for (const [sectionKey, flow] of Object.entries(flowDrafts)) {
-    const section = flowToSectionContent(flow);
-    result = setObjectAtPath(result, sectionKey, section as Record<string, unknown>);
+    const storedFlow = flow.map(stripFlowBlockForStorage);
+    result = setObjectAtPath(result, sectionKey, { flow: storedFlow });
   }
   return result;
 }

@@ -1,6 +1,6 @@
 {
   "name": "phmh",
-  "version": "1.0.6", 
+  "version": "1.0.7", 
   "private": true,
   "imports": {
     "#phmh/contact-form-structure": {

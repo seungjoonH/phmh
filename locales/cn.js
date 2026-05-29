@@ -96,18 +96,30 @@ export default {
     "",
     "",
     "",
+    "",
     ""
   ]
-    },
+    ,
+      "flowText": {
+        "mpoz96lj1": {
+          "p": ""
+        }
+      }},
     "ourVision": {
       "title": "",
       "paragraphs": [
-        "",
-        "",
-        "",
-        ""
-      ]
-    },
+    "",
+    "",
+    "",
+    "",
+    ""
+  ]
+    ,
+      "flowText": {
+        "mpozdldj2": {
+          "p": ""
+        }
+      }},
     "gettingStarted": {
       "title": "",
       "body": {
@@ -148,11 +160,11 @@ export default {
       ]
     },
     "fee": {    flow: [
-      { type: "p", textKey: "pages.fee.paragraphs.1" },
-      { type: "p", textKey: "pages.fee.paragraphs.0" },
-      { type: "p", textKey: "pages.fee.paragraphs.2" },
-      { type: "p", textKey: "pages.fee.paragraphs.3" },
-      { type: "p", textKey: "pages.fee.paragraphs.4" }
+      { type: "p", textKey: "pages.ourVision.flowText.mpozdldj2.p" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.0" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.1" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.2" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.3" }
     ],
 
       "title": "费用",

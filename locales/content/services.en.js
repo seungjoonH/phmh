@@ -17,7 +17,7 @@ export const servicesSectionsEn = {
     ],
     lists: [
       {
-        lead: "Common issues addressed in individual Therapy include:",
+        lead: "**Common issues addressed in individual Therapy include:**",
         items: [
           "Depression",
           "Anxiety disorders",
@@ -28,7 +28,7 @@ export const servicesSectionsEn = {
         ],
       },
       {
-        lead: "Therapeutic approaches may include:",
+        lead: "**Therapeutic approaches may include:**",
         items: [
           "Cognitive Behavioral Therapy (CBT): Restructures negative thought patterns",
           "Psychoanalytic Therapy: Explores past experiences and unconscious emotions",
@@ -36,7 +36,7 @@ export const servicesSectionsEn = {
         ],
       },
       {
-        lead: "Through Therapy, you will:",
+        lead: "**Through Therapy, you will:**",
         items: [
           "Gain self-awareness",
           "Improve emotional regulation",

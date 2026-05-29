@@ -4,6 +4,15 @@ export default {
   "contactRef": "korea",
   "hero": "/centers/korea-center/gallery/gallery-2026-05-20T23-40-14-384Z.png",
   "defaultHero": true,
-  "gallery": [],
+  "gallery": [
+    {
+      "id": "01",
+      "src": "/centers/korea-center/gallery/01.jpg"
+    },
+    {
+      "id": "02",
+      "src": "/centers/korea-center/gallery/02.jpg"
+    }
+  ],
   "mapRef": "korea"
 };

@@ -89,23 +89,35 @@ export default {
     "whoWeAre": {
       "title": "Who We Are",
       "paragraphs": [
-    "Everyone faces psychological challenges at some point in life, shaped by their unique experiences, background, and personality. If you're struggling, know that you’re not alone. Seeking professional support is a courageous and vital step toward healing and growth.",
+    "\nWho We Are\n\nEveryone faces psychological challenges at some point in life, shaped by their unique experiences, background, and personality. If you're struggling, know that you’re not alone. Seeking professional support is a courageous and vital step toward healing and growth.",
     "At Peace & Hope Mental Health Services, our goal is to help you regain balance, improve well-being, and restore your ability to navigate daily life. Our approach goes beyond simply addressing symptoms—we help you recognize your strengths, discover meaning and purpose, and unlock your potential for personal growth, even in difficult times.",
     "To accommodate your needs, we offer both in-person and online counseling. No matter where you are in the world, you can connect with us. Whether you prefer visiting our center or receiving counseling from the comfort of your home, we provide a confidential and secure platform for your sessions.",
     "If you have any questions or would like to learn more about starting therapy, don’t hesitate to reach out. Even in your hardest moments, there is hope. Peace & Hope Mental Health Services is here to support you every step of the way.",
     "We’re here to help.",
-    "With best wishes,\nThe Peace & Hope Mental Health Services Team"
+    "With best wishes,",
+    "The Peace & Hope Mental Health Services Team"
   ]
-    },
+    ,
+      "flowText": {
+        "mpoz96lj1": {
+          "p": "The Peace & Hope Mental Health Services Team"
+        }
+      }},
     "ourVision": {
       "title": "Our Vision",
       "paragraphs": [
-        "Many seek to make an impact by creating groundbreaking innovations or shaping history in significant ways. While these efforts are valuable, we believe in a different approach—one that is small yet deeply meaningful.",
-        "In a world of billions, changing the life of just one person may seem insignificant. Most may never notice the change. But for that one individual, it can be life-changing. And the impact doesn’t stop there. When one person experiences transformation, the effect ripples outward—touching their loved ones, their community, and beyond.",
-        "At Peace & Hope Mental Health Services, we believe that helping one person overcome challenges, regain confidence, and build a fulfilling life is the first step toward changing the world. Through the expertise of our dedicated professionals, our clients find the strength to heal and grow. And as they thrive, they inspire others to do the same.",
-        "Change begins with one person. One becomes two, two become three. With every step forward, the impact expands. At Peace & Hope Mental Health Services, the journey of transformation has begun, and together, we are making a difference."
-      ]
-    },
+    "How can we change the world?",
+    "Many seek to make an impact by creating groundbreaking innovations or shaping history in significant ways. While these efforts are valuable, we believe in a different approach—one that is small yet deeply meaningful.",
+    "In a world of billions, changing the life of just one person may seem insignificant. Most may never notice the change. But for that one individual, it can be life-changing. And the impact doesn’t stop there. When one person experiences transformation, the effect ripples outward—touching their loved ones, their community, and beyond.",
+    "At Peace & Hope Mental Health Services, we believe that helping one person overcome challenges, regain confidence, and build a fulfilling life is the first step toward changing the world. Through the expertise of our dedicated professionals, our clients find the strength to heal and grow. And as they thrive, they inspire others to do the same.",
+    "Change begins with one person. One becomes two, two become three. With every step forward, the impact expands. At Peace & Hope Mental Health Services, the journey of transformation has begun, and together, we are making a difference."
+  ]
+    ,
+      "flowText": {
+        "mpozdldj2": {
+          "p": "How can we change the world?"
+        }
+      }},
     "gettingStarted": {
       "title": "Getting Started",
       "body": {
@@ -146,11 +158,11 @@ export default {
       ]
     },
     "fee": {    flow: [
-      { type: "p", textKey: "pages.fee.paragraphs.1" },
-      { type: "p", textKey: "pages.fee.paragraphs.0" },
-      { type: "p", textKey: "pages.fee.paragraphs.2" },
-      { type: "p", textKey: "pages.fee.paragraphs.3" },
-      { type: "p", textKey: "pages.fee.paragraphs.4" }
+      { type: "p", textKey: "pages.ourVision.flowText.mpozdldj2.p" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.0" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.1" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.2" },
+      { type: "p", textKey: "pages.ourVision.paragraphs.3" }
     ],
 
       "title": "Fees",

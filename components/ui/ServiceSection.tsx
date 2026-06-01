@@ -199,6 +199,13 @@ export function ServiceSection({
       text: title,
       textKey: `${textKeyPrefix}.title`,
     });
+    if (useFlowLayout && tagline) {
+      prepend.push({
+        type: "tagline",
+        text: tagline,
+        textKey: `${textKeyPrefix}.tagline`,
+      });
+    }
   }
 
   return (
@@ -229,7 +236,7 @@ export function ServiceSection({
             </EditableText>
           </h2>
         ) : null}
-        {tagline ? (
+        {!useFlowLayout && tagline ? (
           <EditableText
             as="p"
             className="mt-2 text-lg font-medium text-page-heading/90"

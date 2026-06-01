@@ -92,13 +92,35 @@ export default {
       "title": "",
       "paragraphs": [
     "",
-    "",
-    "",
-    "",
-    "",
     ""
-  ]
-    },
+  ],
+      "flowText": {
+        "mpuvilgj6": { "p": "" },
+        "mpuvimpf7": { "heading": "" },
+        "mpuvinp28": { "heading": "" },
+        "mpuxksaf1": { "p": "" },
+        "mpuxmlbl1": { "p": "" },
+        "mpuxn57c2": { "p": "" },
+        "mpuxn6ci3": { "heading": "" },
+        "mpuxp7l48": { "heading": "" }
+      },
+      "lists": [],
+    
+
+  "flow": [
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+      ]},
+    
+
+
+
+
+
     "ourVision": {
       "title": "",
       "paragraphs": [
@@ -116,45 +138,38 @@ export default {
       },
       "steps": [
         {
-          "number": "",
+          "number": "01",
           "title": "",
           "description": ""
         },
         {
-          "number": "",
+          "number": "02",
           "title": "",
           "description": ""
         },
         {
-          "number": "",
+          "number": "03",
           "title": "",
           "description": ""
         },
         {
-          "number": "",
+          "number": "04",
           "title": "",
           "description": ""
         },
         {
-          "number": "",
+          "number": "05",
           "title": "",
           "description": ""
         },
         {
-          "number": "",
+          "number": "06",
           "title": "",
           "description": ""
         }
       ]
     },
-    "fee": {    flow: [
-      { type: "p", textKey: "pages.fee.paragraphs.1" },
-      { type: "p", textKey: "pages.fee.paragraphs.0" },
-      { type: "p", textKey: "pages.fee.paragraphs.2" },
-      { type: "p", textKey: "pages.fee.paragraphs.3" },
-      { type: "p", textKey: "pages.fee.paragraphs.4" }
-    ],
-
+    "fee": {
       "title": "费用",
       "paragraphs": [
     "**我们提供直接计费服务！**",
@@ -221,7 +236,7 @@ export default {
       "griefLoss",
       "sleep"
     ],
-    "sections": serviceAreasSectionsCn
+    "sections": serviceAreasSectionsCn,
   },
   "contact": {
     "title": "",

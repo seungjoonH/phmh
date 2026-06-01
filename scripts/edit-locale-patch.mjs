@@ -135,6 +135,102 @@ function resolveScopeStart(source, parentKeys) {
 }
 
 /**
+ * 객체 본문에서 최상위(직계) 프로퍼티 배열만 찾는다. flowText 안의 lists 등 중첩 키는 무시.
+ * @param {string} source
+ * @param {string[]} parentKeys e.g. ["pages","whoWeAre"]
+ * @param {string} arrayKey e.g. lists, paragraphs
+ * @returns {number | null} `[` index
+ */
+function findTopLevelArrayKeyBracketIndex(source, parentKeys, arrayKey) {
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
+  if (scopeStart <= 0 || source[scopeStart - 1] !== "{") {
+    return null;
+  }
+  const bodyClose = findClosingBrace(source, scopeStart);
+  const scope = source.slice(scopeStart, bodyClose);
+  const keyRe = new RegExp(`${keyInSourcePattern(arrayKey)}\\s*:\\s*\\[`, "g");
+  let match;
+  while ((match = keyRe.exec(scope)) !== null) {
+    const before = scope.slice(0, match.index);
+    let depth = 0;
+    for (let i = 0; i < before.length; i++) {
+      const ch = before[i];
+      if (ch === "{") depth += 1;
+      else if (ch === "}") depth -= 1;
+    }
+    if (depth === 0) {
+      return scopeStart + match.index + match[0].length - 1;
+    }
+  }
+  return null;
+}
+
+/**
+ * 섹션 객체에서 최상위 `arrayKey: [...]` 프로퍼티를 모두 제거 (중복 flow 등)
+ * @param {string} source
+ * @param {string[]} parentKeys
+ * @param {string} arrayKey
+ */
+function removeAllTopLevelArrayProperties(source, parentKeys, arrayKey) {
+  let next = source;
+  while (true) {
+    const bracketIndex = findTopLevelArrayKeyBracketIndex(next, parentKeys, arrayKey);
+    if (bracketIndex === null) break;
+
+    const scopeStart = parentKeys.length ? resolveScopeStart(next, parentKeys) : 0;
+    const bodyClose = findClosingBrace(next, scopeStart);
+    const scope = next.slice(scopeStart, bodyClose);
+    const relBracket = bracketIndex - scopeStart;
+    const keyRe = new RegExp(`${keyInSourcePattern(arrayKey)}\\s*:\\s*\\[`, "g");
+    let propMatch = null;
+    let m;
+    while ((m = keyRe.exec(scope)) !== null) {
+      if (m.index + m[0].length - 1 === relBracket) {
+        propMatch = m;
+        break;
+      }
+    }
+    if (!propMatch) break;
+
+    let removeStart = scopeStart + propMatch.index;
+    while (removeStart > scopeStart && /[ \t]/.test(next[removeStart - 1])) {
+      removeStart -= 1;
+    }
+    if (removeStart > scopeStart && next[removeStart - 1] === ",") {
+      removeStart -= 1;
+    }
+
+    let depth = 0;
+    let endBracket = bracketIndex;
+    for (let i = bracketIndex; i < next.length; i++) {
+      const ch = next[i];
+      if (ch === "[") depth += 1;
+      else if (ch === "]") {
+        depth -= 1;
+        if (depth === 0) {
+          endBracket = i;
+          break;
+        }
+      }
+    }
+    let removeEnd = endBracket + 1;
+    while (removeEnd < next.length && /[ \t]/.test(next[removeEnd])) {
+      removeEnd += 1;
+    }
+    if (next[removeEnd] === ",") {
+      removeEnd += 1;
+      while (removeEnd < next.length && /[ \t]/.test(next[removeEnd])) {
+        removeEnd += 1;
+      }
+    }
+    if (next[removeEnd] === "\n") removeEnd += 1;
+
+    next = `${next.slice(0, removeStart)}${next.slice(removeEnd)}`;
+  }
+  return next;
+}
+
+/**
  * @param {string} source
  * @param {number} openBraceIndex index right after `{`
  */
@@ -167,6 +263,13 @@ function findClosingBrace(source, openBraceIndex) {
     i += 1;
   }
   throw new Error("Unclosed object");
+}
+
+/** 객체 본문 끝에 프로퍼티 추가할 때 선행 쉼표 (이미 `,` 로 끝나면 생략) */
+function commaBeforeObjectInsert(source, bodyStart, bodyClose) {
+  const trimmed = source.slice(bodyStart, bodyClose).trimEnd();
+  if (!trimmed) return "";
+  return trimmed.endsWith(",") ? "" : ",";
 }
 
 function lineIndentBefore(source, index) {
@@ -423,15 +526,11 @@ export function replaceStringArray(source, keyPath, items) {
   const parts = keyPath.split(".");
   const arrayKey = parts[parts.length - 1];
   const parentKeys = parts.slice(0, -1);
-  const scopeStart = parentKeys.length ? findScopeStart(source, parentKeys) : 0;
-  const scope = source.slice(scopeStart);
-  const arrayRe = new RegExp(`${keyInSourcePattern(arrayKey)}\\s*:\\s*\\[`);
-  const match = arrayRe.exec(scope);
-  if (!match) {
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
+  const bracketIndex = findTopLevelArrayKeyBracketIndex(source, parentKeys, arrayKey);
+  if (bracketIndex === null) {
     throw new Error(`Array key not found: ${arrayKey} at ${keyPath}`);
   }
-
-  const bracketIndex = scopeStart + match.index + match[0].length - 1;
   let depth = 0;
   let endBracket = bracketIndex;
   for (let i = bracketIndex; i < source.length; i++) {
@@ -451,6 +550,121 @@ export function replaceStringArray(source, keyPath, items) {
       ? ""
       : `\n${items.map((item) => `    "${escapeJsString(item)}"`).join(",\n")}\n  `;
   const replacement = `[${body}]`;
+  return `${source.slice(0, bracketIndex)}${replacement}${source.slice(endBracket + 1)}`;
+}
+
+/**
+ * @param {string[][] | undefined} groups
+ */
+function nestedStringGroupsToJs(groups) {
+  if (!groups?.length) return "[]";
+  const inner = groups
+    .map(
+      (group) =>
+        `[\n        ${group.map((line) => `"${escapeJsString(line)}"`).join(",\n        ")}\n      ]`,
+    )
+    .join(",\n      ");
+  return `[\n      ${inner}\n    ]`;
+}
+
+/**
+ * string[][] (groups 등) 배열 전체 교체
+ * @param {string} source
+ * @param {string} keyPath e.g. group.groups or pages.whoWeAre.groups
+ * @param {string[][]} groups
+ */
+export function replaceNestedStringArray(source, keyPath, groups) {
+  const parts = keyPath.split(".");
+  const arrayKey = parts[parts.length - 1];
+  const parentKeys = parts.slice(0, -1);
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
+  const bracketIndex = findTopLevelArrayKeyBracketIndex(source, parentKeys, arrayKey);
+  if (bracketIndex === null) {
+    throw new Error(`Nested array key not found: ${arrayKey} at ${keyPath}`);
+  }
+  let depth = 0;
+  let endBracket = bracketIndex;
+  for (let i = bracketIndex; i < source.length; i++) {
+    const ch = source[i];
+    if (ch === "[") depth += 1;
+    else if (ch === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        endBracket = i;
+        break;
+      }
+    }
+  }
+
+  const replacement = nestedStringGroupsToJs(groups);
+  return `${source.slice(0, bracketIndex)}${replacement}${source.slice(endBracket + 1)}`;
+}
+
+/**
+ * @param {{ lead?: string, items: string[] }} list
+ */
+function listBlockToJs(list) {
+  const lines = [];
+  if (list.lead?.trim()) {
+    lines.push(`lead: "${escapeJsString(list.lead)}"`);
+  }
+  const items = list.items ?? [];
+  const itemsBody =
+    items.length === 0
+      ? ""
+      : `\n          ${items.map((item) => `"${escapeJsString(item)}"`).join(",\n          ")}\n        `;
+  lines.push(`items: [${itemsBody}]`);
+  return `{\n        ${lines.join(",\n        ")}\n      }`;
+}
+
+/**
+ * @param {{ lead?: string, items: string[] }[] | undefined} lists
+ */
+function listBlocksToJs(lists) {
+  if (!lists?.length) return "[]";
+  return `[\n      ${lists.map((list) => listBlockToJs(list)).join(",\n      ")}\n    ]`;
+}
+
+/**
+ * lists: [{ lead, items }] 배열 전체 교체·없으면 섹션 객체에 추가
+ * @param {string} source
+ * @param {string} keyPath e.g. pages.whoWeAre.lists or group.lists
+ * @param {{ lead?: string, items: string[] }[]} lists
+ */
+export function replaceListBlocksArray(source, keyPath, lists) {
+  const parts = keyPath.split(".");
+  const arrayKey = parts[parts.length - 1];
+  const parentKeys = parts.slice(0, -1);
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
+  let bracketIndex = findTopLevelArrayKeyBracketIndex(source, parentKeys, arrayKey);
+
+  if (bracketIndex === null) {
+    const close = findClosingBrace(source, scopeStart);
+    const indent = lineIndentBefore(source, close);
+    const childIndent = `${indent}  `;
+    const comma = commaBeforeObjectInsert(source, scopeStart, close);
+    const listsJs = listBlocksToJs(lists)
+      .split("\n")
+      .map((line, i) => (i === 0 ? line : `${childIndent}${line}`))
+      .join("\n");
+    const insert = `${comma}\n${childIndent}${arrayKey}: ${listsJs}`;
+    return `${source.slice(0, close)}${insert}${source.slice(close)}`;
+  }
+  let depth = 0;
+  let endBracket = bracketIndex;
+  for (let i = bracketIndex; i < source.length; i++) {
+    const ch = source[i];
+    if (ch === "[") depth += 1;
+    else if (ch === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        endBracket = i;
+        break;
+      }
+    }
+  }
+
+  const replacement = listBlocksToJs(lists);
   return `${source.slice(0, bracketIndex)}${replacement}${source.slice(endBracket + 1)}`;
 }
 
@@ -545,55 +759,29 @@ export function replaceSectionFlow(source, sectionScope, blocks) {
   const parentKeys = Array.isArray(sectionScope)
     ? sectionScope
     : [sectionScope];
-  const scopeStart = resolveScopeStart(source, parentKeys);
-  const scope = source.slice(scopeStart);
-  const flowRe = /flow\s*:\s*\[/;
+  const cleaned = removeAllTopLevelArrayProperties(source, parentKeys, "flow");
+  const scopeStart = resolveScopeStart(cleaned, parentKeys);
   const body =
     blocks.length === 0
       ? ""
       : `\n${blocks.map((b) => `      ${storedFlowBlockToJs(b)}`).join(",\n")}\n    `;
-  const replacement = `[${body}]`;
-
-  const match = flowRe.exec(scope);
-  if (match) {
-    const bracketIndex = scopeStart + match.index + match[0].length - 1;
-    let depth = 0;
-    let endBracket = bracketIndex;
-    for (let i = bracketIndex; i < source.length; i++) {
-      const ch = source[i];
-      if (ch === "[") depth += 1;
-      else if (ch === "]") {
-        depth -= 1;
-        if (depth === 0) {
-          endBracket = i;
-          break;
-        }
-      }
-    }
-    return `${source.slice(0, bracketIndex)}${replacement}${source.slice(endBracket + 1)}`;
-  }
-
-  const titleRe = /title\s*:\s*(?:"[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*')\s*,?\s*\n/;
-  const titleMatch = titleRe.exec(scope);
-  const insertAt = titleMatch
-    ? scopeStart + titleMatch.index + titleMatch[0].length
-    : scopeStart;
-  const insert = `    flow: [${body}],\n`;
-  return `${source.slice(0, insertAt)}${insert}${source.slice(insertAt)}`;
+  const close = findClosingBrace(cleaned, scopeStart);
+  const comma = commaBeforeObjectInsert(cleaned, scopeStart, close);
+  const indent = lineIndentBefore(cleaned, close);
+  const childIndent = `${indent}  `;
+  const flowJs = `"flow": [${body}]`
+    .split("\n")
+    .map((line, i) => (i === 0 ? line : `${childIndent}${line}`))
+    .join("\n");
+  const insert = `${comma}\n${childIndent}${flowJs}`;
+  return `${cleaned.slice(0, close)}${insert}${cleaned.slice(close)}`;
 }
 
 /**
  * @param {string[][] | undefined} groups
  */
 function groupsToJs(groups) {
-  if (!groups?.length) return "[]";
-  const inner = groups
-    .map(
-      (group) =>
-        `[\n        ${group.map((line) => `"${escapeJsString(line)}"`).join(",\n        ")}\n      ]`,
-    )
-    .join(",\n      ");
-  return `[\n      ${inner}\n    ]`;
+  return nestedStringGroupsToJs(groups);
 }
 
 /**
@@ -647,8 +835,8 @@ export function removeContentSectionKey(source, sectionKey) {
     throw new Error(`Section key not found in content: ${sectionKey}`);
   }
   const keyStart = bodyStart + match.index;
-  const openBrace = keyStart + match[0].length - 1;
-  const closeBrace = findClosingBrace(source, openBrace);
+  const sectionBodyStart = keyStart + match[0].length;
+  const closeBrace = findClosingBrace(source, sectionBodyStart);
   let end = closeBrace + 1;
   while (end < source.length && /[ \t\r\n]/.test(source[end])) end++;
   if (source[end] === ",") end++;

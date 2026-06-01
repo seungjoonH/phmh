@@ -15,6 +15,8 @@ export type FlowBlock =
   | { type: "p"; text: string; textKey: string }
   | { type: "heading"; text: string; textKey: string }
   | { type: "sectionTitle"; text: string; textKey: string }
+  /** ServiceSection prepend 전용 — locale `*.tagline` (flow 배열에는 저장하지 않음) */
+  | { type: "tagline"; text: string; textKey: string }
   | { type: "list"; ordered: boolean; lead?: string; items: string[]; listKey: string }
   | { type: "hr" }
   | { type: "button"; text: string; textKey: string }
@@ -169,7 +171,8 @@ export function flattenSectionToFlow(
   keyPrefix: string,
   options: FlattenFlowOptions = {},
 ): FlowBlock[] {
-  if (section.flow?.length) {
+  // `flow: []` 도 의도적 빈 본문 — paragraphs 폴백으로 삭제가 되살아나지 않게 함
+  if (Array.isArray(section.flow)) {
     return section.flow.map((b) => normalizeStoredFlowBlock(b as StoredFlowBlock));
   }
 
@@ -245,6 +248,7 @@ export function flowBlockLeadKey(block: FlowBlock): string {
     case "p":
     case "heading":
     case "sectionTitle":
+    case "tagline":
     case "button":
       return `${block.type}:${block.textKey}`;
     case "list":
@@ -337,6 +341,7 @@ export function flowToSectionContent(flow: FlowBlock[]): SectionContent {
         break;
       }
       case "sectionTitle":
+      case "tagline":
       case "hr":
       case "button":
       case "img":
@@ -373,7 +378,8 @@ export function hydrateFlowBlocks(
     if (
       block.type === "p" ||
       block.type === "heading" ||
-      block.type === "sectionTitle"
+      block.type === "sectionTitle" ||
+      block.type === "tagline"
     ) {
       return { ...block, text: readText(block.textKey) };
     }

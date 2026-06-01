@@ -116,9 +116,11 @@ export function applyArrayItemTextDraftsForLocale(
   base: Messages,
   locale: string,
   drafts: Record<string, Partial<LocaleTextValues>>,
+  options?: { skipKeys?: (key: string) => boolean },
 ): Messages {
   let result = base;
   for (const [key, entry] of Object.entries(drafts)) {
+    if (options?.skipKeys?.(key)) continue;
     const parsed = parseArrayItemKey(key);
     if (!parsed) continue;
     const value = entry[locale];
@@ -179,9 +181,11 @@ export function applyArrayDraftsForLocale(
   base: Messages,
   locale: string,
   arrayDrafts: Record<string, Partial<LocaleStringArrays>>,
+  options?: { skipKeys?: (key: string) => boolean },
 ): Messages {
   let result = base;
   for (const [key, entry] of Object.entries(arrayDrafts)) {
+    if (options?.skipKeys?.(key)) continue;
     const value = entry[locale];
     if (Array.isArray(value)) {
       result = setArrayAtPath(result, key, value);

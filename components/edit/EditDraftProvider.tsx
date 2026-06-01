@@ -18,6 +18,10 @@ import { tPath } from "@/lib/i18n/messages";
 import { commitLongFormSectionDrafts } from "@/lib/edit/commit-long-form-sections";
 import { commitSectionFlowDrafts } from "@/lib/edit/commit-section-flow";
 import {
+  flowBlockTextKeys,
+  isFlowManagedContentKey,
+} from "@/lib/edit/flow-group-key";
+import {
   commitPendingEdits,
   computeTherapistTargetSlug,
   isContactStructureDirty,
@@ -563,7 +567,10 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   );
 
   const displayMessages = useMemo(() => {
-    let result = applyArrayDraftsForLocale(base.messages, base.locale, arrayDrafts);
+    const flowSectionKeys = new Set(Object.keys(flowDrafts));
+    let result = applyArrayDraftsForLocale(base.messages, base.locale, arrayDrafts, {
+      skipKeys: (key) => isFlowManagedContentKey(key, flowSectionKeys),
+    });
     result = applyLongFormSectionDraftsForLocale(
       result,
       base.locale,
@@ -572,7 +579,9 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     result = applyStepsDraftsForLocale(result, base.locale, stepsDrafts);
     result = applyFlowDraftsForLocale(result, flowDrafts);
     result = applyStepFieldDraftsForLocale(result, base.locale, drafts);
-    result = applyArrayItemTextDraftsForLocale(result, base.locale, drafts);
+    result = applyArrayItemTextDraftsForLocale(result, base.locale, drafts, {
+      skipKeys: (key) => isFlowManagedContentKey(key, flowSectionKeys),
+    });
     result = applyDraftsForLocale(result, base.locale, drafts);
     return result;
   }, [
@@ -1180,9 +1189,9 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     (sectionKey: string): FlowBlock[] => {
       const section = getSectionFromMessages(sectionKey);
       const prepend = flowPrependRef.current[sectionKey] ?? [];
-      const base =
-        flowDrafts[sectionKey] ??
-        flattenSectionToFlow(section, sectionKey, { prepend });
+      const base = Object.hasOwn(flowDrafts, sectionKey)
+        ? flowDrafts[sectionKey]
+        : flattenSectionToFlow(section, sectionKey, { prepend });
       return ensurePrependBlocks(base, prepend);
     },
     [flowDrafts, getSectionFromMessages],
@@ -1248,6 +1257,18 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       setFlowBusy(sectionKey);
       try {
         const current = sourceBlocks ?? getFlowBlocksForEdit(sectionKey);
+        const removed = current[index];
+        if (removed) {
+          for (const key of flowBlockTextKeys(removed)) {
+            revertDraft(key);
+            setHiddenTextKeys((prev) => {
+              if (!prev[key]) return prev;
+              const next = { ...prev };
+              delete next[key];
+              return next;
+            });
+          }
+        }
         saveFlowDraft(
           sectionKey,
           current.filter((_, i) => i !== index),
@@ -1256,7 +1277,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         setFlowBusy(null);
       }
     },
-    [getFlowBlocksForEdit, saveFlowDraft],
+    [getFlowBlocksForEdit, saveFlowDraft, revertDraft],
   );
 
   const insertFlowBlock = useCallback(
@@ -1359,12 +1380,13 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     setCommitting(true);
     try {
       const savedImageKeys = Object.keys(imageDrafts);
-      if (Object.keys(flowDrafts).length > 0) {
-        await commitSectionFlowDrafts(flowDrafts);
-      }
 
       if (Object.keys(longFormSectionDrafts).length > 0) {
         await commitLongFormSectionDrafts(longFormSectionDrafts);
+      }
+
+      if (Object.keys(flowDrafts).length > 0) {
+        await commitSectionFlowDrafts(flowDrafts);
       }
 
       for (const [slug, draft] of Object.entries(centerImageDrafts)) {
@@ -1399,6 +1421,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         sitePagesHiddenDraft,
         sitePagesHiddenBaseline: sitePagesHiddenBaseline.current,
         therapistDirtySlugs: Object.keys(therapistBlocksDirty),
+        flowDraftSectionKeys: Object.keys(flowDrafts),
       });
 
       if (savedImageKeys.length > 0) {

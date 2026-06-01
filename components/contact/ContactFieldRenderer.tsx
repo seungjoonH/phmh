@@ -3,13 +3,12 @@
 // Contact 스키마 필드 → UI (문구 SSOT: lib/contact-form-schema.ts)
 // 필드 텍스트/구조 편집은 EditInlineControls 의 「설정」 패널에서 단독 관리한다.
 import type { ContactFormLocaleKey } from "@/lib/contact-form-schema";
+import type { ContactFieldDefinition } from "@/lib/contact-form-schema";
 import {
-  getContactFieldCopy,
-  getFieldOptions,
-  type ContactFieldDefinition,
-} from "@/lib/contact-form-schema";
-import {
+  useContactFieldBody,
+  useContactFieldCheckbox,
   useContactFieldLabel,
+  useContactFieldOptions,
   useContactFieldPlaceholder,
 } from "@/lib/edit/useContactFieldCopy";
 import { ContactFieldDate } from "./ContactFieldDate";
@@ -21,9 +20,11 @@ type Props = {
 };
 
 export function ContactFieldRenderer({ field, locale }: Props) {
-  const copy = getContactFieldCopy(locale, field.id);
   const label = useContactFieldLabel(locale, field.id);
   const placeholder = useContactFieldPlaceholder(locale, field.id);
+  const body = useContactFieldBody(locale, field.id);
+  const checkbox = useContactFieldCheckbox(locale, field.id);
+  const options = useContactFieldOptions(locale, field.id);
 
   switch (field.type) {
     case "text":
@@ -90,7 +91,6 @@ export function ContactFieldRenderer({ field, locale }: Props) {
       );
 
     case "select": {
-      const options = getFieldOptions(locale, field.id);
       return (
         <ContactFieldShell label={label} required={field.required}>
           <select name={field.id} required={field.required} className="input-underline">
@@ -106,7 +106,6 @@ export function ContactFieldRenderer({ field, locale }: Props) {
     }
 
     case "checkboxGroup": {
-      const options = getFieldOptions(locale, field.id);
       return (
         <fieldset>
           <legend className="mb-3 font-medium">
@@ -137,9 +136,9 @@ export function ContactFieldRenderer({ field, locale }: Props) {
             {label}
             {field.required ? " *" : ""}
           </legend>
-          {copy?.body ? (
+          {body ? (
             <p className="mb-3 whitespace-pre-line text-sm text-page-body/80">
-              {copy.body}
+              {body}
             </p>
           ) : null}
           <label className="flex items-start gap-2 text-sm">
@@ -149,7 +148,7 @@ export function ContactFieldRenderer({ field, locale }: Props) {
               required={field.required}
               className="input-checkbox"
             />
-            <span>{copy?.checkbox ?? label}</span>
+            <span>{checkbox ?? label}</span>
           </label>
         </fieldset>
       );

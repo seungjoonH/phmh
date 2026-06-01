@@ -9,13 +9,20 @@ type Props = {
   children: string;
 };
 
+function withMultilineClass(className: string | undefined, text: string) {
+  const extra = text.includes("\n") ? "whitespace-pre-line" : "";
+  if (!className && !extra) return undefined;
+  return [className, extra].filter(Boolean).join(" ");
+}
+
 export function MarkupText({ as: Tag = "span", className, children }: Props) {
+  const mergedClass = withMultilineClass(className, children);
   if (isEditMode() && children.trim() === "") {
     return (
-      <Tag className={className}>
+      <Tag className={mergedClass}>
         <EditEmptyPlaceholder />
       </Tag>
     );
   }
-  return <Tag className={className}>{renderInlineMarkup(children)}</Tag>;
+  return <Tag className={mergedClass}>{renderInlineMarkup(children)}</Tag>;
 }

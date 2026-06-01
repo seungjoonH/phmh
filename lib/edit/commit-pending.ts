@@ -61,6 +61,7 @@ import {
   renameTherapistRuntime,
   setTherapistRuntime,
 } from "@/lib/therapists/runtime";
+import { isFlowManagedContentKey } from "@/lib/edit/flow-group-key";
 import { getActiveLocaleIds } from "@/lib/site-locales";
 import { getImageRegistryEntry } from "@/lib/edit/image-registry";
 import { therapistSlugFromPortraitKey } from "@/lib/therapists/default-portrait";
@@ -81,17 +82,21 @@ export type PendingCommitInput = {
   sitePagesHiddenDraft: string[] | null;
   sitePagesHiddenBaseline: string[] | null;
   therapistDirtySlugs?: string[];
+  /** flow 저장 직후 — groups 셀은 commit-section-flow에서 이미 반영됨 */
+  flowDraftSectionKeys?: string[];
 };
 
 async function mergeArrayItemTextDrafts(
   drafts: Record<string, LocaleTextValues>,
   arrayDrafts: Record<string, Partial<LocaleStringArrays>>,
+  flowDraftSectionKeys: string[] = [],
 ): Promise<{
   textDrafts: Record<string, LocaleTextValues>;
   mergedArrayDrafts: Record<string, LocaleStringArrays>;
 }> {
   const textDrafts = { ...drafts };
   const mergedArrayDrafts: Record<string, LocaleStringArrays> = {};
+  const flowSectionKeys = new Set(flowDraftSectionKeys);
 
   for (const [key, partial] of Object.entries(arrayDrafts)) {
     if (!partial || Object.keys(partial).length === 0) continue;
@@ -104,6 +109,10 @@ async function mergeArrayItemTextDrafts(
     if (isTherapistEditKey(key) || isCenterEditKey(key)) continue;
     const parsed = parseArrayItemKey(key);
     if (!parsed) continue;
+    if (isFlowManagedContentKey(key, flowSectionKeys)) {
+      delete textDrafts[key];
+      continue;
+    }
     delete textDrafts[key];
 
     const current =
@@ -153,13 +162,17 @@ export type PendingCommitResult = {
 export async function commitPendingEdits(
   input: PendingCommitInput,
 ): Promise<PendingCommitResult> {
+  const flowSectionKeys = new Set(input.flowDraftSectionKeys ?? []);
+
   const { textDrafts, mergedArrayDrafts } = await mergeArrayItemTextDrafts(
     input.drafts,
     input.arrayDrafts,
+    input.flowDraftSectionKeys,
   );
 
   for (const key of Object.keys(input.hiddenTextKeys)) {
     if (isTherapistEditKey(key) || isCenterEditKey(key)) continue;
+    if (isFlowManagedContentKey(key, flowSectionKeys)) continue;
     await patchText(key, emptyLocaleTextValues());
   }
 
@@ -236,6 +249,7 @@ export async function commitPendingEdits(
   }
 
   for (const [key, locales] of expandTextDraftsForCommit(textDrafts)) {
+    if (isFlowManagedContentKey(key, flowSectionKeys)) continue;
     await patchText(key, locales);
   }
 
@@ -249,6 +263,7 @@ export async function commitPendingEdits(
       setTherapistRuntime(therapistArray.slug, result.record ?? record);
       continue;
     }
+    if (isFlowManagedContentKey(key, flowSectionKeys)) continue;
     await patchStringArray(key, locales);
   }
 
@@ -281,7 +296,10 @@ export async function commitPendingEdits(
     await setImageHidden(key, true);
   }
 
-  if (input.contactStructureDraft) {
+  if (
+    input.contactStructureDraft &&
+    isContactStructureDirty(input.contactStructureDraft, input.contactStructureBaseline)
+  ) {
     const baseline =
       input.contactStructureBaseline ?? (await fetchContactFormStructure());
     const next = input.contactStructureDraft;

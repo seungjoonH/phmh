@@ -2,7 +2,7 @@
 
 // 서비스 섹션 본문 — p·제목·목록·구분선·이미지·버튼 블록 DnD·추가
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { EditableImage } from "@/components/edit/EditableImage";
 import { EditableText } from "@/components/edit/EditableText";
 import { EditFlowInsertBar } from "@/components/edit/EditFlowInsertBar";
@@ -19,7 +19,9 @@ import {
   type FlowBlockInsertType,
 } from "@/lib/edit/section-flow";
 import { isEditMode } from "@/lib/edit/env";
+import { flowImagePublicPath } from "@/lib/edit/image-registry";
 import { useEditText } from "@/lib/edit/use-edit-text";
+import { isImageKeyHidden } from "@/lib/image-hidden";
 import { MarkupText } from "@/components/ui/MarkupText";
 
 type Props = {
@@ -93,6 +95,19 @@ function FlowSectionTitleBlock({
   );
 }
 
+function FlowTaglineBlock({ block }: { block: Extract<FlowBlock, { type: "tagline" }> }) {
+  const text = useEditText(block.textKey, block.text);
+  return (
+    <EditableText
+      as="p"
+      className="mt-2 text-lg font-medium text-page-heading/90"
+      editKey={block.textKey}
+    >
+      {text}
+    </EditableText>
+  );
+}
+
 function FlowListBlock({ block }: { block: Extract<FlowBlock, { type: "list" }> }) {
   const items = block.items.filter((item) => item.trim() !== "");
   const isEmpty = items.length === 0;
@@ -145,26 +160,52 @@ function FlowButtonBlock({
   );
 }
 
+function FlowImagePlaceholder({ editKey }: { editKey: string }) {
+  return (
+    <div
+      className="relative flex aspect-[16/10] w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm border-2 border-dashed border-page-body/30 bg-page-body/5 text-3xl leading-none text-page-body/45"
+      {...editImageAttrs(editKey, { longPress: false })}
+      aria-label="이미지 추가"
+    >
+      +
+    </div>
+  );
+}
+
 function FlowImageBlock({ block }: { block: Extract<FlowBlock, { type: "img" }> }) {
-  if (!block.src) {
-    return (
-      <div
-        className="relative flex aspect-[16/10] w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm border-2 border-dashed border-page-body/30 bg-page-body/5 text-3xl leading-none text-page-body/45"
-        {...editImageAttrs(block.editKey, { longPress: false })}
-        aria-label="이미지 추가"
-      >
-        +
-      </div>
-    );
+  const edit = useEditDraftOptional();
+  const pendingDelete = Boolean(edit?.isImagePendingDelete(block.editKey));
+  const hasDraft = Boolean(edit?.imageDrafts[block.editKey]);
+  const registrySrc = flowImagePublicPath(block.editKey) ?? "";
+  const committedSrc = block.src || registrySrc;
+  const [loadFailed, setLoadFailed] = useState(false);
+
+  useEffect(() => {
+    setLoadFailed(false);
+  }, [block.editKey, committedSrc, hasDraft]);
+
+  if (pendingDelete) {
+    return <FlowImagePlaceholder editKey={block.editKey} />;
   }
+
+  const showPlaceholder =
+    !hasDraft && !block.src && (!registrySrc || loadFailed);
+
+  if (showPlaceholder) {
+    return <FlowImagePlaceholder editKey={block.editKey} />;
+  }
+
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
       <EditableImage
         editKey={block.editKey}
-        src={block.src}
+        src={committedSrc}
         alt={block.alt ?? ""}
         fill
         className="object-cover"
+        onError={() => {
+          if (!hasDraft) setLoadFailed(true);
+        }}
       />
     </div>
   );
@@ -178,6 +219,8 @@ function FlowBlockBody({ block, ctaHref }: { block: FlowBlock; ctaHref?: string 
       return <FlowHeadingBlock block={block} />;
     case "sectionTitle":
       return <FlowSectionTitleBlock block={block} />;
+    case "tagline":
+      return <FlowTaglineBlock block={block} />;
     case "list":
       return <FlowListBlock block={block} />;
     case "hr":
@@ -216,6 +259,12 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
           <MarkupText as="span">{block.text}</MarkupText>
         </h2>
       );
+    case "tagline":
+      return (
+        <p className="mt-2 text-lg font-medium text-page-heading/90">
+          <MarkupText as="span">{block.text}</MarkupText>
+        </p>
+      );
     case "list": {
       const items = block.items.filter((item) => item.trim() !== "");
       const Tag = block.ordered ? "ol" : "ul";
@@ -246,14 +295,17 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
       ) : (
         <span className="cta-primary inline-block">{block.text}</span>
       );
-    case "img":
-      if (!block.src) return null;
+    case "img": {
+      if (isImageKeyHidden(block.editKey)) return null;
+      const src = block.src || flowImagePublicPath(block.editKey);
+      if (!src) return null;
       return (
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={block.src} alt={block.alt ?? ""} className="h-full w-full object-cover" />
+          <img src={src} alt={block.alt ?? ""} className="h-full w-full object-cover" />
         </div>
       );
+    }
     default:
       return null;
   }
@@ -263,7 +315,8 @@ function shouldRowBeFullWidth(block: FlowBlock): boolean {
   return (
     block.type === "hr" ||
     block.type === "img" ||
-    block.type === "sectionTitle"
+    block.type === "sectionTitle" ||
+    block.type === "tagline"
   );
 }
 
@@ -285,8 +338,8 @@ export function EditableContentFlow({
           label: ctaLabel,
         })
       : blocks;
-  const sourceBlocks =
-    displayBlocks.length !== blocks.length ? displayBlocks : undefined;
+  /** CTA·prepend 는 표시 전용 — 삭제·이동·삽입은 props.blocks 기준 */
+  const mutationBlocks = blocks;
 
   const [openInsertIndex, setOpenInsertIndex] = useState<number | null>(null);
   const insertTypes = isServiceSectionKey(sectionKey)
@@ -339,7 +392,7 @@ export function EditableContentFlow({
   const busy = edit.flowBusy === sectionKey;
 
   createDropHandler((from, insertAt) => {
-    return edit.moveFlowBlock(sectionKey, from, insertAt, sourceBlocks);
+    return edit.moveFlowBlock(sectionKey, from, insertAt, mutationBlocks);
   });
 
   const handleInsert = (index: number, type: FlowBlockInsertType) => {
@@ -347,7 +400,7 @@ export function EditableContentFlow({
     void edit.insertFlowBlock(sectionKey, index, type, {
       ctaEditKey,
       ctaLabel,
-      sourceBlocks,
+      sourceBlocks: mutationBlocks,
     });
   };
 
@@ -388,11 +441,11 @@ export function EditableContentFlow({
                   hideHandle={isPrepend}
                   onDragStart={beginDrag}
                   controls={
-                    isPrepend ? undefined : (
+                    isPrepend || i >= mutationBlocks.length ? undefined : (
                       <EditInlineControls
                         busy={busy}
                         onDelete={() =>
-                          void edit.removeFlowBlock(sectionKey, i, sourceBlocks)
+                          void edit.removeFlowBlock(sectionKey, i, mutationBlocks)
                         }
                       />
                     )

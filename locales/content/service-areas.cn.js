@@ -1,3 +1,4 @@
+// 서비스 분야 중국어 본문 (en.js와 동일 구조, 빈 문자열)
 export const serviceAreasSectionsCn = {
   "depression": {
     "title": "",
@@ -14,11 +15,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -32,6 +28,9 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -83,11 +82,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -95,15 +89,12 @@ export const serviceAreasSectionsCn = {
               "",
               "",
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -157,11 +148,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "items": [
@@ -173,6 +159,9 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -186,7 +175,6 @@ export const serviceAreasSectionsCn = {
           {
             "lead": "",
             "items": [
-              "",
               "",
               "",
               "",
@@ -222,11 +210,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -238,6 +221,9 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -251,8 +237,6 @@ export const serviceAreasSectionsCn = {
           {
             "lead": "",
             "items": [
-              "",
-              "",
               "",
               "",
               "",
@@ -281,11 +265,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -296,6 +275,9 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -344,25 +326,16 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "items": [
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -412,24 +385,16 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "items": [
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -443,7 +408,6 @@ export const serviceAreasSectionsCn = {
           {
             "lead": "",
             "items": [
-              "",
               "",
               "",
               "",
@@ -480,11 +444,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "items": [
@@ -496,15 +455,13 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -553,22 +510,16 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "items": [
               "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -618,26 +569,18 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
             "items": [
               "",
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -687,22 +630,16 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "items": [
               "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -720,15 +657,12 @@ export const serviceAreasSectionsCn = {
               "",
               "",
               "",
-              "",
-              "",
               ""
             ]
           },
           {
             "lead": "",
             "items": [
-              "",
               "",
               "",
               ""
@@ -754,11 +688,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -770,6 +699,9 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -818,11 +750,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -834,6 +761,9 @@ export const serviceAreasSectionsCn = {
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {
@@ -880,11 +810,6 @@ export const serviceAreasSectionsCn = {
     "subsections": [
       {
         "heading": "",
-        "groups": [
-          [
-            ""
-          ]
-        ],
         "lists": [
           {
             "lead": "",
@@ -892,17 +817,12 @@ export const serviceAreasSectionsCn = {
               "",
               "",
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               ""
             ]
           }
+        ],
+        "closing": [
+          ""
         ]
       },
       {

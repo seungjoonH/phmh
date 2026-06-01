@@ -5,6 +5,7 @@ import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
 import {
   getContactFieldCopy,
   getContactFormUi,
+  getFieldOptions,
   type ContactFormLocaleKey,
 } from "@/lib/contact-form-schema";
 
@@ -36,6 +37,39 @@ export function useContactFieldPlaceholder(
   const draft = edit ? draftValue(edit.drafts, key, locale) : undefined;
   if (draft !== undefined) return draft;
   return getContactFieldCopy(locale, fieldId)?.placeholder;
+}
+
+export function useContactFieldBody(
+  locale: ContactFormLocaleKey,
+  fieldId: string,
+): string | undefined {
+  const edit = useEditDraftOptional();
+  const key = `contactForm.fields.${fieldId}.body`;
+  const draft = edit ? draftValue(edit.drafts, key, locale) : undefined;
+  if (draft !== undefined) return draft;
+  return getContactFieldCopy(locale, fieldId)?.body;
+}
+
+export function useContactFieldCheckbox(
+  locale: ContactFormLocaleKey,
+  fieldId: string,
+): string | undefined {
+  const edit = useEditDraftOptional();
+  const key = `contactForm.fields.${fieldId}.checkbox`;
+  const draft = edit ? draftValue(edit.drafts, key, locale) : undefined;
+  if (draft !== undefined) return draft;
+  return getContactFieldCopy(locale, fieldId)?.checkbox;
+}
+
+export function useContactFieldOptions(
+  locale: ContactFormLocaleKey,
+  fieldId: string,
+): string[] {
+  const edit = useEditDraftOptional();
+  const key = `contactForm.fields.${fieldId}.options`;
+  const draft = edit?.arrayDrafts[key]?.[locale];
+  if (draft) return [...draft];
+  return getFieldOptions(locale, fieldId);
 }
 
 type FormUiKey =

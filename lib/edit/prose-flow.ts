@@ -11,6 +11,17 @@ export type ProseSectionContent = SectionContent & {
   paragraphs?: string[];
 };
 
+/** locale `lists` 배열에 넣을 블록만 — 빈 목록 placeholder 는 flow 에만 남김 */
+export function listBlocksForLocaleSave(
+  lists: { lead?: string; items: string[] }[] | undefined,
+): { lead?: string; items: string[] }[] {
+  return (lists ?? []).filter(
+    (list) =>
+      Boolean(list.lead?.trim()) ||
+      list.items.some((item) => item.trim().length > 0),
+  );
+}
+
 export function isProseStyleSectionKey(sectionKey: string): boolean {
   if (
     sectionKey.startsWith("services.sections.") ||
@@ -32,11 +43,49 @@ export function paragraphsToFlow(sectionKey: string, paragraphs: string[]): Flow
   }));
 }
 
+/** legacy `paragraphs.N` textKey (flowText·flow.* 제외) */
+export function isLegacyParagraphTextKey(
+  sectionKey: string,
+  textKey: string,
+): boolean {
+  const prefix = `${sectionKey}.paragraphs.`;
+  return textKey.startsWith(prefix) && !textKey.includes(".flowText.");
+}
+
+/** flow 순서대로 legacy 문단 본문만 — flowText 문단은 paragraphs 배열에 넣지 않음 */
+export function legacyParagraphTextsFromFlow(
+  sectionKey: string,
+  flow: FlowBlock[],
+): string[] {
+  return flow
+    .filter(
+      (b): b is Extract<FlowBlock, { type: "p" }> =>
+        b.type === "p" && isLegacyParagraphTextKey(sectionKey, b.textKey),
+    )
+    .map((b) => b.text);
+}
+
+/** 저장 시 legacy 문단 textKey 를 0..n-1 로 재매핑 */
+export function remapLegacyParagraphTextKeys(
+  sectionKey: string,
+  flow: FlowBlock[],
+): FlowBlock[] {
+  const prefix = `${sectionKey}.paragraphs.`;
+  let index = 0;
+  return flow.map((block) => {
+    if (block.type !== "p" || !block.textKey.startsWith(prefix)) return block;
+    if (block.textKey.includes(".flowText.")) return block;
+    const next = { ...block, textKey: `${prefix}${index}` };
+    index += 1;
+    return next;
+  });
+}
+
 export function proseFallbackSection(
   sectionKey: string,
   section: ProseSectionContent,
 ): SectionContent {
-  if (section.flow?.length) return section;
+  if (Array.isArray(section.flow)) return section;
   if (section.paragraphs?.length) {
     return {
       ...section,

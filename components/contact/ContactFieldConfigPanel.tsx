@@ -57,6 +57,8 @@ export function ContactFieldConfigPanel() {
     drafts,
     setDraftEntry,
     applyArrayDraft,
+    revertDraft,
+    revertArrayDraft,
     contactStructureDraft,
     setContactStructureDraft,
     removeContactFieldDrafts,
@@ -133,38 +135,47 @@ export function ContactFieldConfigPanel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- 의도적으로 fieldId만 구독
   }, [fieldId]);
 
-  const updateField = useCallback(
-    (patch: Partial<ContactFieldDefinition>) => {
-      setField((prev) => {
-        if (!prev || !fieldId) return prev;
-        const next = { ...prev, ...patch };
-        const base = contactStructureDraft ?? getContactFormStructure();
-        const fields = base.fields.map((f) =>
-          f.id === fieldId ? ({ ...next, id: fieldId } as ContactFieldDefinition) : f,
-        );
-        setContactStructureDraft({ fields, layout: base.layout });
-        return next;
-      });
-    },
-    [fieldId, contactStructureDraft, setContactStructureDraft],
-  );
-
   const pushCopyToDrafts = useCallback(
     (state: FieldCopyState, def: ContactFieldDefinition) => {
       if (!fieldId) return;
-      setDraftEntry(`contactForm.fields.${fieldId}.label`, state.label);
+      const prefix = `contactForm.fields.${fieldId}`;
+      setDraftEntry(`${prefix}.label`, state.label);
       if (supportsPlaceholder(def.type)) {
-        setDraftEntry(`contactForm.fields.${fieldId}.placeholder`, state.placeholder);
+        setDraftEntry(`${prefix}.placeholder`, state.placeholder);
+      } else {
+        revertDraft(`${prefix}.placeholder`);
       }
       if (def.type === "consent") {
-        setDraftEntry(`contactForm.fields.${fieldId}.body`, state.body);
-        setDraftEntry(`contactForm.fields.${fieldId}.checkbox`, state.checkbox);
+        setDraftEntry(`${prefix}.body`, state.body);
+        setDraftEntry(`${prefix}.checkbox`, state.checkbox);
+      } else {
+        revertDraft(`${prefix}.body`);
+        revertDraft(`${prefix}.checkbox`);
       }
       if (supportsOptions(def.type)) {
-        applyArrayDraft(`contactForm.fields.${fieldId}.options`, state.options);
+        applyArrayDraft(`${prefix}.options`, state.options);
+      } else {
+        revertArrayDraft(`${prefix}.options`);
       }
     },
-    [fieldId, setDraftEntry, applyArrayDraft],
+    [fieldId, setDraftEntry, applyArrayDraft, revertDraft, revertArrayDraft],
+  );
+
+  const updateField = useCallback(
+    (patch: Partial<ContactFieldDefinition>) => {
+      if (!fieldId || !field || !copy) return;
+      const next = { ...field, ...patch } as ContactFieldDefinition;
+      setField(next);
+      const base = contactStructureDraft ?? getContactFormStructure();
+      setContactStructureDraft({
+        fields: base.fields.map((f) =>
+          f.id === fieldId ? ({ ...next, id: fieldId } as ContactFieldDefinition) : f,
+        ),
+        layout: base.layout,
+      });
+      pushCopyToDrafts(copy, next);
+    },
+    [fieldId, field, copy, contactStructureDraft, setContactStructureDraft, pushCopyToDrafts],
   );
 
   const updateCopy = useCallback(

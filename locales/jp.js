@@ -86,14 +86,38 @@ export default {
     "whoWeAre": {
       "title": "私たちについて",
       "paragraphs": [
-    "誰もが人生のどこかで、心理的な困難に直面することがあります。その経験は、それぞれの歩んできた道のり、背景、個性によってさまざまな形で現れます。今、つらい思いをされていますか？あなたは一人ではありません。専門的なサポートを求めることは、癒しと成長への、勇気ある大切な一歩です。",
-    "Peace & Hope メンタルヘルスサービスは、皆さまが心のバランスを取り戻し、より豊かな日々を送り、日常生活を再び満ち足りたものにできるよう、お手伝いします。症状への対処だけでなく、あなたの中にある強さを見つけ、人生の意味や目的を見出し、困難な時期の中でも成長できるよう、共に歩んでいきます。",
-    "ご状況に合わせて、対面カウンセリングとオンラインカウンセリングの両方をご用意しています。世界のどこにいても、私たちとつながることができます。センターへのご来訪でも、ご自宅からのカウンセリングでも、安全でプライバシーが徹底的に守られる環境をご提供します。",
-    "カウンセリングの開始についてご不明な点や、もっと知りたいことがあれば、いつでもお気軽にご連絡ください。どんなに辛い瞬間にも、希望はあります。Peace & Hope メンタルヘルスサービスは、いつもあなたのそばにいます。",
     "私たちがお力になります。",
     "心を込めて、\nPeace & Hope メンタルヘルスサービス チーム一同"
-  ]
-    },
+  ],
+      "flowText": {
+        "mpuvilgj6": {
+          "p": "対面およびオンラインカウンセリングの両方を提供しています。世界中どこからでもご利用いただけます。センターへのご来訪でも、ご自宅からのカウンセリングでも、機密性が保たれた安全な環境でセッションを行います。"
+        },
+        "mpuvimpf7": { "heading": "" },
+        "mpuvinp28": { "heading": "" },
+        "mpuxksaf1": {
+          "p": "カウンセリング開始についてご質問があれば、お気軽にお問い合わせください。最もつらい瞬間にも希望はあります。Peace & Hope メンタルヘルスサービスがあなたの歩みを支えます。"
+        },
+        "mpuxmlbl1": {
+          "p": "人生のどこかで、経験や背景、性格によって誰もが心理的な困難に直面することがあります。つらいときは、一人ではないと知ってください。専門的な支援を求めることは、癒しと成長への勇気ある第一歩です。"
+        },
+        "mpuxn57c2": {
+          "p": "Peace & Hope メンタルヘルスサービスでは、バランスを取り戻し、ウェルビーイングを高め、日常生活を取り戻すお手伝いをします。症状への対処にとどまらず、強みを認識し、意味と目的を見出し、困難な時期でも成長の可能性を引き出すことに重点を置いています。"
+        },
+        "mpuxn6ci3": { "heading": "" },
+        "mpuxp7l48": { "heading": "" }
+      },
+      "lists": [],
+    
+
+  "flow": [
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+      ]},
     "ourVision": {
       "title": "ビジョン",
       "paragraphs": [
@@ -142,14 +166,7 @@ export default {
         }
       ]
     },
-    "fee": {    flow: [
-      { type: "p", textKey: "pages.fee.paragraphs.1" },
-      { type: "p", textKey: "pages.fee.paragraphs.0" },
-      { type: "p", textKey: "pages.fee.paragraphs.2" },
-      { type: "p", textKey: "pages.fee.paragraphs.3" },
-      { type: "p", textKey: "pages.fee.paragraphs.4" }
-    ],
-
+    "fee": {
       "title": "料金",
       "paragraphs": [
     "**ダイレクトビリングサービスをご提供しています！**",

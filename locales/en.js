@@ -89,14 +89,38 @@ export default {
     "whoWeAre": {
       "title": "Who We Are",
       "paragraphs": [
-    "Everyone faces psychological challenges at some point in life, shaped by their unique experiences, background, and personality. If you're struggling, know that you’re not alone. Seeking professional support is a courageous and vital step toward healing and growth.",
-    "At Peace & Hope Mental Health Services, our goal is to help you regain balance, improve well-being, and restore your ability to navigate daily life. Our approach goes beyond simply addressing symptoms—we help you recognize your strengths, discover meaning and purpose, and unlock your potential for personal growth, even in difficult times.",
-    "To accommodate your needs, we offer both in-person and online counseling. No matter where you are in the world, you can connect with us. Whether you prefer visiting our center or receiving counseling from the comfort of your home, we provide a confidential and secure platform for your sessions.",
-    "If you have any questions or would like to learn more about starting therapy, don’t hesitate to reach out. Even in your hardest moments, there is hope. Peace & Hope Mental Health Services is here to support you every step of the way.",
-    "We’re here to help.",
+    "We're here to help.",
     "With best wishes,\nThe Peace & Hope Mental Health Services Team"
-  ]
-    },
+  ],
+      "flowText": {
+        "mpuvilgj6": {
+          "p": "To accommodate your needs, we offer both in-person and online counseling. No matter where you are in the world, you can connect with us. Whether you prefer visiting our center or receiving counseling from the comfort of your home, we provide a confidential and secure platform for your sessions."
+        },
+        "mpuvimpf7": { "heading": "" },
+        "mpuvinp28": { "heading": "" },
+        "mpuxksaf1": {
+          "p": "If you have any questions or would like to learn more about starting therapy, don't hesitate to reach out. Even in your hardest moments, there is hope. Peace & Hope Mental Health Services is here to support you every step of the way."
+        },
+        "mpuxmlbl1": {
+          "p": "Everyone faces psychological challenges at some point in life, shaped by their unique experiences, background, and personality. If you're struggling, know that you're not alone. Seeking professional support is a courageous and vital step toward healing and growth."
+        },
+        "mpuxn57c2": {
+          "p": "At Peace & Hope Mental Health Services, our goal is to help you regain balance, improve well-being, and restore your ability to navigate daily life. Our approach goes beyond simply addressing symptoms—we help you recognize your strengths, discover meaning and purpose, and unlock your potential for personal growth, even in difficult times."
+        },
+        "mpuxn6ci3": { "heading": "" },
+        "mpuxp7l48": { "heading": "" }
+      },
+      "lists": [],
+    
+
+  "flow": [
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+      ]},
     "ourVision": {
       "title": "Our Vision",
       "paragraphs": [
@@ -145,14 +169,7 @@ export default {
         }
       ]
     },
-    "fee": {    flow: [
-      { type: "p", textKey: "pages.fee.paragraphs.1" },
-      { type: "p", textKey: "pages.fee.paragraphs.0" },
-      { type: "p", textKey: "pages.fee.paragraphs.2" },
-      { type: "p", textKey: "pages.fee.paragraphs.3" },
-      { type: "p", textKey: "pages.fee.paragraphs.4" }
-    ],
-
+    "fee": {
       "title": "Fees",
       "paragraphs": [
     "**We provide direct billing services!**",

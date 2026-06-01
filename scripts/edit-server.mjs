@@ -9,6 +9,8 @@ import {
   insertContentSectionKey,
   patchLocaleFile,
   removeContentSectionKey,
+  replaceListBlocksArray,
+  replaceNestedStringArray,
   replaceSectionFlow,
   replaceStepsArray,
   replaceStringArray,
@@ -148,6 +150,30 @@ async function loadImageRegistry() {
   }
 
   return IMAGE_REGISTRY;
+}
+
+/** 정적 registry + flow·롱폼 동적 이미지 키 → 파일 경로 */
+function resolveImageRegistryEntry(registry, key) {
+  const hit = registry[key];
+  if (hit) return hit;
+
+  const flowMatch = /^flow\.(.+)\.([a-z0-9]+)\.img$/i.exec(key);
+  if (flowMatch) {
+    const [, sectionSlug, blockId] = flowMatch;
+    const safeSlug = String(sectionSlug).replace(/[^a-zA-Z0-9._-]/g, "_");
+    const publicPath = `/flow-uploads/${safeSlug}/${blockId}.png`;
+    return { file: `public${publicPath}`, publicPath };
+  }
+
+  const longFormMatch = /^(therapy|area)\.(sec_[a-z0-9]+)$/.exec(key);
+  if (longFormMatch) {
+    const [, domain, slug] = longFormMatch;
+    const folder = domain === "therapy" ? "services" : "service-areas";
+    const publicPath = `/${folder}/${slug}.png`;
+    return { file: `public${publicPath}`, publicPath };
+  }
+
+  return undefined;
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -613,6 +639,86 @@ async function patchArrayRegistry(keyPath, locales) {
   return { backupDir, files: touchedFiles };
 }
 
+/**
+ * @param {string} keyPath
+ * @param {Record<string, string[][]>} locales
+ */
+/**
+ * @param {string} keyPath
+ * @param {Record<string, { lead?: string, items: string[] }[]>} locales
+ */
+async function patchListBlocksRegistry(keyPath, locales) {
+  const target = resolveTextTarget(keyPath);
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+  /** @type {Record<string, string>} */
+  const beforePatch = {};
+  /** @type {string[]} */
+  const touchedFiles = [];
+
+  for (const id of getLocaleIds()) {
+    const nextLists = locales[id];
+    if (!Array.isArray(nextLists)) {
+      throw new Error(`Missing locale list blocks: ${id}`);
+    }
+    const { file, patchPath } = getTextLocaleFile(ROOT, id, target);
+    if (!(file in beforePatch)) {
+      beforePatch[file] = fs.readFileSync(file, "utf8");
+      backupFile(file, backupDir);
+      touchedFiles.push(file);
+    }
+    const current = fs.readFileSync(file, "utf8");
+    const patched = replaceListBlocksArray(current, patchPath, nextLists);
+    fs.writeFileSync(file, patched, "utf8");
+  }
+
+  const check = await runLocaleTest();
+  if (!check.ok) {
+    for (const file of touchedFiles) {
+      fs.writeFileSync(file, beforePatch[file], "utf8");
+    }
+    throw new Error(check.error ?? "Locale key check failed");
+  }
+
+  return { backupDir, files: touchedFiles };
+}
+
+async function patchNestedArrayRegistry(keyPath, locales) {
+  const target = resolveTextTarget(keyPath);
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+  /** @type {Record<string, string>} */
+  const beforePatch = {};
+  /** @type {string[]} */
+  const touchedFiles = [];
+
+  for (const id of getLocaleIds()) {
+    const nextGroups = locales[id];
+    if (!Array.isArray(nextGroups)) {
+      throw new Error(`Missing locale nested array: ${id}`);
+    }
+    const { file, patchPath } = getTextLocaleFile(ROOT, id, target);
+    if (!(file in beforePatch)) {
+      beforePatch[file] = fs.readFileSync(file, "utf8");
+      backupFile(file, backupDir);
+      touchedFiles.push(file);
+    }
+    const current = fs.readFileSync(file, "utf8");
+    const patched = replaceNestedStringArray(current, patchPath, nextGroups);
+    fs.writeFileSync(file, patched, "utf8");
+  }
+
+  const check = await runLocaleTest();
+  if (!check.ok) {
+    for (const file of touchedFiles) {
+      fs.writeFileSync(file, beforePatch[file], "utf8");
+    }
+    throw new Error(check.error ?? "Locale key check failed");
+  }
+
+  return { backupDir, files: touchedFiles };
+}
+
 function runLocaleTest() {
   return runPnpmScript("test:locale");
 }
@@ -703,25 +809,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && imageRegistryMatch) {
       const key = decodeURIComponent(imageRegistryMatch[1]);
       const registry = await loadImageRegistry();
-      let entry = registry[key];
-      if (!entry) {
-        const flowMatch = /^flow\.(.+)\.([a-z0-9]+)\.img$/i.exec(key);
-        if (flowMatch) {
-          const [, sectionSlug, blockId] = flowMatch;
-          const safeSlug = String(sectionSlug).replace(/[^a-zA-Z0-9._-]/g, "_");
-          const publicPath = `/flow-uploads/${safeSlug}/${blockId}.png`;
-          entry = { file: `public${publicPath}`, publicPath };
-        }
-      }
-      if (!entry) {
-        const longFormMatch = /^(therapy|area)\.(sec_[a-z0-9]+)$/.exec(key);
-        if (longFormMatch) {
-          const [, domain, slug] = longFormMatch;
-          const folder = domain === "therapy" ? "services" : "service-areas";
-          const publicPath = `/${folder}/${slug}.png`;
-          entry = { file: `public${publicPath}`, publicPath };
-        }
-      }
+      const entry = resolveImageRegistryEntry(registry, key);
       if (!entry) {
         sendJson(res, 404, { error: `Unknown image key: ${key}` });
         return;
@@ -755,7 +843,7 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       const registry = await loadImageRegistry();
-      const entry = registry[key];
+      const entry = resolveImageRegistryEntry(registry, key);
       if (!entry) {
         sendJson(res, 404, { error: `Unknown image key: ${key}` });
         return;
@@ -814,6 +902,30 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       const result = await patchArrayRegistry(key, locales);
+      sendJson(res, 200, { ok: true, ...result });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/nested-array") {
+      const body = await readJsonBody(req);
+      const { key, locales } = body;
+      if (!key || !locales) {
+        sendJson(res, 400, { error: "key and locales required" });
+        return;
+      }
+      const result = await patchNestedArrayRegistry(key, locales);
+      sendJson(res, 200, { ok: true, ...result });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/list-blocks") {
+      const body = await readJsonBody(req);
+      const { key, locales } = body;
+      if (!key || !locales) {
+        sendJson(res, 400, { error: "key and locales required" });
+        return;
+      }
+      const result = await patchListBlocksRegistry(key, locales);
       sendJson(res, 200, { ok: true, ...result });
       return;
     }

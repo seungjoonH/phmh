@@ -88,14 +88,44 @@ export default {
     "whoWeAre": {
       "title": "회사 소개",
       "paragraphs": [
-    "누구나 살면서 한 번쯤은 심리적인 어려움을 겪습니다. 그 어려움은 저마다의 경험, 배경, 성격에 따라 다양한 모습으로 나타납니다. 지금 힘드신가요? 당신은 혼자가 아닙니다. 전문적인 도움을 구하는 것은 치유와 성장을 향한 용기 있고 소중한 첫걸음입니다.",
-    "Peace & Hope 정신건강 서비스는 여러분이 삶의 균형을 되찾고, 더 나은 삶을 살아가며, 일상을 다시 온전히 누릴 수 있도록 돕습니다. 저희는 단순히 증상을 해소하는 것을 넘어, 여러분 안에 있는 강점을 발견하고, 삶의 의미와 목적을 찾으며, 어려운 시간 속에서도 성장할 수 있도록 함께합니다.",
-    "여러분의 상황에 맞게 대면 상담과 온라인 상담을 모두 제공하고 있습니다. 세계 어디에 계시든 저희와 연결될 수 있습니다. 센터를 직접 방문하시거나, 편안한 공간에서 상담을 받으시거나—어떤 방식이든 안전하고 철저하게 비밀이 보장되는 환경을 제공합니다.",
-    "상담 시작에 대해 궁금한 점이 있으시거나 더 알고 싶으신 내용이 있다면 언제든지 연락 주세요. 가장 힘든 순간에도 희망은 있습니다. Peace & Hope 정신건강 서비스가 언제나 여러분 곁에 있겠습니다.",
-    "감사드리며,",
-    "Peace & Hope 정신건강 서비스 팀 드림."
-  ]
-    },
+    "도움이 필요하시면 언제든지 말씀해 주세요.",
+    "진심을 담아,\nPeace & Hope Mental Health Services 팀 드림"
+  ],
+      "flowText": {
+        "mpuvilgj6": {
+          "p": "대면 및 온라인 상담을 모두 제공합니다. 전 세계 어디서나 연결하실 수 있으며, 센터 방문 또는 집에서의 상담 모두 비밀이 보장되는 안전한 환경에서 진행됩니다."
+        },
+        "mpuvimpf7": { "heading": "" },
+        "mpuvinp28": { "heading": "" },
+        "mpuxksaf1": {
+          "p": "상담 시작에 대해 궁금하신 점이 있으시면 언제든지 문의해 주시기 바랍니다. 가장 어려운 순간에도 희망은 있습니다. PHMH가 함께하겠습니다."
+        },
+        "mpuxmlbl1": {
+          "p": "살면서 누구나 경험·배경·성격에 따라 심리적 어려움을 겪을 수 있습니다. 힘들어하고 계시다면 혼자가 아니십니다. 전문적인 지원을 구하는 것은 치유와 성장을 위한 용기 있는 첫걸음입니다."
+        },
+        "mpuxn57c2": {
+          "p": "Peace & Hope Mental Health Services(PHMH)는 균형을 되찾고 웰빙을 높이며 일상으로 돌아가실 수 있도록 돕습니다. 증상 완화를 넘어 강점을 인식하고 의미와 목적을 발견하며 성장 잠재력을 키우는 데 초점을 둡니다."
+        },
+        "mpuxn6ci3": { "heading": "" },
+        "mpuxp7l48": { "heading": "" }
+      },
+      "lists": [],
+    
+
+  "flow": [
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+      ]},
+    
+
+
+
+
+
     "ourVision": {
       "title": "우리의 비전",
       "paragraphs": [
@@ -144,14 +174,7 @@ export default {
         }
       ]
     },
-    "fee": {    flow: [
-      { type: "p", textKey: "pages.fee.paragraphs.1" },
-      { type: "p", textKey: "pages.fee.paragraphs.0" },
-      { type: "p", textKey: "pages.fee.paragraphs.2" },
-      { type: "p", textKey: "pages.fee.paragraphs.3" },
-      { type: "p", textKey: "pages.fee.paragraphs.4" }
-    ],
-
+    "fee": {
       "title": "비용",
       "paragraphs": [
     "**직접 청구 서비스를 제공합니다!**",

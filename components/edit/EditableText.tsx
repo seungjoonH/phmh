@@ -38,8 +38,14 @@ export function EditableText({
 
   if (typeof children === "string") {
     const empty = children.trim() === "";
+    const mergedClass = [
+      className,
+      children.includes("\n") ? "whitespace-pre-line" : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
     return (
-      <Tag className={className} {...attrs}>
+      <Tag className={mergedClass || undefined} {...attrs}>
         {empty && editKey && isEditMode() ? (
           <EditEmptyPlaceholder />
         ) : (

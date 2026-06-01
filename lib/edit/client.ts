@@ -27,6 +27,12 @@ export type LocaleTextValues = Record<string, string>;
 
 export type LocaleStringArrays = Record<string, string[]>;
 
+export type LocaleNestedStringArrays = Record<string, string[][]>;
+
+export type ListBlockPayload = { lead?: string; items: string[] };
+
+export type LocaleListBlockArrays = Record<string, ListBlockPayload[]>;
+
 export type GettingStartedStepPayload = {
   number: string;
   title: string;
@@ -59,6 +65,26 @@ export async function fetchArrayRegistry(key: string): Promise<LocaleStringArray
 
 export async function patchStringArray(key: string, locales: LocaleStringArrays) {
   return editFetch("/patch/array", {
+    method: "POST",
+    body: JSON.stringify({ key, locales }),
+  });
+}
+
+export async function patchNestedStringArray(
+  key: string,
+  locales: LocaleNestedStringArrays,
+) {
+  return editFetch("/patch/nested-array", {
+    method: "POST",
+    body: JSON.stringify({ key, locales }),
+  });
+}
+
+export async function patchListBlocksArray(
+  key: string,
+  locales: LocaleListBlockArrays,
+) {
+  return editFetch("/patch/list-blocks", {
     method: "POST",
     body: JSON.stringify({ key, locales }),
   });

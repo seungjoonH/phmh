@@ -88,8 +88,7 @@ export default {
     "whoWeAre": {
       "title": "회사 소개",
       "paragraphs": [
-    "도움이 필요하시면 언제든지 말씀해 주세요.",
-    "진심을 담아,\nPeace & Hope Mental Health Services 팀 드림"
+    "도움이 필요하시면 언제든지 말씀해 주세요."
   ],
       "flowText": {
         "mpuvilgj6": {
@@ -112,13 +111,13 @@ export default {
       "lists": [],
     
 
+
   "flow": [
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" }
       ]},
     
 

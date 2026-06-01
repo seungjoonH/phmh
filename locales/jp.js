@@ -86,8 +86,7 @@ export default {
     "whoWeAre": {
       "title": "私たちについて",
       "paragraphs": [
-    "私たちがお力になります。",
-    "心を込めて、\nPeace & Hope メンタルヘルスサービス チーム一同"
+    "私たちがお力になります。"
   ],
       "flowText": {
         "mpuvilgj6": {
@@ -110,13 +109,13 @@ export default {
       "lists": [],
     
 
+
   "flow": [
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" }
       ]},
     "ourVision": {
       "title": "ビジョン",

@@ -89,8 +89,7 @@ export default {
     "whoWeAre": {
       "title": "Who We Are",
       "paragraphs": [
-    "We're here to help.",
-    "With best wishes,\nThe Peace & Hope Mental Health Services Team"
+    "We're here to help.\nWith best wishes,\nThe Peace & Hope Mental Health Services Team"
   ],
       "flowText": {
         "mpuvilgj6": {
@@ -113,13 +112,13 @@ export default {
       "lists": [],
     
 
+
   "flow": [
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.1" }
+        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" }
       ]},
     "ourVision": {
       "title": "Our Vision",

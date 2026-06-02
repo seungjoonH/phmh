@@ -46,6 +46,7 @@ export type SectionData = {
 type Props = {
   pageTitle: string;
   heroSrc: string;
+  heroFallbackSrc?: string;
   heroEditKey?: string;
   pageTitleEditKey?: string;
   sidebar: SidebarItem[];
@@ -59,6 +60,7 @@ type Props = {
 export function LongFormPage({
   pageTitle,
   heroSrc,
+  heroFallbackSrc,
   heroEditKey,
   pageTitleEditKey,
   sidebar,
@@ -134,7 +136,7 @@ export function LongFormPage({
 
   return (
     <article>
-      <PageHeroBanner src={heroSrc} editKey={heroEditKey} />
+      <PageHeroBanner src={heroSrc} fallbackSrc={heroFallbackSrc} editKey={heroEditKey} />
       <div className="page-container scroll-mt-28" id="top">
         <Reveal>
           <h1

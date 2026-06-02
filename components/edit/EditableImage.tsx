@@ -24,8 +24,45 @@ export function EditableImage({
 }: Props) {
   const resolvedFromEdit = useEditImageSrc(editKey ?? "", src);
   const resolvedSrc = editKey ? resolvedFromEdit : src;
+  const useRawImg =
+    typeof resolvedSrc === "string" &&
+    (resolvedSrc.startsWith("blob:") || resolvedSrc.startsWith("data:"));
+
+  const imgClass = fill
+    ? `${className ?? ""} h-full w-full`
+    : className;
+
+  const renderImage = () => {
+    if (useRawImg) {
+      return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={resolvedSrc}
+          alt={alt}
+          className={imgClass}
+          draggable={false}
+        />
+      );
+    }
+    return (
+      <Image
+        src={resolvedSrc}
+        alt={alt}
+        className={className}
+        fill={fill}
+        draggable={false}
+        {...rest}
+      />
+    );
+  };
 
   if (!editKey || !isEditMode()) {
+    if (useRawImg) {
+      const staticWrapperClass = fill
+        ? "absolute inset-0"
+        : "relative inline-block w-fit max-w-full";
+      return <span className={staticWrapperClass}>{renderImage()}</span>;
+    }
     return (
       <Image src={resolvedSrc} alt={alt} className={className} fill={fill} {...rest} />
     );
@@ -40,14 +77,7 @@ export function EditableImage({
 
   return (
     <span className={wrapperClass} {...(editOnParent ? {} : editImageAttrs(editKey))}>
-      <Image
-        src={resolvedSrc}
-        alt={alt}
-        className={className}
-        fill={fill}
-        draggable={false}
-        {...rest}
-      />
+      {renderImage()}
     </span>
   );
 }

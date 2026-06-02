@@ -89,6 +89,7 @@ export function ServiceAreasPage() {
     <PageVisibilityGuard pageId="services.areas">
     <LongFormPage
       heroSrc={pageHeroes.serviceAreas}
+      heroFallbackSrc={areaImages.depression}
       heroEditKey="heroes.serviceAreas"
       pageTitleEditKey="serviceAreas.pageTitle"
       pageTitle={data.pageTitle}

@@ -83,6 +83,7 @@ export function ServicesTypesPage() {
     <PageVisibilityGuard pageId="services.types">
     <LongFormPage
       heroSrc={pageHeroes.servicesTypes}
+      heroFallbackSrc={therapyImages.individual}
       heroEditKey="heroes.servicesTypes"
       pageTitleEditKey="services.pageTitle"
       pageTitle={data.pageTitle}

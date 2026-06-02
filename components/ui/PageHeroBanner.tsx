@@ -13,6 +13,7 @@ import { isImageKeyHidden } from "@/lib/image-hidden";
 
 type Props = {
   src: string;
+  fallbackSrc?: string;
   alt?: string;
   priority?: boolean;
   useDefault?: boolean;
@@ -22,6 +23,7 @@ type Props = {
 
 export function PageHeroBanner({
   src,
+  fallbackSrc,
   alt = "",
   priority = false,
   useDefault: forceDefault = false,
@@ -44,10 +46,13 @@ export function PageHeroBanner({
   const pendingImageDraft = Boolean(editKey && edit?.imageDrafts[editKey]);
   const pendingDelete = Boolean(editKey && edit?.isImagePendingDelete(editKey));
   const [imageFailed, setImageFailed] = useState(false);
+  const [fallbackTried, setFallbackTried] = useState(false);
   // src가 바뀌면 실패 상태 초기화 (편집 모드 미리보기 대비)
   useEffect(() => {
     setImageFailed(false);
-  }, [src]);
+    setFallbackTried(false);
+  }, [src, fallbackSrc]);
+  const activeSrc = !fallbackTried ? src : fallbackSrc ?? src;
   const useDefault =
     !pendingImageDraft &&
     (forceDefault || explicitlyHidden || pendingDelete || imageFailed);
@@ -92,13 +97,19 @@ export function PageHeroBanner({
           <EditableImage
             editKey={editKey}
             editClipBounds={editActive}
-            src={src}
+            src={activeSrc}
             alt={alt}
             fill
             className="object-cover object-top"
             priority={priority}
             sizes="100vw"
-            onError={() => setImageFailed(true)}
+            onError={() => {
+              if (!fallbackTried && fallbackSrc) {
+                setFallbackTried(true);
+                return;
+              }
+              setImageFailed(true);
+            }}
           />
         )}
       </motion.div>

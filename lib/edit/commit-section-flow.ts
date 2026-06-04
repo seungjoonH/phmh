@@ -81,7 +81,13 @@ async function commitServiceSectionFlow(
     ) {
       if (
         !isNestedGroupCellKey(block.textKey) &&
-        !isFlowScopedStorageKey(sectionKey, block.textKey)
+        !isFlowScopedStorageKey(sectionKey, block.textKey) &&
+        // 최상위 closing.N 은 patchStringArray(closing)로 일괄 처리 — 중복 patchText 방지
+        // subsections 내부 closing은 해당 없음
+        !(
+          /\.closing\.\d+$/.test(block.textKey) &&
+          !block.textKey.includes(".subsections.")
+        )
       ) {
         textKeys.add(block.textKey);
       }

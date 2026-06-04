@@ -322,7 +322,14 @@ export function flowToSectionContent(flow: FlowBlock[]): SectionContent {
     switch (block.type) {
       case "p":
         flushList();
-        paragraphBuffer.push(block.text);
+        // 최상위 .closing.N 블록은 closing 배열로 복원
+        // subsections 내부 closing(.subsections.K.closing.N)은 해당 없음
+        if (/\.closing\.\d+$/.test(block.textKey) && !block.textKey.includes(".subsections.")) {
+          flushParagraphs();
+          closing.push(block.text);
+        } else {
+          paragraphBuffer.push(block.text);
+        }
         break;
       case "heading":
         flushParagraphs();

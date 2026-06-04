@@ -761,20 +761,24 @@ export function replaceSectionFlow(source, sectionScope, blocks) {
     : [sectionScope];
   const cleaned = removeAllTopLevelArrayProperties(source, parentKeys, "flow");
   const scopeStart = resolveScopeStart(cleaned, parentKeys);
+  // 파일 내 실제 들여쓰기 대신 depth 기반으로 계산 — removeAllTopLevelArrayProperties 후 }가
+  // 같은 줄에 붙어 있을 때 lineIndentBefore가 잘못된 값을 반환하는 버그를 방지한다.
+  const indent = "  ".repeat(parentKeys.length);
+  const childIndent = `${indent}  `;
+  const blockIndent = `${childIndent}  `;
   const body =
     blocks.length === 0
       ? ""
-      : `\n${blocks.map((b) => `      ${storedFlowBlockToJs(b)}`).join(",\n")}\n    `;
+      : `\n${blocks.map((b) => `${blockIndent}${storedFlowBlockToJs(b)}`).join(",\n")}\n${childIndent}`;
   const close = findClosingBrace(cleaned, scopeStart);
   const comma = commaBeforeObjectInsert(cleaned, scopeStart, close);
-  const indent = lineIndentBefore(cleaned, close);
-  const childIndent = `${indent}  `;
   const flowJs = `"flow": [${body}]`
     .split("\n")
     .map((line, i) => (i === 0 ? line : `${childIndent}${line}`))
     .join("\n");
   const insert = `${comma}\n${childIndent}${flowJs}`;
-  return `${cleaned.slice(0, close)}${insert}${cleaned.slice(close)}`;
+  // \n${indent} 를 추가해 닫는 } 가 항상 올바른 들여쓰기의 새 줄에 위치하도록 보장
+  return `${cleaned.slice(0, close)}${insert}\n${indent}${cleaned.slice(close)}`;
 }
 
 /**

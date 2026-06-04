@@ -110,19 +110,16 @@ export default {
         "mpuxp7l48": { "heading": "" }
       },
       "lists": [],
-    
 
-
-
-
-
-  "flow": [
+      "flow": [
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
         { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
         { type: "p", textKey: "pages.whoWeAre.paragraphs.0" }
-      ]},
+      ]
+
+    },
     "ourVision": {
       "title": "Our Vision",
       "paragraphs": [

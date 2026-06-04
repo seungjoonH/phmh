@@ -991,8 +991,29 @@ const server = http.createServer(async (req, res) => {
       const contactMod = await import(
         localeModuleUrl(path.join(ROOT, `lib/contact-form-locale/${localeId}.js`)),
       );
+
+      // locales/*.js의 static import는 Node.js 모듈 캐시에서 구 버전을 반환한다.
+      // content 파일을 별도로 cache-bust import해서 messages에 직접 주입한다.
+      const messages = { ...mod.default };
+      const servicesSuffix = `servicesSections${suffix}`;
+      const serviceAreasSuffix = `serviceAreasSections${suffix}`;
+      const servicesContentPath = path.join(ROOT, `locales/content/services.${localeId}.js`);
+      const serviceAreasContentPath = path.join(ROOT, `locales/content/service-areas.${localeId}.js`);
+      if (fs.existsSync(servicesContentPath)) {
+        const cm = await import(localeModuleUrl(servicesContentPath));
+        if (cm[servicesSuffix] && messages.services) {
+          messages.services = { ...messages.services, sections: cm[servicesSuffix] };
+        }
+      }
+      if (fs.existsSync(serviceAreasContentPath)) {
+        const cm = await import(localeModuleUrl(serviceAreasContentPath));
+        if (cm[serviceAreasSuffix] && messages.serviceAreas) {
+          messages.serviceAreas = { ...messages.serviceAreas, sections: cm[serviceAreasSuffix] };
+        }
+      }
+
       sendJson(res, 200, {
-        messages: mod.default,
+        messages,
         contact: contactMod[contactName],
       });
       return;

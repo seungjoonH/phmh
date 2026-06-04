@@ -78,7 +78,8 @@ function findObjectInArrayAt(source, arrayStart, index) {
       throw new Error(`Array object index ${index} not found`);
     }
     if (ch === "{") {
-      if (found === index) return cursor;
+      // { 다음 위치를 반환 — findScopeStart처럼 { 이후 내용부터 탐색 시작
+      if (found === index) return cursor + 1;
       cursor += 1;
       let depth = 1;
       while (cursor < source.length && depth > 0) {
@@ -486,7 +487,8 @@ export function patchLocaleFile(source, keyPath, newValue) {
 function patchArrayIndex(source, parts, index, newValue) {
   const arrayKey = parts[parts.length - 1];
   const parentKeys = parts.slice(0, -1);
-  const scopeStart = parentKeys.length ? findScopeStart(source, parentKeys) : 0;
+  // findScopeStart → resolveScopeStart: subsections.0 같은 배열+인덱스 경로 지원
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
   const scope = source.slice(scopeStart);
   const arrayRe = new RegExp(`${keyInSourcePattern(arrayKey)}\\s*:\\s*\\[`);
   const match = arrayRe.exec(scope);
@@ -688,7 +690,7 @@ export function replaceStepsArray(source, keyPath, steps) {
   const parts = keyPath.split(".");
   const arrayKey = parts[parts.length - 1];
   const parentKeys = parts.slice(0, -1);
-  const scopeStart = parentKeys.length ? findScopeStart(source, parentKeys) : 0;
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
   const scope = source.slice(scopeStart);
   const arrayRe = new RegExp(`${keyInSourcePattern(arrayKey)}\\s*:\\s*\\[`);
   const match = arrayRe.exec(scope);

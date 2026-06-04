@@ -1,861 +1,853 @@
-// 서비스 분야 일본어 본문 (en.js와 동일 구조)
+// サービス分野 日本語本文
 export const serviceAreasSectionsJp = {
   "depression": {
-    "title": "Depression",
-    "tagline": "You Are Not Alone",
-    "groups": [
-      [
-        "Depression is more than just feeling sad. It can feel like a heavy fog that settles over everything—making even the simplest tasks feel overwhelming. You might be tired all the time, yet unable to rest. Things you once enjoyed may no longer bring you joy. You may feel numb, hopeless, or quietly overwhelmed without always knowing why. And still, you keep going. You try to hold it together, even when it feels like you're falling apart inside."
-      ],
-      [
-        "If this sounds familiar, please know: this is not your fault. You are not weak. Depression is not a flaw in your character—it's a signal that your heart and mind are asking for care.",
-        "Even if it feels like nothing will ever change, these feelings are not forever. With the right support, healing is possible. You can reconnect with yourself, your strength, and the parts of life that once felt meaningful."
-      ]
-    ],
+    "title": "うつ病",
+    "tagline": "あなたはひとりではありません",
+    "groups": [],
     "subsections": [
       {
-        "heading": "Listening to Your Feelings: When to Seek Support for Depression",
+        "heading": "テスト見出し",
         "lists": [
           {
-            "lead": "If you've experienced some of the following for more than two weeks, it may be time to seek support:",
+            "lead": "以下のいずれかを2週間以上経験している場合、サポートを求めるタイミングかもしれません。",
             "items": [
-              "A persistent sense of sadness, anxiety, or emotional emptiness",
-              "Constant fatigue or low energy—even after rest",
-              "Loss of interest in activities, people, or routines you once enjoyed",
-              "Difficulty concentrating, making decisions, or remembering things",
-              "Persistent guilt, harsh self-criticism, or feeling worthless",
-              "Noticeable changes in sleep or appetite—sleeping too much or too little, eating more or less than usual",
-              "Thoughts of self-harm or suicide"
+              "持続的な悲しみ、不安、または感情的な虚無感",
+              "休息後も続く慢性的な疲労や気力のなさ",
+              "かつて楽しんでいた活動、人、日課への興味の喪失",
+              "集中困難、意思決定のしにくさ、または物忘れ",
+              "持続的な罪悪感、厳しい自己批判、または無価値感",
+              "睡眠や食欲の顕著な変化――寝すぎる・眠れない、食べすぎる・食べられない",
+              "自傷または自殺に関する考え"
             ]
           }
         ],
         "closing": [
-          "*These feelings are not something you have to face alone. Reaching out isn't a sign of failure—it's an act of courage and care.*"
+          "*これらの感情は、あなたが一人で向き合わなければならないものではありません。助けを求めることは失敗のサインではなく、勇気とケアの行為です。*"
         ]
       },
       {
-        "heading": "Rediscovering Your Strength: Your Path to Emotional Healing (Treatment & Support)",
+        "heading": "あなたの強さを取り戻す――感情的な回復への道（治療とサポート）",
         "groups": [
           [
-            "Depression is highly treatable. While there's no single path to recovery, there are many effective ways to begin healing and reconnecting with life."
+            "うつ病は非常に治療可能です。回復への唯一の道はありませんが、癒しを始め、人生と再びつながるための効果的な方法はたくさんあります。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify unhelpful thought patterns and develop more balanced, supportive ways of thinking.",
-              "Interpersonal Therapy (IPT): Explore how relationship struggles might impact your mood and learn tools for building healthier connections.",
-              "Behavioral Activation (BA): Re-engage with small, meaningful activities that help rebuild motivation, energy, and joy.",
-              "Client-Centered Therapy: A warm, nonjudgmental space to talk openly, reflect deeply, and grow with support.",
-              "Stress Management & Thought Restructuring: Learn how to calm your body and mind, and replace negative thought cycles with more constructive perspectives."
+              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し、より均衡のとれた支えとなる考え方を育てます。",
+              "対人関係療法（IPT）：対人関係の課題が気分にどう影響するかを探り、より健全なつながりを築くためのツールを学びます。",
+              "行動活性化（BA）：意欲・エネルギー・喜びを取り戻すための小さくて意味のある活動に再び取り組みます。",
+              "クライアント中心療法：温かく、判断のない空間で率直に話し、深く内省し、サポートのもとで成長します。",
+              "ストレス管理と思考の再構成：心身を落ち着かせ、否定的な思考の連鎖をより建設的な視点に置き換える方法を学びます。"
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "ライフスタイルのサポートとセルフケア",
             "items": [
-              "Gentle physical movement to boost energy and support mood",
-              "A balanced, nourishing diet to care for both body and mind",
-              "Mindfulness, deep breathing, or meditation to ease tension",
-              "A consistent sleep routine to support emotional and physical recovery"
+              "エネルギーを高め、気分をサポートするための穏やかな身体活動",
+              "心身両方をケアするための、バランスのとれた栄養豊富な食事",
+              "緊張をほぐすためのマインドフルネス、深呼吸、または瞑想",
+              "感情的・身体的な回復をサポートするための規則正しい睡眠習慣"
             ]
           }
         ]
       }
     ],
-    "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not defined by what you're feeling right now. This pain—this difficult season—does not last forever. Depression is treatable, and you don't have to navigate it alone.",
-      "There is space for healing, for renewal, and for life to feel like yours again. You don't have to be \"ready.\" You just need a safe place to begin. We'll meet you there—gently, respectfully, and at your pace."
-    ]
+    "closing": []
+  ,
+    lists: [],
+  
+    "flow": []
   },
   "traumaPtsd": {
-    "title": "Trauma & PTSD",
-    "tagline": "You Are Not Defined by What Happened to You — You Deserve to Feel Safe Again",
+    "title": "トラウマ・PTSD",
+    "tagline": "あなたは起きたことで定義されるのではありません――再び安心を感じる権利があります",
     "groups": [
       [
-        "Some memories don't fade with time. They show up uninvited—during a quiet conversation, on a crowded street, or when you're just trying to fall asleep. Sometimes fear appears out of nowhere. Other times, it feels like you're stuck in a moment that's long since passed, unable to fully return to the present.",
-        "But what happened to you is just one part of your story—it doesn't define who you are. Trauma is never your fault, and you don't have to carry it forever. Even if healing feels out of reach right now, you still have the strength to reclaim your life—to feel safe again, to reconnect with yourself, and to find peace.",
-        "Healing takes time, and it doesn't have to happen alone. At our counseling center, we offer a safe and supportive space where you can begin to heal—gently, and at your own pace."
+        "記憶は時間とともに薄れるとは限りません。それは静かな会話の中に、人混みの街角で、あるいは眠ろうとするときに、突然やってきます。恐怖がどこからともなく現れることもあります。あるいは、とっくに過ぎ去ったはずの瞬間に囚われ、現在に完全に戻れないような感覚に陥ることもあるかもしれません。",
+        "しかし、あなたに起きたことはあなたの物語の一部にすぎず、あなたが誰であるかを決めるものではありません。トラウマは決してあなたのせいではなく、永遠に抱え続ける必要もありません。たとえ今は癒しが遠く感じられても、あなたにはまだ人生を取り戻す力があります――再び安心を感じ、自分自身と再びつながり、平和を見つける力が。",
+        "癒しには時間がかかります。そして、それは一人で行う必要はありません。私たちのカウンセリングセンターでは、安全でサポーティブな空間を提供しています。そこで、穏やかに、自分のペースで、癒しを始めることができます。"
       ]
     ],
     "subsections": [
       {
-        "heading": "When Your Heart Feels Heavy: Recognizing the Need for Care",
+        "heading": "心が重いと感じるとき――ケアの必要性に気づく",
         "lists": [
           {
-            "lead": "Trauma can show up in many different ways. If any of the following feel familiar, professional support may help:",
+            "lead": "トラウマはさまざまな形で現れます。以下のいずれかが心当たりのある場合、専門的なサポートが助けになるかもしれません。",
             "items": [
-              "Intrusive Memories & Reactions: Flashbacks, nightmares, or distressing memories that feel hard to escape; Sudden emotional or physical reactions to reminders of the trauma",
-              "Avoidance & Disconnection: Avoiding people, places, or conversations that bring up painful memories; Feeling emotionally numb or disconnected from yourself or others",
-              "Negative Thoughts & Mood Changes: Ongoing guilt, shame, or self-blame; Difficulty trusting others or feeling emotionally close; Trouble remembering parts of the trauma or viewing the world as unsafe",
-              "Hyperarousal & Reactivity: Constantly feeling on edge, easily startled, or overly alert; Difficulty sleeping, concentrating, or managing energy levels; Intense emotional reactions or difficulty regulating strong emotions"
+              "侵入的な記憶と反応：逃げられないように感じるフラッシュバック、悪夢、または苦痛を伴う記憶；トラウマを思い出させるものへの突然の感情的・身体的反応",
+              "回避と断絶：辛い記憶を呼び起こす人物、場所、または会話を避ける；感情的に麻痺したり、自分や他者から切り離されたように感じる",
+              "否定的な思考と気分の変化：持続的な罪悪感、恥、または自責；他者を信頼したり感情的に親密になることへの困難；トラウマの一部を思い出せなかったり、世界を危険だと感じる",
+              "過覚醒と反応性：常に警戒状態、驚きやすい、または過度に注意が向く；睡眠、集中力、またはエネルギー管理の困難；強い感情反応、または強い感情を調整することへの困難"
             ]
           }
         ],
         "closing": [
-          "*If these symptoms last longer than a month or begin interfering with daily life, reaching out for help is not only okay—it's important.*"
+          "*これらの症状が1ヶ月以上続いたり、日常生活に支障をきたし始めた場合、助けを求めることは構わないことではなく――重要なことです。*"
         ]
       },
       {
-        "heading": "Reclaiming Your Life: A Gentle Path to Trauma Recovery",
+        "heading": "人生を取り戻す――トラウマ回復への穏やかな道",
         "groups": [
           [
-            "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
+            "トラウマは一人で抱え込むものではありません。適切なサポートがあれば、再び地に足のついた感覚を持ち、信頼を再構築し、人生と再びつながり始めることができます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify unhelpful thoughts and develop healthier coping strategies.",
-              "Exposure Therapy: Safely revisit trauma-related memories in a controlled environment to reduce fear and avoidance.",
-              "Eye Movement Desensitization and Reprocessing (EMDR): Use guided eye movements to help your brain process and release distressing memories.",
-              "Interpersonal Therapy (IPT): Rebuild connection and trust through healing interpersonal relationships.",
-              "Client-Centered Therapy: Explore emotions in a nonjudgmental space, guided by your pace and your needs.",
-              "Behavioral Activation (BA): Re-engage in meaningful activities to restore a sense of purpose and joy.",
-              "Stress Management & Cognitive Restructuring: Learn techniques to calm your nervous system and shift negative thought patterns."
+              "認知行動療法（CBT）：役に立たない思考を見つけ出し、より健全な対処法を育てます。",
+              "曝露療法：制御された環境でトラウマに関連する記憶に安全に向き合い、恐怖と回避を軽減します。",
+              "眼球運動による脱感作と再処理（EMDR）：誘導された眼球運動を使い、苦痛を伴う記憶を脳が処理・解放するのを助けます。",
+              "対人関係療法（IPT）：対人関係の癒しを通じて、つながりと信頼を再構築します。",
+              "クライアント中心療法：あなたのペースとニーズに沿って、判断のない空間で感情を探ります。",
+              "行動活性化（BA）：目的と喜びの感覚を回復するために、意味のある活動に再び取り組みます。",
+              "ストレス管理と認知の再構成：神経系を落ち着かせ、否定的な思考パターンを転換するためのテクニックを学びます。"
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "ライフスタイルのサポートとセルフケア",
             "items": [
-              "Practice mindfulness, deep breathing, or grounding exercises to soothe your body and mind",
-              "Incorporate regular movement—such as walking or yoga—to help release tension",
-              "Build supportive, safe relationships with people who make you feel understood and respected"
+              "心身を落ち着かせるためのマインドフルネス、深呼吸、またはグラウンディングの練習",
+              "緊張を解放するのに役立つ、ウォーキングやヨガなどの定期的な運動を取り入れる",
+              "理解され、尊重されていると感じられる人々との、支え合い安心できる関係を築く"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not broken. The pain you carry is real—but it is not all of who you are. Healing doesn't mean forgetting. It means feeling safe again, finding peace in the present, and allowing hope to grow.",
-      "You don't have to rush. You don't have to go through it alone. You get to choose how healing looks for you. And we're here to walk that path with you—with steadiness, care, and respect.",
-      "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
+      "**回復への第一歩**",
+      "あなたは壊れていません。あなたが抱える痛みは本物です――しかし、それがあなたのすべてではありません。癒しとは忘れることではありません。それは再び安心を感じ、現在の中に平和を見つけ、希望が育まれることを許すことです。",
+      "急ぐ必要はありません。一人で乗り越える必要もありません。癒しがどのようなものかは、あなたが選ぶことができます。そして私たちは、確かさ、ケア、そして敬意をもって、その道をともに歩みます。",
+      "トラウマは一人で抱え込むものではありません。適切なサポートがあれば、再び地に足のついた感覚を持ち、信頼を再構築し、人生と再びつながり始めることができます。"
     ]
   },
   "anxietyPanic": {
-    "title": "Anxiety Panic Attacks",
-    "tagline": "Reclaiming Calm — You Are Not Defined by Your Fear",
+    "title": "不安・パニック発作",
+    "tagline": "平穏を取り戻す――あなたは恐れで定義されるのではありません",
     "groups": [
       [
-        "Sometimes, panic strikes without warning. Your heart races. Your chest tightens. It feels like you can't breathe—as if something terrible is about to happen, or like you're losing control. In those moments, your entire body goes on high alert, even when there's no clear threat.",
-        "It's not just frightening—it's exhausting. And when it happens more than once, you might start avoiding places, people, or even everyday situations, fearing that another attack could happen at any moment. But panic doesn't have to control your life. These responses are not your fault—they're your nervous system's way of signaling that it needs care. The good news is, that care is possible.",
-        "At our counseling center, we help you gently understand what your mind and body are trying to tell you. Together, we'll explore ways to calm the fear, rebuild a sense of safety, and return to a life that feels more steady and manageable—at your own pace."
+        "パニックは前触れもなく訪れることがあります。心臓が激しく打ち、胸が締め付けられる。息ができないような感覚――まるで何か恐ろしいことが起きようとしているか、制御を失いそうな感じ。そのような瞬間、明確な脅威がなくても、身体全体が警戒態勢に入ります。",
+        "それは怖いだけでなく、疲弊します。そして一度だけでなく繰り返し起きると、次の発作がいつ来るかという恐れから、場所、人、あるいは日常的な状況を避け始めるかもしれません。しかし、パニックがあなたの人生を支配する必要はありません。これらの反応はあなたのせいではなく、あなたの神経系がケアを必要としているというサインです。そのケアは可能です。",
+        "私たちのカウンセリングセンターでは、心と身体が伝えようとしていることを穏やかに理解するお手伝いをします。恐怖を和らげ、安心感を再構築し、より安定した管理しやすい日常生活に戻るための方法を、あなたのペースで一緒に探ります。"
       ]
     ],
     "subsections": [
       {
-        "heading": "When Panic Feels Overwhelming (Signs You Might Need Support)",
+        "heading": "パニックが圧倒的に感じるとき（サポートが必要なサイン）",
         "lists": [
           {
             "items": [
-              "Sudden, intense waves of anxiety or fear",
-              "Pounding heart, chest tightness, shortness of breath",
-              "Dizziness, nausea, tingling, or chills",
-              "A sense of losing control or feeling disconnected",
-              "Avoiding places or situations that might trigger an attack",
-              "Constant worry about when the next panic attack will occur"
+              "突然の強い不安や恐怖の波",
+              "心悸亢進、胸の締め付け、息苦しさ",
+              "めまい、吐き気、しびれ、または悪寒",
+              "制御を失う感覚、または現実感の喪失",
+              "発作を引き起こすかもしれない場所や状況の回避",
+              "次のパニック発作がいつ来るかについての絶え間ない心配"
             ]
           }
         ],
         "closing": [
-          "*If these experiences are interfering with your daily life, you don't have to face them alone. With the right support, you can find relief and feel in control again.*"
+          "*これらの体験が日常生活に支障をきたしているなら、一人で向き合う必要はありません。適切なサポートがあれば、安堵を見つけ、再びコントロールを感じることができます。*"
         ]
       },
       {
-        "heading": "Rediscovering Inner Peace: Your Path Toward Calm",
+        "heading": "内なる平和を取り戻す――穏やかさへの道",
         "groups": [
           [
-            "Panic attacks can feel intense—but they are also highly treatable. With the right tools and guidance, you can interrupt the cycle of fear, better understand your anxiety, and build long-lasting confidence in yourself."
+            "パニック発作は強烈に感じられますが、非常に治療可能です。適切なツールとガイダンスがあれば、恐怖のサイクルを断ち、不安をより深く理解し、自分自身への長続きする自信を築くことができます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Learn to recognize and reshape the thought patterns that trigger panic and develop healthier responses.",
-              "Exposure Therapy: Gradually and safely face feared situations, helping you reduce avoidance and build resilience.",
-              "Client-Centered Therapy: A supportive, nonjudgmental space where you can process fear, rebuild trust in your body, and reconnect with yourself.",
-              "Stress Management & Cognitive Restructuring: Gain practical tools to soothe your nervous system and reframe anxious thoughts into steadier, more balanced perspectives."
+              "認知行動療法（CBT）：パニックを引き起こす思考パターンを認識し再構成することを学び、より健全な反応を育てます。",
+              "曝露療法：恐れている状況に段階的かつ安全に向き合い、回避を減らし、回復力を高めます。",
+              "クライアント中心療法：恐怖を処理し、身体への信頼を再構築し、自分自身と再びつながれる、サポーティブで判断のない空間。",
+              "ストレス管理と認知の再構成：神経系を落ち着かせ、不安な思考をより安定したバランスのとれた視点に変えるための実践的なツールを身につけます。"
             ]
           },
           {
-            "lead": "Lifestyle Support & Everyday Care",
+            "lead": "ライフスタイルのサポートと日常のケア",
             "items": [
-              "Breathing & Relaxation Practices: Techniques like deep breathing, mindfulness, or yoga to calm your body and mind.",
-              "Movement & Nourishment: Regular exercise and a balanced diet to support emotional and physical regulation.",
-              "Reducing Triggers & Stimulants: Limiting caffeine or overstimulation to help reduce anxiety symptoms."
+              "呼吸とリラクゼーションの実践：深呼吸、マインドフルネス、ヨガなどの技法で心身を落ち着かせます。",
+              "運動と栄養：感情的・身体的な調整をサポートするための定期的な運動とバランスのとれた食事。",
+              "刺激物・誘発因子の軽減：不安症状を軽減するためにカフェインや過剰な刺激を制限する。"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Peace**",
-      "Panic is not a sign of weakness. It's a signal that your body is asking for safety and support—and with care, safety can be restored. You are more than your fear. You are capable of living a calm, steady life again. You don't have to brace yourself for the next panic attack. You can move through the fear—and come out stronger on the other side. We'll be here to walk with you—step by step."
+      "**平和への第一歩**",
+      "パニックは弱さのサインではありません。それはあなたの身体が安心とサポートを求めているというサインであり、ケアがあれば安心は回復できます。あなたは恐れよりも大きな存在です。再び穏やかで安定した生活を送る力があります。次のパニック発作に備えて身構える必要はありません。恐怖を乗り越え――より強くなって出てくることができます。私たちは、一歩一歩、ともに歩みます。"
     ]
   },
   "suicidalThoughts": {
-    "title": "Suicidal Thoughts",
-    "tagline": "You are not alone in this. And hope—though it may feel distant—still lives.",
+    "title": "自殺念慮",
+    "tagline": "あなたはこの中でひとりではありません。そして希望は――遠く感じられても――まだここにあります。",
     "groups": [
       [
-        "There may be days when everything feels unbearably heavy. When waking up feels like a battle, and just getting through the day takes all the strength you have. The pain may be loud or silent, constant or unpredictable. It may feel like you've tried everything, and nothing has helped. Like the world is moving on—while you remain stuck in the same place, hurting.",
-        "If this is where you are right now, please know: You are not weak. You are not broken. And you are not alone. These thoughts are not shameful. They are signals—messages from a part of you that is overwhelmed, exhausted, and longing for care. And that part of you deserves to be seen, heard, and held with compassion.",
-        "At our counseling center, we offer a space that is gentle, safe, and pressure-free. A place where your pain isn't rushed or minimized—but honored, respected, and understood. We'll sit with you—right where you are—and help you begin to breathe again."
+        "すべてが耐えられないほど重く感じられる日があるかもしれません。目覚めること自体が戦いのように感じられ、一日を乗り越えるだけで持てる力すべてを使い果たしてしまう。痛みは大きいこともあれば静かなこともあり、常にあることもあれば予測できないこともある。あらゆることを試みたのに、何も助けにならなかったように感じることもあるかもしれません。世界は前に進んでいるのに、自分だけが同じ場所に取り残され、傷ついている、と感じるように。",
+        "今まさにそこにいるなら、どうか知ってください。あなたは弱くありません。あなたは壊れていません。そしてあなたはひとりではありません。これらの考えは恥ずかしいものではありません。それはサインです――疲れ果てて、ケアを切望しているあなたの一部からのメッセージです。そしてその部分は、見られ、聞かれ、思いやりをもって抱かれるに値します。",
+        "私たちのカウンセリングセンターでは、穏やかで、安全で、プレッシャーのない空間を提供しています。あなたの痛みが急かされたり軽んじられたりするのではなく――尊重され、敬意をもって、理解される場所。私たちは、あなたがいるそのままの場所であなたのそばに寄り添い、再び息ができるよう支えます。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Pain: Recognizing When It's Time to Reach Out",
+        "heading": "あなたの痛みに耳を傾ける――助けを求めるタイミングを認識する",
         "lists": [
           {
-            "lead": "If any of these experiences sound familiar, it may be time to ask for help:",
+            "lead": "以下のいずれかが心当たりのある場合、助けを求めるタイミングかもしれません。",
             "items": [
-              "A deep, ongoing sadness or emotional numbness that won't lift",
-              "Feeling disconnected from life or hopeless about the future",
-              "Thoughts of self-harm or making a plan to end your life",
-              "Withdrawing from others, or believing no one would miss you",
-              "Thinking your existence is a burden, or that life might be easier without you"
+              "晴れることのない、深く続く悲しみや感情の麻痺",
+              "人生から切り離された感覚、または将来への絶望感",
+              "自傷の考え、または命を絶つ計画",
+              "他者から距離を置く、または誰も自分のことを気にしないと思い込む",
+              "自分の存在が重荷であると感じる、または自分がいなければ楽になると思う"
             ]
           }
         ],
         "closing": [
-          "*These feelings don't make you weak—they make you human. And you don't have to carry them on your own.*"
+          "*これらの感情はあなたを弱くするものではなく――あなたを人間にするものです。そしてそれらを一人で抱え込む必要はありません。*"
         ]
       },
       {
-        "heading": "Finding Light Again: Gentle Guidance Toward Hope and Healing",
+        "heading": "再び光を見つける――希望と癒しへの穏やかな導き",
         "groups": [
           [
-            "There is no one right way to heal. But there is a way forward—and you don't have to find it alone."
+            "癒しへの唯一の正しい道はありません。しかし、前に進む道はあります――そしてそれを一人で見つける必要はありません。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Gently explore and reframe painful thoughts, and rediscover moments of hope and meaning.",
-              "Client-Centered Therapy: A compassionate space where your voice matters, and healing unfolds at your own pace.",
-              "Interpersonal Therapy (IPT): Strengthen meaningful relationships and rebuild the support you need and deserve.",
-              "Crisis Support & Emotional Care: Immediate support during moments of emotional overwhelm; Tools to manage intense feelings and stay grounded; Guidance in building a support system—people who genuinely care and want to walk beside you"
+              "認知行動療法（CBT）：つらい思考を穏やかに探り再構成し、希望と意味の瞬間を再発見します。",
+              "クライアント中心療法：あなたの声が大切にされ、あなた自身のペースで癒しが展開される、思いやりある空間。",
+              "対人関係療法（IPT）：意味のある関係を強化し、必要とし、値するサポートを再構築します。",
+              "危機支援と感情的ケア：感情的に圧倒されそうなときの即時サポート；強い感情を管理し地に足をつけるためのツール；あなたのそばで歩んでくれる人々のサポートシステムを築くための指針"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**You Are Still Here—And That Matters**",
-      "Even if you can't see it right now, life still holds space for you. A breath you haven't taken yet. A connection you haven't made. A feeling of peace you haven't known in a long time. You don't have to pretend you're okay. You don't need to have all the answers. You just need one small, safe place to begin again. We'll be with you in the dark—not to push, but to remind you that you're not alone. And when you're ready, we'll walk with you—gently—toward the light."
+      "**あなたはまだここにいる――それが大切なこと**",
+      "今はそう見えなくても、人生にはまだあなたのための場所があります。まだ吸っていない息があります。まだ出会っていないつながりがあります。長い間感じていなかった平和の感覚があります。大丈夫なふりをする必要はありません。すべての答えを持っている必要もありません。ただ、やり直すための小さく安全な場所が一つあれば十分です。私たちは暗闇の中であなたのそばにいます――押し進めるためではなく、あなたがひとりではないことを伝えるために。そして準備ができたとき、穏やかに――光へと、ともに歩みます。"
     ]
   },
   "culturalIdentity": {
-    "title": "Cultural Identity",
-    "tagline": "Understanding Your Story, Embracing Your True Self",
+    "title": "文化的アイデンティティ",
+    "tagline": "あなたの物語を理解し、本当の自分を受け入れる",
     "groups": [
       [
-        "Each of us carries a story that cannot be told in just one language, place, or tradition. Your cultural identity isn't defined solely by your birthplace or nationality—it's shaped by the people you've known, the places you've lived, the values you hold, and the experiences that have shaped your heart.",
-        "Sometimes, living between cultures can feel disorienting. You may find yourself caught between expectations—never fully belonging here or there. At times, it might feel like you're standing in two worlds, yet at home in neither.",
-        "These feelings aren't signs of weakness. They're part of a meaningful journey—one that leads to deeper self-understanding and the creation of an identity that is fully, authentically yours. Your multicultural experiences aren't something to overcome—they're something to explore, integrate, and embrace.",
-        "At our counseling center, we offer a warm, respectful space to support that exploration. We're here to help you reconnect with yourself and build a life that feels grounded, confident, and true to who you are."
+        "私たちは誰もが、ひとつの言語、場所、伝統だけでは語り切れない物語を抱えています。あなたの文化的アイデンティティは、生まれた場所や国籍だけで決まるのではありません。出会った人々、暮らした場所、持っている価値観、そして心を形作った体験によって育まれるものです。",
+        "複数の文化の間で生きていると、時に方向感覚を失うような感覚になることがあります。期待の狭間に挟まれ、ここにも、あそこにも、完全には属せないように感じることもあるかもしれません。ふたつの世界に立っているのに、どちらにも馴染めないように思える瞬間もあるかもしれません。",
+        "これらの感情は弱さのサインではありません。それは意味深い旅の一部です――より深い自己理解へ、そして完全に、真に自分自身であるアイデンティティの創造へと向かう旅。多文化的な経験は乗り越えるべきものではなく、探求し、統合し、受け入れるべきものです。",
+        "私たちのカウンセリングセンターでは、その探求を支えるための温かく、敬意あふれる空間を提供しています。自分自身と再びつながり、地に足がついた、自信を持って、本当の自分らしい人生を築くお手伝いをします。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Yourself: Signs Cultural Identity Issues Need Support",
+        "heading": "自分自身に耳を傾ける――文化的アイデンティティの問題にサポートが必要なサイン",
         "lists": [
           {
-            "lead": "If any of the following feel familiar, counseling may help:",
+            "lead": "以下のいずれかが心当たりのある場合、カウンセリングが助けになるかもしれません。",
             "items": [
-              "Feeling unsure of where you truly belong",
-              "Struggling to balance differing cultural expectations or values",
-              "Experiencing stress, confusion, or emotional fatigue in multicultural environments",
-              "Feeling disconnected from your identity or uncertain about how to express your authentic self"
+              "自分が本当に属する場所がわからないと感じる",
+              "異なる文化的期待や価値観のバランスをとることへの困難",
+              "多文化的な環境でのストレス、混乱、または感情的な疲労",
+              "自分のアイデンティティへの疎外感、または本当の自分をどう表現するかへの不確かさ"
             ]
           }
         ],
         "closing": [
-          "*If these experiences begin to affect your confidence, well-being, or daily life, you don't have to navigate them alone. Support is here.*"
+          "*これらの体験が自信、ウェルビーイング、または日常生活に影響し始めた場合、一人で乗り越える必要はありません。サポートがあります。*"
         ]
       },
       {
-        "heading": "Embracing Your Identity: Empowering Cultural Healing",
+        "heading": "アイデンティティを受け入れる――文化的癒しへのエンパワーメント",
         "groups": [
           [
-            "Counseling is not about choosing one part of you over another—it's about learning to bring all of your experiences into harmony, with gentleness and care."
+            "カウンセリングとは、あなたの一部を別の部分のために諦めることではありません。それは、穏やかさとケアをもって、あなたのすべての経験を調和させることを学ぶことです。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Identity Exploration & Integration: Explore your cultural experiences and values to develop a more grounded and secure sense of self.",
-              "Culturally Responsive Counseling: Learn how to navigate different cultural spaces while honoring your individuality.",
-              "Stress & Resilience in Multicultural Settings: Understand the emotional impact of cultural stress and build strategies to respond with confidence and clarity."
+              "アイデンティティの探求と統合：文化的な経験と価値観を探り、より安定した確かな自己感覚を育てます。",
+              "文化的に応答するカウンセリング：個性を尊重しながら、さまざまな文化的空間をうまく渡り歩く方法を学びます。",
+              "多文化環境でのストレスと回復力：文化的ストレスの感情的な影響を理解し、自信と明確さをもって対応するための戦略を構築します。"
             ]
           },
           {
-            "lead": "Social Support & Self-Care",
+            "lead": "社会的サポートとセルフケア",
             "items": [
-              "Embracing Cultural Strengths: Recognize how your unique cultural background can be a source of strength, perspective, and pride.",
-              "Self-Acceptance & Self-Esteem: Practice affirming your identity, respecting yourself, and finding confidence in your uniqueness.",
-              "Building Meaningful Relationships: Foster connections where you feel seen, respected, and supported—just as you are."
+              "文化的強みを受け入れる：あなた独自の文化的背景が、強さ、視点、そして誇りの源となりうることを認識します。",
+              "自己受容と自尊心：自分のアイデンティティを肯定し、自分を尊重し、自分の独自性に自信を見つける実践。",
+              "意味のある関係を築く：ありのままの自分として、見られ、尊重され、サポートされると感じられるつながりを育てます。"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Wholeness**",
-      "Your identity is not a problem to be solved. It is a story still unfolding—rich in complexity, shaped by experience, and full of possibility. Even if the path feels uncertain now, you have the ability to define what belonging means to you. You don't have to choose between cultures—you can choose to embrace your whole self.",
-      "We're here to walk beside you as you learn to live more freely, more fully, and more in alignment with who you truly are."
+      "**あなた自身の全体性への第一歩**",
+      "あなたのアイデンティティは解決されるべき問題ではありません。それはまだ展開し続けている物語です――複雑さに富み、経験に形作られ、可能性に満ちている。たとえ今は道が不確かに感じられても、あなたには「属する」ということが自分にとって何を意味するかを定義する力があります。文化の間でどちらかを選ぶ必要はありません――全部の自分を受け入れることを選べるのです。",
+      "あなたがより自由に、より充実して、そして真に自分らしく生きることを学ぶ過程で、私たちはあなたのそばに寄り添います。"
     ]
   },
   "bipolar": {
-    "title": "Bipolar Disorder",
-    "tagline": "Finding Steady Ground in the Shifts of Emotion",
+    "title": "双極性障害",
+    "tagline": "感情の波の中で、安定した地を見つける",
     "groups": [
       [
-        "Some days, you may feel unstoppable—full of energy, ideas, and possibility. Other days, even getting out of bed can feel like climbing a mountain. Your emotions might swing between hope and hopelessness, energy and exhaustion—sometimes without warning—leaving you disoriented and out of sync with yourself.",
-        "But none of this is your fault. Bipolar disorder is not a reflection of who you are—it's a condition that affects how your brain processes mood and energy. Most importantly, it is treatable. Even when your emotions feel like they're moving faster than you can keep up, you are not powerless. With the right support, you can learn to recognize your patterns, build tools for stability, and move through emotional waves with more ease.",
-        "You don't have to go through this alone. At our counseling center, we're here to walk beside you—helping you restore balance and reconnect with your sense of self."
+        "無敵のように感じられる日があります――エネルギー、アイデア、可能性に満ちあふれた日。また別の日には、ベッドから出ることさえ山を登るように感じられます。感情が希望と絶望、エネルギーと疲弊の間を揺れ動くことがあり、時には予告なく――自分自身と調子が合わず、途方に暮れる感覚を残すことがあります。",
+        "しかし、これはあなたのせいではありません。双極性障害はあなたが誰であるかを映し出すものではなく、脳の気分とエネルギーの処理の仕方に影響を与える状態です。最も重要なことは、これは治療可能だということです。感情が追いつけないほど速く動いているように感じても、あなたは無力ではありません。適切なサポートがあれば、自分のパターンを認識し、安定のためのツールを築き、感情の波をより楽に乗り越えることができます。",
+        "一人でこれと向き合う必要はありません。私たちのカウンセリングセンターでは、あなたのそばで歩み、バランスを回復し、自分自身の感覚と再びつながるお手伝いをします。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Recognizing Your Signals: When Bipolar Disorder Affects Your Life",
+        "heading": "あなたのサインを認識する――双極性障害が人生に影響するとき",
         "lists": [
           {
             "items": [
-              "Manic or Hypomanic Episodes: Surges of energy, excitement, or euphoria that feel hard to contain; Sleeping very little without feeling tired; Impulsive behaviors—risky spending, reckless decisions, or overcommitting; Racing thoughts, rapid speech, or difficulty focusing",
-              "Depressive Episodes: Deep, lingering sadness or emotional numbness; Loss of interest in activities you once enjoyed; Fatigue or a heavy, slowed-down feeling in your body; Trouble concentrating or making everyday decisions; Feelings of hopelessness or thoughts of self-harm"
+              "躁状態または軽躁状態のエピソード：抑えきれないような感覚のエネルギー、興奮、または多幸感；眠れなくても疲れを感じない；衝動的な行動――リスクのある出費、無謀な決断、またはやりすぎ；思考が飛び回る、早口になる、または集中困難",
+              "うつ病エピソード：深く続く悲しみや感情の麻痺；かつて楽しんでいた活動への興味喪失；疲労感、または身体が重くのろく感じる；集中困難、または日常的な決断のしにくさ；絶望感、または自傷に関する考え"
             ]
           }
         ],
         "closing": [
-          "*If you're experiencing recurring mood swings that affect your relationships, work, or quality of life, support is available—and healing is possible.*"
+          "*関係、仕事、または生活の質に影響を与える反復的な気分の波を経験しているなら、サポートは利用可能です――そして癒しは可能です。*"
         ]
       },
       {
-        "heading": "Reclaiming Your Life: Finding Harmony Through Bipolar Disorder",
+        "heading": "人生を取り戻す――双極性障害を通じて調和を見つける",
         "groups": [
           [
-            "Bipolar disorder isn't about pushing emotions away. It's about learning how to live with them, work with them, and respond to them with more understanding and balance. With the right therapeutic support and self-care, you can build a more stable and fulfilling life."
+            "双極性障害とは感情を遠ざけることではありません。それは感情とともに生き、感情と協力し、より深い理解とバランスをもって感情に応答することを学ぶことです。適切な治療サポートとセルフケアがあれば、より安定した充実した人生を築くことができます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify patterns in thoughts and behavior that impact mood—and learn how to regulate emotions more effectively.",
-              "Interpersonal & Social Rhythm Therapy (IPSRT): Establish healthy routines and strengthen relationships to support mood stability.",
-              "Client-Centered Therapy: Explore your experiences in a safe, nonjudgmental space and deepen your understanding of your emotional needs.",
-              "Emotion Regulation & Stress Management: Build practical skills to manage mood swings and respond to stress with confidence and calm."
+              "認知行動療法（CBT）：気分に影響を与える思考と行動のパターンを見つけ出し、感情をより効果的に調整する方法を学びます。",
+              "対人関係・社会的リズム療法（IPSRT）：健全なルーティンを確立し、気分の安定を支える関係を強化します。",
+              "クライアント中心療法：安全で判断のない空間で自分の経験を探り、感情的ニーズへの理解を深めます。",
+              "感情調整とストレス管理：気分の波を管理し、自信と平静さをもってストレスに対応するための実践的なスキルを築きます。"
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "ライフスタイルのサポートとセルフケア",
             "items": [
-              "Keep a steady routine: Maintaining consistent sleep, meal, and daily activity schedules can support your body's natural rhythms.",
-              "Recognize impulsive patterns: Bring gentle awareness to impulsive urges and practice pausing before reacting.",
-              "Track your moods: Use a journal or app to notice emotional patterns and identify early signs of mood shifts."
+              "安定したルーティンを保つ：一貫した睡眠、食事、日常活動のスケジュールを維持することで身体の自然なリズムをサポートします。",
+              "衝動的なパターンを認識する：衝動的な衝動に穏やかな気づきを向け、反応する前に立ち止まる練習をします。",
+              "気分を記録する：日記やアプリを使って感情的なパターンに気づき、気分の変化の早期サインを見つけます。"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Stability**",
-      "You are not defined by your highs and lows. Even when life feels out of balance, there is a path forward—a way to feel steady, grounded, and more in tune with yourself again. Healing doesn't have to happen all at once. It begins with understanding, with self-compassion, and with small steps that lead to real change. You already carry the strength it takes to begin. And we're here to walk beside you—every step of the way."
+      "**安定への第一歩**",
+      "あなたは浮き沈みで定義されるのではありません。たとえ人生がバランスを失っているように感じても、前に進む道があります――再び安定した、地に足のついた、自分自身と調和した感覚を持つための道が。癒しは一度に起こる必要はありません。それは理解から、自己への思いやりから、そして本当の変化につながる小さな一歩から始まります。あなたはすでに、始めるのに必要な強さを持っています。そして私たちは、一歩一歩、あなたのそばで歩みます。"
     ]
   },
   "adhd": {
-    "title": "ADHD (Attention Deficit Hyperactivity Disorder)",
-    "tagline": "With the right support, your child can grow—with more focus, confidence, and self-understanding.",
+    "title": "ADHD（注意欠如・多動性障害）",
+    "tagline": "適切なサポートがあれば、お子さんはより集中力、自信、自己理解をもって成長できます。",
     "groups": [
       [
-        "Have you noticed your child struggling to finish tasks, frequently jumping from one thing to another, or acting on impulse without thinking it through? Maybe they're full of energy and bright ideas, but staying organized, following instructions, or sitting still seems especially difficult.",
-        "As a parent, you may feel a mix of admiration, concern, and exhaustion. You may have asked yourself, \"Why is this so hard for them?\" or even, \"Am I doing something wrong?\" Please know: your child is not broken. And you are not failing them.",
-        "ADHD is not about laziness, disobedience, or lack of effort. It's about a brain that processes, organizes, and responds to the world differently. And with the right understanding and support, your child can thrive—not in spite of their differences, but through them.",
-        "At our counseling center, we're here to help you better understand your child's unique strengths and challenges—and to walk alongside your family with care, clarity, and compassion."
+        "お子さんがタスクを終わらせることに苦労していたり、頻繁に別のことに飛びついたり、よく考えずに行動したりすることに気づきましたか。エネルギーと明るいアイデアに満ちているのに、整理すること、指示に従うこと、じっとしていることが特に難しいのかもしれません。",
+        "親として、称賛と心配と疲弊が入り混じった気持ちになることもあるでしょう。「なぜこんなに難しいのだろう」「私が何か間違っているのだろうか」と自問したこともあるかもしれません。どうか知ってください。お子さんは壊れていません。そしてあなたもお子さんに失敗しているわけではありません。",
+        "ADHDは怠慢、反抗、または努力不足とは関係ありません。それは、世界を異なる方法で処理し、整理し、反応する脳の話です。そして適切な理解とサポートがあれば、お子さんはその違いにもかかわらずではなく、違いを通じて繁栄できます。",
+        "私たちのカウンセリングセンターでは、お子さんのユニークな強みと課題をより深く理解するお手伝いをします。そしてケア、明確さ、思いやりをもって、ご家族に寄り添います。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Child: Signs ADHD Support Can Help",
+        "heading": "お子さんに耳を傾ける――ADHDのサポートが助けになるサイン",
         "lists": [
           {
             "items": [
-              "Inattention: Trouble starting or completing tasks; Frequently losing everyday items like books, toys, or school supplies; Difficulty with organization, time management, or following multi-step directions; Easily distracted; struggling to focus for sustained periods",
-              "Hyperactivity & Impulsivity: Constant movement, fidgeting, or restlessness; Talking excessively, interrupting others, or difficulty waiting their turn; Acting impulsively, often followed by frustration or regret; Difficulty managing emotions or following rules in group settings"
+              "不注意：タスクを始めたり完了したりすることへの困難；本、おもちゃ、学用品などの日用品を頻繁に失くす；整理、時間管理、または複数ステップの指示に従うことへの困難；気が散りやすく、持続的に集中することへの困難",
+              "多動性と衝動性：絶え間ない動き、そわそわ、または落ち着きのなさ；過度のおしゃべり、他者への割り込み、または順番を待つことへの困難；衝動的に行動し、その後で欲求不満や後悔につながることが多い；感情の管理、またはグループ設定でのルールを守ることへの困難"
             ]
           }
         ],
         "closing": [
-          "*If these behaviors persist and begin to affect your child's daily life, relationships, or school performance, professional support can offer tools, understanding, and meaningful change—for your child and for you.*"
+          "*これらの行動が持続し、お子さんの日常生活、対人関係、または学校の成績に影響し始めた場合、専門的なサポートがツール、理解、そして意味ある変化を提供できます――お子さんとあなた自身のために。*"
         ]
       },
       {
-        "heading": "Helping Your Child Flourish: Support for Thriving With ADHD",
+        "heading": "お子さんが花開くのを助ける――ADHDとともに輝くためのサポート",
         "groups": [
           [
-            "There's no one-size-fits-all approach to ADHD—and that's okay. Your child's brain works differently, and that difference can be a source of strength. With the right support, guidance, and strategies, your child can learn to focus, regulate emotions, and navigate challenges with more ease and self-confidence."
+            "ADHDへの画一的なアプローチはありません――それで構いません。お子さんの脳は異なる働きをしており、その違いは強みの源になり得ます。適切なサポート、指導、戦略があれば、お子さんはより集中し、感情を調整し、より楽に自信をもって課題に取り組む方法を学べます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Helps your child identify unhelpful thought patterns and build practical skills for focus, emotional awareness, and self-regulation.",
-              "Behavioral Therapy: Uses structure, routine, and positive reinforcement to support healthy habits and behavioral growth.",
-              "Organizational & Self-Management Coaching: Teaches tools for planning, prioritizing, and managing daily tasks—reducing stress and encouraging independence.",
-              "Social & Emotional Skills Training: Improves communication, impulse control, and emotional expression to support healthier relationships at home and school."
+              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し、集中力、感情的な気づき、自己調整のための実践的なスキルを築くのを助けます。",
+              "行動療法：健全な習慣と行動的成長をサポートするために、構造、ルーティン、正のフィードバックを活用します。",
+              "整理・自己管理コーチング：計画、優先順位づけ、日常タスクの管理のためのツールを教えます――ストレスを軽減し、自立を促します。",
+              "社会的・感情的スキルトレーニング：家庭や学校でのより健全な関係をサポートするために、コミュニケーション、衝動制御、感情表現を向上させます。"
             ]
           },
           {
-            "lead": "Lifestyle Support & Everyday Support",
+            "lead": "ライフスタイルのサポートと日常のケア",
             "items": [
-              "Establish predictable routines to reduce overwhelm and bring consistency",
-              "Minimize distractions and create focused, calming environments for work or study",
-              "Encourage movement and mindfulness to help regulate energy and attention",
-              "Practice kindness—toward your child, and toward yourself—as growth unfolds at its own pace"
+              "圧倒されることを減らし、一貫性をもたらすための予測可能なルーティンを確立する",
+              "集中力や学習のための、気が散らない落ち着いた環境を作る",
+              "エネルギーと注意力を調整するのに役立つ運動とマインドフルネスを促進する",
+              "成長が自分のペースで展開することを認識しながら、お子さんへ、そして自分自身へ、親切にする"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Rediscovering Possibility—Together**",
-      "Your child may move through the world in a way that's harder for others to understand—but that doesn't make their journey any less meaningful. Their creativity, curiosity, and sensitivity are not challenges to \"fix\"—they're strengths to support and celebrate. If this path feels overwhelming, you don't have to walk it alone. We're here to listen, to help, and to walk alongside your family—step by step."
+      "**ともに可能性を再発見する**",
+      "お子さんは他の人には理解しにくい方法で世界と向き合っているかもしれません――しかし、それはその旅が意味深くないということではありません。その創造性、好奇心、感受性は「修正」すべき課題ではありません――サポートされ、称えられるべき強みです。この道が圧倒的に感じられるなら、一人で歩む必要はありません。私たちは、話を聞き、助け、一歩一歩、ご家族に寄り添うためにここにいます。"
     ]
   },
   "relationship": {
-    "title": "Relationship Counseling",
-    "tagline": "For connections that feel safe, honest, and true to you",
+    "title": "関係カウンセリング",
+    "tagline": "安心で、誠実で、あなたらしいつながりのために",
     "groups": [
       [
-        "Relationships have the power to enrich our lives—and sometimes, to leave us feeling unsteady. You might find yourself drifting apart from someone you care about, caught in cycles of miscommunication or unresolved conflict. You may wonder, \"What am I doing wrong?\" or feel alone, even when someone is right beside you.",
-        "Family. Friends. Partners. Colleagues. The closer the connection, the more deeply we can feel hurt—and the harder it becomes to express what's really going on. But relationships aren't problems to fix or burdens to carry alone. They're living connections that can be nurtured, reshaped, and healed. As much as you want to be there for others, you also deserve to feel understood, respected, and supported.",
-        "At our counseling center, we offer a space where you can explore your patterns and learn to connect in ways that feel sustainable, mutual, and true to who you are."
+        "人間関係は人生を豊かにする力を持っています――そして時に、不安定な気持ちにさせることもあります。大切な人と距離が生まれていたり、誤解や解決されない衝突のループにはまったりしているかもしれません。「私は何をやり間違えているのだろう」と思ったり、隣に誰かがいても孤独を感じたりすることもあるかもしれません。",
+        "家族。友人。パートナー。同僚。つながりが深いほど、深く傷つくことがあります――そして本当に起きていることを表現することが難しくなります。しかし、人間関係は解決すべき問題でも、一人で抱えるべき重荷でもありません。それは育まれ、再形成され、癒されることのできる生きたつながりです。他の人のそばにいたいと思うと同時に、あなた自身も理解され、尊重され、サポートされる権利があります。",
+        "私たちのカウンセリングセンターでは、自分のパターンを探り、持続可能で互いを大切にした、本当の自分らしいつながり方を学ぶための空間を提供しています。"
       ]
     ],
     "subsections": [
       {
-        "heading": "When Connection Feels Difficult: Recognizing Signs to Seek Support",
+        "heading": "つながりが難しいと感じるとき――サポートを求めるサインの認識",
         "lists": [
           {
             "items": [
-              "You often feel emotionally drained by conflict with someone close",
-              "It's hard to express your feelings, and you often feel misunderstood",
-              "You fear intimacy—or find yourself becoming overly dependent in relationships",
-              "You feel like you're always the one trying harder",
-              "You struggle to trust others or repeat the same painful dynamics",
-              "You feel torn between your own emotions and other people's expectations"
+              "身近な人との衝突によって感情的に消耗することが多い",
+              "気持ちを表現することが難しく、よく誤解されると感じる",
+              "親密さを恐れる――または関係の中で過度に依存的になってしまう",
+              "自分ばかりが努力しているように感じる",
+              "他者を信頼することが難しく、同じつらいパターンを繰り返してしまう",
+              "自分の感情と他者の期待の間で引き裂かれる感覚がある"
             ]
           }
         ],
         "closing": [
-          "*Relationship challenges happen to everyone. But you don't have to carry them alone. With the right support, you can find clarity, relief, and healthier ways to relate.*"
+          "*人間関係の課題は誰にでも起こります。しかし、一人で抱える必要はありません。適切なサポートがあれば、明確さ、安堵、そしてより健全な関わり方を見つけることができます。*"
         ]
       },
       {
-        "heading": "Creating Harmony Together: Gentle Paths to Relationship Healing",
+        "heading": "ともに調和を築く――関係の癒しへの穏やかな道",
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Relationship Pattern Exploration: Reflect on recurring dynamics and discover how to build healthier, more balanced ways of connecting.",
-              "Cognitive Behavioral Therapy (CBT): Shift unhelpful thoughts and learn practical tools for managing emotions and communication.",
-              "Client-Centered Therapy: Share difficult feelings in a nonjudgmental space—and strengthen your ability to stay present with your own emotions."
+              "関係パターンの探求：繰り返す関係のダイナミクスを振り返り、よりバランスのとれた健全なつながり方を発見します。",
+              "認知行動療法（CBT）：役に立たない思考を転換し、感情管理とコミュニケーションのための実践的なツールを学びます。",
+              "クライアント中心療法：判断のない空間でつらい感情を分かち合い――自分自身の感情とともにいる力を強化します。"
             ]
           },
           {
-            "lead": "Communication & Emotional Expression",
+            "lead": "コミュニケーションと感情表現",
             "items": [
-              "Practice expressing emotions openly and respectfully",
-              "Learn to navigate conflict without causing harm",
-              "Rebuild connection through mindful listening and mutual understanding"
+              "感情をオープンに、敬意をもって表現する練習",
+              "傷をつけることなく対立を乗り越える方法を学ぶ",
+              "思いやりのある傾聴と相互理解を通じてつながりを再構築する"
             ]
           },
           {
-            "lead": "Self-Care & Boundaries in Relationships",
+            "lead": "関係の中のセルフケアと境界線",
             "items": [
-              "Reclaim the right to say no and set boundaries that protect your well-being",
-              "Stay connected to your values and needs without losing yourself in the relationship",
-              "Rebuild self-esteem by honoring your own voice and emotional truth"
+              "断る権利と、ウェルビーイングを守る境界線を設ける権利を取り戻す",
+              "関係の中で自分を失うことなく、自分の価値観とニーズにつながり続ける",
+              "自分の声と感情的な真実を大切にすることで自尊心を再構築する"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healthier Connection**",
-      "The most nourishing relationships don't ask you to shrink—they help you expand into who you truly are. What you're facing now may not be failure, but a turning point—an invitation to grow, relate, and love more authentically. The desire to connect deeply without losing yourself is not too much to ask. And you don't have to navigate it alone.",
-      "When you're ready to open your heart again, we'll be here—gently, steadily, and by your side."
+      "**より健全なつながりへの第一歩**",
+      "最も豊かな関係は、あなたを縮小させるものではなく――真の自分へと広がる助けをしてくれるものです。今直面していることは失敗ではなく、成長し、より真に関わり、より真に愛するための転換点かもしれません。自分を失わずに深くつながりたいという願いは、贅沢なことではありません。そしてそれを一人で乗り越える必要もありません。",
+      "再び心を開く準備ができたとき、私たちはここにいます――穏やかに、確かに、あなたのそばに。"
     ]
   },
   "ocd": {
-    "title": "Obsessive-Compulsive Disorder (OCD)",
-    "tagline": "Finding Your Way Back to a Calmer, More Centered Life",
+    "title": "強迫性障害（OCD）",
+    "tagline": "より穏やかで、より中心に戻る道を見つける",
     "groups": [
       [
-        "Do you ever find yourself stuck in a loop—checking, counting, cleaning, or repeating actions just to feel a fleeting sense of relief? Maybe a thought keeps returning no matter how hard you try to push it away, or you feel that something terrible might happen unless a specific ritual is completed. These patterns aren't signs of weakness. They're often your mind's way of trying to feel safe in the face of anxiety. But when these routines begin to take over your days, disrupt your peace, or affect your relationships, it may be time to seek support.",
-        "Obsessive-Compulsive Disorder (OCD) involves recurring intrusive thoughts (obsessions) and repetitive behaviors (compulsions) aimed at reducing distress. While these behaviors may bring temporary relief, they often intensify anxiety and emotional exhaustion over time.",
-        "Still—healing is possible. You are not your thoughts. You are not your compulsions. And this cycle doesn't have to define your life. With the right support, you can begin to gently interrupt the patterns, ease your anxiety, and return to a steadier, more spacious way of living.",
-        "At our counseling center, we help you understand the patterns underlying OCD—and support you in developing new, more compassionate ways to respond."
+        "ループにはまったような感覚になることはありますか――一時の安堵感を得るためだけに、確認し、数え、片付け、または行動を繰り返してしまう。何度も頭から追い払おうとしても戻ってくる考えや、特定の儀式を完了しなければ何か恐ろしいことが起きてしまうという感覚に囚われることがあるかもしれません。これらのパターンは弱さのサインではありません。それらはしばしば、不安に直面して安心を感じようとする心のあり方です。しかし、これらのルーティンが毎日を乗っ取り始め、平和を乱し、または関係に影響し始めると、サポートを求めるタイミングかもしれません。",
+        "強迫性障害（OCD）は、苦痛を軽減することを目的とした繰り返す侵入的な考え（強迫観念）と反復的な行動（強迫行為）を伴います。これらの行動は一時的な安堵をもたらすかもしれませんが、時間の経過とともに不安と感情的な疲弊を強めることが多いです。",
+        "それでも――癒しは可能です。あなたはあなたの考えではありません。あなたはあなたの強迫行為ではありません。そしてこのサイクルがあなたの人生を定義する必要はありません。適切なサポートがあれば、パターンを穏やかに断ち切り、不安を和らげ、より安定した、より広がりのある生き方に戻ることができます。",
+        "私たちのカウンセリングセンターでは、OCDの根底にあるパターンを理解するお手伝いをし、より思いやりある新しい応答の仕方を育てるためのサポートをします。"
       ]
     ],
     "subsections": [
       {
-        "heading": "When Rituals Become Overwhelming: Gentle Indicators to Reach Out",
+        "heading": "儀式が圧倒的になるとき――助けを求めるための穏やかなサイン",
         "lists": [
           {
             "items": [
-              "Obsessions (Intrusive Thoughts): Repetitive, unwanted thoughts, images, or urges; Fears related to contamination, harm, or things being \"not quite right\"; Growing anxiety if a thought isn't \"neutralized\" or undone",
-              "Compulsions (Repetitive Behaviors): Repeated handwashing, checking, counting, or arranging; A belief that something bad will happen unless a specific behavior is completed; Rituals that interfere with daily life, relationships, or your sense of well-being"
+              "強迫観念（侵入的な考え）：繰り返す望まない考え、イメージ、または衝動；汚染、危害、または何かが「ちょうどよくない」という恐れ；考えが「中和」または取り消されないと高まる不安",
+              "強迫行為（反復的な行動）：繰り返す手洗い、確認、数える、または並べる；特定の行動を完了しなければ何か悪いことが起きるという信念；日常生活、関係、またはウェルビーイングを妨げる儀式"
             ]
           }
         ],
         "closing": [
-          "*If these experiences have persisted for more than a month or are disrupting your daily life, seeking support can be a meaningful and important step toward healing.*"
+          "*これらの体験が1ヶ月以上続いたり、日常生活に支障をきたしている場合、サポートを求めることは癒しへ向けた意味深く重要な一歩となり得ます。*"
         ]
       },
       {
-        "heading": "Freeing Your Mind: Gentle Paths Toward OCD Recovery",
+        "heading": "心を解放する――OCD回復への穏やかな道",
         "groups": [
           [
-            "OCD is highly treatable. With time, care, and the right tools, you can begin to relate to your thoughts in new ways—and loosen their hold on your life."
+            "OCDは非常に治療可能です。時間、ケア、そして適切なツールがあれば、自分の考えに対して新しい関わり方を始め、その考えが人生に及ぼす影響を弱めることができます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify and shift unhelpful thought patterns while building healthier coping strategies.",
-              "Exposure and Response Prevention (ERP): Gradually face anxiety triggers in a safe, supportive space while learning to resist compulsive responses.",
-              "Client-Centered Therapy: Work with a therapist who offers warmth, respect, and understanding as you explore your experiences.",
-              "Emotion Regulation & Stress Management: Practice grounding and mindfulness techniques to manage overwhelming emotions and increase emotional resilience."
+              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し転換しながら、より健全な対処法を築きます。",
+              "曝露反応妨害法（ERP）：安全でサポーティブな空間で不安のトリガーに段階的に向き合いながら、強迫的な反応に抵抗することを学びます。",
+              "クライアント中心療法：あなたの経験を探りながら、温かさ、敬意、理解を提供するセラピストとともに取り組みます。",
+              "感情調整とストレス管理：圧倒的な感情を管理し感情的な回復力を高めるためのグラウンディングとマインドフルネスの技法を練習します。"
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care Support",
+            "lead": "ライフスタイルとセルフケアのサポート",
             "items": [
-              "Establish regular sleep and meal routines to support overall emotional stability",
-              "Use breathing exercises and mindfulness practices to calm your nervous system",
-              "Meet anxious thoughts with compassion rather than criticism",
-              "Set boundaries with overstimulating inputs (e.g., digital media) to support mental clarity"
+              "全体的な感情の安定をサポートするための規則正しい睡眠と食事のルーティンを確立する",
+              "神経系を落ち着かせるための呼吸法とマインドフルネスの実践を使う",
+              "批判ではなく思いやりをもって不安な考えと向き合う",
+              "精神的な明瞭さをサポートするために過剰な刺激（例：デジタルメディア）に境界線を設ける"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "Intrusive thoughts and compulsive behaviors may feel powerful—but they are not stronger than you. They're not personal flaws. They are signs that your mind is doing its best to stay safe. You don't have to face this alone. With the right support, you can find steadier ground, ease anxiety's grip, and return to a life that feels calmer, clearer, and truly your own. Let's begin—gently, together."
+      "**癒しへの第一歩**",
+      "侵入的な考えと強迫的な行動は強力に感じられるかもしれませんが、あなたよりも強くはありません。それらは個人的な欠陥ではありません。それらはあなたの心が安全を保とうとしているサインです。一人でこれと向き合う必要はありません。適切なサポートがあれば、より安定した地を見つけ、不安の締め付けを緩め、より穏やかで、より明確で、真に自分自身の人生に戻ることができます。穏やかに、ともに始めましょう。"
     ]
   },
   "eatingDisorders": {
-    "title": "Eating Disorders",
-    "tagline": "A Gentle Beginning Toward a Healthier Body and Mind",
+    "title": "摂食障害",
+    "tagline": "より健全な心と身体へ向けた、穏やかな始まり",
     "groups": [
       [
-        "Sometimes, emotions speak through food. Sometimes, the pain we carry shows up in how we treat our bodies. Eating disorders aren't simply about food, weight, or willpower. Beneath rigid eating habits or distress around body image often lies something deeper—unspoken pain, unmet emotional needs, or a longing for control in a world that can feel overwhelming.",
-        "Conditions such as anorexia nervosa, bulimia nervosa, and binge eating disorder can profoundly affect both physical health and emotional well-being. But healing is possible—and it doesn't begin with judgment. It begins with care, compassion, and understanding.",
-        "At our counseling center, we meet you exactly where you are—with gentleness, respect, and hope. Together, we'll begin the process of rebuilding your relationship with food, your body, and yourself."
+        "感情が食を通して語ることがあります。私たちが抱える痛みが、身体の扱い方に現れることがあります。摂食障害は単に食べ物、体重、または意志力の問題ではありません。硬直した食習慣や身体イメージへの苦痛の根底には、しばしばより深いものがあります――言葉にされない痛み、満たされていない感情的ニーズ、または圧倒的に感じられる世界でのコントロールへの渇望。",
+        "神経性食欲不振症、神経性過食症、過食性障害などの状態は、身体的健康と感情的ウェルビーイングの両方に深く影響することがあります。しかし、癒しは可能です――そしてそれは判断からではなく始まりません。それはケア、思いやり、そして理解から始まります。",
+        "私たちのカウンセリングセンターでは、あなたがいるそのままの場所であなたと出会います――穏やかさ、敬意、そして希望をもって。ともに、食、身体、そして自分自身との関係を再構築するプロセスを始めます。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Body: When to Consider Eating Disorder Support",
+        "heading": "身体に耳を傾ける――摂食障害のサポートを検討するタイミング",
         "lists": [
           {
-            "lead": "If you recognize any of the following patterns in yourself or someone you care about, it may be time to reach out:",
+            "lead": "以下のパターンのいずれかに自分自身または大切な人に心当たりがある場合、手を伸ばすタイミングかもしれません。",
             "items": [
-              "Anorexia Nervosa: Ongoing food restriction and an intense fear of gaining weight; Anxiety around eating or maintaining a \"normal\" body size; Distorted body image and strict rules around food",
-              "Bulimia Nervosa: Episodes of binge eating followed by purging (vomiting, laxatives, or over-exercising); Strong preoccupation with weight and body shape; Feelings of shame, guilt, or distress after eating",
-              "Binge Eating Disorder: Frequent episodes of eating beyond fullness, often with a sense of being out of control; Emotional numbness, self-criticism, or guilt following meals; May be associated with weight fluctuations or physical discomfort"
+              "神経性食欲不振症：持続的な食制限と体重増加への強い恐怖；食事や「正常な」体型を維持することへの不安；歪んだ身体イメージと食事に関する厳しいルール",
+              "神経性過食症：過食とその後の排出（嘔吐、下剤、または過度の運動）のエピソード；体重と体型への強い執着；食後の恥、罪悪感、または苦痛の感情",
+              "過食性障害：制御を失った感覚を伴う、満腹を超えて食べる頻繁なエピソード；食後の感情的麻痺、自己批判、または罪悪感；体重の変動または身体的不快感と関連することがある"
             ]
           }
         ],
         "closing": [
-          "*Eating disorders affect more than the body—they impact how you relate to yourself. If any of these patterns feel familiar, early support can make a real difference.*"
+          "*摂食障害は身体だけでなく、自分自身との関わり方にも影響します。これらのパターンのいずれかが心当たりのある場合、早期のサポートが本当の違いをもたらすことができます。*"
         ]
       },
       {
-        "heading": "Reclaiming Your Relationship With Food and Yourself",
+        "heading": "食と自分自身との関係を取り戻す",
         "groups": [
           [
-            "Recovery isn't about perfection. It's about building a more compassionate relationship with food, your body, and yourself—one grounded in trust, balance, and kindness."
+            "回復は完璧さについてではありません。それは信頼、バランス、そして優しさに根ざした、食、身体、そして自分自身とのより思いやりある関係を築くことです。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Reframe harmful beliefs about food, body image, and self-worth while building healthier habits.",
-              "Interpersonal Therapy (IPT): Explore how life transitions and relationship dynamics influence eating patterns and self-image.",
-              "Client-Centered Therapy: A warm, supportive space where your experience is heard, understood, and valued.",
-              "Emotion Regulation & Stress Management: Recognize emotional triggers and develop healthy coping skills that reduce the urge to engage in disordered behaviors."
+              "認知行動療法（CBT）：食、身体イメージ、自己価値に関する有害な信念を再構成しながら、より健全な習慣を築きます。",
+              "対人関係療法（IPT）：人生の転換期と対人関係のダイナミクスが食のパターンと自己像にどう影響するかを探ります。",
+              "クライアント中心療法：あなたの経験が聞かれ、理解され、大切にされる温かくサポーティブな空間。",
+              "感情調整とストレス管理：感情的なトリガーを認識し、乱れた行動へのエネルギーを減らす健全な対処スキルを育てます。"
             ]
           },
           {
-            "lead": "Nutritional Guidance & Lifestyle Support",
+            "lead": "栄養指導とライフスタイルサポート",
             "items": [
-              "Create gentle, nourishing meal routines that promote physical healing",
-              "Reconnect with your body through curiosity, care, and self-compassion",
-              "Establish daily rhythms that support emotional balance and self-respect"
+              "身体的な癒しを促進する穏やかで栄養豊富な食習慣を作る",
+              "好奇心、ケア、自己への思いやりをもって身体と再びつながる",
+              "感情的なバランスと自己尊重をサポートする日常のリズムを確立する"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "The discomfort in your body. The fear in front of the mirror. The quiet battle that happens with every meal—These are not signs of failure. They're signs of pain. And pain deserves care. You don't have to fight this alone. Recovery isn't about getting everything \"right.\" It's about softening self-judgment, releasing shame, and learning to trust yourself again—gently, and at your own pace.",
-      "Let's begin there: Not with pressure, but with patience. Not with criticism, but with compassion. Not by changing who you are, but by helping you feel at home in your body—and in your life."
+      "**癒しへの第一歩**",
+      "身体の中の不快感。鏡の前での恐怖。毎回の食事のたびに繰り広げられる静かな戦い――これらは失敗のサインではありません。それらは痛みのサインです。そして痛みはケアに値します。一人でこれと戦う必要はありません。回復はすべてを「正しく」することではありません。それは自己批判を和らげ、恥を手放し、穏やかに、自分のペースで、再び自分自身を信頼することを学ぶことです。",
+      "そこから始めましょう。プレッシャーではなく、忍耐から。批判ではなく、思いやりから。あなたを変えることではなく、あなたが身体の中に、そして人生の中に、我が家を感じる手助けをすることから。"
     ]
   },
   "asd": {
-    "title": "Autism Spectrum Disorder (ASD)",
-    "tagline": "For every unique way of being—there is space to grow, connect, and thrive.",
+    "title": "自閉スペクトラム症（ASD）",
+    "tagline": "ひとりひとりのユニークな在り方のために――成長し、つながり、輝く場所があります。",
     "groups": [
       [
-        "Every child, every person, experiences the world in their own beautifully distinct way. Some communicate not with words, but with gestures, rhythm, or silence. Some find deep comfort in repetition and structure. If you're a parent, caregiver, or loved one, you may have noticed these differences in someone you care about. Perhaps you've watched them struggle to make eye contact, navigate social situations, or process sensory input. Maybe you've wondered: \"Are they okay? Are we doing the right thing? How can I help?\"",
-        "Autism Spectrum Disorder (ASD) is a neurodevelopmental condition marked by differences in social interaction, communication, behavior, and sensory experience. But these differences are not deficits—they are part of a rich and varied way of being. Still, it's natural to feel confused or worried as a parent or family member. You may feel isolated, unsure of how to support your loved one—or even how to care for yourself in the process. You are not alone. And neither is your child, partner, sibling, or friend. There is support. There is understanding. And there is hope.",
-        "At our counseling center, we offer a safe, compassionate space—not just for individuals with ASD, but for the families who love and care for them. We're here to help you better understand each other, communicate with more ease, and build a life that honors both difference and connection."
+        "すべての子ども、すべての人は、それぞれの美しく独自の方法で世界を経験します。言葉ではなく、ジェスチャーやリズム、沈黙でコミュニケーションをとる人もいます。繰り返しと構造に深い安心を見出す人もいます。親御さん、介護者、または愛する人であれば、気にかけている誰かにこのような違いを気づいているかもしれません。目を合わせることへの苦労、社会的状況の乗り越え方、または感覚的な情報の処理を見てきたかもしれません。「この子は大丈夫かしら。私たちは正しいことをしているのかしら。どうすれば助けられるのかしら」と思ったことがあるかもしれません。",
+        "自閉スペクトラム症（ASD）は、社会的交流、コミュニケーション、行動、および感覚体験の違いを特徴とする神経発達状態です。しかし、これらの違いは欠陥ではなく、豊かで多様な在り方の一部です。それでも、親御さんや家族として混乱したり心配したりすることは自然なことです。大切な人をどう支えればよいか、あるいは自分自身をどうケアすればよいかわからず、孤立感を感じることもあるかもしれません。あなたはひとりではありません。あなたのお子さん、パートナー、兄弟、または友人もひとりではありません。サポートがあります。理解があります。そして希望があります。",
+        "私たちのカウンセリングセンターでは、安全で思いやりある空間を提供しています――ASDを持つ個人のためだけでなく、その方を愛してケアする家族のためにも。互いをよりよく理解し、より楽にコミュニケーションをとり、違いとつながりの両方を尊重した生活を築くお手伝いをします。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Understanding Your Experiences: Signs You Deserve Support",
+        "heading": "あなたの経験を理解する――サポートに値するサイン",
         "lists": [
           {
             "items": [
-              "Social interaction and communication differences: Avoiding eye contact or struggling with facial expressions and tone of voice; Difficulty with back-and-forth conversations or interpreting social cues; Needing extra time to process and express emotions",
-              "Repetitive behaviors and focused interests: Intense attachment to routines, patterns, or specific interests; Discomfort with unexpected changes or transitions; Unusual sensitivity to lights, sounds, textures, or physical touch"
+              "社会的交流とコミュニケーションの違い：目を合わせることや表情、声のトーンへの苦労；やりとりのある会話や社会的なサインの解釈への困難；感情の処理と表現に余分な時間が必要",
+              "反復的な行動と集中した興味：ルーティン、パターン、または特定の興味への強い執着；予期しない変化や移行への不快感；光、音、質感、または身体的な接触への異常な感受性"
             ]
           }
         ],
         "closing": [
-          "*If these traits create ongoing challenges at home, school, or in relationships, professional support can help you better understand your child—or yourself—and build tools for daily life. We're here to walk with you, without judgment, at your own pace.*"
+          "*これらの特性が家庭、学校、または対人関係で継続的な課題をもたらす場合、専門的なサポートがお子さん――または自分自身――をよりよく理解し、日常生活のためのツールを築くのに役立ちます。私たちは、判断なく、あなた自身のペースで、ともに歩みます。*"
         ]
       },
       {
-        "heading": "Supporting Your Journey: Personalized Care for Individuals and Families",
+        "heading": "あなたの旅をサポートする――個人と家族へのパーソナライズされたケア",
         "groups": [
           [
-            "**If You're a Parent or Caregiver**",
-            "You may carry so many questions. You may feel tired, overwhelmed, or unsure of what comes next. That doesn't mean you're failing. It means you're trying—and that matters deeply. You don't have to do this alone. Support is not just about helping someone else—it's about being resourced and supported yourself, too. We're here to listen, guide, and walk with you, as you learn how to support your loved one—and take care of your own heart in the process."
+            "**親御さんまたは介護者の方へ**",
+            "たくさんの疑問を抱えているかもしれません。疲れ果て、圧倒され、次に何が来るかわからないと感じているかもしれません。それはあなたが失敗しているという意味ではありません。それはあなたが努力しているということ――そしてそれは深く大切なことです。一人でこれを行う必要はありません。サポートとは誰かを助けることだけでなく、あなた自身もリソースを受けサポートされることです。大切な人を支える方法を学びながら、自分の心もケアするために、話を聞き、導き、ともに歩むためにここにいます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Social Skills Training (SST): Supporting natural social growth through structured, peer-based practice",
-              "Cognitive Behavioral Therapy (CBT): Helping manage anxiety, increase flexibility, and build self-regulation",
-              "Speech & Language Therapy: Strengthening verbal and non-verbal communication",
-              "Sensory Integration Therapy: Creating comfort and calm in sensory experiences"
+              "ソーシャルスキルトレーニング（SST）：構造化されたピアベースの練習を通じて、自然な社会的成長をサポートします。",
+              "認知行動療法（CBT）：不安の管理、柔軟性の向上、自己調整の構築を助けます。",
+              "言語・コミュニケーション療法：言語的および非言語的コミュニケーションを強化します。",
+              "感覚統合療法：感覚体験における安心と落ち着きを育てます。"
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Regulation",
+            "lead": "ライフスタイルのサポートと自己調整",
             "items": [
-              "Creating predictable routines: Fostering a sense of security through structure",
-              "Sensory management tools: Developing strategies to navigate overstimulation",
-              "Emotion regulation & coping skills: Teaching children and adults to recognize and respond to emotional cues with more ease"
+              "予測可能なルーティンを作る：構造を通じて安心感を育てます。",
+              "感覚管理ツール：過剰刺激を乗り越えるための戦略を開発します。",
+              "感情調整と対処スキル：子どもと大人が感情的なサインをより楽に認識し対応することを教えます。"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**A First Step Toward Understanding and Connection**",
-      "Autism is not something to fix. It is something to understand, embrace, and support. You and your loved one are already enough, just as you are. We believe in nurturing strengths, not erasing difference. In helping families grow closer, not further apart. And in walking with you—gently, respectfully, every step of the way."
+      "**理解とつながりへの第一歩**",
+      "自閉症は修正すべきものではありません。それは理解し、受け入れ、サポートすべきものです。あなたと大切な人は、今のままで、すでに十分です。私たちは違いを消すのではなく、強みを育てることを信じています。家族が離れるのではなく、より近くなることを助けることを信じています。そして、穏やかに、敬意をもって、一歩一歩、ともに歩むことを信じています。"
     ]
   },
   "lifeStress": {
-    "title": "Life Stress",
-    "tagline": "Lighten the weight you carry — and make space for an easier tomorrow",
+    "title": "生活ストレス",
+    "tagline": "抱えている重さを軽くし――より楽な明日への空間を作る",
     "groups": [
       [
-        "You've been doing your best—showing up, holding it all together, trying to make things work. But when the weight of work, school, relationships, or financial pressure keeps piling up, it can start to feel like too much. Your chest tightens. Your mind races. You feel stuck—exhausted before the day even begins. Some problems don't have simple solutions. And when stress keeps building, even small tasks can feel overwhelming. If you've been wondering whether it's okay to pause and breathe—it is. Stress is a part of life, but it doesn't have to take over your life.",
-        "At our counseling center, we're here to help you move from just getting through the day to actually feeling grounded again—with more clarity, calm, and room to breathe."
+        "あなたはベストを尽くしてきました――現れ続け、すべてをまとめ、物事をうまくいかせようとしてきました。しかし、仕事、学校、人間関係、または経済的なプレッシャーの重さが積み重なると、多すぎると感じ始めることがあります。胸が締め付けられます。心が先走ります。行き詰まった感覚――一日が始まる前から疲れ果てている。単純な解決策のない問題もあります。そしてストレスが積み重なり続けると、小さなタスクさえ手に負えないように感じられます。立ち止まって息をすることが許されるのかと疑問に思っているなら――許されます。ストレスは生活の一部ですが、人生を乗っ取る必要はありません。",
+        "私たちのカウンセリングセンターでは、ただ一日をやり過ごすだけから、再び地に足のついた感覚へ移行するお手伝いをします――より明確さ、穏やかさ、そして息のできる余裕をもって。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Stress: Signals That You Need Care",
+        "heading": "あなたのストレスに耳を傾ける――ケアが必要なサイン",
         "lists": [
           {
-            "lead": "If you've been noticing any of the following, it may be time to seek support:",
+            "lead": "以下のいずれかに気づいているなら、サポートを求めるタイミングかもしれません。",
             "items": [
-              "Persistent fatigue or lack of motivation",
-              "Feeling anxious or overwhelmed—even by everyday tasks",
-              "Difficulty focusing or making decisions",
-              "Physical symptoms like headaches, digestive issues, or muscle tension",
-              "Irregular sleep or eating habits; feeling emotionally drained"
+              "持続的な疲労または意欲の低下",
+              "日常的なタスクでさえ不安や圧倒される感覚",
+              "集中困難または意思決定のしにくさ",
+              "頭痛、消化の問題、または筋肉の緊張などの身体症状",
+              "不規則な睡眠や食習慣；感情的に消耗した感覚"
             ]
           }
         ],
         "closing": [
-          "*If these signs have been lingering and are beginning to impact your daily life, know that you don't have to face them alone. Support is available, and healing is possible.*"
+          "*これらのサインが長続きし、日常生活に影響し始めている場合、一人で向き合う必要はないことを知ってください。サポートは利用可能であり、癒しは可能です。*"
         ]
       },
       {
-        "heading": "Restoring Balance: Support That Brings You Back to Yourself",
+        "heading": "バランスを回復する――自分自身に戻るためのサポート",
         "groups": [
           [
-            "We can't remove stress from life—but we can learn to respond to it with more awareness, steadiness, and self-compassion. Healing doesn't begin with pushing through. It begins with noticing your own needs—and meeting them with care."
+            "ストレスを人生から取り除くことはできません――しかし、より多くの気づき、安定、そして自己への思いやりをもってそれに対応することを学ぶことはできます。癒しは押し進めることから始まりません。それは自分自身のニーズに気づくことから――そしてそれをケアをもって満たすことから始まります。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify and reframe unhelpful thought patterns. Build healthier, more grounded perspectives that ease mental pressure.",
-              "Client-Centered Therapy: Explore your experiences in a supportive, judgment-free space. Feel truly heard—and find direction at your own pace.",
-              "Stress Management Training: Learn practical tools to manage overwhelm, regulate your emotions, and feel more in control in high-pressure situations."
+              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し、再構成する。精神的なプレッシャーを和らげる、より健全で地に足のついた視点を築きます。",
+              "クライアント中心療法：サポーティブで判断のない空間で自分の経験を探ります。真に話を聞いてもらいながら、自分のペースで方向性を見つけます。",
+              "ストレス管理トレーニング：圧倒感を管理し、感情を調整し、プレッシャーの高い状況でより主体的に感じるための実践的なツールを学びます。"
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care",
+            "lead": "ライフスタイルとセルフケア",
             "items": [
-              "Gentle movement or regular exercise to release tension",
-              "Mindfulness, deep breathing, or relaxation techniques to calm the nervous system",
-              "Balanced meals, consistent rest, and intentional pauses throughout your day",
-              "Boundaries that help protect your time, focus, and emotional well-being"
+              "緊張を解放するための穏やかな運動や定期的な身体活動",
+              "神経系を落ち着かせるためのマインドフルネス、深呼吸、またはリラクゼーション技法",
+              "バランスのとれた食事、一貫した休息、そして一日の中で意図的な休息をとること",
+              "時間、集中力、感情的なウェルビーイングを守るための境界線"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward a Lighter Tomorrow**",
-      "Stress may be part of life—but it doesn't have to take up all the space. You don't have to carry everything on your own. Whatever you're feeling right now, you have the strength to find your way forward. And when you're ready, we'll be here—to walk beside you, at your pace, in your way."
+      "**より軽い明日への第一歩**",
+      "ストレスは生活の一部かもしれませんが、すべての空間を占有する必要はありません。すべてを一人で抱える必要はありません。今どう感じていても、前に進む道を見つける力があります。そして準備ができたとき、私たちはここにいます――あなたのペースで、あなたのやり方で、そばで歩みます。"
     ]
   },
   "griefLoss": {
-    "title": "Grief & Loss",
-    "tagline": "Holding the Memories, Finding Your Way Forward",
+    "title": "悲嘆・喪失",
+    "tagline": "記憶を抱きしめながら、前へと歩む道を見つける",
     "groups": [
       [
-        "When someone we love is no longer with us—or when a meaningful relationship comes to an end—life can feel like it pauses in deep sadness. A quiet emptiness lingers. Regret may echo through unspoken words. Even the smallest moments can feel unbearably heavy.",
-        "Grief doesn't follow a straight line. It comes in waves, in silence, in sudden tears that catch you off guard. And sometimes, you may not even know how to begin processing it. Please know: everything you're feeling is valid. Grief is not something to fix or rush through. It's something to move through—gently, and in your own time. When the pain feels too heavy to carry alone, finding a safe, compassionate space to rest can bring comfort and strength.",
-        "At our counseling center, we honor your experience. We're here to walk beside you through your grief—with care, without pressure, and always at your pace."
+        "愛する人がもういなくなったとき、または意味深い関係が終わりを迎えたとき、人生は深い悲しみの中で止まってしまったように感じられます。静かな空虚さが残ります。言葉にされなかった言葉への後悔がこだまします。最も些細な瞬間さえ耐えられないほど重く感じられることがあります。",
+        "悲嘆は直線的には進みません。それは波となって、沈黙となって、ふとした瞬間の突然の涙として訪れます。そして時に、それを処理するにはどこから始めればよいかさえわからないことがあります。どうか知ってください。あなたが感じていることすべては妥当です。悲嘆は修正したり急いで通り過ぎたりするものではありません。それは穏やかに、自分の時間で、通り抜けるものです。痛みが一人で抱えるには重すぎると感じるとき、安全で思いやりある空間に休むことは、慰めと強さをもたらすことができます。",
+        "私たちのカウンセリングセンターでは、あなたの経験を大切にします。ケアをもって、プレッシャーなく、常にあなたのペースで、悲嘆を通じてあなたのそばを歩みます。"
       ]
     ],
     "subsections": [
       {
-        "heading": "When Grief Feels Too Heavy: Gentle Signs to Seek Support",
+        "heading": "悲嘆が重すぎると感じるとき――サポートを求めるための穏やかなサイン",
         "lists": [
           {
-            "lead": "If any of the following resonate with you or someone you care about, counseling may help:",
+            "lead": "以下のいずれかがあなた自身または大切な人に共鳴するなら、カウンセリングが助けになるかもしれません。",
             "items": [
-              "Deep sadness, emptiness, or emotional numbness",
-              "Lingering regret, guilt, or unspoken feelings",
-              "Difficulty focusing or functioning in daily life",
-              "Withdrawing from relationships or isolating yourself",
-              "A sense of being lost or unable to move forward"
+              "深い悲しみ、空虚さ、または感情の麻痺",
+              "長続きする後悔、罪悪感、または言葉にされなかった感情",
+              "日常生活での集中困難または機能不全",
+              "対人関係からの孤立または引きこもり",
+              "道に迷った感覚または前に進めない感覚"
             ]
           }
         ],
         "closing": [
-          "*If grief begins to affect your well-being, relationships, or daily functioning, reaching out for support is not a sign of weakness—it's a step toward healing.*"
+          "*悲嘆がウェルビーイング、対人関係、または日常の機能に影響し始めたなら、サポートを求めることは弱さのサインではなく――癒しへの一歩です。*"
         ]
       },
       {
-        "heading": "Your Journey Through Grief: Gentle Steps Toward Healing",
+        "heading": "悲嘆の旅――癒しへの穏やかな歩み",
         "groups": [
           [
-            "Grief doesn't disappear—but it can soften. With the right support, you can learn to carry it with more peace, clarity, and self-compassion."
+            "悲嘆は消えることはありません――しかし、和らぐことはあります。適切なサポートがあれば、より多くの平和、明確さ、そして自己への思いやりをもってそれを抱いていくことを学べます。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Gently explore and reframe difficult thoughts surrounding your loss. Learn healthier ways to cope with emotional overwhelm.",
-              "Client-Centered Therapy: A warm, nonjudgmental space where your emotions are seen, heard, and supported—without pressure or expectation.",
-              "Grief Processing & Emotional Support: Develop emotional awareness, allowing grief to move through you naturally. Discover how to express, honor, and live with your loss in a meaningful way."
+              "認知行動療法（CBT）：喪失を巡る困難な考えを穏やかに探り、再構成します。感情的な圧倒にうまく対処するための方法を学びます。",
+              "クライアント中心療法：プレッシャーや期待なく、感情が見られ、聞かれ、サポートされる温かく判断のない空間。",
+              "悲嘆の処理と感情的サポート：感情的な気づきを育て、悲嘆が自然に流れていくことを許します。喪失を意味深く表現し、大切にし、ともに生きる方法を発見します。"
             ]
           },
           {
-            "lead": "Social Support & Self-Care",
+            "lead": "社会的サポートとセルフケア",
             "items": [
-              "Connecting with Others: Talk openly with trusted friends or family. Shared stories and simple presence can be a source of comfort and connection.",
-              "Gentle Care for Body and Mind: Incorporate calming routines—like mindful walking, quiet journaling, or deep breathing—that give space to your grief and help restore your inner balance."
+              "他者とつながる：信頼できる友人や家族とオープンに話す。共有された物語とそこにいてくれること自体が、慰めとつながりの源になることがあります。",
+              "心身への穏やかなケア：マインドフルなウォーキング、静かな日記書き、または深呼吸などの落ち着いたルーティンを取り入れ、悲嘆に空間を与え、内なるバランスを回復する助けをします。"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "Grief is a reflection of love—and the pain you feel honors the depth of that connection. But your grief is not the whole of you. And this season of sorrow is not where your story ends. The people and memories you carry with you will always matter. And in time, you can begin to feel warmth again—not by forgetting, but by learning to carry love and loss side by side. You don't have to walk this path alone. We're here to support you—gently, steadily, and always in your time."
+      "**癒しへの第一歩**",
+      "悲嘆は愛の反映であり、あなたが感じる痛みはそのつながりの深さを称えるものです。しかし、あなたの悲嘆はあなたのすべてではありません。そして、この悲しみの季節はあなたの物語が終わる場所ではありません。あなたが抱き続ける人々と記憶は、常に大切であり続けます。そして時を経て、忘れることによってではなく、愛と喪失を並べて抱く方法を学ぶことによって、再び温もりを感じ始めることができます。この道を一人で歩む必要はありません。穏やかに、確かに、常にあなたの時間で、あなたをサポートするためにここにいます。"
     ]
   },
   "sleep": {
-    "title": "Sleep Disturbances",
-    "tagline": "A Restful Night Can Be Yours Again",
+    "title": "睡眠障害",
+    "tagline": "安らかな夜を、再びあなたのものに",
     "groups": [
       [
-        "For some, nighttime brings quiet comfort. For others, it marks the beginning of restlessness. You might lie awake for hours, your mind racing while the world around you settles. Or perhaps you wake up too early, unable to fall back asleep. Even after a full night's rest, you may still feel tired, foggy, or emotionally drained.",
-        "Sleep is more than rest—it's how the body and mind repair, reset, and return to balance. When sleep becomes difficult, it isn't a sign of weakness. Often, it's your body's way of saying, \"I need care.\" That care doesn't begin with pressure. It begins with awareness, compassion, and gentle support.",
-        "At our counseling center, we provide a space where your story is heard—where you can begin the journey back to deep, restorative rest."
+        "夜が静かな安らぎをもたらす人もいます。他の人にとっては、それは落ち着きのなさの始まりです。何時間も目が覚めたまま横たわり、周囲が静まり返る中で心が先走っているかもしれません。あるいは、早く目が覚めてしまい、再び眠ることができないかもしれません。一晩中眠った後でも、疲れ、もやがかかったような感覚、または感情的に消耗した状態のままかもしれません。",
+        "睡眠は単なる休息ではありません――それは身体と心が修復し、リセットし、バランスに戻る方法です。睡眠が困難になったとき、それは弱さのサインではありません。それはしばしば、「ケアが必要」と言っている身体のサインです。そのケアはプレッシャーから始まりません。それは気づき、思いやり、そして穏やかなサポートから始まります。",
+        "私たちのカウンセリングセンターでは、あなたの物語が聞かれる空間を提供しています――深く、回復的な眠りへの旅を始めることのできる場所。"
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Restlessness: Signs It's Time for Support",
+        "heading": "あなたの落ち着きのなさに耳を傾ける――サポートを求めるタイミングのサイン",
         "lists": [
           {
-            "lead": "If any of the following sound familiar, it may be time to reach out:",
+            "lead": "以下のいずれかが心当たりのある場合、手を伸ばすタイミングかもしれません。",
             "items": [
-              "Insomnia: Difficulty falling asleep or staying asleep; Waking up too early and being unable to return to sleep; Persistent fatigue, even after sleeping",
-              "Sleep Apnea: Breathing that stops or becomes shallow during sleep; Snoring or gasping for air; Daytime drowsiness, irritability, or difficulty focusing",
-              "Hypersomnia: Excessive sleepiness despite getting enough sleep; Struggling to stay awake during the day; Difficulty functioning due to overwhelming fatigue",
-              "Nightmare Disorder: Intense, distressing dreams that interrupt your sleep; Lingering fear or anxiety around falling asleep; Emotional exhaustion upon waking"
+              "不眠症：寝つけない、または眠り続けることができない；早く目が覚めて、再び眠れない；眠った後も持続的な疲労感",
+              "睡眠時無呼吸症候群：睡眠中に呼吸が止まったり、浅くなったりする；いびき、または息が詰まる感覚；日中の眠気、過敏性、または集中困難",
+              "過眠症：十分な睡眠をとっているのに過度の眠気；日中に目を覚まし続けることへの困難；圧倒的な疲労のために機能することへの困難",
+              "悪夢障害：睡眠を妨げる強烈で苦痛を伴う夢；眠りに落ちることへの残留する恐怖または不安；目覚めた際の感情的な疲弊"
             ]
           }
         ],
         "closing": [
-          "*If these symptoms have lasted for more than two weeks or are interfering with your daily life, professional support can help identify the cause and guide you toward more restful sleep.*"
+          "*これらの症状が2週間以上続いたり、日常生活に支障をきたしている場合、専門的なサポートが原因を特定し、より安らかな睡眠に向けてガイドするのに役立ちます。*"
         ]
       },
       {
-        "heading": "Gentle Steps Toward Restful Nights: Personalized Sleep Support",
+        "heading": "安らかな夜への穏やかな歩み――パーソナライズされた睡眠サポート",
         "groups": [
           [
-            "Sleep difficulties are common—and they are treatable. Healing doesn't begin by forcing change. It begins with gently noticing what your body is trying to tell you—and learning how to respond with care."
+            "睡眠の困難は一般的です――そして、それらは治療可能です。癒しは変化を強制することから始まりません。それは身体が伝えようとしていることを穏やかに気づくことから――そしてケアをもって対応することを学ぶことから始まります。"
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "心理療法・カウンセリング",
             "items": [
-              "CBT-I (Cognitive Behavioral Therapy for Insomnia): Identify and shift thought patterns that interfere with sleep. Build healthier bedtime routines and reduce anxiety around sleep.",
-              "Stress Management & Relaxation Training: Practice techniques like deep breathing, progressive muscle relaxation, or guided imagery to calm the nervous system and ease into rest."
+              "不眠症のための認知行動療法（CBT-I）：睡眠を妨げる思考パターンを見つけ出し、転換する。より健全な就寝ルーティンを築き、睡眠に関する不安を軽減します。",
+              "ストレス管理とリラクゼーショントレーニング：深呼吸、漸進的筋弛緩法、または誘導イメージなどの技法を練習し、神経系を落ち着かせ、休息へと穏やかに入ります。"
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care Support",
+            "lead": "ライフスタイルとセルフケアのサポート",
             "items": [
-              "Maintain a consistent sleep and wake schedule",
-              "Limit caffeine, nicotine, and alcohol—especially in the evening",
-              "Reduce screen time before bed to protect your natural sleep rhythm",
-              "Create a quiet, dark, and comfortable sleep environment that supports relaxation"
+              "一貫した就寝・起床スケジュールを維持する",
+              "特に夜間のカフェイン、ニコチン、アルコールを制限する",
+              "自然な睡眠リズムを守るために就寝前のスクリーンタイムを減らす",
+              "リラクゼーションをサポートする静かで、暗く、快適な睡眠環境を作る"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing Rest**",
-      "If sleep feels far away—if nights are restless and mornings feel heavy—it may be your body and mind asking for gentler care. The good news is that restful sleep can be restored. You don't have to keep pushing through exhaustion. You can reclaim rest.",
-      "At our counseling center, we take the time to understand not just your symptoms—but your story. Together, we'll help you find new rhythms that bring balance, calm, and renewal."
+      "**癒しの休息への第一歩**",
+      "睡眠が遠く感じられるなら――夜が落ち着かず、朝が重く感じられるなら――それはあなたの心と身体がより穏やかなケアを求めているサインかもしれません。朗報は、安らかな睡眠は回復できるということです。疲弊を押し進め続ける必要はありません。休息を取り戻すことができます。",
+      "私たちのカウンセリングセンターでは、あなたの症状だけでなく――あなたの物語を理解するための時間をとります。ともに、バランス、穏やかさ、そして再生をもたらす新しいリズムを見つけるお手伝いをします。"
     ]
   }
 };

@@ -86,7 +86,7 @@ export default {
   },
   "pages": {
     "whoWeAre": {
-      "title": "회사 소개",
+      "title": "저희는 누구인가요",
       "paragraphs": [
     "도움이 필요하시면 언제든지 말씀해 주세요."
   ],
@@ -110,14 +110,12 @@ export default {
       },
       "lists": [],
 
-      "flow": [
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" }
-      ]
 
+    
+      "flow": [
+              { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+              { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" }
+            ]
     },
     
 

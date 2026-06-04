@@ -89,7 +89,7 @@ export default {
   },
   "pages": {
     "whoWeAre": {
-      "title": "",
+      "title": "关于我们",
       "paragraphs": [
     ""
   ],
@@ -105,14 +105,12 @@ export default {
       },
       "lists": [],
 
-      "flow": [
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" },
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuvilgj6.p" },
-        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxksaf1.p" },
-        { type: "p", textKey: "pages.whoWeAre.paragraphs.0" }
-      ]
 
+    
+      "flow": [
+              { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+              { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" }
+            ]
     },
     
 

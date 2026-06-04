@@ -1,861 +1,853 @@
-// 서비스 분야 한국어 본문 (source.txt — groups/lists/subsections, 영문 원문)
+// 서비스 분야 한국어 본문
 export const serviceAreasSectionsKo = {
   "depression": {
-    "title": "Depression",
-    "tagline": "You Are Not Alone",
-    "groups": [
-      [
-        "Depression is more than just feeling sad. It can feel like a heavy fog that settles over everything—making even the simplest tasks feel overwhelming. You might be tired all the time, yet unable to rest. Things you once enjoyed may no longer bring you joy. You may feel numb, hopeless, or quietly overwhelmed without always knowing why. And still, you keep going. You try to hold it together, even when it feels like you're falling apart inside."
-      ],
-      [
-        "If this sounds familiar, please know: this is not your fault. You are not weak. Depression is not a flaw in your character—it's a signal that your heart and mind are asking for care.",
-        "Even if it feels like nothing will ever change, these feelings are not forever. With the right support, healing is possible. You can reconnect with yourself, your strength, and the parts of life that once felt meaningful."
-      ]
-    ],
+    "title": "우울증",
+    "tagline": "당신은 혼자가 아닙니다",
+    "groups": [],
     "subsections": [
       {
-        "heading": "Listening to Your Feelings: When to Seek Support for Depression",
+        "heading": "테스트 제목",
         "lists": [
           {
-            "lead": "If you've experienced some of the following for more than two weeks, it may be time to seek support:",
+            "lead": "다음 중 일부를 2주 이상 경험하셨다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "A persistent sense of sadness, anxiety, or emotional emptiness",
-              "Constant fatigue or low energy—even after rest",
-              "Loss of interest in activities, people, or routines you once enjoyed",
-              "Difficulty concentrating, making decisions, or remembering things",
-              "Persistent guilt, harsh self-criticism, or feeling worthless",
-              "Noticeable changes in sleep or appetite—sleeping too much or too little, eating more or less than usual",
-              "Thoughts of self-harm or suicide"
+              "지속적인 슬픔, 불안, 또는 정서적 공허함",
+              "쉬어도 회복되지 않는 만성 피로 또는 기력 저하",
+              "예전에 즐겼던 활동, 사람, 또는 일상에 대한 흥미 상실",
+              "집중력 저하, 결정의 어려움, 또는 기억력 감퇴",
+              "지속적인 죄책감, 심한 자기비판, 또는 무가치감",
+              "수면이나 식욕의 뚜렷한 변화—지나치게 많이 자거나 적게 자거나, 평소보다 많이 먹거나 적게 먹는 것",
+              "자해 또는 자살에 대한 생각"
             ]
           }
         ],
         "closing": [
-          "*These feelings are not something you have to face alone. Reaching out isn't a sign of failure—it's an act of courage and care.*"
+          "*이러한 감정들은 혼자 감당해야 하는 것이 아닙니다. 도움을 요청하는 것은 실패의 표시가 아니라, 용기와 자기 돌봄의 행동입니다.*"
         ]
       },
       {
-        "heading": "Rediscovering Your Strength: Your Path to Emotional Healing (Treatment & Support)",
+        "heading": "내면의 힘 되찾기: 정서적 치유를 향한 여정 (치료 및 지원)",
         "groups": [
           [
-            "Depression is highly treatable. While there's no single path to recovery, there are many effective ways to begin healing and reconnecting with life."
+            "우울증은 치료 가능성이 매우 높습니다. 회복에는 단 하나의 정해진 길이 있는 것이 아니라, 치유를 시작하고 삶과 다시 연결되기 위한 다양하고 효과적인 방법들이 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify unhelpful thought patterns and develop more balanced, supportive ways of thinking.",
-              "Interpersonal Therapy (IPT): Explore how relationship struggles might impact your mood and learn tools for building healthier connections.",
-              "Behavioral Activation (BA): Re-engage with small, meaningful activities that help rebuild motivation, energy, and joy.",
-              "Client-Centered Therapy: A warm, nonjudgmental space to talk openly, reflect deeply, and grow with support.",
-              "Stress Management & Thought Restructuring: Learn how to calm your body and mind, and replace negative thought cycles with more constructive perspectives."
+              "인지행동치료(CBT): 도움이 되지 않는 사고 패턴을 파악하고, 보다 균형 잡히고 건강한 사고 방식을 개발합니다.",
+              "대인관계치료(IPT): 관계의 어려움이 기분에 미치는 영향을 탐색하고, 보다 건강한 관계를 형성하는 방법을 배웁니다.",
+              "행동 활성화(BA): 동기, 에너지, 기쁨을 되살려주는 소소하고 의미 있는 활동들에 다시 참여합니다.",
+              "내담자 중심 치료: 따뜻하고 비판단적인 공간에서 마음을 열어 이야기하고, 깊이 성찰하며, 지원을 받으며 성장합니다.",
+              "스트레스 관리 및 사고 재구조화: 몸과 마음을 안정시키고, 부정적인 사고 패턴을 보다 건설적인 관점으로 전환하는 방법을 배웁니다."
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "생활 지원 및 자기 돌봄",
             "items": [
-              "Gentle physical movement to boost energy and support mood",
-              "A balanced, nourishing diet to care for both body and mind",
-              "Mindfulness, deep breathing, or meditation to ease tension",
-              "A consistent sleep routine to support emotional and physical recovery"
+              "에너지를 높이고 기분을 지지하는 부드러운 신체 활동",
+              "몸과 마음 모두를 돌보는 균형 잡힌 영양 섭취",
+              "긴장 완화를 위한 마음 챙김, 복식 호흡, 또는 명상",
+              "정서적·신체적 회복을 지원하는 규칙적인 수면 루틴"
             ]
           }
         ]
       }
     ],
-    "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not defined by what you're feeling right now. This pain—this difficult season—does not last forever. Depression is treatable, and you don't have to navigate it alone.",
-      "There is space for healing, for renewal, and for life to feel like yours again. You don't have to be \"ready.\" You just need a safe place to begin. We'll meet you there—gently, respectfully, and at your pace."
-    ]
+    "closing": []
+  ,
+    lists: [],
+  
+    "flow": []
   },
   "traumaPtsd": {
-    "title": "Trauma & PTSD",
-    "tagline": "You Are Not Defined by What Happened to You — You Deserve to Feel Safe Again",
+    "title": "트라우마 & PTSD",
+    "tagline": "당신은 일어난 일로 규정되지 않습니다 — 다시 안전함을 느낄 자격이 있습니다",
     "groups": [
       [
-        "Some memories don't fade with time. They show up uninvited—during a quiet conversation, on a crowded street, or when you're just trying to fall asleep. Sometimes fear appears out of nowhere. Other times, it feels like you're stuck in a moment that's long since passed, unable to fully return to the present.",
-        "But what happened to you is just one part of your story—it doesn't define who you are. Trauma is never your fault, and you don't have to carry it forever. Even if healing feels out of reach right now, you still have the strength to reclaim your life—to feel safe again, to reconnect with yourself, and to find peace.",
-        "Healing takes time, and it doesn't have to happen alone. At our counseling center, we offer a safe and supportive space where you can begin to heal—gently, and at your own pace."
+        "어떤 기억들은 시간이 지나도 사라지지 않습니다. 조용한 대화 중에, 사람 많은 거리에서, 또는 막 잠들려는 순간에 불쑥 찾아옵니다. 때로는 갑자기 두려움이 엄습하기도 합니다. 또 어떤 때는 이미 오래전에 지나간 순간에 갇혀, 현재로 완전히 돌아오지 못하는 것처럼 느껴지기도 합니다.",
+        "하지만 당신에게 일어난 일은 당신의 이야기 중 일부에 불과합니다—그것이 당신이 누구인지를 정의하지 않습니다. 트라우마는 결코 당신의 잘못이 아니며, 영원히 짊어지고 갈 필요도 없습니다. 지금 당장 치유가 불가능하게 느껴지더라도, 당신에게는 여전히 삶을 되찾을 힘이 있습니다—다시 안전함을 느끼고, 자신과 다시 연결되고, 평화를 찾을 수 있습니다.",
+        "치유에는 시간이 걸리며, 혼자 이겨내야 할 필요는 없습니다. 저희 상담센터는 치유를 시작할 수 있는 안전하고 지지적인 공간을 제공합니다—부드럽게, 그리고 당신만의 속도로."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Your Heart Feels Heavy: Recognizing the Need for Care",
+        "heading": "마음이 무거울 때: 돌봄이 필요함을 인식하기",
         "lists": [
           {
-            "lead": "Trauma can show up in many different ways. If any of the following feel familiar, professional support may help:",
+            "lead": "트라우마는 다양한 방식으로 나타날 수 있습니다. 다음 중 익숙하게 느껴지는 것이 있다면 전문적인 지원이 도움이 될 수 있습니다.",
             "items": [
-              "Intrusive Memories & Reactions: Flashbacks, nightmares, or distressing memories that feel hard to escape; Sudden emotional or physical reactions to reminders of the trauma",
-              "Avoidance & Disconnection: Avoiding people, places, or conversations that bring up painful memories; Feeling emotionally numb or disconnected from yourself or others",
-              "Negative Thoughts & Mood Changes: Ongoing guilt, shame, or self-blame; Difficulty trusting others or feeling emotionally close; Trouble remembering parts of the trauma or viewing the world as unsafe",
-              "Hyperarousal & Reactivity: Constantly feeling on edge, easily startled, or overly alert; Difficulty sleeping, concentrating, or managing energy levels; Intense emotional reactions or difficulty regulating strong emotions"
+              "침습적 기억 및 반응: 벗어나기 어려운 플래시백, 악몽, 또는 고통스러운 기억들. 트라우마를 상기시키는 것에 대한 갑작스러운 감정적·신체적 반응",
+              "회피 및 단절: 고통스러운 기억을 불러일으키는 사람, 장소, 또는 대화를 피함. 감정적으로 무감각해지거나 자신 또는 타인과 단절된 느낌",
+              "부정적 사고 및 기분 변화: 지속적인 죄책감, 수치심, 또는 자책. 타인을 신뢰하거나 정서적으로 가까워지는 것의 어려움. 트라우마의 일부를 기억하지 못하거나 세상이 안전하지 않다고 느낌",
+              "과각성 및 반응성: 끊임없이 긴장 상태에 있거나, 쉽게 놀라거나, 과도하게 경계함. 수면, 집중, 또는 에너지 조절의 어려움. 강렬한 감정 반응 또는 강한 감정을 조절하는 데 어려움"
             ]
           }
         ],
         "closing": [
-          "*If these symptoms last longer than a month or begin interfering with daily life, reaching out for help is not only okay—it's important.*"
+          "*이러한 증상들이 한 달 이상 지속되거나 일상생활을 방해하기 시작한다면, 도움을 요청하는 것은 괜찮을 뿐만 아니라 중요한 일입니다.*"
         ]
       },
       {
-        "heading": "Reclaiming Your Life: A Gentle Path to Trauma Recovery",
+        "heading": "삶 되찾기: 트라우마 회복을 위한 부드러운 여정",
         "groups": [
           [
-            "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
+            "트라우마는 혼자 짊어지도록 설계되지 않았습니다. 적절한 지원으로 다시 안정감을 찾고, 신뢰를 재건하며, 삶과 다시 연결되기 시작할 수 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify unhelpful thoughts and develop healthier coping strategies.",
-              "Exposure Therapy: Safely revisit trauma-related memories in a controlled environment to reduce fear and avoidance.",
-              "Eye Movement Desensitization and Reprocessing (EMDR): Use guided eye movements to help your brain process and release distressing memories.",
-              "Interpersonal Therapy (IPT): Rebuild connection and trust through healing interpersonal relationships.",
-              "Client-Centered Therapy: Explore emotions in a nonjudgmental space, guided by your pace and your needs.",
-              "Behavioral Activation (BA): Re-engage in meaningful activities to restore a sense of purpose and joy.",
-              "Stress Management & Cognitive Restructuring: Learn techniques to calm your nervous system and shift negative thought patterns."
+              "인지행동치료(CBT): 도움이 되지 않는 사고를 파악하고 더 건강한 대처 전략을 개발합니다.",
+              "노출 치료: 통제된 환경에서 트라우마 관련 기억을 안전하게 다시 마주하여 두려움과 회피를 줄입니다.",
+              "안구운동 민감소실 및 재처리 요법(EMDR): 안내된 안구 운동을 활용해 뇌가 고통스러운 기억을 처리하고 해소하도록 돕습니다.",
+              "대인관계치료(IPT): 치유적인 대인관계를 통해 연결감과 신뢰를 회복합니다.",
+              "내담자 중심 치료: 비판단적인 공간에서 당신의 속도와 필요에 따라 감정을 탐색합니다.",
+              "행동 활성화(BA): 의미 있는 활동에 다시 참여하여 삶의 목적과 기쁨을 되찾습니다.",
+              "스트레스 관리 및 인지 재구조화: 신경계를 안정시키고 부정적인 사고 패턴을 전환하는 기술을 배웁니다."
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "생활 지원 및 자기 돌봄",
             "items": [
-              "Practice mindfulness, deep breathing, or grounding exercises to soothe your body and mind",
-              "Incorporate regular movement—such as walking or yoga—to help release tension",
-              "Build supportive, safe relationships with people who make you feel understood and respected"
+              "몸과 마음을 달래는 마음 챙김, 복식 호흡, 또는 그라운딩 훈련",
+              "긴장 해소에 도움이 되는 걷기나 요가 같은 규칙적인 움직임 실천",
+              "이해받고 존중받는다는 느낌을 주는 안전하고 지지적인 관계 형성"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not broken. The pain you carry is real—but it is not all of who you are. Healing doesn't mean forgetting. It means feeling safe again, finding peace in the present, and allowing hope to grow.",
-      "You don't have to rush. You don't have to go through it alone. You get to choose how healing looks for you. And we're here to walk that path with you—with steadiness, care, and respect.",
-      "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
+      "**치유를 향한 첫 걸음**",
+      "당신은 망가진 존재가 아닙니다. 당신이 짊어진 고통은 실재합니다—하지만 그것이 당신의 전부는 아닙니다. 치유는 잊는다는 의미가 아닙니다. 다시 안전함을 느끼고, 현재에서 평화를 찾고, 희망이 자라나도록 허용하는 것을 의미합니다.",
+      "서두를 필요가 없습니다. 혼자 감당하지 않아도 됩니다. 치유의 모습은 당신이 선택할 수 있습니다. 저희는 그 길을 함께 걷겠습니다—흔들림 없이, 진심으로, 그리고 깊은 존중을 담아.",
+      "트라우마는 혼자 짊어지도록 설계되지 않았습니다. 적절한 지원으로 다시 안정감을 찾고, 신뢰를 재건하며, 삶과 다시 연결되기 시작할 수 있습니다."
     ]
   },
   "anxietyPanic": {
-    "title": "Anxiety Panic Attacks",
-    "tagline": "Reclaiming Calm — You Are Not Defined by Your Fear",
+    "title": "불안 & 공황 발작",
+    "tagline": "평온을 되찾으세요 — 당신은 두려움으로 규정되지 않습니다",
     "groups": [
       [
-        "Sometimes, panic strikes without warning. Your heart races. Your chest tightens. It feels like you can't breathe—as if something terrible is about to happen, or like you're losing control. In those moments, your entire body goes on high alert, even when there's no clear threat.",
-        "It's not just frightening—it's exhausting. And when it happens more than once, you might start avoiding places, people, or even everyday situations, fearing that another attack could happen at any moment. But panic doesn't have to control your life. These responses are not your fault—they're your nervous system's way of signaling that it needs care. The good news is, that care is possible.",
-        "At our counseling center, we help you gently understand what your mind and body are trying to tell you. Together, we'll explore ways to calm the fear, rebuild a sense of safety, and return to a life that feels more steady and manageable—at your own pace."
+        "때로는 아무런 경고 없이 공황이 찾아옵니다. 심장이 빠르게 뜁니다. 가슴이 조여 듭니다. 숨을 쉴 수 없는 것처럼 느껴집니다—마치 끔찍한 일이 곧 일어날 것 같거나, 통제력을 잃고 있는 것 같은 느낌이 듭니다. 그 순간, 분명한 위협이 없어도 온몸이 극도로 긴장합니다.",
+        "그것은 단순히 두렵기만 한 것이 아니라, 진이 빠지는 일입니다. 그리고 그런 일이 반복되면, 또 다른 발작이 언제든 일어날 수 있다는 두려움 때문에 장소, 사람, 심지어 일상적인 상황까지 피하기 시작할 수 있습니다. 하지만 공황이 당신의 삶을 지배할 필요는 없습니다. 이러한 반응들은 당신의 잘못이 아닙니다—신경계가 돌봄이 필요하다는 신호를 보내는 방식입니다. 다행히도, 그 돌봄은 가능합니다.",
+        "저희 상담센터에서는 마음과 몸이 무엇을 말하려는지 부드럽게 이해할 수 있도록 돕습니다. 함께 두려움을 진정시키고, 안전감을 회복하며, 보다 안정적이고 수월한 삶으로 돌아가는 방법을 탐색해 나가겠습니다—당신의 속도에 맞추어."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Panic Feels Overwhelming (Signs You Might Need Support)",
+        "heading": "공황이 너무 힘겨울 때 (도움이 필요한 신호)",
         "lists": [
           {
             "items": [
-              "Sudden, intense waves of anxiety or fear",
-              "Pounding heart, chest tightness, shortness of breath",
-              "Dizziness, nausea, tingling, or chills",
-              "A sense of losing control or feeling disconnected",
-              "Avoiding places or situations that might trigger an attack",
-              "Constant worry about when the next panic attack will occur"
+              "갑작스럽고 강렬한 불안 또는 공포감",
+              "심장 두근거림, 가슴 답답함, 숨 막힘",
+              "어지러움, 메스꺼움, 저림, 또는 오한",
+              "통제를 잃거나 현실과 단절되는 느낌",
+              "공황 발작을 유발할 수 있는 장소나 상황 회피",
+              "다음 공황 발작이 언제 올지에 대한 지속적인 걱정"
             ]
           }
         ],
         "closing": [
-          "*If these experiences are interfering with your daily life, you don't have to face them alone. With the right support, you can find relief and feel in control again.*"
+          "*이런 경험들이 일상생활을 방해하고 있다면, 혼자 감당하지 않아도 됩니다. 적절한 지원으로 안도감을 찾고 다시 통제감을 회복할 수 있습니다.*"
         ]
       },
       {
-        "heading": "Rediscovering Inner Peace: Your Path Toward Calm",
+        "heading": "내면의 평온 되찾기: 안정을 향한 여정",
         "groups": [
           [
-            "Panic attacks can feel intense—but they are also highly treatable. With the right tools and guidance, you can interrupt the cycle of fear, better understand your anxiety, and build long-lasting confidence in yourself."
+            "공황 발작은 강렬하게 느껴질 수 있지만, 치료 가능성도 매우 높습니다. 올바른 도구와 안내가 있다면 두려움의 악순환을 끊고, 불안을 더 잘 이해하며, 자신에 대한 지속적인 자신감을 키울 수 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Learn to recognize and reshape the thought patterns that trigger panic and develop healthier responses.",
-              "Exposure Therapy: Gradually and safely face feared situations, helping you reduce avoidance and build resilience.",
-              "Client-Centered Therapy: A supportive, nonjudgmental space where you can process fear, rebuild trust in your body, and reconnect with yourself.",
-              "Stress Management & Cognitive Restructuring: Gain practical tools to soothe your nervous system and reframe anxious thoughts into steadier, more balanced perspectives."
+              "인지행동치료(CBT): 공황을 유발하는 사고 패턴을 인식하고 재구성하며, 보다 건강한 반응 방식을 개발하는 것을 배웁니다.",
+              "노출 치료: 두려운 상황에 점진적으로 안전하게 직면하여 회피를 줄이고 회복 탄력성을 키웁니다.",
+              "내담자 중심 치료: 두려움을 처리하고, 몸에 대한 신뢰를 재건하며, 자신과 다시 연결될 수 있는 지지적이고 비판단적인 공간.",
+              "스트레스 관리 및 인지 재구조화: 신경계를 안정시키고 불안한 생각을 보다 균형 잡히고 안정적인 관점으로 재구성하는 실용적인 도구를 얻습니다."
             ]
           },
           {
-            "lead": "Lifestyle Support & Everyday Care",
+            "lead": "생활 지원 및 일상 돌봄",
             "items": [
-              "Breathing & Relaxation Practices: Techniques like deep breathing, mindfulness, or yoga to calm your body and mind.",
-              "Movement & Nourishment: Regular exercise and a balanced diet to support emotional and physical regulation.",
-              "Reducing Triggers & Stimulants: Limiting caffeine or overstimulation to help reduce anxiety symptoms."
+              "호흡 및 이완 훈련: 몸과 마음을 안정시키는 복식 호흡, 마음 챙김, 또는 요가 같은 기법.",
+              "움직임 및 영양 관리: 정서적·신체적 조절을 지원하는 규칙적인 운동과 균형 잡힌 식단.",
+              "유발 요인 및 자극제 줄이기: 카페인이나 과도한 자극을 제한하여 불안 증상을 완화합니다."
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Peace**",
-      "Panic is not a sign of weakness. It's a signal that your body is asking for safety and support—and with care, safety can be restored. You are more than your fear. You are capable of living a calm, steady life again. You don't have to brace yourself for the next panic attack. You can move through the fear—and come out stronger on the other side. We'll be here to walk with you—step by step."
+      "**평온을 향한 첫 걸음**",
+      "공황은 나약함의 표시가 아닙니다. 몸이 안전과 지지를 필요로 한다는 신호이며—적절한 돌봄으로 안전은 회복될 수 있습니다. 당신은 두려움 이상의 존재입니다. 다시 평온하고 안정적인 삶을 살 수 있습니다. 다음 공황 발작에 움츠러들지 않아도 됩니다. 두려움을 통과하여—더 단단해질 수 있습니다. 저희가 한 걸음씩 함께 걷겠습니다."
     ]
   },
   "suicidalThoughts": {
-    "title": "Suicidal Thoughts",
-    "tagline": "You are not alone in this. And hope—though it may feel distant—still lives.",
+    "title": "자살 생각",
+    "tagline": "당신은 이 안에서 혼자가 아닙니다. 그리고 희망은—멀게 느껴질지라도—여전히 존재합니다.",
     "groups": [
       [
-        "There may be days when everything feels unbearably heavy. When waking up feels like a battle, and just getting through the day takes all the strength you have. The pain may be loud or silent, constant or unpredictable. It may feel like you've tried everything, and nothing has helped. Like the world is moving on—while you remain stuck in the same place, hurting.",
-        "If this is where you are right now, please know: You are not weak. You are not broken. And you are not alone. These thoughts are not shameful. They are signals—messages from a part of you that is overwhelmed, exhausted, and longing for care. And that part of you deserves to be seen, heard, and held with compassion.",
-        "At our counseling center, we offer a space that is gentle, safe, and pressure-free. A place where your pain isn't rushed or minimized—but honored, respected, and understood. We'll sit with you—right where you are—and help you begin to breathe again."
+        "모든 것이 감당할 수 없을 만큼 무겁게 느껴지는 날들이 있을 수 있습니다. 아침에 일어나는 것 자체가 싸움처럼 느껴지고, 하루를 버티는 데 모든 힘을 쏟아야 하는 날들. 그 고통은 크게 울부짖기도 하고, 조용히 스며들기도 하며, 끊임없이 또는 예측할 수 없이 찾아올 수 있습니다. 모든 것을 시도해 봤지만 아무것도 도움이 되지 않은 것처럼 느껴질 수 있습니다. 세상은 계속 나아가는데—자신만 같은 자리에서 고통받고 있는 것처럼.",
+        "지금 이런 상황에 있다면, 이것만은 알아주세요. 당신은 나약하지 않습니다. 당신은 망가지지 않았습니다. 그리고 당신은 혼자가 아닙니다. 이런 생각들은 부끄러운 것이 아닙니다. 그것들은 신호입니다—압도되고, 지치고, 돌봄을 갈구하는 당신의 내면이 보내는 메시지입니다. 그리고 그 내면은 보여지고, 들려지고, 따뜻하게 안겨야 할 자격이 있습니다.",
+        "저희 상담센터는 부드럽고, 안전하며, 부담이 없는 공간을 제공합니다. 당신의 고통이 서둘러 처리되거나 축소되지 않고—존중받고, 인정받고, 이해받는 곳. 저희가 당신 곁에 앉아—지금 있는 그 자리에서—다시 숨을 쉬기 시작할 수 있도록 함께하겠습니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Pain: Recognizing When It's Time to Reach Out",
+        "heading": "당신의 고통에 귀 기울이기: 도움을 구해야 할 때 알아차리기",
         "lists": [
           {
-            "lead": "If any of these experiences sound familiar, it may be time to ask for help:",
+            "lead": "다음 경험들 중 익숙하게 느껴지는 것이 있다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "A deep, ongoing sadness or emotional numbness that won't lift",
-              "Feeling disconnected from life or hopeless about the future",
-              "Thoughts of self-harm or making a plan to end your life",
-              "Withdrawing from others, or believing no one would miss you",
-              "Thinking your existence is a burden, or that life might be easier without you"
+              "가라앉지 않는 깊고 지속적인 슬픔 또는 감정적 무감각",
+              "삶과의 단절감 또는 미래에 대한 무망감",
+              "자해에 대한 생각 또는 삶을 끝내는 것에 대한 계획",
+              "타인으로부터 멀어지거나, 아무도 자신을 그리워하지 않을 것이라는 믿음",
+              "자신의 존재가 짐이 된다는 생각, 또는 자신이 없으면 세상이 더 나을 것이라는 생각"
             ]
           }
         ],
         "closing": [
-          "*These feelings don't make you weak—they make you human. And you don't have to carry them on your own.*"
+          "*이러한 감정들은 당신을 나약하게 만드는 것이 아닙니다—당신이 인간임을 보여주는 것입니다. 그리고 그것들을 혼자 감당할 필요는 없습니다.*"
         ]
       },
       {
-        "heading": "Finding Light Again: Gentle Guidance Toward Hope and Healing",
+        "heading": "다시 빛을 찾아서: 희망과 치유를 향한 부드러운 안내",
         "groups": [
           [
-            "There is no one right way to heal. But there is a way forward—and you don't have to find it alone."
+            "치유에 단 하나의 정해진 방법이란 없습니다. 하지만 앞으로 나아가는 길은 있습니다—그리고 그 길을 혼자 찾을 필요는 없습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Gently explore and reframe painful thoughts, and rediscover moments of hope and meaning.",
-              "Client-Centered Therapy: A compassionate space where your voice matters, and healing unfolds at your own pace.",
-              "Interpersonal Therapy (IPT): Strengthen meaningful relationships and rebuild the support you need and deserve.",
-              "Crisis Support & Emotional Care: Immediate support during moments of emotional overwhelm; Tools to manage intense feelings and stay grounded; Guidance in building a support system—people who genuinely care and want to walk beside you"
+              "인지행동치료(CBT): 고통스러운 생각을 부드럽게 탐색하고 재구성하며, 희망과 의미의 순간들을 다시 발견합니다.",
+              "내담자 중심 치료: 당신의 목소리가 중요하고, 치유가 당신만의 속도로 펼쳐지는 따뜻하고 공감 어린 공간.",
+              "대인관계치료(IPT): 의미 있는 관계를 강화하고, 필요하고 당연히 받아야 할 지지를 재건합니다.",
+              "위기 지원 및 정서적 돌봄: 감정이 압도될 때 즉각적인 지지. 강렬한 감정을 관리하고 안정감을 유지하는 도구. 진심으로 당신을 아끼고 곁에서 함께하고 싶어 하는 사람들로 이루어진 지지 체계 구축 안내"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**You Are Still Here—And That Matters**",
-      "Even if you can't see it right now, life still holds space for you. A breath you haven't taken yet. A connection you haven't made. A feeling of peace you haven't known in a long time. You don't have to pretend you're okay. You don't need to have all the answers. You just need one small, safe place to begin again. We'll be with you in the dark—not to push, but to remind you that you're not alone. And when you're ready, we'll walk with you—gently—toward the light."
+      "**당신은 여전히 여기 있습니다—그것이 중요합니다**",
+      "지금은 보이지 않을 수 있지만, 삶은 여전히 당신을 위한 공간을 간직하고 있습니다. 아직 마시지 않은 숨결. 아직 맺지 못한 인연. 오랫동안 느끼지 못했던 평온함. 괜찮은 척 하지 않아도 됩니다. 모든 답을 가질 필요도 없습니다. 다시 시작할 수 있는 작고 안전한 공간 하나만 있으면 됩니다. 저희가 어둠 속에서 당신 곁에 있겠습니다—재촉하지 않고, 당신이 혼자가 아님을 기억할 수 있도록. 그리고 준비가 되면, 당신과 함께—조용히—빛을 향해 걷겠습니다."
     ]
   },
   "culturalIdentity": {
-    "title": "Cultural Identity",
-    "tagline": "Understanding Your Story, Embracing Your True Self",
+    "title": "문화적 정체성",
+    "tagline": "나의 이야기를 이해하고, 진정한 자신을 받아들이기",
     "groups": [
       [
-        "Each of us carries a story that cannot be told in just one language, place, or tradition. Your cultural identity isn't defined solely by your birthplace or nationality—it's shaped by the people you've known, the places you've lived, the values you hold, and the experiences that have shaped your heart.",
-        "Sometimes, living between cultures can feel disorienting. You may find yourself caught between expectations—never fully belonging here or there. At times, it might feel like you're standing in two worlds, yet at home in neither.",
-        "These feelings aren't signs of weakness. They're part of a meaningful journey—one that leads to deeper self-understanding and the creation of an identity that is fully, authentically yours. Your multicultural experiences aren't something to overcome—they're something to explore, integrate, and embrace.",
-        "At our counseling center, we offer a warm, respectful space to support that exploration. We're here to help you reconnect with yourself and build a life that feels grounded, confident, and true to who you are."
+        "우리 각자는 단 하나의 언어, 장소, 또는 전통으로는 다 담을 수 없는 이야기를 품고 있습니다. 당신의 문화적 정체성은 단순히 출생지나 국적만으로 정의되지 않습니다—그것은 함께한 사람들, 살아온 장소들, 소중히 여기는 가치들, 그리고 마음을 빚어온 경험들에 의해 형성됩니다.",
+        "때로는 여러 문화 사이에 살아간다는 것이 혼란스럽게 느껴질 수 있습니다. 기대 사이에서 갈팡질팡하며—이 곳에도 저 곳에도 온전히 속하지 못하는 느낌. 어떤 때는 두 세계에 서 있으면서도 어느 곳에서도 집처럼 느껴지지 않는 것처럼 느껴질 수 있습니다.",
+        "이러한 감정들은 나약함의 표시가 아닙니다. 더 깊은 자기 이해로 이어지고, 온전히 자신만의 정체성을 만들어 가는 의미 있는 여정의 일부입니다. 다문화적 경험은 극복해야 할 것이 아니라—탐색하고, 통합하고, 받아들여야 할 것입니다.",
+        "저희 상담센터는 그 탐색을 지원하는 따뜻하고 존중 어린 공간을 제공합니다. 자신과 다시 연결되고, 안정되고, 자신감 있으며, 진정한 자신에 충실한 삶을 구축할 수 있도록 함께하겠습니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Yourself: Signs Cultural Identity Issues Need Support",
+        "heading": "자신에게 귀 기울이기: 문화적 정체성 문제에 지원이 필요한 신호",
         "lists": [
           {
-            "lead": "If any of the following feel familiar, counseling may help:",
+            "lead": "다음 중 익숙하게 느껴지는 것이 있다면 상담이 도움이 될 수 있습니다.",
             "items": [
-              "Feeling unsure of where you truly belong",
-              "Struggling to balance differing cultural expectations or values",
-              "Experiencing stress, confusion, or emotional fatigue in multicultural environments",
-              "Feeling disconnected from your identity or uncertain about how to express your authentic self"
+              "자신이 진정으로 어디에 속하는지 확신이 서지 않는 느낌",
+              "서로 다른 문화적 기대나 가치 사이에서 균형을 잡는 것의 어려움",
+              "다문화 환경에서의 스트레스, 혼란, 또는 정서적 피로",
+              "정체성과의 단절감 또는 진정한 자신을 어떻게 표현할지 불확실함"
             ]
           }
         ],
         "closing": [
-          "*If these experiences begin to affect your confidence, well-being, or daily life, you don't have to navigate them alone. Support is here.*"
+          "*이런 경험들이 자신감, 정신 건강, 또는 일상생활에 영향을 미치기 시작한다면, 혼자 헤쳐나가지 않아도 됩니다. 지원은 여기 있습니다.*"
         ]
       },
       {
-        "heading": "Embracing Your Identity: Empowering Cultural Healing",
+        "heading": "정체성 받아들이기: 문화적 치유를 위한 힘 찾기",
         "groups": [
           [
-            "Counseling is not about choosing one part of you over another—it's about learning to bring all of your experiences into harmony, with gentleness and care."
+            "상담은 자신의 일부를 다른 부분보다 선택하는 것에 관한 것이 아닙니다—모든 경험들을 부드럽게, 그리고 사려 깊게 조화롭게 통합하는 방법을 배우는 것입니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Identity Exploration & Integration: Explore your cultural experiences and values to develop a more grounded and secure sense of self.",
-              "Culturally Responsive Counseling: Learn how to navigate different cultural spaces while honoring your individuality.",
-              "Stress & Resilience in Multicultural Settings: Understand the emotional impact of cultural stress and build strategies to respond with confidence and clarity."
+              "정체성 탐색 및 통합: 문화적 경험과 가치를 탐색하여 보다 안정적이고 확고한 자아 감각을 발전시킵니다.",
+              "문화적으로 민감한 상담: 자신의 개성을 존중하면서 다양한 문화적 공간을 헤쳐나가는 방법을 배웁니다.",
+              "다문화 환경에서의 스트레스 및 회복 탄력성: 문화적 스트레스의 정서적 영향을 이해하고, 자신감과 명확함으로 대응하는 전략을 구축합니다."
             ]
           },
           {
-            "lead": "Social Support & Self-Care",
+            "lead": "사회적 지지 및 자기 돌봄",
             "items": [
-              "Embracing Cultural Strengths: Recognize how your unique cultural background can be a source of strength, perspective, and pride.",
-              "Self-Acceptance & Self-Esteem: Practice affirming your identity, respecting yourself, and finding confidence in your uniqueness.",
-              "Building Meaningful Relationships: Foster connections where you feel seen, respected, and supported—just as you are."
+              "문화적 강점 받아들이기: 고유한 문화적 배경이 어떻게 강점, 통찰, 그리고 자긍심의 원천이 될 수 있는지 인식합니다.",
+              "자기 수용 및 자존감: 자신의 정체성을 긍정하고, 자신을 존중하며, 자신만의 고유함에서 자신감을 찾는 연습.",
+              "의미 있는 관계 형성: 있는 그대로의 당신이 보여지고, 존중받고, 지지받는다고 느낄 수 있는 관계를 키워나갑니다."
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Wholeness**",
-      "Your identity is not a problem to be solved. It is a story still unfolding—rich in complexity, shaped by experience, and full of possibility. Even if the path feels uncertain now, you have the ability to define what belonging means to you. You don't have to choose between cultures—you can choose to embrace your whole self.",
-      "We're here to walk beside you as you learn to live more freely, more fully, and more in alignment with who you truly are."
+      "**온전함을 향한 첫 걸음**",
+      "당신의 정체성은 해결해야 할 문제가 아닙니다. 그것은 여전히 펼쳐지고 있는 이야기입니다—풍부한 복잡성을 지니고, 경험으로 빚어지고, 가능성으로 가득 찬. 지금 길이 불확실하게 느껴지더라도, 당신에게 소속감이 무엇인지 스스로 정의할 능력이 있습니다. 문화 사이에서 하나를 선택할 필요가 없습니다—온전한 자신을 받아들이는 것을 선택할 수 있습니다.",
+      "당신이 보다 자유롭게, 보다 충만하게, 그리고 진정한 자신과 더 가까이 살아가는 법을 배워가는 동안 저희가 곁에서 함께하겠습니다."
     ]
   },
   "bipolar": {
-    "title": "Bipolar Disorder",
-    "tagline": "Finding Steady Ground in the Shifts of Emotion",
+    "title": "양극성 장애",
+    "tagline": "감정의 기복 속에서 안정된 땅을 찾기",
     "groups": [
       [
-        "Some days, you may feel unstoppable—full of energy, ideas, and possibility. Other days, even getting out of bed can feel like climbing a mountain. Your emotions might swing between hope and hopelessness, energy and exhaustion—sometimes without warning—leaving you disoriented and out of sync with yourself.",
-        "But none of this is your fault. Bipolar disorder is not a reflection of who you are—it's a condition that affects how your brain processes mood and energy. Most importantly, it is treatable. Even when your emotions feel like they're moving faster than you can keep up, you are not powerless. With the right support, you can learn to recognize your patterns, build tools for stability, and move through emotional waves with more ease.",
-        "You don't have to go through this alone. At our counseling center, we're here to walk beside you—helping you restore balance and reconnect with your sense of self."
+        "어떤 날은 멈출 수 없을 것 같은 느낌이 듭니다—에너지, 아이디어, 가능성으로 가득 찬. 또 어떤 날은 침대에서 일어나는 것조차 산을 오르는 것처럼 느껴집니다. 감정이 희망과 절망 사이, 에너지와 탈진 사이를 오갈 수 있습니다—때로는 예고 없이—자신과 어긋나고 방향을 잃은 느낌을 남기며.",
+        "하지만 이 어떤 것도 당신의 잘못이 아닙니다. 양극성 장애는 당신이 어떤 사람인지를 반영하는 것이 아닙니다—뇌가 기분과 에너지를 처리하는 방식에 영향을 미치는 상태입니다. 가장 중요한 것은, 치료가 가능하다는 것입니다. 감정이 당신이 따라잡을 수 있는 것보다 빠르게 움직이는 것처럼 느껴질 때도, 당신은 무력하지 않습니다. 적절한 지원으로 자신의 패턴을 인식하고, 안정을 위한 도구를 만들며, 감정의 파도를 보다 수월하게 헤쳐나가는 것을 배울 수 있습니다.",
+        "혼자 이것을 겪어낼 필요가 없습니다. 저희 상담센터에서 당신 곁에서 함께하겠습니다—균형을 회복하고 자신과 다시 연결되도록 돕겠습니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "Recognizing Your Signals: When Bipolar Disorder Affects Your Life",
+        "heading": "신호 알아차리기: 양극성 장애가 삶에 영향을 미칠 때",
         "lists": [
           {
             "items": [
-              "Manic or Hypomanic Episodes: Surges of energy, excitement, or euphoria that feel hard to contain; Sleeping very little without feeling tired; Impulsive behaviors—risky spending, reckless decisions, or overcommitting; Racing thoughts, rapid speech, or difficulty focusing",
-              "Depressive Episodes: Deep, lingering sadness or emotional numbness; Loss of interest in activities you once enjoyed; Fatigue or a heavy, slowed-down feeling in your body; Trouble concentrating or making everyday decisions; Feelings of hopelessness or thoughts of self-harm"
+              "조증 또는 경조증 삽화: 억누르기 어려운 에너지, 흥분, 또는 행복감의 급증. 피곤함을 느끼지 않으면서 거의 잠을 자지 않음. 충동적인 행동—위험한 지출, 무모한 결정, 또는 과도한 약속. 생각이 빠르게 달리거나, 말이 빨라지거나, 집중하기 어려움",
+              "우울증 삽화: 깊고 오래 지속되는 슬픔 또는 감정적 무감각. 예전에 즐겼던 활동에 대한 흥미 상실. 피로감 또는 몸이 무겁고 굼뜬 느낌. 집중하거나 일상적인 결정을 내리는 것의 어려움. 희망 없음 또는 자해에 대한 생각"
             ]
           }
         ],
         "closing": [
-          "*If you're experiencing recurring mood swings that affect your relationships, work, or quality of life, support is available—and healing is possible.*"
+          "*관계, 직업, 또는 삶의 질에 영향을 미치는 반복적인 기분 변화를 경험하고 계신다면, 도움을 받을 수 있습니다—그리고 치유는 가능합니다.*"
         ]
       },
       {
-        "heading": "Reclaiming Your Life: Finding Harmony Through Bipolar Disorder",
+        "heading": "삶 되찾기: 양극성 장애와 함께 조화 찾기",
         "groups": [
           [
-            "Bipolar disorder isn't about pushing emotions away. It's about learning how to live with them, work with them, and respond to them with more understanding and balance. With the right therapeutic support and self-care, you can build a more stable and fulfilling life."
+            "양극성 장애는 감정을 밀어내는 것에 관한 것이 아닙니다. 감정과 함께 사는 법, 감정과 협력하는 법, 그리고 더 깊은 이해와 균형으로 반응하는 법을 배우는 것입니다. 올바른 치료적 지원과 자기 돌봄으로 더 안정적이고 충만한 삶을 구축할 수 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify patterns in thoughts and behavior that impact mood—and learn how to regulate emotions more effectively.",
-              "Interpersonal & Social Rhythm Therapy (IPSRT): Establish healthy routines and strengthen relationships to support mood stability.",
-              "Client-Centered Therapy: Explore your experiences in a safe, nonjudgmental space and deepen your understanding of your emotional needs.",
-              "Emotion Regulation & Stress Management: Build practical skills to manage mood swings and respond to stress with confidence and calm."
+              "인지행동치료(CBT): 기분에 영향을 미치는 사고와 행동의 패턴을 파악하고, 감정을 보다 효과적으로 조절하는 법을 배웁니다.",
+              "대인관계 및 사회적 리듬 치료(IPSRT): 건강한 루틴을 확립하고 관계를 강화하여 기분 안정을 지원합니다.",
+              "내담자 중심 치료: 안전하고 비판단적인 공간에서 자신의 경험을 탐색하고 정서적 필요에 대한 이해를 심화합니다.",
+              "감정 조절 및 스트레스 관리: 기분 변화를 관리하고 스트레스에 자신감 있고 침착하게 대응하는 실용적인 기술을 쌓습니다."
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "생활 지원 및 자기 돌봄",
             "items": [
-              "Keep a steady routine: Maintaining consistent sleep, meal, and daily activity schedules can support your body's natural rhythms.",
-              "Recognize impulsive patterns: Bring gentle awareness to impulsive urges and practice pausing before reacting.",
-              "Track your moods: Use a journal or app to notice emotional patterns and identify early signs of mood shifts."
+              "규칙적인 루틴 유지하기: 일관된 수면, 식사, 그리고 일상 활동 일정을 유지하는 것이 몸의 자연적인 리듬을 지원합니다.",
+              "충동적인 패턴 알아차리기: 충동적인 욕구에 부드럽게 주의를 기울이고, 반응하기 전에 잠시 멈추는 연습을 합니다.",
+              "기분 기록하기: 일기나 앱을 사용하여 감정 패턴을 파악하고 기분 변화의 초기 신호를 포착합니다."
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Stability**",
-      "You are not defined by your highs and lows. Even when life feels out of balance, there is a path forward—a way to feel steady, grounded, and more in tune with yourself again. Healing doesn't have to happen all at once. It begins with understanding, with self-compassion, and with small steps that lead to real change. You already carry the strength it takes to begin. And we're here to walk beside you—every step of the way."
+      "**안정을 향한 첫 걸음**",
+      "당신은 기복으로 규정되지 않습니다. 삶이 불균형하게 느껴질 때도, 앞으로 나아가는 길이 있습니다—다시 안정적이고, 안정감 있으며, 자신과 더 조화를 이루는 느낌을 받을 수 있는 방법. 치유는 한 번에 이루어질 필요가 없습니다. 그것은 이해와 함께, 자기 연민과 함께, 그리고 진정한 변화로 이어지는 작은 발걸음들과 함께 시작됩니다. 당신은 이미 시작하는 데 필요한 힘을 갖고 있습니다. 저희가 매 걸음마다 함께하겠습니다."
     ]
   },
   "adhd": {
-    "title": "ADHD (Attention Deficit Hyperactivity Disorder)",
-    "tagline": "With the right support, your child can grow—with more focus, confidence, and self-understanding.",
+    "title": "ADHD (주의력결핍 과잉행동장애)",
+    "tagline": "적절한 지원으로 아이는 더 나은 집중력, 자신감, 자기 이해를 가지고 성장할 수 있습니다.",
     "groups": [
       [
-        "Have you noticed your child struggling to finish tasks, frequently jumping from one thing to another, or acting on impulse without thinking it through? Maybe they're full of energy and bright ideas, but staying organized, following instructions, or sitting still seems especially difficult.",
-        "As a parent, you may feel a mix of admiration, concern, and exhaustion. You may have asked yourself, \"Why is this so hard for them?\" or even, \"Am I doing something wrong?\" Please know: your child is not broken. And you are not failing them.",
-        "ADHD is not about laziness, disobedience, or lack of effort. It's about a brain that processes, organizes, and responds to the world differently. And with the right understanding and support, your child can thrive—not in spite of their differences, but through them.",
-        "At our counseling center, we're here to help you better understand your child's unique strengths and challenges—and to walk alongside your family with care, clarity, and compassion."
+        "아이가 과제를 끝내는 데 어려움을 겪거나, 자주 이것저것 넘나들거나, 깊이 생각하지 않고 충동적으로 행동하는 것을 눈치채셨나요. 에너지와 번뜩이는 아이디어로 가득하지만, 정리하거나, 지시를 따르거나, 가만히 앉아 있는 것이 유독 힘들어 보일 수 있습니다.",
+        "부모로서 감탄, 걱정, 그리고 지침의 감정이 뒤섞일 수 있습니다. '왜 이것이 이렇게 힘든 걸까?' 또는 심지어 '내가 잘못하고 있는 건 아닐까?'라고 스스로에게 물어봤을지 모릅니다. 이것만은 알아주세요. 당신의 아이는 망가지지 않았습니다. 그리고 당신은 아이를 실망시키고 있는 것이 아닙니다.",
+        "ADHD는 게으름, 불복종, 또는 노력 부족의 문제가 아닙니다. 세상을 다르게 처리하고, 조직화하고, 반응하는 뇌의 문제입니다. 그리고 올바른 이해와 지원으로, 당신의 아이는 번성할 수 있습니다—차이점에도 불구하고가 아니라, 바로 그 차이점을 통해.",
+        "저희 상담센터에서는 아이의 고유한 강점과 어려움을 더 잘 이해할 수 있도록 돕겠습니다—그리고 세심함, 명확함, 그리고 따뜻함으로 가족과 함께 걷겠습니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Child: Signs ADHD Support Can Help",
+        "heading": "아이의 말에 귀 기울이기: ADHD 지원이 도움이 되는 신호",
         "lists": [
           {
             "items": [
-              "Inattention: Trouble starting or completing tasks; Frequently losing everyday items like books, toys, or school supplies; Difficulty with organization, time management, or following multi-step directions; Easily distracted; struggling to focus for sustained periods",
-              "Hyperactivity & Impulsivity: Constant movement, fidgeting, or restlessness; Talking excessively, interrupting others, or difficulty waiting their turn; Acting impulsively, often followed by frustration or regret; Difficulty managing emotions or following rules in group settings"
+              "부주의: 과제를 시작하거나 완료하는 것의 어려움. 책, 장난감, 학용품 같은 일상 용품을 자주 잃어버림. 정리, 시간 관리, 또는 여러 단계의 지시를 따르는 것의 어려움. 쉽게 산만해지거나 오랫동안 집중하는 데 어려움",
+              "과잉행동 및 충동성: 끊임없는 움직임, 안절부절못함, 또는 가만히 있지 못함. 과도한 말하기, 다른 사람의 말을 끊거나, 차례를 기다리는 것의 어려움. 충동적으로 행동하고, 종종 좌절감이나 후회가 뒤따름. 집단 환경에서 감정을 관리하거나 규칙을 따르는 것의 어려움"
             ]
           }
         ],
         "closing": [
-          "*If these behaviors persist and begin to affect your child's daily life, relationships, or school performance, professional support can offer tools, understanding, and meaningful change—for your child and for you.*"
+          "*이러한 행동들이 지속되고 아이의 일상생활, 대인관계, 또는 학교 성적에 영향을 미치기 시작한다면, 전문적인 지원이 도구, 이해, 그리고 의미 있는 변화를 가져다줄 수 있습니다—아이와 부모 모두에게.*"
         ]
       },
       {
-        "heading": "Helping Your Child Flourish: Support for Thriving With ADHD",
+        "heading": "아이가 꽃피도록 돕기: ADHD와 함께 성장하기 위한 지원",
         "groups": [
           [
-            "There's no one-size-fits-all approach to ADHD—and that's okay. Your child's brain works differently, and that difference can be a source of strength. With the right support, guidance, and strategies, your child can learn to focus, regulate emotions, and navigate challenges with more ease and self-confidence."
+            "ADHD에 대한 만능 접근법은 없습니다—그리고 그것은 괜찮습니다. 아이의 뇌는 다르게 작동하며, 그 차이는 강점의 원천이 될 수 있습니다. 올바른 지원, 안내, 그리고 전략으로 아이는 집중하고, 감정을 조절하며, 더 편안하고 자신 있게 어려움을 헤쳐나가는 것을 배울 수 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Helps your child identify unhelpful thought patterns and build practical skills for focus, emotional awareness, and self-regulation.",
-              "Behavioral Therapy: Uses structure, routine, and positive reinforcement to support healthy habits and behavioral growth.",
-              "Organizational & Self-Management Coaching: Teaches tools for planning, prioritizing, and managing daily tasks—reducing stress and encouraging independence.",
-              "Social & Emotional Skills Training: Improves communication, impulse control, and emotional expression to support healthier relationships at home and school."
+              "인지행동치료(CBT): 아이가 도움이 되지 않는 사고 패턴을 파악하고, 집중력, 감정 인식, 자기 조절을 위한 실용적인 기술을 쌓도록 돕습니다.",
+              "행동 치료: 구조, 루틴, 그리고 긍정적 강화를 사용하여 건강한 습관과 행동적 성장을 지원합니다.",
+              "조직화 및 자기 관리 코칭: 일상 과제를 계획하고, 우선순위를 정하며, 관리하는 도구를 가르쳐—스트레스를 줄이고 독립심을 키웁니다.",
+              "사회적·정서적 기술 훈련: 가정과 학교에서 더 건강한 관계를 지원하기 위해 의사소통, 충동 조절, 감정 표현을 향상시킵니다."
             ]
           },
           {
-            "lead": "Lifestyle Support & Everyday Support",
+            "lead": "생활 지원 및 일상 돌봄",
             "items": [
-              "Establish predictable routines to reduce overwhelm and bring consistency",
-              "Minimize distractions and create focused, calming environments for work or study",
-              "Encourage movement and mindfulness to help regulate energy and attention",
-              "Practice kindness—toward your child, and toward yourself—as growth unfolds at its own pace"
+              "압도감을 줄이고 일관성을 가져오는 예측 가능한 루틴 확립",
+              "방해 요소를 최소화하고 업무 또는 공부를 위한 집중적이고 차분한 환경 조성",
+              "에너지와 주의력 조절에 도움이 되는 운동과 마음 챙김 장려",
+              "성장이 자신의 속도대로 이루어지는 동안 아이와 자신 모두에게 친절함 실천"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Rediscovering Possibility—Together**",
-      "Your child may move through the world in a way that's harder for others to understand—but that doesn't make their journey any less meaningful. Their creativity, curiosity, and sensitivity are not challenges to \"fix\"—they're strengths to support and celebrate. If this path feels overwhelming, you don't have to walk it alone. We're here to listen, to help, and to walk alongside your family—step by step."
+      "**함께 가능성을 다시 발견하기**",
+      "당신의 아이는 다른 사람들이 이해하기 어려운 방식으로 세상을 살아갈 수 있습니다—하지만 그렇다고 그들의 여정이 덜 의미 있는 것은 아닙니다. 그들의 창의성, 호기심, 그리고 감수성은 '고쳐야 할' 어려움이 아닙니다—지지하고 축하해야 할 강점입니다. 이 길이 버겁게 느껴진다면, 혼자 걷지 않아도 됩니다. 저희가 귀 기울이고, 돕고, 가족과 함께—한 걸음씩—걷겠습니다."
     ]
   },
   "relationship": {
-    "title": "Relationship Counseling",
-    "tagline": "For connections that feel safe, honest, and true to you",
+    "title": "관계 상담",
+    "tagline": "안전하고, 솔직하며, 자신에게 진실된 관계를 위해",
     "groups": [
       [
-        "Relationships have the power to enrich our lives—and sometimes, to leave us feeling unsteady. You might find yourself drifting apart from someone you care about, caught in cycles of miscommunication or unresolved conflict. You may wonder, \"What am I doing wrong?\" or feel alone, even when someone is right beside you.",
-        "Family. Friends. Partners. Colleagues. The closer the connection, the more deeply we can feel hurt—and the harder it becomes to express what's really going on. But relationships aren't problems to fix or burdens to carry alone. They're living connections that can be nurtured, reshaped, and healed. As much as you want to be there for others, you also deserve to feel understood, respected, and supported.",
-        "At our counseling center, we offer a space where you can explore your patterns and learn to connect in ways that feel sustainable, mutual, and true to who you are."
+        "관계는 우리의 삶을 풍요롭게 할 수도 있고—때로는 불안하게 만들 수도 있습니다. 소중한 사람과 점점 멀어지는 느낌이 들거나, 반복되는 오해와 해결되지 않는 갈등의 악순환에 빠질 수 있습니다. '내가 뭘 잘못하고 있는 걸까?' 하고 의문이 들거나, 누군가 바로 옆에 있어도 외로움을 느낄 수 있습니다.",
+        "가족. 친구. 파트너. 동료. 가까운 관계일수록 더 깊이 상처를 받을 수 있습니다—그리고 실제로 무슨 일이 일어나고 있는지 표현하기가 더 어려워집니다. 하지만 관계는 고쳐야 할 문제나 혼자 짊어져야 할 짐이 아닙니다. 그것들은 살아있는 연결로, 돌보고, 재형성하고, 치유할 수 있는 것입니다. 다른 사람들 곁에 있고 싶은 만큼, 당신도 이해받고, 존중받고, 지지받을 자격이 있습니다.",
+        "저희 상담센터에서는 자신의 패턴을 탐색하고, 지속 가능하며 상호적이고 자신에게 진실된 방식으로 연결하는 법을 배울 수 있는 공간을 제공합니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Connection Feels Difficult: Recognizing Signs to Seek Support",
+        "heading": "관계가 힘겹게 느껴질 때: 도움을 구해야 할 신호 알아보기",
         "lists": [
           {
             "items": [
-              "You often feel emotionally drained by conflict with someone close",
-              "It's hard to express your feelings, and you often feel misunderstood",
-              "You fear intimacy—or find yourself becoming overly dependent in relationships",
-              "You feel like you're always the one trying harder",
-              "You struggle to trust others or repeat the same painful dynamics",
-              "You feel torn between your own emotions and other people's expectations"
+              "가까운 사람과의 갈등으로 자주 감정적으로 지침",
+              "감정 표현이 어렵고, 자주 오해받는 느낌이 듦",
+              "친밀함이 두렵거나, 관계에서 지나치게 의존적이 됨",
+              "항상 더 많이 노력하는 쪽이 자신인 것처럼 느껴짐",
+              "타인을 신뢰하기 어렵거나 같은 고통스러운 역학 관계를 반복함",
+              "자신의 감정과 타인의 기대 사이에서 갈등이 느껴짐"
             ]
           }
         ],
         "closing": [
-          "*Relationship challenges happen to everyone. But you don't have to carry them alone. With the right support, you can find clarity, relief, and healthier ways to relate.*"
+          "*관계의 어려움은 누구에게나 일어납니다. 하지만 혼자 감당할 필요는 없습니다. 적절한 지원으로 명확함, 안도감, 그리고 더 건강한 관계 방식을 찾을 수 있습니다.*"
         ]
       },
       {
-        "heading": "Creating Harmony Together: Gentle Paths to Relationship Healing",
+        "heading": "함께 조화 만들기: 관계 치유를 위한 부드러운 길",
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Relationship Pattern Exploration: Reflect on recurring dynamics and discover how to build healthier, more balanced ways of connecting.",
-              "Cognitive Behavioral Therapy (CBT): Shift unhelpful thoughts and learn practical tools for managing emotions and communication.",
-              "Client-Centered Therapy: Share difficult feelings in a nonjudgmental space—and strengthen your ability to stay present with your own emotions."
+              "관계 패턴 탐색: 반복되는 역학 관계를 성찰하고, 보다 건강하고 균형 잡힌 연결 방식을 구축하는 방법을 발견합니다.",
+              "인지행동치료(CBT): 도움이 되지 않는 생각을 전환하고, 감정과 의사소통을 관리하는 실용적인 도구를 배웁니다.",
+              "내담자 중심 치료: 비판단적인 공간에서 어려운 감정을 나누고—자신의 감정과 함께 있는 능력을 강화합니다."
             ]
           },
           {
-            "lead": "Communication & Emotional Expression",
+            "lead": "의사소통 및 감정 표현",
             "items": [
-              "Practice expressing emotions openly and respectfully",
-              "Learn to navigate conflict without causing harm",
-              "Rebuild connection through mindful listening and mutual understanding"
+              "감정을 열리고 존중 어린 방식으로 표현하는 연습",
+              "해를 끼치지 않으면서 갈등을 헤쳐나가는 방법 배우기",
+              "주의 깊은 경청과 상호 이해를 통해 관계 회복"
             ]
           },
           {
-            "lead": "Self-Care & Boundaries in Relationships",
+            "lead": "관계에서의 자기 돌봄 및 경계",
             "items": [
-              "Reclaim the right to say no and set boundaries that protect your well-being",
-              "Stay connected to your values and needs without losing yourself in the relationship",
-              "Rebuild self-esteem by honoring your own voice and emotional truth"
+              "거절할 권리를 되찾고 자신의 안녕을 보호하는 경계 설정",
+              "관계 안에서 자신을 잃지 않으면서 자신의 가치와 필요에 계속 연결되기",
+              "자신의 목소리와 감정적 진실을 존중함으로써 자존감 회복"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healthier Connection**",
-      "The most nourishing relationships don't ask you to shrink—they help you expand into who you truly are. What you're facing now may not be failure, but a turning point—an invitation to grow, relate, and love more authentically. The desire to connect deeply without losing yourself is not too much to ask. And you don't have to navigate it alone.",
-      "When you're ready to open your heart again, we'll be here—gently, steadily, and by your side."
+      "**더 건강한 관계를 향한 첫 걸음**",
+      "가장 영양이 되는 관계는 당신을 줄어들게 요구하지 않습니다—그것들은 당신이 진정한 자신으로 확장되도록 돕습니다. 지금 직면하고 있는 것이 실패가 아닐 수 있습니다—성장하고, 더 진실하게 관계 맺고, 사랑하는 전환점일 수 있습니다. 자신을 잃지 않으면서 깊이 연결되고 싶다는 바람은 너무 많은 것을 바라는 것이 아닙니다. 그리고 혼자 헤쳐나가지 않아도 됩니다.",
+      "다시 마음을 열 준비가 되었을 때, 저희가 여기 있겠습니다—부드럽게, 꾸준히, 그리고 당신 곁에서."
     ]
   },
   "ocd": {
-    "title": "Obsessive-Compulsive Disorder (OCD)",
-    "tagline": "Finding Your Way Back to a Calmer, More Centered Life",
+    "title": "강박 장애(OCD)",
+    "tagline": "보다 조용하고 중심 잡힌 삶으로 돌아가는 길 찾기",
     "groups": [
       [
-        "Do you ever find yourself stuck in a loop—checking, counting, cleaning, or repeating actions just to feel a fleeting sense of relief? Maybe a thought keeps returning no matter how hard you try to push it away, or you feel that something terrible might happen unless a specific ritual is completed. These patterns aren't signs of weakness. They're often your mind's way of trying to feel safe in the face of anxiety. But when these routines begin to take over your days, disrupt your peace, or affect your relationships, it may be time to seek support.",
-        "Obsessive-Compulsive Disorder (OCD) involves recurring intrusive thoughts (obsessions) and repetitive behaviors (compulsions) aimed at reducing distress. While these behaviors may bring temporary relief, they often intensify anxiety and emotional exhaustion over time.",
-        "Still—healing is possible. You are not your thoughts. You are not your compulsions. And this cycle doesn't have to define your life. With the right support, you can begin to gently interrupt the patterns, ease your anxiety, and return to a steadier, more spacious way of living.",
-        "At our counseling center, we help you understand the patterns underlying OCD—and support you in developing new, more compassionate ways to respond."
+        "반복적인 루프에 갇혀 있는 자신을 발견한 적이 있나요—잠깐의 안도감을 느끼려고 확인하고, 세고, 청소하거나, 행동을 반복하는. 아무리 밀어내려 해도 계속 돌아오는 생각, 또는 특정 의식을 완료하지 않으면 끔찍한 일이 일어날 것 같은 느낌이 들 수 있습니다. 이러한 패턴들은 나약함의 표시가 아닙니다. 종종 불안에 직면하여 안전하다고 느끼려는 마음의 방식입니다. 하지만 이러한 루틴들이 하루를 장악하고, 평온함을 방해하거나, 관계에 영향을 미치기 시작한다면, 도움을 구할 때가 되었을 수 있습니다.",
+        "강박 장애(OCD)는 고통을 줄이기 위한 반복적인 행동(강박 행동)과 함께 반복적인 침습적 생각(강박 사고)을 포함합니다. 이러한 행동들은 일시적인 안도감을 줄 수 있지만, 시간이 지남에 따라 불안과 감정적 탈진을 심화시키는 경우가 많습니다.",
+        "그럼에도—치유는 가능합니다. 당신은 당신의 생각이 아닙니다. 당신은 당신의 강박 행동이 아닙니다. 그리고 이 악순환이 당신의 삶을 정의할 필요는 없습니다. 적절한 지원으로 패턴을 부드럽게 끊기 시작하고, 불안을 완화하며, 보다 안정적이고 넓은 삶의 방식으로 돌아갈 수 있습니다.",
+        "저희 상담센터에서는 OCD의 근본 패턴을 이해하도록 돕고—더 자기 연민 어린 방식으로 반응하는 새로운 방법을 개발하도록 지원합니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Rituals Become Overwhelming: Gentle Indicators to Reach Out",
+        "heading": "의식이 버겁게 느껴질 때: 도움을 구해야 할 부드러운 신호",
         "lists": [
           {
             "items": [
-              "Obsessions (Intrusive Thoughts): Repetitive, unwanted thoughts, images, or urges; Fears related to contamination, harm, or things being \"not quite right\"; Growing anxiety if a thought isn't \"neutralized\" or undone",
-              "Compulsions (Repetitive Behaviors): Repeated handwashing, checking, counting, or arranging; A belief that something bad will happen unless a specific behavior is completed; Rituals that interfere with daily life, relationships, or your sense of well-being"
+              "강박 사고(침습적 생각): 반복적이고 원하지 않는 생각, 이미지, 또는 충동. 오염, 해를 끼치는 것, 또는 무언가가 '딱 맞지 않는' 것에 대한 두려움. 생각이 '중화'되거나 취소되지 않으면 커지는 불안",
+              "강박 행동(반복적 행동): 반복적인 손 씻기, 확인, 세기, 또는 정렬. 특정 행동을 완료하지 않으면 나쁜 일이 일어날 것이라는 믿음. 일상생활, 관계, 또는 안녕감을 방해하는 의식"
             ]
           }
         ],
         "closing": [
-          "*If these experiences have persisted for more than a month or are disrupting your daily life, seeking support can be a meaningful and important step toward healing.*"
+          "*이러한 경험들이 한 달 이상 지속되거나 일상생활을 방해하고 있다면, 도움을 구하는 것이 치유를 향한 의미 있고 중요한 걸음이 될 수 있습니다.*"
         ]
       },
       {
-        "heading": "Freeing Your Mind: Gentle Paths Toward OCD Recovery",
+        "heading": "마음 해방시키기: OCD 회복을 향한 부드러운 길",
         "groups": [
           [
-            "OCD is highly treatable. With time, care, and the right tools, you can begin to relate to your thoughts in new ways—and loosen their hold on your life."
+            "OCD는 치료 가능성이 매우 높습니다. 시간, 돌봄, 그리고 올바른 도구로 생각과 새로운 방식으로 관계 맺기 시작하고—생각이 삶을 지배하는 힘을 느슨하게 할 수 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify and shift unhelpful thought patterns while building healthier coping strategies.",
-              "Exposure and Response Prevention (ERP): Gradually face anxiety triggers in a safe, supportive space while learning to resist compulsive responses.",
-              "Client-Centered Therapy: Work with a therapist who offers warmth, respect, and understanding as you explore your experiences.",
-              "Emotion Regulation & Stress Management: Practice grounding and mindfulness techniques to manage overwhelming emotions and increase emotional resilience."
+              "인지행동치료(CBT): 도움이 되지 않는 사고 패턴을 파악하고 전환하면서 더 건강한 대처 전략을 구축합니다.",
+              "노출 및 반응 방지(ERP): 안전하고 지지적인 공간에서 불안 유발 요인에 점진적으로 직면하면서 강박적 반응을 억제하는 것을 배웁니다.",
+              "내담자 중심 치료: 경험을 탐색하면서 따뜻함, 존중, 이해를 제공하는 치료자와 함께합니다.",
+              "감정 조절 및 스트레스 관리: 압도적인 감정을 관리하고 정서적 회복 탄력성을 높이기 위한 그라운딩 및 마음 챙김 기법을 연습합니다."
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care Support",
+            "lead": "생활 및 자기 돌봄 지원",
             "items": [
-              "Establish regular sleep and meal routines to support overall emotional stability",
-              "Use breathing exercises and mindfulness practices to calm your nervous system",
-              "Meet anxious thoughts with compassion rather than criticism",
-              "Set boundaries with overstimulating inputs (e.g., digital media) to support mental clarity"
+              "전반적인 정서적 안정을 지원하는 규칙적인 수면 및 식사 루틴 확립",
+              "신경계를 안정시키는 호흡 훈련 및 마음 챙김 실천",
+              "불안한 생각을 비판이 아닌 자기 연민으로 대하기",
+              "정신적 명료함을 지원하기 위해 과도한 자극(예: 디지털 미디어)에 경계 설정"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "Intrusive thoughts and compulsive behaviors may feel powerful—but they are not stronger than you. They're not personal flaws. They are signs that your mind is doing its best to stay safe. You don't have to face this alone. With the right support, you can find steadier ground, ease anxiety's grip, and return to a life that feels calmer, clearer, and truly your own. Let's begin—gently, together."
+      "**치유를 향한 첫 걸음**",
+      "침습적 생각과 강박적 행동은 강력하게 느껴질 수 있습니다—하지만 그것들은 당신보다 강하지 않습니다. 그것들은 개인적인 결함이 아닙니다. 마음이 안전하게 지내려고 최선을 다하고 있다는 신호입니다. 혼자 이것을 감당하지 않아도 됩니다. 적절한 지원으로 더 안정된 땅을 찾고, 불안의 지배를 느슨하게 하며, 더 조용하고 명확하며 진정으로 자신만의 삶으로 돌아갈 수 있습니다. 시작해 봅시다—부드럽게, 함께."
     ]
   },
   "eatingDisorders": {
-    "title": "Eating Disorders",
-    "tagline": "A Gentle Beginning Toward a Healthier Body and Mind",
+    "title": "섭식 장애",
+    "tagline": "더 건강한 몸과 마음을 향한 부드러운 시작",
     "groups": [
       [
-        "Sometimes, emotions speak through food. Sometimes, the pain we carry shows up in how we treat our bodies. Eating disorders aren't simply about food, weight, or willpower. Beneath rigid eating habits or distress around body image often lies something deeper—unspoken pain, unmet emotional needs, or a longing for control in a world that can feel overwhelming.",
-        "Conditions such as anorexia nervosa, bulimia nervosa, and binge eating disorder can profoundly affect both physical health and emotional well-being. But healing is possible—and it doesn't begin with judgment. It begins with care, compassion, and understanding.",
-        "At our counseling center, we meet you exactly where you are—with gentleness, respect, and hope. Together, we'll begin the process of rebuilding your relationship with food, your body, and yourself."
+        "때로는 감정이 음식을 통해 말을 합니다. 때로는 우리가 짊어진 고통이 몸을 대하는 방식으로 나타납니다. 섭식 장애는 단순히 음식, 체중, 또는 의지력의 문제가 아닙니다. 엄격한 식습관이나 체형에 대한 고통 이면에는 종종 더 깊은 것이 있습니다—말로 표현하지 못한 고통, 충족되지 않은 감정적 필요, 또는 압도적으로 느껴지는 세상에서 통제력을 갖고 싶다는 갈망.",
+        "신경성 식욕부진증, 신경성 폭식증, 폭식 장애와 같은 상태는 신체 건강과 정서적 안녕 모두에 깊이 영향을 미칠 수 있습니다. 하지만 치유는 가능합니다—그리고 그것은 판단으로 시작되지 않습니다. 돌봄, 자기 연민, 그리고 이해로 시작됩니다.",
+        "저희 상담센터에서는 지금 있는 그 자리에서 당신을 만납니다—부드럽게, 존중을 담아, 그리고 희망을 품고. 함께 음식, 몸, 그리고 자신과의 관계를 재건하는 과정을 시작하겠습니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Body: When to Consider Eating Disorder Support",
+        "heading": "몸의 소리에 귀 기울이기: 섭식 장애 지원을 고려해야 할 때",
         "lists": [
           {
-            "lead": "If you recognize any of the following patterns in yourself or someone you care about, it may be time to reach out:",
+            "lead": "자신이나 소중한 사람에게서 다음 패턴 중 어느 것이라도 인식된다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "Anorexia Nervosa: Ongoing food restriction and an intense fear of gaining weight; Anxiety around eating or maintaining a \"normal\" body size; Distorted body image and strict rules around food",
-              "Bulimia Nervosa: Episodes of binge eating followed by purging (vomiting, laxatives, or over-exercising); Strong preoccupation with weight and body shape; Feelings of shame, guilt, or distress after eating",
-              "Binge Eating Disorder: Frequent episodes of eating beyond fullness, often with a sense of being out of control; Emotional numbness, self-criticism, or guilt following meals; May be associated with weight fluctuations or physical discomfort"
+              "신경성 식욕부진증: 지속적인 식이 제한과 체중 증가에 대한 강렬한 두려움. 먹거나 '정상적인' 체형을 유지하는 것에 대한 불안. 왜곡된 체형 인식과 음식에 관한 엄격한 규칙",
+              "신경성 폭식증: 구토, 하제 복용, 또는 과도한 운동으로 이어지는 폭식 삽화. 체중과 체형에 대한 강한 집착. 식사 후 수치심, 죄책감, 또는 괴로움",
+              "폭식 장애: 통제력을 잃는 느낌과 함께 포만감을 넘어서는 잦은 식사 삽화. 식사 후 감정적 무감각, 자기 비판, 또는 죄책감. 체중 변동이나 신체적 불편함을 동반할 수 있음"
             ]
           }
         ],
         "closing": [
-          "*Eating disorders affect more than the body—they impact how you relate to yourself. If any of these patterns feel familiar, early support can make a real difference.*"
+          "*섭식 장애는 몸 이상의 것에 영향을 미칩니다—자신과의 관계 방식에 영향을 줍니다. 이러한 패턴 중 익숙한 것이 있다면, 조기 지원이 실질적인 차이를 만들 수 있습니다.*"
         ]
       },
       {
-        "heading": "Reclaiming Your Relationship With Food and Yourself",
+        "heading": "음식과 자신과의 관계 되찾기",
         "groups": [
           [
-            "Recovery isn't about perfection. It's about building a more compassionate relationship with food, your body, and yourself—one grounded in trust, balance, and kindness."
+            "회복은 완벽함에 관한 것이 아닙니다. 음식, 몸, 그리고 자신과 더 자기 연민 어린 관계를 구축하는 것에 관한 것입니다—신뢰, 균형, 그리고 친절함을 바탕으로."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Reframe harmful beliefs about food, body image, and self-worth while building healthier habits.",
-              "Interpersonal Therapy (IPT): Explore how life transitions and relationship dynamics influence eating patterns and self-image.",
-              "Client-Centered Therapy: A warm, supportive space where your experience is heard, understood, and valued.",
-              "Emotion Regulation & Stress Management: Recognize emotional triggers and develop healthy coping skills that reduce the urge to engage in disordered behaviors."
+              "인지행동치료(CBT): 음식, 체형, 자기 가치에 대한 해로운 신념을 재구성하면서 더 건강한 습관을 구축합니다.",
+              "대인관계치료(IPT): 삶의 전환과 관계 역학이 식습관과 자아상에 어떻게 영향을 미치는지 탐색합니다.",
+              "내담자 중심 치료: 당신의 경험이 들려지고, 이해받고, 소중히 여겨지는 따뜻하고 지지적인 공간.",
+              "감정 조절 및 스트레스 관리: 감정적 유발 요인을 인식하고, 장애적 행동에 대한 충동을 줄이는 건강한 대처 기술을 개발합니다."
             ]
           },
           {
-            "lead": "Nutritional Guidance & Lifestyle Support",
+            "lead": "영양 안내 및 생활 지원",
             "items": [
-              "Create gentle, nourishing meal routines that promote physical healing",
-              "Reconnect with your body through curiosity, care, and self-compassion",
-              "Establish daily rhythms that support emotional balance and self-respect"
+              "신체 치유를 촉진하는 부드럽고 영양 있는 식사 루틴 만들기",
+              "호기심, 돌봄, 그리고 자기 연민으로 몸과 다시 연결되기",
+              "정서적 균형과 자기 존중을 지원하는 일상적인 리듬 확립"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "The discomfort in your body. The fear in front of the mirror. The quiet battle that happens with every meal—These are not signs of failure. They're signs of pain. And pain deserves care. You don't have to fight this alone. Recovery isn't about getting everything \"right.\" It's about softening self-judgment, releasing shame, and learning to trust yourself again—gently, and at your own pace.",
-      "Let's begin there: Not with pressure, but with patience. Not with criticism, but with compassion. Not by changing who you are, but by helping you feel at home in your body—and in your life."
+      "**치유를 향한 첫 걸음**",
+      "몸의 불편함. 거울 앞의 두려움. 매 식사마다 벌어지는 조용한 싸움—이것들은 실패의 표시가 아닙니다. 고통의 표시입니다. 그리고 고통은 돌봄을 받을 자격이 있습니다. 혼자 이것과 싸우지 않아도 됩니다. 회복은 모든 것을 '올바르게' 하는 것이 아닙니다. 자기 판단을 부드럽게 하고, 수치심을 내려놓으며, 다시 자신을 신뢰하는 것을 배우는 것입니다—부드럽게, 그리고 자신의 속도로.",
+      "여기서 시작해 봅시다. 압박이 아닌 인내심으로. 비판이 아닌 자기 연민으로. 당신이 누구인지를 바꾸는 것이 아니라, 몸 안에서—그리고 삶 안에서—편안함을 느낄 수 있도록 돕는 것으로."
     ]
   },
   "asd": {
-    "title": "Autism Spectrum Disorder (ASD)",
-    "tagline": "For every unique way of being—there is space to grow, connect, and thrive.",
+    "title": "자폐 스펙트럼 장애(ASD)",
+    "tagline": "모든 고유한 존재 방식에는—성장하고, 연결되고, 꽃피울 공간이 있습니다.",
     "groups": [
       [
-        "Every child, every person, experiences the world in their own beautifully distinct way. Some communicate not with words, but with gestures, rhythm, or silence. Some find deep comfort in repetition and structure. If you're a parent, caregiver, or loved one, you may have noticed these differences in someone you care about. Perhaps you've watched them struggle to make eye contact, navigate social situations, or process sensory input. Maybe you've wondered: \"Are they okay? Are we doing the right thing? How can I help?\"",
-        "Autism Spectrum Disorder (ASD) is a neurodevelopmental condition marked by differences in social interaction, communication, behavior, and sensory experience. But these differences are not deficits—they are part of a rich and varied way of being. Still, it's natural to feel confused or worried as a parent or family member. You may feel isolated, unsure of how to support your loved one—or even how to care for yourself in the process. You are not alone. And neither is your child, partner, sibling, or friend. There is support. There is understanding. And there is hope.",
-        "At our counseling center, we offer a safe, compassionate space—not just for individuals with ASD, but for the families who love and care for them. We're here to help you better understand each other, communicate with more ease, and build a life that honors both difference and connection."
+        "모든 아이, 모든 사람은 저마다 아름답게 독특한 방식으로 세상을 경험합니다. 어떤 이는 말이 아닌 몸짓, 리듬, 또는 침묵으로 소통합니다. 어떤 이는 반복과 구조 안에서 깊은 안정감을 찾습니다. 부모, 보호자, 또는 사랑하는 사람이라면, 소중한 사람에게서 이러한 차이점들을 눈치챘을 수 있습니다. 눈을 맞추거나, 사회적 상황을 헤쳐나가거나, 감각 자극을 처리하는 것을 힘겨워하는 모습을 지켜봤을 수 있습니다. 어쩌면 이런 생각이 들었을지도 모릅니다. '아이가 괜찮을까. 우리가 올바른 것을 하고 있는 걸까. 어떻게 도울 수 있을까.'",
+        "자폐 스펙트럼 장애(ASD)는 사회적 상호작용, 의사소통, 행동, 감각 경험의 차이가 나타나는 신경발달적 상태입니다. 하지만 이러한 차이들은 결핍이 아닙니다—그것들은 풍부하고 다양한 존재 방식의 일부입니다. 그럼에도 부모나 가족으로서 혼란스럽거나 걱정이 되는 것은 자연스러운 일입니다. 사랑하는 사람을 어떻게 지원해야 할지—또는 그 과정에서 자신을 어떻게 돌봐야 할지조차 확신이 서지 않아 고립감을 느낄 수 있습니다. 당신은 혼자가 아닙니다. 그리고 당신의 자녀, 파트너, 형제자매, 또는 친구도 마찬가지입니다. 지원이 있습니다. 이해가 있습니다. 그리고 희망이 있습니다.",
+        "저희 상담센터는 안전하고 공감 어린 공간을 제공합니다—ASD를 가진 개인뿐만 아니라 그들을 사랑하고 돌보는 가족을 위해서도. 서로를 더 잘 이해하고, 더 수월하게 소통하며, 차이점과 연결 모두를 존중하는 삶을 구축할 수 있도록 함께하겠습니다."
       ]
     ],
     "subsections": [
       {
-        "heading": "Understanding Your Experiences: Signs You Deserve Support",
+        "heading": "경험 이해하기: 지원이 필요한 신호",
         "lists": [
           {
             "items": [
-              "Social interaction and communication differences: Avoiding eye contact or struggling with facial expressions and tone of voice; Difficulty with back-and-forth conversations or interpreting social cues; Needing extra time to process and express emotions",
-              "Repetitive behaviors and focused interests: Intense attachment to routines, patterns, or specific interests; Discomfort with unexpected changes or transitions; Unusual sensitivity to lights, sounds, textures, or physical touch"
+              "사회적 상호작용 및 의사소통의 차이: 눈 맞춤을 피하거나 표정과 목소리 톤을 파악하는 것의 어려움. 주고받는 대화나 사회적 신호를 해석하는 것의 어려움. 감정을 처리하고 표현하는 데 추가적인 시간이 필요함",
+              "반복적 행동과 집중적 관심: 루틴, 패턴, 또는 특정 관심사에 대한 강한 집착. 예상치 못한 변화나 전환에 대한 불편함. 빛, 소리, 질감, 또는 신체적 접촉에 대한 특이한 민감성"
             ]
           }
         ],
         "closing": [
-          "*If these traits create ongoing challenges at home, school, or in relationships, professional support can help you better understand your child—or yourself—and build tools for daily life. We're here to walk with you, without judgment, at your own pace.*"
+          "*이러한 특성들이 가정, 학교, 또는 관계에서 지속적인 어려움을 만들고 있다면, 전문적인 지원이 자녀—또는 자신—을 더 잘 이해하고 일상생활을 위한 도구를 구축하는 데 도움이 될 수 있습니다. 저희가 판단 없이, 당신의 속도에 맞추어 함께하겠습니다.*"
         ]
       },
       {
-        "heading": "Supporting Your Journey: Personalized Care for Individuals and Families",
+        "heading": "여정 지원하기: 개인과 가족을 위한 맞춤형 돌봄",
         "groups": [
           [
-            "**If You're a Parent or Caregiver**",
-            "You may carry so many questions. You may feel tired, overwhelmed, or unsure of what comes next. That doesn't mean you're failing. It means you're trying—and that matters deeply. You don't have to do this alone. Support is not just about helping someone else—it's about being resourced and supported yourself, too. We're here to listen, guide, and walk with you, as you learn how to support your loved one—and take care of your own heart in the process."
+            "**부모 또는 보호자이신가요**",
+            "많은 의문들을 안고 계실 수 있습니다. 피곤하고, 압도되거나, 다음에 무엇을 해야 할지 모르는 느낌이 들 수 있습니다. 그것은 당신이 실패하고 있다는 의미가 아닙니다. 노력하고 있다는 의미이며—그것은 매우 중요합니다. 혼자 이것을 감당하지 않아도 됩니다. 지원은 다른 사람을 돕는 것만이 아닙니다—자원을 갖추고 자신도 지지받는 것에 관한 것이기도 합니다. 저희가 귀 기울이고, 안내하고, 함께 걷겠습니다. 사랑하는 사람을 지원하는 법을 배우면서—그 과정에서 자신의 마음도 돌볼 수 있도록."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Social Skills Training (SST): Supporting natural social growth through structured, peer-based practice",
-              "Cognitive Behavioral Therapy (CBT): Helping manage anxiety, increase flexibility, and build self-regulation",
-              "Speech & Language Therapy: Strengthening verbal and non-verbal communication",
-              "Sensory Integration Therapy: Creating comfort and calm in sensory experiences"
+              "사회적 기술 훈련(SST): 구조화된 또래 기반 연습을 통한 자연스러운 사회적 성장 지원",
+              "인지행동치료(CBT): 불안 관리, 유연성 향상, 자기 조절 능력 구축",
+              "언어 및 말하기 치료: 언어적·비언어적 의사소통 강화",
+              "감각 통합 치료: 감각 경험에서의 편안함과 안정감 조성"
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Regulation",
+            "lead": "생활 지원 및 자기 조절",
             "items": [
-              "Creating predictable routines: Fostering a sense of security through structure",
-              "Sensory management tools: Developing strategies to navigate overstimulation",
-              "Emotion regulation & coping skills: Teaching children and adults to recognize and respond to emotional cues with more ease"
+              "예측 가능한 루틴 만들기: 구조를 통해 안전감 조성",
+              "감각 관리 도구: 과부하 상황을 헤쳐나가는 전략 개발",
+              "감정 조절 및 대처 기술: 아이와 어른이 감정적 신호를 보다 수월하게 인식하고 반응하는 것 교육"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**A First Step Toward Understanding and Connection**",
-      "Autism is not something to fix. It is something to understand, embrace, and support. You and your loved one are already enough, just as you are. We believe in nurturing strengths, not erasing difference. In helping families grow closer, not further apart. And in walking with you—gently, respectfully, every step of the way."
+      "**이해와 연결을 향한 첫 걸음**",
+      "자폐는 고쳐야 할 것이 아닙니다. 이해하고, 받아들이고, 지지해야 할 것입니다. 당신과 사랑하는 사람은 이미 지금 있는 그대로 충분합니다. 저희는 차이를 지우는 것이 아니라 강점을 키우는 것을 믿습니다. 가족이 더 멀어지는 것이 아니라 더 가까워지도록 돕는 것을. 그리고 당신과 함께—부드럽게, 존중을 담아, 매 걸음마다—걷는 것을."
     ]
   },
   "lifeStress": {
-    "title": "Life Stress",
-    "tagline": "Lighten the weight you carry — and make space for an easier tomorrow",
+    "title": "삶의 스트레스",
+    "tagline": "짊어진 짐을 가볍게 하고 — 더 편안한 내일을 위한 공간 만들기",
     "groups": [
       [
-        "You've been doing your best—showing up, holding it all together, trying to make things work. But when the weight of work, school, relationships, or financial pressure keeps piling up, it can start to feel like too much. Your chest tightens. Your mind races. You feel stuck—exhausted before the day even begins. Some problems don't have simple solutions. And when stress keeps building, even small tasks can feel overwhelming. If you've been wondering whether it's okay to pause and breathe—it is. Stress is a part of life, but it doesn't have to take over your life.",
-        "At our counseling center, we're here to help you move from just getting through the day to actually feeling grounded again—with more clarity, calm, and room to breathe."
+        "당신은 최선을 다해왔습니다—나타나고, 모든 것을 붙들고, 상황을 되게 만들려고 노력하면서. 하지만 직장, 학업, 인간관계, 또는 재정적 압박의 무게가 계속 쌓여 가면, 너무 많은 것처럼 느껴지기 시작할 수 있습니다. 가슴이 조여 옵니다. 머릿속이 복잡합니다. 하루가 시작되기도 전에 지쳐서—꼼짝할 수 없는 느낌이 듭니다. 어떤 문제들은 간단한 해결책이 없습니다. 그리고 스트레스가 계속 쌓이면, 작은 과제조차 버겁게 느껴질 수 있습니다. 잠시 멈추고 숨을 쉬어도 괜찮은지 자문해 본 적이 있다면—괜찮습니다. 스트레스는 삶의 일부이지만, 삶 전체를 장악할 필요는 없습니다.",
+        "저희 상담센터에서는 그저 하루하루를 버티는 것에서 실제로 다시 안정감을 느끼는 것으로 나아갈 수 있도록 돕겠습니다—더 큰 명확함, 고요함, 그리고 숨 쉴 공간과 함께."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Stress: Signals That You Need Care",
+        "heading": "스트레스에 귀 기울이기: 돌봄이 필요하다는 신호",
         "lists": [
           {
-            "lead": "If you've been noticing any of the following, it may be time to seek support:",
+            "lead": "다음 중 어느 것을 느끼고 있다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "Persistent fatigue or lack of motivation",
-              "Feeling anxious or overwhelmed—even by everyday tasks",
-              "Difficulty focusing or making decisions",
-              "Physical symptoms like headaches, digestive issues, or muscle tension",
-              "Irregular sleep or eating habits; feeling emotionally drained"
+              "지속적인 피로 또는 의욕 부족",
+              "일상적인 일에도 불안하거나 압도되는 느낌",
+              "집중하거나 결정을 내리는 것의 어려움",
+              "두통, 소화 문제, 또는 근육 긴장 같은 신체 증상",
+              "불규칙한 수면이나 식습관. 감정적으로 소진된 느낌"
             ]
           }
         ],
         "closing": [
-          "*If these signs have been lingering and are beginning to impact your daily life, know that you don't have to face them alone. Support is available, and healing is possible.*"
+          "*이러한 신호들이 지속되고 일상생활에 영향을 미치기 시작하고 있다면, 혼자 마주하지 않아도 된다는 것을 알아주세요. 지원이 있으며, 치유는 가능합니다.*"
         ]
       },
       {
-        "heading": "Restoring Balance: Support That Brings You Back to Yourself",
+        "heading": "균형 회복하기: 자신으로 돌아오는 지원",
         "groups": [
           [
-            "We can't remove stress from life—but we can learn to respond to it with more awareness, steadiness, and self-compassion. Healing doesn't begin with pushing through. It begins with noticing your own needs—and meeting them with care."
+            "삶에서 스트레스를 없앨 수는 없습니다—하지만 더 많은 인식, 안정감, 그리고 자기 연민으로 스트레스에 반응하는 법을 배울 수 있습니다. 치유는 억지로 버티는 것으로 시작되지 않습니다. 자신의 필요를 알아차리는 것으로—그리고 돌봄으로 그 필요를 충족시키는 것으로 시작됩니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify and reframe unhelpful thought patterns. Build healthier, more grounded perspectives that ease mental pressure.",
-              "Client-Centered Therapy: Explore your experiences in a supportive, judgment-free space. Feel truly heard—and find direction at your own pace.",
-              "Stress Management Training: Learn practical tools to manage overwhelm, regulate your emotions, and feel more in control in high-pressure situations."
+              "인지행동치료(CBT): 도움이 되지 않는 사고 패턴을 파악하고 재구성합니다. 정신적 압박을 완화하는 더 건강하고 안정된 관점을 구축합니다.",
+              "내담자 중심 치료: 지지적이고 판단 없는 공간에서 자신의 경험을 탐색합니다. 진정으로 들려지고—자신의 속도로 방향을 찾습니다.",
+              "스트레스 관리 훈련: 압도감을 관리하고, 감정을 조절하며, 높은 압박 상황에서 더 통제감을 느끼는 실용적인 도구를 배웁니다."
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care",
+            "lead": "생활 및 자기 돌봄",
             "items": [
-              "Gentle movement or regular exercise to release tension",
-              "Mindfulness, deep breathing, or relaxation techniques to calm the nervous system",
-              "Balanced meals, consistent rest, and intentional pauses throughout your day",
-              "Boundaries that help protect your time, focus, and emotional well-being"
+              "긴장을 해소하는 부드러운 움직임 또는 규칙적인 운동",
+              "신경계를 안정시키는 마음 챙김, 복식 호흡, 또는 이완 기법",
+              "균형 잡힌 식사, 충분한 휴식, 그리고 하루 중 의도적인 쉬는 시간",
+              "시간, 집중력, 그리고 정서적 안녕을 보호하는 경계 설정"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward a Lighter Tomorrow**",
-      "Stress may be part of life—but it doesn't have to take up all the space. You don't have to carry everything on your own. Whatever you're feeling right now, you have the strength to find your way forward. And when you're ready, we'll be here—to walk beside you, at your pace, in your way."
+      "**더 가벼운 내일을 향한 첫 걸음**",
+      "스트레스는 삶의 일부일 수 있습니다—하지만 모든 공간을 차지할 필요는 없습니다. 모든 것을 혼자 짊어지지 않아도 됩니다. 지금 어떤 감정을 느끼든, 당신에게는 앞으로 나아갈 힘이 있습니다. 그리고 준비가 되면, 저희가 여기 있겠습니다—당신의 속도로, 당신의 방식으로 함께 걸으며."
     ]
   },
   "griefLoss": {
-    "title": "Grief & Loss",
-    "tagline": "Holding the Memories, Finding Your Way Forward",
+    "title": "슬픔 & 상실",
+    "tagline": "기억을 간직하며, 앞으로 나아가는 길 찾기",
     "groups": [
       [
-        "When someone we love is no longer with us—or when a meaningful relationship comes to an end—life can feel like it pauses in deep sadness. A quiet emptiness lingers. Regret may echo through unspoken words. Even the smallest moments can feel unbearably heavy.",
-        "Grief doesn't follow a straight line. It comes in waves, in silence, in sudden tears that catch you off guard. And sometimes, you may not even know how to begin processing it. Please know: everything you're feeling is valid. Grief is not something to fix or rush through. It's something to move through—gently, and in your own time. When the pain feels too heavy to carry alone, finding a safe, compassionate space to rest can bring comfort and strength.",
-        "At our counseling center, we honor your experience. We're here to walk beside you through your grief—with care, without pressure, and always at your pace."
+        "사랑하는 사람이 더 이상 곁에 없거나—의미 있던 관계가 끝나갈 때—삶이 깊은 슬픔 속에서 멈춘 것처럼 느껴질 수 있습니다. 조용한 공허함이 맴돕니다. 말하지 못한 말들에 대한 후회가 울려 퍼집니다. 가장 작은 순간들조차 감당하기 어려울 만큼 무겁게 느껴질 수 있습니다.",
+        "슬픔은 직선으로 흐르지 않습니다. 파도처럼, 침묵 속에서, 예상치 못한 순간의 눈물로 찾아옵니다. 그리고 때로는 어디서부터 시작해야 할지조차 모를 수 있습니다. 이것만은 알아주세요. 느끼는 모든 감정은 타당합니다. 슬픔은 고치거나 서둘러 통과해야 하는 것이 아닙니다. 부드럽게, 자신만의 시간에 통과해 나가야 하는 것입니다. 고통이 혼자 감당하기에 너무 무겁게 느껴질 때, 안전하고 공감 어린 쉴 공간을 찾는 것이 위안과 힘을 가져다줄 수 있습니다.",
+        "저희 상담센터에서는 당신의 경험을 존중합니다. 슬픔을 헤쳐나가는 동안 곁에 함께하겠습니다—돌봄을 담아, 압박 없이, 항상 당신의 속도에 맞추어."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Grief Feels Too Heavy: Gentle Signs to Seek Support",
+        "heading": "슬픔이 너무 무거울 때: 도움을 구해야 할 부드러운 신호",
         "lists": [
           {
-            "lead": "If any of the following resonate with you or someone you care about, counseling may help:",
+            "lead": "다음 중 자신이나 소중한 사람에게 공감되는 것이 있다면, 상담이 도움이 될 수 있습니다.",
             "items": [
-              "Deep sadness, emptiness, or emotional numbness",
-              "Lingering regret, guilt, or unspoken feelings",
-              "Difficulty focusing or functioning in daily life",
-              "Withdrawing from relationships or isolating yourself",
-              "A sense of being lost or unable to move forward"
+              "깊은 슬픔, 공허함, 또는 감정적 무감각",
+              "지속적인 후회, 죄책감, 또는 말하지 못한 감정들",
+              "일상생활에서 집중하거나 기능하는 것의 어려움",
+              "관계에서 멀어지거나 스스로를 고립시킴",
+              "길을 잃거나 앞으로 나아갈 수 없다는 느낌"
             ]
           }
         ],
         "closing": [
-          "*If grief begins to affect your well-being, relationships, or daily functioning, reaching out for support is not a sign of weakness—it's a step toward healing.*"
+          "*슬픔이 안녕감, 관계, 또는 일상적인 기능에 영향을 미치기 시작한다면, 도움을 요청하는 것은 나약함의 표시가 아닙니다—치유를 향한 걸음입니다.*"
         ]
       },
       {
-        "heading": "Your Journey Through Grief: Gentle Steps Toward Healing",
+        "heading": "슬픔을 통과하는 여정: 치유를 향한 부드러운 걸음",
         "groups": [
           [
-            "Grief doesn't disappear—but it can soften. With the right support, you can learn to carry it with more peace, clarity, and self-compassion."
+            "슬픔은 사라지지 않습니다—하지만 부드러워질 수 있습니다. 적절한 지원으로 더 많은 평화, 명확함, 그리고 자기 연민으로 슬픔을 안고 살아가는 법을 배울 수 있습니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Gently explore and reframe difficult thoughts surrounding your loss. Learn healthier ways to cope with emotional overwhelm.",
-              "Client-Centered Therapy: A warm, nonjudgmental space where your emotions are seen, heard, and supported—without pressure or expectation.",
-              "Grief Processing & Emotional Support: Develop emotional awareness, allowing grief to move through you naturally. Discover how to express, honor, and live with your loss in a meaningful way."
+              "인지행동치료(CBT): 상실을 둘러싼 어려운 생각들을 부드럽게 탐색하고 재구성합니다. 감정적 압도를 대처하는 더 건강한 방법을 배웁니다.",
+              "내담자 중심 치료: 감정이 보여지고, 들려지고, 지지받는—압박이나 기대 없는 따뜻하고 비판단적인 공간.",
+              "슬픔 처리 및 정서적 지지: 감정적 인식을 개발하여 슬픔이 자연스럽게 통과하도록 합니다. 상실을 의미 있는 방식으로 표현하고, 기리고, 함께 살아가는 법을 발견합니다."
             ]
           },
           {
-            "lead": "Social Support & Self-Care",
+            "lead": "사회적 지지 및 자기 돌봄",
             "items": [
-              "Connecting with Others: Talk openly with trusted friends or family. Shared stories and simple presence can be a source of comfort and connection.",
-              "Gentle Care for Body and Mind: Incorporate calming routines—like mindful walking, quiet journaling, or deep breathing—that give space to your grief and help restore your inner balance."
+              "타인과 연결하기: 신뢰하는 친구나 가족과 마음을 열어 이야기합니다. 함께 나누는 이야기와 단순한 존재감이 위안과 연결의 원천이 될 수 있습니다.",
+              "몸과 마음을 위한 부드러운 돌봄: 마음 챙김 걷기, 조용한 일기 쓰기, 또는 복식 호흡 같은 차분한 루틴을 실천하여 슬픔에 공간을 주고 내면의 균형을 회복합니다."
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "Grief is a reflection of love—and the pain you feel honors the depth of that connection. But your grief is not the whole of you. And this season of sorrow is not where your story ends. The people and memories you carry with you will always matter. And in time, you can begin to feel warmth again—not by forgetting, but by learning to carry love and loss side by side. You don't have to walk this path alone. We're here to support you—gently, steadily, and always in your time."
+      "**치유를 향한 첫 걸음**",
+      "슬픔은 사랑의 반영입니다—그리고 느끼는 고통은 그 연결의 깊이를 기리는 것입니다. 하지만 슬픔이 당신의 전부는 아닙니다. 그리고 이 비탄의 계절이 당신의 이야기가 끝나는 곳이 아닙니다. 함께한 사람들과 기억들은 항상 중요할 것입니다. 그리고 시간이 지나면, 잊는 것이 아니라 사랑과 상실을 나란히 안고 살아가는 법을 배우면서—다시 따뜻함을 느끼기 시작할 수 있습니다. 이 길을 혼자 걷지 않아도 됩니다. 저희가 당신을 지지하겠습니다—부드럽게, 꾸준히, 그리고 항상 당신의 시간에 맞추어."
     ]
   },
   "sleep": {
-    "title": "Sleep Disturbances",
-    "tagline": "A Restful Night Can Be Yours Again",
+    "title": "수면 장애",
+    "tagline": "편안한 밤이 다시 당신의 것이 될 수 있습니다",
     "groups": [
       [
-        "For some, nighttime brings quiet comfort. For others, it marks the beginning of restlessness. You might lie awake for hours, your mind racing while the world around you settles. Or perhaps you wake up too early, unable to fall back asleep. Even after a full night's rest, you may still feel tired, foggy, or emotionally drained.",
-        "Sleep is more than rest—it's how the body and mind repair, reset, and return to balance. When sleep becomes difficult, it isn't a sign of weakness. Often, it's your body's way of saying, \"I need care.\" That care doesn't begin with pressure. It begins with awareness, compassion, and gentle support.",
-        "At our counseling center, we provide a space where your story is heard—where you can begin the journey back to deep, restorative rest."
+        "어떤 사람에게는 밤이 조용한 안식을 가져다 줍니다. 어떤 사람에게는 불안한 시간의 시작입니다. 주변 세상이 잠들어 있는 동안 머릿속이 달리면서 몇 시간씩 누워 있을 수 있습니다. 또는 너무 일찍 깨어나 다시 잠들지 못할 수 있습니다. 밤새 자고 나도 여전히 피곤하거나, 머리가 멍하거나, 감정적으로 소진된 느낌이 들 수 있습니다.",
+        "수면은 단순한 휴식 이상입니다—그것은 몸과 마음이 회복하고, 재설정하고, 균형으로 돌아오는 방식입니다. 수면이 어려워질 때, 그것은 나약함의 표시가 아닙니다. 종종 몸이 '돌봄이 필요해'라고 말하는 방식입니다. 그 돌봄은 압박으로 시작되지 않습니다. 인식, 자기 연민, 그리고 부드러운 지지로 시작됩니다.",
+        "저희 상담센터에서는 당신의 이야기가 들려지는 공간을 제공합니다—깊고 회복적인 휴식으로 돌아가는 여정을 시작할 수 있는 곳."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Restlessness: Signs It's Time for Support",
+        "heading": "불안함에 귀 기울이기: 지원이 필요한 때의 신호",
         "lists": [
           {
-            "lead": "If any of the following sound familiar, it may be time to reach out:",
+            "lead": "다음 중 익숙하게 느껴지는 것이 있다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "Insomnia: Difficulty falling asleep or staying asleep; Waking up too early and being unable to return to sleep; Persistent fatigue, even after sleeping",
-              "Sleep Apnea: Breathing that stops or becomes shallow during sleep; Snoring or gasping for air; Daytime drowsiness, irritability, or difficulty focusing",
-              "Hypersomnia: Excessive sleepiness despite getting enough sleep; Struggling to stay awake during the day; Difficulty functioning due to overwhelming fatigue",
-              "Nightmare Disorder: Intense, distressing dreams that interrupt your sleep; Lingering fear or anxiety around falling asleep; Emotional exhaustion upon waking"
+              "불면증: 잠들거나 잠을 유지하는 것의 어려움. 너무 일찍 깨어나 다시 잠들지 못함. 자고 나도 지속되는 피로",
+              "수면 무호흡증: 수면 중 호흡이 멈추거나 얕아짐. 코골이 또는 숨을 헐떡임. 낮 시간의 졸림, 짜증, 또는 집중 어려움",
+              "과다수면증: 충분히 자도 과도한 졸림. 낮에 깨어 있는 것의 어려움. 압도적인 피로로 인한 일상 기능 어려움",
+              "악몽 장애: 수면을 방해하는 강렬하고 고통스러운 꿈. 잠드는 것에 대한 지속적인 두려움 또는 불안. 깨어났을 때의 감정적 탈진"
             ]
           }
         ],
         "closing": [
-          "*If these symptoms have lasted for more than two weeks or are interfering with your daily life, professional support can help identify the cause and guide you toward more restful sleep.*"
+          "*이러한 증상들이 2주 이상 지속되거나 일상생활을 방해하고 있다면, 전문적인 지원이 원인을 파악하고 더 편안한 수면을 향해 나아가도록 안내해 줄 수 있습니다.*"
         ]
       },
       {
-        "heading": "Gentle Steps Toward Restful Nights: Personalized Sleep Support",
+        "heading": "편안한 밤을 향한 부드러운 걸음: 맞춤형 수면 지원",
         "groups": [
           [
-            "Sleep difficulties are common—and they are treatable. Healing doesn't begin by forcing change. It begins with gently noticing what your body is trying to tell you—and learning how to respond with care."
+            "수면 어려움은 흔한 일이며—치료가 가능합니다. 치유는 억지로 변화를 강요하는 것으로 시작되지 않습니다. 몸이 무엇을 말하려는지 부드럽게 알아차리고—돌봄으로 반응하는 법을 배우는 것으로 시작됩니다."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "심리치료 및 상담",
             "items": [
-              "CBT-I (Cognitive Behavioral Therapy for Insomnia): Identify and shift thought patterns that interfere with sleep. Build healthier bedtime routines and reduce anxiety around sleep.",
-              "Stress Management & Relaxation Training: Practice techniques like deep breathing, progressive muscle relaxation, or guided imagery to calm the nervous system and ease into rest."
+              "불면증을 위한 인지행동치료(CBT-I): 수면을 방해하는 사고 패턴을 파악하고 전환합니다. 더 건강한 취침 루틴을 만들고 수면에 대한 불안을 줄입니다.",
+              "스트레스 관리 및 이완 훈련: 신경계를 안정시키고 휴식으로 자연스럽게 전환하기 위해 복식 호흡, 점진적 근육 이완, 또는 안내 이미지 같은 기법을 연습합니다."
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care Support",
+            "lead": "생활 및 자기 돌봄 지원",
             "items": [
-              "Maintain a consistent sleep and wake schedule",
-              "Limit caffeine, nicotine, and alcohol—especially in the evening",
-              "Reduce screen time before bed to protect your natural sleep rhythm",
-              "Create a quiet, dark, and comfortable sleep environment that supports relaxation"
+              "일관된 취침 및 기상 시간 유지",
+              "특히 저녁에 카페인, 니코틴, 알코올 제한",
+              "자연적인 수면 리듬을 보호하기 위해 자기 전 화면 시간 줄이기",
+              "이완을 지원하는 조용하고, 어둡고, 편안한 수면 환경 조성"
             ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing Rest**",
-      "If sleep feels far away—if nights are restless and mornings feel heavy—it may be your body and mind asking for gentler care. The good news is that restful sleep can be restored. You don't have to keep pushing through exhaustion. You can reclaim rest.",
-      "At our counseling center, we take the time to understand not just your symptoms—but your story. Together, we'll help you find new rhythms that bring balance, calm, and renewal."
+      "**편안한 휴식을 향한 첫 걸음**",
+      "수면이 멀게 느껴진다면—밤이 불안하고 아침이 무겁게 느껴진다면—그것은 몸과 마음이 더 부드러운 돌봄을 요청하고 있는 것일 수 있습니다. 좋은 소식은 편안한 수면이 회복될 수 있다는 것입니다. 피로를 억지로 버티지 않아도 됩니다. 휴식을 되찾을 수 있습니다.",
+      "저희 상담센터에서는 단순히 증상만이 아니라—당신의 이야기를 이해하는 데 시간을 할애합니다. 함께 균형, 고요함, 그리고 새로운 활력을 가져오는 새로운 리듬을 찾아가겠습니다."
     ]
   }
 };

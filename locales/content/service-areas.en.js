@@ -3,18 +3,10 @@ export const serviceAreasSectionsEn = {
   "depression": {
     "title": "Depression",
     "tagline": "You Are Not Alone",
-    "groups": [
-      [
-        "Depression is more than just feeling sad. It can feel like a heavy fog that settles over everything—making even the simplest tasks feel overwhelming. You might be tired all the time, yet unable to rest. Things you once enjoyed may no longer bring you joy. You may feel numb, hopeless, or quietly overwhelmed without always knowing why. And still, you keep going. You try to hold it together, even when it feels like you're falling apart inside."
-      ],
-      [
-        "If this sounds familiar, please know: this is not your fault. You are not weak. Depression is not a flaw in your character—it's a signal that your heart and mind are asking for care.",
-        "Even if it feels like nothing will ever change, these feelings are not forever. With the right support, healing is possible. You can reconnect with yourself, your strength, and the parts of life that once felt meaningful."
-      ]
-    ],
+    "groups": [],
     "subsections": [
       {
-        "heading": "Listening to Your Feelings: When to Seek Support for Depression",
+        "heading": "Test Heading",
         "lists": [
           {
             "lead": "If you've experienced some of the following for more than two weeks, it may be time to seek support:",
@@ -63,11 +55,11 @@ export const serviceAreasSectionsEn = {
         ]
       }
     ],
-    "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not defined by what you're feeling right now. This pain—this difficult season—does not last forever. Depression is treatable, and you don't have to navigate it alone.",
-      "There is space for healing, for renewal, and for life to feel like yours again. You don't have to be \"ready.\" You just need a safe place to begin. We'll meet you there—gently, respectfully, and at your pace."
-    ]
+    "closing": []
+  ,
+    lists: [],
+  
+    "flow": []
   },
   "traumaPtsd": {
     "title": "Trauma & PTSD",

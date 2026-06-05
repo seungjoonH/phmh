@@ -47,10 +47,8 @@ export const servicesSectionsEn = {
       },
     ],
     closing: [
-    "Therapy empowers you to lead a more fulfilling life, build resilience, and strengthen your relationships."
-  ],
-  
-    "flow": []
+      "Therapy empowers you to lead a more fulfilling life, build resilience, and strengthen your relationships.",
+    ],
   },
   couples: {
     title: "Couples Therapy",

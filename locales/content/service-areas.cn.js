@@ -1,12 +1,20 @@
 // 서비스 분야 중국어 본문 (en.js와 동일 구조, 빈 문자열)
 export const serviceAreasSectionsCn = {
   "depression": {
-    "title": "抑郁症",
+    "title": "",
     "tagline": "",
-    "groups": [],
+    "groups": [
+      [
+        ""
+      ],
+      [
+        "",
+        ""
+      ]
+    ],
     "subsections": [
       {
-        "heading": "测试标题",
+        "heading": "",
         "lists": [
           {
             "lead": "",
@@ -55,11 +63,11 @@ export const serviceAreasSectionsCn = {
         ]
       }
     ],
-    "closing": []
-  ,
-    lists: [],
-  
-    "flow": []
+    "closing": [
+      "",
+      "",
+      ""
+    ]
   },
   "traumaPtsd": {
     "title": "",

@@ -46,10 +46,8 @@ export const servicesSectionsCn = {
       }
     ],
     "closing": [
-    "咨询有助于您过上更充实的生活，增强韧性，并加强人际关系。"
-  ]
-  ,
-    "flow": []
+      ""
+    ]
   },
   "couples": {
     "title": "",

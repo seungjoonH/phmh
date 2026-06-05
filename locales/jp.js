@@ -107,13 +107,10 @@ export default {
         "mpuxp7l48": { "heading": "" }
       },
       "lists": [],
-
-
-    
       "flow": [
-              { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
-              { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" }
-            ]
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxmlbl1.p" },
+        { type: "p", textKey: "pages.whoWeAre.flowText.mpuxn57c2.p" }
+      ]
     },
     "ourVision": {
       "title": "ビジョン",

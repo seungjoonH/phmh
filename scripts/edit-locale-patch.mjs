@@ -767,20 +767,21 @@ export function replaceSectionFlow(source, sectionScope, blocks) {
   // 같은 줄에 붙어 있을 때 lineIndentBefore가 잘못된 값을 반환하는 버그를 방지한다.
   const indent = "  ".repeat(parentKeys.length);
   const childIndent = `${indent}  `;
-  const blockIndent = `${childIndent}  `;
+  // body는 상대 들여쓰기(2칸/0칸)로 작성 — flowJs 맵에서 childIndent를 절대값으로 붙임
   const body =
     blocks.length === 0
       ? ""
-      : `\n${blocks.map((b) => `${blockIndent}${storedFlowBlockToJs(b)}`).join(",\n")}\n${childIndent}`;
+      : `\n${blocks.map((b) => `  ${storedFlowBlockToJs(b)}`).join(",\n")}\n`;
   const close = findClosingBrace(cleaned, scopeStart);
   const comma = commaBeforeObjectInsert(cleaned, scopeStart, close);
+  // flowJs: 첫 줄 제외 각 줄에 childIndent 추가 → 절대 들여쓰기 완성
   const flowJs = `"flow": [${body}]`
     .split("\n")
     .map((line, i) => (i === 0 ? line : `${childIndent}${line}`))
     .join("\n");
-  const insert = `${comma}\n${childIndent}${flowJs}`;
-  // \n${indent} 를 추가해 닫는 } 가 항상 올바른 들여쓰기의 새 줄에 위치하도록 보장
-  return `${cleaned.slice(0, close)}${insert}\n${indent}${cleaned.slice(close)}`;
+  // trimEnd()로 } 앞 trailing whitespace 제거 → comma가 새 줄에 고립되는 현상 방지
+  const before = cleaned.slice(0, close).trimEnd();
+  return `${before}${comma}\n${childIndent}${flowJs}\n${indent}${cleaned.slice(close)}`;
 }
 
 /**
@@ -823,7 +824,9 @@ export function insertContentSectionKey(source, sectionKey, sectionJs) {
     ? sectionKey
     : `"${escapeJsString(sectionKey)}"`;
   const trimmed = source.slice(bodyStart, close).trim();
-  const insert = `${trimmed ? "," : ""}\n${indent}  ${keyPart}: ${sectionJs}`;
+  // 이미 trailing comma가 있으면 추가하지 않음 — double comma 방지
+  const needsComma = trimmed.length > 0 && !trimmed.endsWith(",");
+  const insert = `${needsComma ? "," : ""}\n${indent}  ${keyPart}: ${sectionJs}`;
   return `${source.slice(0, close)}${insert}\n${source.slice(close)}`;
 }
 

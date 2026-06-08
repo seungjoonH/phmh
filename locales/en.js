@@ -68,7 +68,7 @@ export default {
     },
     "philippines": {
       "addressShort":
-        "Abby's Apartelle, B10 L3 Unit C, Elvira St, Josefa Subd. Malabanias, Angeles",
+        "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "addressFull":
         "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
@@ -150,37 +150,37 @@ export default {
         "paragraphs": []
       },
       "steps": [
-        {
-          "number": "01",
-          "title": "Explore",
-          "description": "Ask questions and book an appointment"
-        },
-        {
-          "number": "02",
-          "title": "Contact Us",
-          "description": "Work toward healing with professional support."
-        },
-        {
-          "number": "03",
-          "title": "Complete Online Form",
-          "description": "Complete Online Forms"
-        },
-        {
-          "number": "04",
-          "title": "Attend Initial Session",
-          "description": "Attend Initial Session"
-        },
-        {
-          "number": "05",
-          "title": "Begin Therapy",
-          "description": "Peace & Hope Mental Health Services"
-        },
-        {
-          "number": "06",
-          "title": "Solve Problem",
-          "description": "Mental Health Services"
-        }
-      ]
+    {
+      number: "01",
+      title: "Explore",
+      description: "Learn about our philosophy and approach."
+    },
+    {
+      number: "02",
+      title: "Contact Us",
+      description: "Ask questions and book an appointment"
+    },
+    {
+      number: "03",
+      title: "Complete Online Form",
+      description: "Essential for your first session"
+    },
+    {
+      number: "04",
+      title: "Attend Initial Session",
+      description: "Set therapy goals."
+    },
+    {
+      number: "05",
+      title: "Begin Therapy",
+      description: "Work toward healing with professional support."
+    },
+    {
+      number: "06",
+      title: "Solve Problem",
+      description: "Solve your problem."
+    }
+  ]
     },
     "fee": {
       "title": "Fees",

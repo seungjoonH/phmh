@@ -67,7 +67,7 @@ export default {
     },
     "philippines": {
       "addressShort":
-        "Abby's Apartelle, B10 L3 Unit C, Elvira St, Josefa Subd. Malabanias, Angeles",
+        "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "addressFull":
         "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
@@ -150,37 +150,37 @@ export default {
         "paragraphs": []
       },
       "steps": [
-        {
-          "number": "01",
-          "title": "알아보기",
-          "description": "궁금한 점을 질문하고 예약하세요"
-        },
-        {
-          "number": "02",
-          "title": "문의하기",
-          "description": "전문가의 도움으로 치유를 향해 나아가세요."
-        },
-        {
-          "number": "03",
-          "title": "온라인 양식 작성",
-          "description": "온라인 양식을 작성해 주세요"
-        },
-        {
-          "number": "04",
-          "title": "초기 상담 참석",
-          "description": "첫 번째 상담에 참석하세요"
-        },
-        {
-          "number": "05",
-          "title": "치료 시작",
-          "description": "Peace & Hope 정신건강 서비스"
-        },
-        {
-          "number": "06",
-          "title": "문제 해결",
-          "description": "정신건강 서비스"
-        }
-      ]
+    {
+      number: "01",
+      title: "알아보기",
+      description: "저희의 철학과 접근 방식에 대해 알아보세요."
+    },
+    {
+      number: "02",
+      title: "문의하기",
+      description: "궁금한 점이 있으면 문의하고 예약을 하세요."
+    },
+    {
+      number: "03",
+      title: "온라인 양식 작성",
+      description: "첫 수업에 필수적인 사항입니다."
+    },
+    {
+      number: "04",
+      title: "초기 상담 참석",
+      description: "치료 목표를 설정하세요."
+    },
+    {
+      number: "05",
+      title: "치료 시작",
+      description: "전문가의 도움으로 치유를 향해 나아가세요."
+    },
+    {
+      number: "06",
+      title: "문제 해결",
+      description: "문제를 해결하세요."
+    }
+  ]
     },
     "fee": {
       "title": "비용",

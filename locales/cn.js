@@ -145,37 +145,37 @@ export default {
         "paragraphs": []
       },
       "steps": [
-        {
-          "number": "01",
-          "title": "",
-          "description": ""
-        },
-        {
-          "number": "02",
-          "title": "",
-          "description": ""
-        },
-        {
-          "number": "03",
-          "title": "",
-          "description": ""
-        },
-        {
-          "number": "04",
-          "title": "",
-          "description": ""
-        },
-        {
-          "number": "05",
-          "title": "",
-          "description": ""
-        },
-        {
-          "number": "06",
-          "title": "",
-          "description": ""
-        }
-      ]
+    {
+      number: "01",
+      title: "",
+      description: ""
+    },
+    {
+      number: "02",
+      title: "",
+      description: ""
+    },
+    {
+      number: "03",
+      title: "",
+      description: ""
+    },
+    {
+      number: "04",
+      title: "",
+      description: ""
+    },
+    {
+      number: "05",
+      title: "",
+      description: ""
+    },
+    {
+      number: "06",
+      title: "",
+      description: ""
+    }
+  ]
     },
     "fee": {
       "title": "费用",

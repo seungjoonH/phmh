@@ -66,7 +66,7 @@ export default {
       "email": "hsj6831@gmail.com"
     },
     "philippines": {
-      "addressShort": "Abby's Apartelle, B10 L3 Unit C, Elvira St, Josefa Subd. Malabanias, Angeles",
+      "addressShort": "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "addressFull": "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
       "phoneViber": "+63 952 479 1119 (Viber)",
@@ -142,37 +142,37 @@ export default {
         "paragraphs": []
       },
       "steps": [
-        {
-          "number": "01",
-          "title": "情報収集",
-          "description": "気になることを質問し、予約を取りましょう"
-        },
-        {
-          "number": "02",
-          "title": "お問い合わせ",
-          "description": "専門家のサポートのもと、癒しへの一歩を踏み出しましょう"
-        },
-        {
-          "number": "03",
-          "title": "オンラインフォーム記入",
-          "description": "オンラインフォームにご記入ください"
-        },
-        {
-          "number": "04",
-          "title": "初回セッションへのご参加",
-          "description": "初回セッションにご参加ください"
-        },
-        {
-          "number": "05",
-          "title": "カウンセリング開始",
-          "description": "Peace & Hope メンタルヘルスサービス"
-        },
-        {
-          "number": "06",
-          "title": "課題の解決",
-          "description": "メンタルヘルスサービス"
-        }
-      ]
+    {
+      number: "01",
+      title: "情報収集",
+      description: "私たちの理念と取り組みについてご紹介します。"
+    },
+    {
+      number: "02",
+      title: "お問い合わせ",
+      description: "質問したり、予約を入れたりしてください。"
+    },
+    {
+      number: "03",
+      title: "オンラインフォーム記入",
+      description: "初回セッションに必須"
+    },
+    {
+      number: "04",
+      title: "初回セッションへのご参加",
+      description: "治療目標を設定する。"
+    },
+    {
+      number: "05",
+      title: "カウンセリング開始",
+      description: "専門家のサポートのもと、癒しへの一歩を踏み出しましょう"
+    },
+    {
+      number: "06",
+      title: "課題の解決",
+      description: "問題を解決してください。"
+    }
+  ]
     },
     "fee": {
       "title": "料金",

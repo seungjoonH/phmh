@@ -118,10 +118,24 @@ export default {
     "ourVision": {
       "title": "",
       "paragraphs": [
-        "",
-        "",
-        "",
-        ""
+    "",
+    "",
+    "",
+    ""
+  ]
+    ,
+      lists: [],
+        "flowText": {
+          "mq4tgoto1": {
+            "p": ""
+          }
+        },
+      "flow": [
+        { type: "p", textKey: "pages.ourVision.flowText.mq4tgoto1.p" },
+        { type: "p", textKey: "pages.ourVision.paragraphs.0" },
+        { type: "p", textKey: "pages.ourVision.paragraphs.1" },
+        { type: "p", textKey: "pages.ourVision.paragraphs.2" },
+        { type: "p", textKey: "pages.ourVision.paragraphs.3" }
       ]
     },
     "gettingStarted": {

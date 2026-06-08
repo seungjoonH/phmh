@@ -17,7 +17,7 @@ export const servicesSectionsEn = {
     ],
     lists: [
       {
-        lead: "Common issues addressed in individual Therapy include:",
+        lead: "**Common issues addressed in individual Therapy include:**",
         items: [
           "Depression",
           "Anxiety disorders",
@@ -28,7 +28,7 @@ export const servicesSectionsEn = {
         ],
       },
       {
-        lead: "Therapeutic approaches may include:",
+        lead: "**Therapeutic approaches may include:**",
         items: [
           "Cognitive Behavioral Therapy (CBT): Restructures negative thought patterns",
           "Psychoanalytic Therapy: Explores past experiences and unconscious emotions",
@@ -36,7 +36,7 @@ export const servicesSectionsEn = {
         ],
       },
       {
-        lead: "Through Therapy, you will:",
+        lead: "**Through Therapy, you will:**",
         items: [
           "Gain self-awareness",
           "Improve emotional regulation",
@@ -63,7 +63,7 @@ export const servicesSectionsEn = {
     ],
     lists: [
       {
-        lead: "Couples Therapy helps you:",
+        lead: "**Couples Therapy helps you:**",
         items: [
           "Identify and break negative relationship patterns",
           "Improve communication skills",
@@ -87,7 +87,7 @@ export const servicesSectionsEn = {
     ],
     lists: [
       {
-        lead: "Family therapy focuses on:",
+        lead: "**Family therapy focuses on:**",
         items: [
           "Strengthening emotional bonds between parents and children",
           "Improving communication and understanding",
@@ -112,7 +112,7 @@ export const servicesSectionsEn = {
         items: ["Art materials", "Dolls and figurines", "Toys and games"],
       },
       {
-        lead: "Therapists observe and guide play sessions to help children:",
+        lead: "**Therapists observe and guide play sessions to help children:**",
         items: [
           "Develop problem-solving skills",
           "Improve self-esteem",

@@ -1,13 +1,8 @@
 {
   "hidden": [
     "centers.korea-center.hero",
-    "heroes.about",
     "heroes.centers",
     "heroes.fee",
-    "heroes.servicesTypes",
-    "heroes.therapists",
-    "therapy.couples",
-    "therapy.family",
-    "therapy.individual"
+    "heroes.therapists"
   ]
 }

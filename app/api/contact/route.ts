@@ -41,15 +41,13 @@ export async function POST(request: Request) {
 
   if (error) {
     console.error("[contact] Resend error:", error);
-    const devHint =
-      process.env.NODE_ENV === "development" && error.message
+    const message =
+      typeof error.message === "string" && error.message.trim().length > 0
         ? error.message
-        : null;
+        : "Email delivery failed.";
     return NextResponse.json(
       {
-        error:
-          devHint ??
-          "Failed to send message. Please try again.",
+        error: message,
       },
       { status: 502 },
     );

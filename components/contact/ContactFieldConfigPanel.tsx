@@ -65,6 +65,7 @@ export function ContactFieldConfigPanel() {
   } = useEditDraft();
   const fieldId = selected?.kind === "contactField" ? selected.fieldId : null;
   const structureAtOpenRef = useRef<ContactFormStructurePayload | null>(null);
+  const shouldSyncCopyDraftRef = useRef(false);
 
   const [field, setField] = useState<ContactFieldDefinition | null>(null);
   const [copy, setCopy] = useState<FieldCopyState | null>(null);
@@ -116,6 +117,7 @@ export function ContactFieldConfigPanel() {
       structureAtOpenRef.current = contactStructureDraft
         ? structuredClone(contactStructureDraft)
         : null;
+      shouldSyncCopyDraftRef.current = false;
       setField({ ...def } as ContactFieldDefinition);
       setCopy({ label, placeholder, body, checkbox, options });
     };
@@ -180,30 +182,33 @@ export function ContactFieldConfigPanel() {
 
   const updateCopy = useCallback(
     (key: keyof Omit<FieldCopyState, "options">, locale: string, value: string) => {
+      shouldSyncCopyDraftRef.current = true;
       setCopy((prev) => {
-        if (!prev || !field) return prev;
-        const next = {
+        if (!prev) return prev;
+        return {
           ...prev,
           [key]: { ...prev[key], [locale]: value },
         };
-        pushCopyToDrafts(next, field);
-        return next;
       });
     },
-    [field, pushCopyToDrafts],
+    [],
   );
 
   const updateOptions = useCallback(
     (locale: string, options: string[]) => {
+      shouldSyncCopyDraftRef.current = true;
       setCopy((prev) => {
-        if (!prev || !field) return prev;
-        const next = { ...prev, options: { ...prev.options, [locale]: options } };
-        pushCopyToDrafts(next, field);
-        return next;
+        if (!prev) return prev;
+        return { ...prev, options: { ...prev.options, [locale]: options } };
       });
     },
-    [field, pushCopyToDrafts],
+    [],
   );
+
+  useEffect(() => {
+    if (!shouldSyncCopyDraftRef.current || !copy || !field) return;
+    pushCopyToDrafts(copy, field);
+  }, [copy, field, pushCopyToDrafts]);
 
   const handleClose = () => {
     closeEditor();

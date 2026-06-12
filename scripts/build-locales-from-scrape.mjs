@@ -240,7 +240,7 @@ const messagesEn = {
     brand: "Peace & Hope Mental Health Services",
     menu: "Menu",
     contact: "Contact",
-    email: "info@phmhservices.com",
+    email: "support@mypeaceandhope.com",
     koreaAddress:
       "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea",
     philippinesAddress:

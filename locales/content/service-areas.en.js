@@ -461,10 +461,10 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "**Creating Harmony Together: Gentle Paths to Relationship Healing**",
+        "heading": "**Creating Harmony Together: Gentle Paths to Relationship Healing**\n\nRelationships are not defined by their struggles. With support, understanding, and hope, couples and families can rediscover connection, strengthen bonds, and move forward together with greater confidence and care.",
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Relationship Pattern Exploration: Reflect on recurring dynamics and discover how to build healthier, more balanced ways of connecting.",
               "Cognitive Behavioral Therapy (CBT): Shift unhelpful thoughts and learn practical tools for managing emotions and communication.",
@@ -472,7 +472,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Communication & Emotional Expression",
+            "lead": "**Communication & Emotional Expression**",
             "items": [
               "Practice expressing emotions openly and respectfully",
               "Learn to navigate conflict without causing harm",
@@ -480,7 +480,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Self-Care & Boundaries in Relationships",
+            "lead": "**Self-Care & Boundaries in Relationships**",
             "items": [
               "Reclaim the right to say no and set boundaries that protect your well-being",
               "Stay connected to your values and needs without losing yourself in the relationship",
@@ -501,15 +501,15 @@ export const serviceAreasSectionsEn = {
     "tagline": "Finding Your Way Back to a Calmer, More Centered Life",
     "groups": [
       [
-        "Do you ever find yourself stuck in a loop—checking, counting, cleaning, or repeating actions just to feel a fleeting sense of relief? Maybe a thought keeps returning no matter how hard you try to push it away, or you feel that something terrible might happen unless a specific ritual is completed. These patterns aren't signs of weakness. They're often your mind's way of trying to feel safe in the face of anxiety. But when these routines begin to take over your days, disrupt your peace, or affect your relationships, it may be time to seek support.",
+        "Do you ever find yourself stuck in a loop—checking, counting, cleaning, or repeating actions just to feel a fleeting sense of relief? Maybe a thought keeps returning no matter how hard you try to push it away, or you feel that something terrible might happen unless a specific ritual is completed. These patterns aren't signs of weakness. **They're often your mind's way of trying to feel safe in the face of anxiety.** But when these routines begin to take over your days, disrupt your peace, or affect your relationships, it may be time to seek support.",
         "Obsessive-Compulsive Disorder (OCD) involves recurring intrusive thoughts (obsessions) and repetitive behaviors (compulsions) aimed at reducing distress. While these behaviors may bring temporary relief, they often intensify anxiety and emotional exhaustion over time.",
-        "Still—healing is possible. You are not your thoughts. You are not your compulsions. And this cycle doesn't have to define your life. With the right support, you can begin to gently interrupt the patterns, ease your anxiety, and return to a steadier, more spacious way of living.",
+        "**Still—healing is possible. **You are not your thoughts. You are not your compulsions. And this cycle doesn't have to define your life. With the right support, you can begin to gently interrupt the patterns, ease your anxiety, and return to a steadier, more spacious way of living.",
         "At our counseling center, we help you understand the patterns underlying OCD—and support you in developing new, more compassionate ways to respond."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Rituals Become Overwhelming: Gentle Indicators to Reach Out",
+        "heading": "**When Rituals Become Overwhelming: Gentle Indicators to Reach Out**",
         "lists": [
           {
             "items": [
@@ -523,7 +523,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Freeing Your Mind: Gentle Paths Toward OCD Recovery",
+        "heading": "**Freeing Your Mind: Gentle Paths Toward OCD Recovery**",
         "groups": [
           [
             "OCD is highly treatable. With time, care, and the right tools, you can begin to relate to your thoughts in new ways—and loosen their hold on your life."
@@ -531,7 +531,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Identify and shift unhelpful thought patterns while building healthier coping strategies.",
               "Exposure and Response Prevention (ERP): Gradually face anxiety triggers in a safe, supportive space while learning to resist compulsive responses.",
@@ -540,7 +540,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care Support",
+            "lead": "**Lifestyle & Self-Care Support**",
             "items": [
               "Establish regular sleep and meal routines to support overall emotional stability",
               "Use breathing exercises and mindfulness practices to calm your nervous system",
@@ -552,9 +552,9 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "Intrusive thoughts and compulsive behaviors may feel powerful—but they are not stronger than you. They're not personal flaws. They are signs that your mind is doing its best to stay safe. You don't have to face this alone. With the right support, you can find steadier ground, ease anxiety's grip, and return to a life that feels calmer, clearer, and truly your own. Let's begin—gently, together."
-    ]
+    "**Your First Step Toward Healing**",
+    "Intrusive thoughts and compulsive behaviors may feel powerful—**but they are not stronger than you. **They're not personal flaws. They are signs that your mind is doing its best to stay safe. You don't have to face this alone. With the right support, you can find steadier ground, ease anxiety's grip, and return to a life that feels calmer, clearer, and truly your own. Let's begin—gently, together."
+  ]
   },
   "eatingDisorders": {
     "title": "Eating Disorders",
@@ -568,7 +568,7 @@ export const serviceAreasSectionsEn = {
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Body: When to Consider Eating Disorder Support",
+        "heading": "**Listening to Your Body: When to Consider Eating Disorder Support**",
         "lists": [
           {
             "lead": "If you recognize any of the following patterns in yourself or someone you care about, it may be time to reach out:",
@@ -584,7 +584,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Reclaiming Your Relationship With Food and Yourself",
+        "heading": "**Reclaiming Your Relationship With Food and Yourself**",
         "groups": [
           [
             "Recovery isn't about perfection. It's about building a more compassionate relationship with food, your body, and yourself—one grounded in trust, balance, and kindness."
@@ -592,7 +592,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Reframe harmful beliefs about food, body image, and self-worth while building healthier habits.",
               "Interpersonal Therapy (IPT): Explore how life transitions and relationship dynamics influence eating patterns and self-image.",
@@ -601,7 +601,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Nutritional Guidance & Lifestyle Support",
+            "lead": "**Nutritional Guidance & Lifestyle Support**",
             "items": [
               "Create gentle, nourishing meal routines that promote physical healing",
               "Reconnect with your body through curiosity, care, and self-compassion",
@@ -612,10 +612,10 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "The discomfort in your body. The fear in front of the mirror. The quiet battle that happens with every meal—These are not signs of failure. They're signs of pain. And pain deserves care. You don't have to fight this alone. Recovery isn't about getting everything \"right.\" It's about softening self-judgment, releasing shame, and learning to trust yourself again—gently, and at your own pace.",
-      "Let's begin there: Not with pressure, but with patience. Not with criticism, but with compassion. Not by changing who you are, but by helping you feel at home in your body—and in your life."
-    ]
+    "**Your First Step Toward Healing**",
+    "The discomfort in your body. The fear in front of the mirror. The quiet battle that happens with every meal—**These are not signs of failure. They're signs of pain. And pain deserves care.** You don't have to fight this alone. Recovery isn't about getting everything \"right.\" It's about softening self-judgment, releasing shame, and learning to trust yourself again—gently, and at your own pace.",
+    "Let's begin there: Not with pressure, but with patience. Not with criticism, but with compassion. Not by changing who you are, but by helping you feel at home in your body—and in your life."
+  ]
   },
   "asd": {
     "title": "Autism Spectrum Disorder (ASD)",
@@ -623,13 +623,13 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "Every child, every person, experiences the world in their own beautifully distinct way. Some communicate not with words, but with gestures, rhythm, or silence. Some find deep comfort in repetition and structure. If you're a parent, caregiver, or loved one, you may have noticed these differences in someone you care about. Perhaps you've watched them struggle to make eye contact, navigate social situations, or process sensory input. Maybe you've wondered: \"Are they okay? Are we doing the right thing? How can I help?\"",
-        "Autism Spectrum Disorder (ASD) is a neurodevelopmental condition marked by differences in social interaction, communication, behavior, and sensory experience. But these differences are not deficits—they are part of a rich and varied way of being. Still, it's natural to feel confused or worried as a parent or family member. You may feel isolated, unsure of how to support your loved one—or even how to care for yourself in the process. You are not alone. And neither is your child, partner, sibling, or friend. There is support. There is understanding. And there is hope.",
+        "Autism Spectrum Disorder (ASD) is a neurodevelopmental condition marked by differences in social interaction, communication, behavior, and sensory experience. **But these differences are not deficits**—they are part of a rich and varied way of being. Still, it's natural to feel confused or worried as a parent or family member. You may feel isolated, unsure of how to support your loved one—or even how to care for yourself in the process. You are not alone. And neither is your child, partner, sibling, or friend. There is support. There is understanding. And there is hope.",
         "At our counseling center, we offer a safe, compassionate space—not just for individuals with ASD, but for the families who love and care for them. We're here to help you better understand each other, communicate with more ease, and build a life that honors both difference and connection."
       ]
     ],
     "subsections": [
       {
-        "heading": "Understanding Your Experiences: Signs You Deserve Support",
+        "heading": "**Understanding Your Experiences: Signs You Deserve Support**",
         "lists": [
           {
             "items": [
@@ -643,16 +643,16 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Supporting Your Journey: Personalized Care for Individuals and Families",
+        "heading": "**Supporting Your Journey: Personalized Care for Individuals and Families**",
         "groups": [
           [
             "**If You're a Parent or Caregiver**",
-            "You may carry so many questions. You may feel tired, overwhelmed, or unsure of what comes next. That doesn't mean you're failing. It means you're trying—and that matters deeply. You don't have to do this alone. Support is not just about helping someone else—it's about being resourced and supported yourself, too. We're here to listen, guide, and walk with you, as you learn how to support your loved one—and take care of your own heart in the process."
+            "You may carry so many questions. You may feel tired, overwhelmed, or unsure of what comes next. **That doesn't mean you're failing. It means you're trying—and that matters deeply.** You don't have to do this alone. Support is not just about helping someone else—it's about being resourced and supported yourself, too. We're here to listen, guide, and walk with you, as you learn how to support your loved one—and take care of your own heart in the process."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Social Skills Training (SST): Supporting natural social growth through structured, peer-based practice",
               "Cognitive Behavioral Therapy (CBT): Helping manage anxiety, increase flexibility, and build self-regulation",
@@ -661,7 +661,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Regulation",
+            "lead": "**Lifestyle Support & Self-Regulation**",
             "items": [
               "Creating predictable routines: Fostering a sense of security through structure",
               "Sensory management tools: Developing strategies to navigate overstimulation",
@@ -681,13 +681,13 @@ export const serviceAreasSectionsEn = {
     "tagline": "Lighten the weight you carry — and make space for an easier tomorrow",
     "groups": [
       [
-        "You've been doing your best—showing up, holding it all together, trying to make things work. But when the weight of work, school, relationships, or financial pressure keeps piling up, it can start to feel like too much. Your chest tightens. Your mind races. You feel stuck—exhausted before the day even begins. Some problems don't have simple solutions. And when stress keeps building, even small tasks can feel overwhelming. If you've been wondering whether it's okay to pause and breathe—it is. Stress is a part of life, but it doesn't have to take over your life.",
+        "You've been doing your best—showing up, holding it all together, trying to make things work. But when the weight of work, school, relationships, or financial pressure keeps piling up, it can start to feel like too much. Your chest tightens. Your mind races. You feel stuck—exhausted before the day even begins. Some problems don't have simple solutions. And when stress keeps building, even small tasks can feel overwhelming. If you've been wondering whether it's okay to pause and breathe—it is. **Stress is a part of life, but it doesn't have to take over your life.**",
         "At our counseling center, we're here to help you move from just getting through the day to actually feeling grounded again—with more clarity, calm, and room to breathe."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Stress: Signals That You Need Care",
+        "heading": "**Listening to Your Stress: Signals That You Need Care**",
         "lists": [
           {
             "lead": "If you've been noticing any of the following, it may be time to seek support:",
@@ -705,15 +705,15 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Restoring Balance: Support That Brings You Back to Yourself",
+        "heading": "**Restoring Balance: Support That Brings You Back to Yourself**",
         "groups": [
           [
-            "We can't remove stress from life—but we can learn to respond to it with more awareness, steadiness, and self-compassion. Healing doesn't begin with pushing through. It begins with noticing your own needs—and meeting them with care."
+            "We can't remove stress from life—**but we can learn to respond to it with more awareness, steadiness, and self-compassion.** Healing doesn't begin with pushing through. It begins with noticing your own needs—and meeting them with care."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Identify and reframe unhelpful thought patterns. Build healthier, more grounded perspectives that ease mental pressure.",
               "Client-Centered Therapy: Explore your experiences in a supportive, judgment-free space. Feel truly heard—and find direction at your own pace.",
@@ -721,7 +721,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care",
+            "lead": "**Lifestyle & Self-Care**",
             "items": [
               "Gentle movement or regular exercise to release tension",
               "Mindfulness, deep breathing, or relaxation techniques to calm the nervous system",
@@ -743,13 +743,13 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "When someone we love is no longer with us—or when a meaningful relationship comes to an end—life can feel like it pauses in deep sadness. A quiet emptiness lingers. Regret may echo through unspoken words. Even the smallest moments can feel unbearably heavy.",
-        "Grief doesn't follow a straight line. It comes in waves, in silence, in sudden tears that catch you off guard. And sometimes, you may not even know how to begin processing it. Please know: everything you're feeling is valid. Grief is not something to fix or rush through. It's something to move through—gently, and in your own time. When the pain feels too heavy to carry alone, finding a safe, compassionate space to rest can bring comfort and strength.",
+        "Grief doesn't follow a straight line. It comes in waves, in silence, in sudden tears that catch you off guard. And sometimes, you may not even know how to begin processing it. Please know: everything you're feeling is valid. **Grief is not something to fix or rush through. It's something to move through—gently, **and in your own time. When the pain feels too heavy to carry alone, finding a safe, compassionate space to rest can bring comfort and strength.",
         "At our counseling center, we honor your experience. We're here to walk beside you through your grief—with care, without pressure, and always at your pace."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Grief Feels Too Heavy: Gentle Signs to Seek Support",
+        "heading": "**When Grief Feels Too Heavy: Gentle Signs to Seek Support**",
         "lists": [
           {
             "lead": "If any of the following resonate with you or someone you care about, counseling may help:",
@@ -767,15 +767,15 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Your Journey Through Grief: Gentle Steps Toward Healing",
+        "heading": "**Your Journey Through Grief: Gentle Steps Toward Healing**",
         "groups": [
           [
-            "Grief doesn't disappear—but it can soften. With the right support, you can learn to carry it with more peace, clarity, and self-compassion."
+            "**Grief doesn't disappear—but it can soften. **With the right support, you can learn to carry it with more peace, clarity, and self-compassion."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Gently explore and reframe difficult thoughts surrounding your loss. Learn healthier ways to cope with emotional overwhelm.",
               "Client-Centered Therapy: A warm, nonjudgmental space where your emotions are seen, heard, and supported—without pressure or expectation.",
@@ -783,7 +783,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Social Support & Self-Care",
+            "lead": "**Social Support & Self-Care**",
             "items": [
               "Connecting with Others: Talk openly with trusted friends or family. Shared stories and simple presence can be a source of comfort and connection.",
               "Gentle Care for Body and Mind: Incorporate calming routines—like mindful walking, quiet journaling, or deep breathing—that give space to your grief and help restore your inner balance."
@@ -803,13 +803,13 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "For some, nighttime brings quiet comfort. For others, it marks the beginning of restlessness. You might lie awake for hours, your mind racing while the world around you settles. Or perhaps you wake up too early, unable to fall back asleep. Even after a full night's rest, you may still feel tired, foggy, or emotionally drained.",
-        "Sleep is more than rest—it's how the body and mind repair, reset, and return to balance. When sleep becomes difficult, it isn't a sign of weakness. Often, it's your body's way of saying, \"I need care.\" That care doesn't begin with pressure. It begins with awareness, compassion, and gentle support.",
+        "**Sleep is more than rest**—it's how the body and mind repair, reset, and return to balance. When sleep becomes difficult, it isn't a sign of weakness. Often, it's your body's way of saying, \"I need care.\" That care doesn't begin with pressure. It begins with awareness, compassion, and gentle support.",
         "At our counseling center, we provide a space where your story is heard—where you can begin the journey back to deep, restorative rest."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Restlessness: Signs It's Time for Support",
+        "heading": "**Listening to Your Restlessness: Signs It's Time for Support**",
         "lists": [
           {
             "lead": "If any of the following sound familiar, it may be time to reach out:",
@@ -826,7 +826,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Gentle Steps Toward Restful Nights: Personalized Sleep Support",
+        "heading": "**Gentle Steps Toward Restful Nights: Personalized Sleep Support**",
         "groups": [
           [
             "Sleep difficulties are common—and they are treatable. Healing doesn't begin by forcing change. It begins with gently noticing what your body is trying to tell you—and learning how to respond with care."
@@ -834,14 +834,14 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "CBT-I (Cognitive Behavioral Therapy for Insomnia): Identify and shift thought patterns that interfere with sleep. Build healthier bedtime routines and reduce anxiety around sleep.",
               "Stress Management & Relaxation Training: Practice techniques like deep breathing, progressive muscle relaxation, or guided imagery to calm the nervous system and ease into rest."
             ]
           },
           {
-            "lead": "Lifestyle & Self-Care Support",
+            "lead": "**Lifestyle & Self-Care Support**",
             "items": [
               "Maintain a consistent sleep and wake schedule",
               "Limit caffeine, nicotine, and alcohol—especially in the evening",

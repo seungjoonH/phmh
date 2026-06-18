@@ -552,9 +552,9 @@ export const serviceAreasSectionsCn = {
       }
     ],
     "closing": [
-      "",
-      ""
-    ]
+    "",
+    ""
+  ]
   },
   "eatingDisorders": {
     "title": "",
@@ -612,10 +612,10 @@ export const serviceAreasSectionsCn = {
       }
     ],
     "closing": [
-      "",
-      "",
-      ""
-    ]
+    "",
+    "",
+    ""
+  ]
   },
   "asd": {
     "title": "",

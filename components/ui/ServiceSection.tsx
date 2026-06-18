@@ -9,11 +9,14 @@ import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
 import { editTextAttrs } from "@/lib/edit/attrs";
 import { isEditMode } from "@/lib/edit/env";
 import type { FlowBlock, SectionContent } from "@/lib/edit/section-flow";
+import type { ListTree } from "@/lib/edit/list-tree";
+import { normalizeListTree } from "@/lib/edit/list-tree";
 import { MarkupText } from "./MarkupText";
+import { NestedList } from "./NestedList";
 
 export type ListBlock = {
   lead?: string;
-  items: string[];
+  items: string[] | ListTree;
 };
 
 export type ContentSubsection = {
@@ -86,18 +89,7 @@ function renderLists(lists: ListBlock[], keyPrefix?: string) {
         </EditableText>
       ) : null}
       {list.items.length > 0 && (
-        <ul className="list-disc space-y-2 pl-6 marker:text-page-body">
-          {list.items.map((item, i) => (
-            <li key={i}>
-              <EditableText
-                as="span"
-                editKey={keyPrefix ? `${keyPrefix}.lists.${li}.items.${i}` : undefined}
-              >
-                {stripBulletPrefix(item)}
-              </EditableText>
-            </li>
-          ))}
-        </ul>
+        <NestedList tree={normalizeListTree(list.items, "dash")} />
       )}
     </div>
   ));
@@ -261,8 +253,8 @@ export function ServiceSection({
             <>
               {renderGroups(groups, textKeyPrefix)}
               {renderLists(lists, textKeyPrefix)}
-              {renderClosing(closing, textKeyPrefix)}
               {renderSubsections(subsections, textKeyPrefix)}
+              {renderClosing(closing, textKeyPrefix)}
             </>
           )}
 

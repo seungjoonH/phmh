@@ -3,6 +3,17 @@ import { Fragment, type ReactNode } from "react";
 
 type MarkupPart = { kind: "text" | "bold" | "italic"; value: string };
 
+function renderWithLineBreaks(value: string, keyPrefix: string): ReactNode {
+  const lines = value.split("\n");
+  if (lines.length === 1) return value;
+  return lines.map((line, i) => (
+    <Fragment key={`${keyPrefix}-${i}`}>
+      {i > 0 ? <br /> : null}
+      {line}
+    </Fragment>
+  ));
+}
+
 function tokenizeInlineMarkup(input: string): MarkupPart[] {
   const parts: MarkupPart[] = [];
   let i = 0;
@@ -53,6 +64,8 @@ export function renderInlineMarkup(text: string): ReactNode {
         </em>
       );
     }
-    return <Fragment key={index}>{part.value}</Fragment>;
+    return (
+      <Fragment key={index}>{renderWithLineBreaks(part.value, String(index))}</Fragment>
+    );
   });
 }

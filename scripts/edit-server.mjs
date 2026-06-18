@@ -10,6 +10,7 @@ import {
   patchLocaleFile,
   removeContentSectionKey,
   replaceListBlocksArray,
+  replaceListTreeArray,
   replaceNestedStringArray,
   replaceSectionFlow,
   replaceStepsArray,
@@ -258,6 +259,82 @@ function getStringArrayAtPath(obj, keyPath) {
   if (!Array.isArray(current)) return undefined;
   if (!current.every((item) => typeof item === "string")) return undefined;
   return /** @type {string[]} */ (current);
+}
+
+function getListTreeAtPath(obj, keyPath) {
+  const parts = keyPath.split(".");
+  let current = obj;
+  for (const part of parts) {
+    if (current === null || current === undefined) return undefined;
+    if (typeof current !== "object") return undefined;
+    current = /** @type {Record<string, unknown>} */ (current)[part];
+  }
+  if (!Array.isArray(current)) return undefined;
+  return current;
+}
+
+/**
+ * @param {string} file
+ * @param {string} exportName
+ * @param {string} innerPath
+ */
+async function readListTreeFromLocaleFile(file, exportName, innerPath) {
+  const root = await importLocaleModule(file, exportName);
+  const value = getListTreeAtPath(root, innerPath);
+  if (!value) {
+    throw new Error(`Key ${innerPath} is not a list array in ${file}`);
+  }
+  return value;
+}
+
+/**
+ * @param {string} keyPath
+ */
+async function readListTreeRegistry(keyPath) {
+  const target = resolveTextTarget(keyPath);
+  /** @type {Record<string, unknown[]>} */
+  const locales = {};
+  for (const id of getLocaleIds()) {
+    const { file, exportName, patchPath } = getTextLocaleFile(ROOT, id, target);
+    locales[id] = await readListTreeFromLocaleFile(file, exportName, patchPath);
+  }
+  return locales;
+}
+
+async function patchListTreeRegistry(keyPath, locales) {
+  const target = resolveTextTarget(keyPath);
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const backupDir = path.join(ROOT, ".phmh-edit-backups", timestamp);
+  /** @type {Record<string, string>} */
+  const beforePatch = {};
+  /** @type {string[]} */
+  const touchedFiles = [];
+
+  for (const id of getLocaleIds()) {
+    const nextTree = locales[id];
+    if (!Array.isArray(nextTree)) {
+      throw new Error(`Missing locale list tree: ${id}`);
+    }
+    const { file, patchPath } = getTextLocaleFile(ROOT, id, target);
+    if (!(file in beforePatch)) {
+      beforePatch[file] = fs.readFileSync(file, "utf8");
+      backupFile(file, backupDir);
+      touchedFiles.push(file);
+    }
+    const current = fs.readFileSync(file, "utf8");
+    const patched = replaceListTreeArray(current, patchPath, nextTree);
+    fs.writeFileSync(file, patched, "utf8");
+  }
+
+  const check = await runLocaleTest();
+  if (!check.ok) {
+    for (const file of touchedFiles) {
+      fs.writeFileSync(file, beforePatch[file], "utf8");
+    }
+    throw new Error(check.error ?? "Locale key check failed");
+  }
+
+  return { backupDir, files: touchedFiles };
 }
 
 /**
@@ -874,6 +951,14 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    const listTreeRegistryMatch = url.pathname.match(/^\/registry\/list-tree\/(.+)$/);
+    if (req.method === "GET" && listTreeRegistryMatch) {
+      const key = decodeURIComponent(listTreeRegistryMatch[1]);
+      const locales = await readListTreeRegistry(key);
+      sendJson(res, 200, { key, locales });
+      return;
+    }
+
     const stepsRegistryMatch = url.pathname.match(/^\/registry\/steps\/(.+)$/);
     if (req.method === "GET" && stepsRegistryMatch) {
       const key = decodeURIComponent(stepsRegistryMatch[1]);
@@ -902,6 +987,18 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       const result = await patchArrayRegistry(key, locales);
+      sendJson(res, 200, { ok: true, ...result });
+      return;
+    }
+
+    if (req.method === "POST" && url.pathname === "/patch/list-tree") {
+      const body = await readJsonBody(req);
+      const { key, locales } = body;
+      if (!key || !locales) {
+        sendJson(res, 400, { error: "key and locales required" });
+        return;
+      }
+      const result = await patchListTreeRegistry(key, locales);
       sendJson(res, 200, { ok: true, ...result });
       return;
     }

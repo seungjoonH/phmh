@@ -27,6 +27,18 @@ export type LocaleTextValues = Record<string, string>;
 
 export type LocaleStringArrays = Record<string, string[]>;
 
+export type ListTreeMarker = "dash" | "dot" | "decimal-dot" | "decimal-paren";
+
+export type ListTreeNodePayload = {
+  text: string;
+  marker: ListTreeMarker;
+  children?: ListTreeNodePayload[];
+};
+
+export type ListTreePayload = ListTreeNodePayload[];
+
+export type LocaleListTreeArrays = Record<string, ListTreePayload>;
+
 export type LocaleNestedStringArrays = Record<string, string[][]>;
 
 export type ListBlockPayload = { lead?: string; items: string[] };
@@ -65,6 +77,23 @@ export async function fetchArrayRegistry(key: string): Promise<LocaleStringArray
 
 export async function patchStringArray(key: string, locales: LocaleStringArrays) {
   return editFetch("/patch/array", {
+    method: "POST",
+    body: JSON.stringify({ key, locales }),
+  });
+}
+
+export async function fetchListTreeRegistry(
+  key: string,
+): Promise<LocaleListTreeArrays> {
+  const data = await editFetch(`/registry/list-tree/${encodeURIComponent(key)}`);
+  return data.locales as LocaleListTreeArrays;
+}
+
+export async function patchListTreeArray(
+  key: string,
+  locales: LocaleListTreeArrays,
+) {
+  return editFetch("/patch/list-tree", {
     method: "POST",
     body: JSON.stringify({ key, locales }),
   });

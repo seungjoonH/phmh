@@ -185,7 +185,7 @@ export function LongFormPage({
                             dragIndex={drag.dragIndex}
                             rowShift={drag.getRowShift(i)}
                             onDragStart={drag.beginDrag}
-                            handleClassName="absolute -left-9 inset-y-0 z-10"
+                            handleClassName="absolute -left-9 top-0 z-10"
                             fullWidth
                             busy={sectionBusy}
                             controls={

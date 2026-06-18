@@ -49,7 +49,7 @@ export function createFlowBlock(
       return {
         type: "list",
         ordered: false,
-        items: [""],
+        items: [],
         listKey: `${sectionKey}.flow.${id}.list`,
       };
     case "button":
@@ -96,5 +96,5 @@ export function draftEntryForNewFlowBlock(block: FlowBlock) {
 
 export function arrayDraftForNewFlowBlock(block: FlowBlock) {
   if (block.type !== "list") return null;
-  return Object.fromEntries(getActiveLocaleIds().map((id) => [id, [""]]));
+  return Object.fromEntries(getActiveLocaleIds().map((id) => [id, []]));
 }

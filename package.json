@@ -1,6 +1,6 @@
 {
   "name": "phmh",
-  "version": "1.0.18", 
+  "version": "1.0.19", 
   "private": true,
   "imports": {
     "#phmh/contact-form-structure": {
@@ -23,7 +23,11 @@
     "test:centers": "node scripts/check-centers.mjs",
     "test:inline-markup": "node --experimental-strip-types scripts/test-inline-markup-edit.mjs",
     "test:pending-keys": "node --experimental-strip-types scripts/test-pending-keys.mjs",
-    "test:text-edit-history": "node --experimental-strip-types scripts/test-text-edit-history.mjs"
+    "test:text-edit-history": "node --experimental-strip-types scripts/test-text-edit-history.mjs",
+    "test:edit-reorder-drag": "node --experimental-strip-types scripts/test-edit-reorder-drag.mjs",
+    "test:set-array-at-path": "node --experimental-strip-types scripts/test-set-array-at-path.mjs",
+    "test:list-tree": "node --experimental-strip-types scripts/test-list-tree.mjs",
+    "test:list-textarea-indent": "node --experimental-strip-types scripts/test-list-textarea-indent.mjs"
   },
   "dependencies": {
     "motion": "^12.38.0",

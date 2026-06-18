@@ -20,6 +20,7 @@ import { commitSectionFlowDrafts } from "@/lib/edit/commit-section-flow";
 import {
   flowBlockTextKeys,
   isFlowManagedContentKey,
+  sectionKeyFromListKey,
 } from "@/lib/edit/flow-group-key";
 import {
   commitPendingEdits,
@@ -45,6 +46,7 @@ import {
   applyArrayItemTextDraftsForLocale,
   applyDraftsForLocale,
   applyFlowDraftsForLocale,
+  applyListTreeDraftsForLocale,
   applyLongFormSectionDraftsForLocale,
   applyStepFieldDraftsForLocale,
   applyStepsDraftsForLocale,
@@ -72,6 +74,8 @@ import {
   draftEntryForNewFlowBlock,
   type CreateFlowBlockOptions,
 } from "@/lib/edit/flow-block-factory";
+import { getListTreeAtPath } from "@/lib/edit/get-list-tree";
+import type { ListTree } from "@/lib/edit/list-tree";
 import {
   ensurePrependBlocks,
   flattenSectionToFlow,
@@ -101,6 +105,7 @@ import {
   renameTherapist,
   writeImageFile,
   type ContactFormStructurePayload,
+  type LocaleListTreeArrays,
   type LocaleStepsArrays,
   type LocaleStringArrays,
   type LocaleTextValues,
@@ -296,7 +301,7 @@ type EditDraftContextValue = {
   /** 목록(list) 블록의 ordered/items 갱신 */
   updateListBlock: (
     listKey: string,
-    update: { ordered: boolean; items: string[] },
+    update: { ordered: boolean; items: ListTree },
   ) => Promise<void>;
   /** 현재 messages 트리에서 list 블록 정보 조회 */
   lookupListBlock: (listKey: string) => {
@@ -312,6 +317,9 @@ type EditDraftContextValue = {
   localeCreateBusy: boolean;
   applyArrayDraft: (arrayKey: string, locales: LocaleStringArrays) => void;
   arrayDrafts: Record<string, Partial<LocaleStringArrays>>;
+  applyListTreeDraft: (arrayKey: string, locales: LocaleListTreeArrays) => void;
+  listTreeDrafts: Record<string, Partial<LocaleListTreeArrays>>;
+  revertListTreeDraft: (arrayKey: string) => void;
   applyTherapistArrayPreview: (
     arrayKey: string,
     locales: LocaleStringArrays,
@@ -395,6 +403,11 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   const [arrayDrafts, setArrayDrafts] = useState<
     Record<string, Partial<LocaleStringArrays>>
   >({});
+  const [listTreeDrafts, setListTreeDrafts] = useState<
+    Record<string, Partial<LocaleListTreeArrays>>
+  >({});
+  const listTreeDraftsRef = useRef(listTreeDrafts);
+  listTreeDraftsRef.current = listTreeDrafts;
   const [hiddenTextKeys, setHiddenTextKeys] = useState<Record<string, true>>({});
   const [arrayBusy, setArrayBusy] = useState<string | null>(null);
   const [flowDrafts, setFlowDrafts] = useState<Record<string, FlowBlock[]>>({});
@@ -571,6 +584,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     let result = applyArrayDraftsForLocale(base.messages, base.locale, arrayDrafts, {
       skipKeys: (key) => isFlowManagedContentKey(key, flowSectionKeys),
     });
+    result = applyListTreeDraftsForLocale(result, base.locale, listTreeDrafts);
     result = applyLongFormSectionDraftsForLocale(
       result,
       base.locale,
@@ -588,6 +602,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
     base.messages,
     base.locale,
     arrayDrafts,
+    listTreeDrafts,
     longFormSectionDrafts,
     stepsDrafts,
     flowDrafts,
@@ -820,6 +835,30 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       const next = { ...prev };
       delete next[arrayKey];
       arrayDraftsRef.current = next;
+      return next;
+    });
+  }, []);
+
+  const applyListTreeDraft = useCallback(
+    (arrayKey: string, locales: LocaleListTreeArrays) => {
+      setListTreeDrafts((prev) => {
+        const next = {
+          ...prev,
+          [arrayKey]: { ...locales },
+        };
+        listTreeDraftsRef.current = next;
+        return next;
+      });
+    },
+    [],
+  );
+
+  const revertListTreeDraft = useCallback((arrayKey: string) => {
+    setListTreeDrafts((prev) => {
+      if (!prev[arrayKey]) return prev;
+      const next = { ...prev };
+      delete next[arrayKey];
+      listTreeDraftsRef.current = next;
       return next;
     });
   }, []);
@@ -1217,14 +1256,18 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         flowPrependRef.current[sectionKey] = options.prepend;
       }
       const raw = getFlowBlocksForEdit(sectionKey);
-      return hydrateFlowBlocks(raw, (key) => {
+      return hydrateFlowBlocks(
+        raw,
+        (key) => {
         const direct = drafts[key]?.[base.locale];
         if (typeof direct === "string") return direct;
         const linked = findLinkedDraft(drafts, key);
         const fromLinked = linked?.[base.locale];
         if (typeof fromLinked === "string") return fromLinked;
         return tPath(displayMessages, key);
-      });
+      },
+        (key) => getListTreeAtPath(displayMessages, key),
+      );
     },
     [getFlowBlocksForEdit, displayMessages, drafts, base.locale],
   );
@@ -1308,7 +1351,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
 
         const arrayDraft = arrayDraftForNewFlowBlock(block);
         if (arrayDraft && block.type === "list") {
-          applyArrayDraft(`${block.listKey}.items`, arrayDraft);
+          applyListTreeDraft(`${block.listKey}.items`, arrayDraft);
         }
 
         saveFlowDraft(sectionKey, next);
@@ -1316,7 +1359,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         setFlowBusy(null);
       }
     },
-    [getFlowBlocksForEdit, saveFlowDraft, setDraftEntry, applyArrayDraft],
+    [getFlowBlocksForEdit, saveFlowDraft, setDraftEntry, applyListTreeDraft],
   );
 
   const lookupListBlock = useCallback(
@@ -1327,10 +1370,8 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         return { sectionKey: fromDraft.sectionKey, block: fromDraft.block };
       }
       // 2) listKey 패턴에서 sectionKey 추출 후 메시지의 section.flow에서 찾기
-      const m =
-        /^(.+?)\.(?:lists\.\d+|flow\.[a-z0-9]+\.list)$/i.exec(listKey);
-      if (!m) return null;
-      const sectionKey = m[1];
+      const sectionKey = sectionKeyFromListKey(listKey);
+      if (!sectionKey) return null;
       const flow = getFlowBlocksForEdit(sectionKey);
       const block = flow.find(
         (b): b is Extract<FlowBlock, { type: "list" }> =>
@@ -1345,7 +1386,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
   const updateListBlock = useCallback(
     async (
       listKey: string,
-      update: { ordered: boolean; items: string[] },
+      update: { ordered: boolean; items: ListTree },
     ) => {
       const found = lookupListBlock(listKey);
       if (!found) return;
@@ -1355,7 +1396,11 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
         const current = getFlowBlocksForEdit(sectionKey);
         const next = current.map((b) => {
           if (b.type !== "list" || b.listKey !== listKey) return b;
-          return { ...b, ordered: update.ordered, items: [...update.items] };
+          return {
+            ...b,
+            ordered: update.ordered,
+            items: structuredClone(update.items),
+          };
         });
         saveFlowDraft(sectionKey, next);
       } finally {
@@ -1409,6 +1454,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       const { renamedSlugs } = await commitPendingEdits({
         drafts,
         arrayDrafts,
+        listTreeDrafts,
         stepsDrafts,
         hiddenTextKeys,
         imageDrafts,
@@ -1567,6 +1613,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       imageDeleteDrafts,
       hiddenTextKeys,
       arrayDrafts,
+      listTreeDrafts,
       stepsDrafts,
       flowDrafts,
     }),
@@ -1580,6 +1627,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       imageDeleteDrafts,
       hiddenTextKeys,
       arrayDrafts,
+      listTreeDrafts,
       stepsDrafts,
       flowDrafts,
     ],
@@ -1913,6 +1961,9 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       localeCreateBusy,
       applyArrayDraft,
       arrayDrafts,
+      applyListTreeDraft,
+      listTreeDrafts,
+      revertListTreeDraft,
       applyTherapistArrayPreview,
       removeContactFieldDrafts,
       sitePagesHiddenDraft,
@@ -1988,6 +2039,9 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       localeCreateBusy,
       applyArrayDraft,
       arrayDrafts,
+      applyListTreeDraft,
+      listTreeDrafts,
+      revertListTreeDraft,
       applyTherapistArrayPreview,
       removeContactFieldDrafts,
       sitePagesHiddenDraft,

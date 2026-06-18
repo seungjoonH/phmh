@@ -59,12 +59,10 @@ export default {
     "tel": "Tel"
   },
   "siteContact": {
-    "email": "hsj6831@gmail.com",
     "korea": {
       "address":
         "81-1, Jinsaegol-gil, Chowol-eup, Gwangju-si, Gyeonggi-do, Republic of Korea",
-      "phone": "",
-      "email": "hsj6831@gmail.com"
+      "phone": ""
     },
     "philippines": {
       "addressShort":
@@ -72,8 +70,7 @@ export default {
       "addressFull":
         "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
-      "phoneViber": "+63 952 479 1119 (Viber)",
-      "email": "hsj6831@gmail.com"
+      "phoneViber": "+63 952 479 1119 (Viber)"
     }
   },
   "footer": {

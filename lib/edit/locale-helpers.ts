@@ -1,5 +1,6 @@
 // 편집 모드 — manifest 기준 locale 레코드 헬퍼
 import type {
+  LocaleListTreeArrays,
   LocaleStepsArrays,
   LocaleStringArrays,
   LocaleTextValues,
@@ -34,6 +35,14 @@ export function isCompleteArrayRecord(
   record: Partial<LocaleStringArrays> | undefined,
   ids: string[] = getActiveLocaleIds(),
 ): record is LocaleStringArrays {
+  if (!record) return false;
+  return ids.every((id) => Array.isArray(record[id]));
+}
+
+export function isCompleteListTreeRecord(
+  record: Partial<LocaleListTreeArrays> | undefined,
+  ids: string[] = getActiveLocaleIds(),
+): record is LocaleListTreeArrays {
   if (!record) return false;
   return ids.every((id) => Array.isArray(record[id]));
 }

@@ -17,7 +17,6 @@ export type CenterContactDetails = {
 
 export type CenterContactEditKeys = {
   phone: string;
-  email: string;
   address: string;
 };
 
@@ -25,20 +24,17 @@ export function getCenterContactEditKeys(contactRef: string): CenterContactEditK
   if (contactRef === "philippines") {
     return {
       phone: "siteContact.philippines.phone",
-      email: "siteContact.philippines.email",
       address: "siteContact.philippines.addressShort",
     };
   }
   if (contactRef === "korea") {
     return {
       phone: "siteContact.korea.phone",
-      email: "siteContact.korea.email",
       address: "siteContact.korea.address",
     };
   }
   return {
     phone: `siteContact.${contactRef}.phone`,
-    email: `siteContact.${contactRef}.email`,
     address: `siteContact.${contactRef}.address`,
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-// Center 연락처 표시 — 주소·전화·이메일은 siteContact SSOT에서 파생
+// Center 연락처 표시 — 주소·전화는 locales, 이메일은 .env
 import type { CenterRecord } from "@/lib/centers/types";
 import {
   getCenterContactDetails,
@@ -28,7 +28,7 @@ export function CenterContactDetails({ center, locale, messages }: Props) {
 
   const rows = [
     { label: "TEL", value: contact.phone, editKey: contactKeys.phone },
-    { label: "EMAIL", value: contact.email, editKey: contactKeys.email },
+    { label: "EMAIL", value: contact.email, editKey: undefined },
     { label: "ADDRESS", value: contact.address, editKey: contactKeys.address },
     { label: "Parking", value: parking, editKey: centerParkingKey(center.slug) },
     ...extraInfo.map((value, index) => ({

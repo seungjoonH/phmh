@@ -1,11 +1,9 @@
 // flow 섹션 groups/lists 편집 키 판별·블록에서 textKey 수집
-import {
-  flowBulletItemEditKey,
-  type FlowBlock,
-} from "@/lib/edit/section-flow";
+import type { FlowBlock } from "@/lib/edit/section-flow";
 
 const NESTED_GROUP_CELL_KEY = /\.groups\.\d+\.\d+$/;
-const FLOW_LIST_KEY = /\.lists\.\d+(?:\.lead|\.items\.\d+)$/;
+const FLOW_LIST_KEY =
+  /\.(?:subsections\.\d+\.)?lists\.\d+(?:\.lead|\.items(?:\.\d+)?)?$/;
 const FLOW_PARAGRAPH_KEY = /\.paragraphs\.\d+$/;
 
 /** `services.sections.group.groups.1.0` 같은 groups[][] 셀 키 */
@@ -13,9 +11,26 @@ export function isNestedGroupCellKey(key: string): boolean {
   return NESTED_GROUP_CELL_KEY.test(key);
 }
 
-/** `pages.whoWeAre.lists.0.lead` · `…lists.0.items.1` */
+/** `pages.whoWeAre.lists.0.lead` · `…lists.0.items` · `…subsections.0.lists.0.items` */
 export function isFlowManagedListKey(key: string): boolean {
   return FLOW_LIST_KEY.test(key);
+}
+
+/** listKey 에서 flow 섹션 루트 키 추출 */
+export function sectionKeyFromListKey(listKey: string): string | null {
+  const flowScoped = /^(.+?)\.flow\.[a-z0-9]+\.list$/i.exec(listKey);
+  if (flowScoped) return flowScoped[1];
+
+  const subsectionList = /^(.+?)\.subsections\.\d+\.lists\.\d+$/i.exec(listKey);
+  if (subsectionList) return subsectionList[1];
+
+  const servicesSection = /^(serviceAreas|services)\.sections\.([^.]+)/.exec(listKey);
+  if (servicesSection) return `${servicesSection[1]}.sections.${servicesSection[2]}`;
+
+  const topList = /^(.+?)\.lists\.\d+$/i.exec(listKey);
+  if (topList) return topList[1];
+
+  return null;
 }
 
 /** `pages.whoWeAre.paragraphs.3` — flow 저장 시 paragraphs 배열로 이미 반영 */
@@ -66,11 +81,8 @@ export function flowBlockTextKeys(block: FlowBlock): string[] {
     case "button":
       return [block.textKey];
     case "list": {
-      const keys: string[] = [];
-      if (block.lead?.trim()) keys.push(`${block.listKey}.lead`);
-      block.items.forEach((_, i) => {
-        keys.push(flowBulletItemEditKey(block.listKey, i));
-      });
+      const keys: string[] = [`${block.listKey}.items`];
+      if (block.lead?.trim()) keys.unshift(`${block.listKey}.lead`);
       return keys;
     }
     default:

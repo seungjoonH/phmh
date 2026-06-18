@@ -1,5 +1,6 @@
 // Prose·body flow — paragraphs 배열 ↔ flow 블록
 import type { ListBlock } from "@/components/ui/ServiceSection";
+import { flattenListTreeText, normalizeListTree } from "@/lib/edit/list-tree";
 import {
   stripFlowBlockForStorage,
   type FlowBlock,
@@ -13,13 +14,13 @@ export type ProseSectionContent = SectionContent & {
 
 /** locale `lists` 배열에 넣을 블록만 — 빈 목록 placeholder 는 flow 에만 남김 */
 export function listBlocksForLocaleSave(
-  lists: { lead?: string; items: string[] }[] | undefined,
-): { lead?: string; items: string[] }[] {
-  return (lists ?? []).filter(
-    (list) =>
-      Boolean(list.lead?.trim()) ||
-      list.items.some((item) => item.trim().length > 0),
-  );
+  lists: ListBlock[] | undefined,
+): ListBlock[] {
+  return (lists ?? []).filter((list) => {
+    if (list.lead?.trim()) return true;
+    const flat = flattenListTreeText(normalizeListTree(list.items));
+    return flat.some((item) => item.trim().length > 0);
+  });
 }
 
 export function isProseStyleSectionKey(sectionKey: string): boolean {
@@ -121,10 +122,10 @@ export function flowToProseSection(flow: FlowBlock[]): ProseSectionContent {
         break;
       case "list":
         if (pendingList && pendingList.items.length === 0) {
-          pendingList.items = [...block.items];
+          pendingList.items = structuredClone(block.items);
         } else {
           flushList();
-          lists.push({ lead: block.lead, items: [...block.items] });
+          lists.push({ lead: block.lead, items: structuredClone(block.items) });
           pendingList = null;
         }
         break;

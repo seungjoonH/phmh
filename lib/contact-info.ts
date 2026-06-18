@@ -1,7 +1,6 @@
 // 연락처 표시 헬퍼 — 이메일은 env SSOT, 주소·전화는 locales siteContact.*
 import type { Messages } from "@/lib/i18n/messages";
 import {
-  siteContactEmail,
   siteContactKoreaAddress,
   siteContactKoreaEmail,
   siteContactKoreaPhone,
@@ -11,10 +10,6 @@ import {
   siteContactPhilippinesPhone,
   siteContactPhilippinesPhoneViber,
 } from "@/lib/site-contact";
-
-export function getContactEmailDisplay(messages: Messages): string {
-  return siteContactEmail(messages);
-}
 
 export function getKoreaAddress(messages: Messages): string {
   return siteContactKoreaAddress(messages);

@@ -6,6 +6,7 @@ import { useEditDraftOptional } from "@/components/edit/EditDraftProvider";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { isEditMode } from "@/lib/edit/env";
 import { proseFallbackSection, type ProseSectionContent } from "@/lib/edit/prose-flow";
+import { getListTreeAtPath } from "@/lib/edit/get-list-tree";
 import {
   flattenSectionToFlow,
   hydrateFlowBlocks,
@@ -57,8 +58,10 @@ export function EditableBodyFlow({
   const blocks =
     isEditMode() && edit
       ? edit.resolveFlowBlocks(sectionKey, section)
-      : hydrateFlowBlocks(flattenSectionToFlow(section, sectionKey), (key) =>
-          tPath(messages, key),
+      : hydrateFlowBlocks(
+          flattenSectionToFlow(section, sectionKey),
+          (key) => tPath(messages, key),
+          (key) => getListTreeAtPath(messages, key),
         );
 
   return (

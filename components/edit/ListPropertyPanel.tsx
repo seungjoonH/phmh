@@ -1,15 +1,23 @@
 "use client";
 
-// 목록(ul/ol) 통합 편집 패널 — textarea 한 줄에 -/숫자. 프리픽스로 파싱
+// 목록(ul/ol) 통합 편집 패널 — 중첩 목록 textarea 파싱·자동 포맷
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useEditDraft } from "@/components/edit/EditDraftProvider";
 import { EditSidePanel } from "@/components/edit/EditSidePanel";
-import { fetchArrayRegistry } from "@/lib/edit/client";
+import { fetchListTreeRegistry } from "@/lib/edit/client";
+import { toggleInlineMarkup } from "@/lib/edit/inline-markup-edit";
+import { indentTextareaLines, outdentTextareaLines } from "@/lib/edit/list-textarea-indent";
 import {
   formatListText,
   parseListText,
   type ParseListResult,
 } from "@/lib/edit/list-parse";
+import {
+  formatListTreeText,
+  normalizeListTree,
+  parseListTreeText,
+  type ParseListTreeResult,
+} from "@/lib/edit/list-tree";
 import {
   isTherapistArrayKey,
   parseTherapistArrayKey,
@@ -33,9 +41,12 @@ export function ListPropertyPanel() {
     selected,
     closeEditor,
     applyArrayDraft,
+    applyListTreeDraft,
     applyTherapistArrayPreview,
     arrayDrafts,
+    listTreeDrafts,
     revertArrayDraft,
+    revertListTreeDraft,
     updateListBlock,
     lookupListBlock,
     committing,
@@ -43,16 +54,18 @@ export function ListPropertyPanel() {
 
   const arrayDraftsRef = useRef(arrayDrafts);
   arrayDraftsRef.current = arrayDrafts;
+  const listTreeDraftsRef = useRef(listTreeDrafts);
+  listTreeDraftsRef.current = listTreeDrafts;
 
-  // 미리보기 콜백들은 부모 state(flowDrafts 등)에 의존해 매 렌더마다 reference가
-  // 바뀐다. useEffect deps에 직접 넣으면 무한 루프가 되므로 ref로 latest만 잡는다.
   const previewCallbacksRef = useRef({
     applyArrayDraft,
+    applyListTreeDraft,
     applyTherapistArrayPreview,
     updateListBlock,
   });
   previewCallbacksRef.current = {
     applyArrayDraft,
+    applyListTreeDraft,
     applyTherapistArrayPreview,
     updateListBlock,
   };
@@ -62,6 +75,7 @@ export function ListPropertyPanel() {
     () => (listKey ? parseTherapistArrayKey(listKey) : null),
     [listKey],
   );
+  const isFlowList = Boolean(listKey && !therapistArray);
   const localeIds = useMemo(() => getActiveLocaleIds(), []);
   const rows = useMemo(() => localeRows(localeIds), [localeIds]);
   const lookup = useMemo(
@@ -81,9 +95,9 @@ export function ListPropertyPanel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const textareaRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
+  const textsRef = useRef(texts);
+  textsRef.current = texts;
   const hydratedRef = useRef<string | null>(null);
-  // 사용자가 textarea를 실제로 건드린 적이 있는지. hydration setTexts만으로는
-  // arrayDrafts에 push하지 않아야 pending(노란점) 오인이 안 생긴다.
   const userEditedRef = useRef(false);
 
   useEffect(() => {
@@ -96,26 +110,40 @@ export function ListPropertyPanel() {
 
     const load = async () => {
       try {
-        let locales: Record<string, string[]>;
-        const pendingDraft = arrayDraftsRef.current[
-          therapistArray ? listKey : `${listKey}.items`
-        ];
-        if (pendingDraft) {
-          locales = Object.fromEntries(
-            localeIds.map((id) => [id, [...(pendingDraft[id] ?? [])]]),
-          );
-        } else if (therapistArray) {
-          const record = getTherapistBySlug(therapistArray.slug);
-          if (!record) throw new Error("상담사 데이터를 찾을 수 없습니다.");
-          locales = readTherapistArrayLocales(record, therapistArray);
+        const next: Record<string, string> = {};
+        if (therapistArray) {
+          const pendingDraft = arrayDraftsRef.current[listKey];
+          let locales: Record<string, string[]>;
+          if (pendingDraft) {
+            locales = Object.fromEntries(
+              localeIds.map((id) => [id, [...(pendingDraft[id] ?? [])]]),
+            );
+          } else {
+            const record = getTherapistBySlug(therapistArray.slug);
+            if (!record) throw new Error("상담사 데이터를 찾을 수 없습니다.");
+            locales = readTherapistArrayLocales(record, therapistArray);
+          }
+          for (const id of localeIds) {
+            next[id] = formatListText(locales[id] ?? [], initialOrdered);
+          }
         } else {
-          locales = await fetchArrayRegistry(`${listKey}.items`);
+          const itemsKey = `${listKey}.items`;
+          const pendingDraft = listTreeDraftsRef.current[itemsKey];
+          let locales: Record<string, unknown[]>;
+          if (pendingDraft) {
+            locales = Object.fromEntries(
+              localeIds.map((id) => [id, [...(pendingDraft[id] ?? [])]]),
+            );
+          } else {
+            locales = await fetchListTreeRegistry(itemsKey);
+          }
+          const defaultMarker = initialOrdered ? "decimal-dot" : "dash";
+          for (const id of localeIds) {
+            const tree = normalizeListTree(locales[id], defaultMarker);
+            next[id] = formatListTreeText(tree);
+          }
         }
         if (cancelled) return;
-        const next: Record<string, string> = {};
-        for (const id of localeIds) {
-          next[id] = formatListText(locales[id] ?? [], initialOrdered);
-        }
         setTexts(next);
         hydratedRef.current = listKey;
       } catch (err) {
@@ -138,22 +166,42 @@ export function ListPropertyPanel() {
     };
   }, []);
 
-  const parsed = useMemo<Record<string, ParseListResult>>(() => {
+  const parsedFlat = useMemo<Record<string, ParseListResult>>(() => {
     const out: Record<string, ParseListResult> = {};
+    if (isFlowList) return out;
     for (const id of Object.keys(texts)) {
       out[id] = parseListText(texts[id] ?? "");
     }
     return out;
-  }, [texts]);
+  }, [texts, isFlowList]);
+
+  const parsedTree = useMemo<Record<string, ParseListTreeResult>>(() => {
+    const out: Record<string, ParseListTreeResult> = {};
+    if (!isFlowList) return out;
+    for (const id of Object.keys(texts)) {
+      out[id] = parseListTreeText(texts[id] ?? "");
+    }
+    return out;
+  }, [texts, isFlowList]);
 
   const validationError = useMemo<string | null>(() => {
-    const ids = Object.keys(parsed);
+    if (isFlowList) {
+      for (const id of localeIds) {
+        const r = parsedTree[id];
+        if (!r?.ok) {
+          const label = resolveLocaleOption(id)?.label ?? id.toUpperCase();
+          return `[${label}] ${r?.ok === false ? r.error : "형식 오류"}`;
+        }
+      }
+      return null;
+    }
+
     let agreedOrdered: boolean | null = null;
-    for (const id of ids) {
-      const r = parsed[id];
-      if (!r.ok) {
+    for (const id of localeIds) {
+      const r = parsedFlat[id];
+      if (!r?.ok) {
         const label = resolveLocaleOption(id)?.label ?? id.toUpperCase();
-        return `[${label}] ${r.error}`;
+        return `[${label}] ${r?.ok === false ? r.error : "형식 오류"}`;
       }
       if (r.items.length === 0) continue;
       if (agreedOrdered === null) agreedOrdered = r.ordered;
@@ -162,36 +210,150 @@ export function ListPropertyPanel() {
       }
     }
     return null;
-  }, [parsed]);
+  }, [isFlowList, localeIds, parsedFlat, parsedTree]);
 
-  // 실시간 미리보기 — 사용자가 textarea를 건드린 뒤에만 push.
-  // hydration 직후의 setTexts가 트리거하는 첫 실행에서는 push하지 않아야
-  // 데이터 유실/잘못된 pending 표시를 모두 막을 수 있다.
   useEffect(() => {
     if (!listKey) return;
     if (hydratedRef.current !== listKey) return;
     if (!userEditedRef.current) return;
     if (validationError) return;
 
-    const localesArrays: Record<string, string[]> = {};
-    let ordered = initialOrdered;
-    for (const id of localeIds) {
-      const r = parsed[id];
-      localesArrays[id] = r && r.ok ? r.items : [];
-      if (r?.ok && r.items.length > 0) ordered = r.ordered;
-    }
-
     const cb = previewCallbacksRef.current;
     if (isTherapistArrayKey(listKey)) {
+      const localesArrays: Record<string, string[]> = {};
+      let ordered = initialOrdered;
+      for (const id of localeIds) {
+        const r = parsedFlat[id];
+        localesArrays[id] = r && r.ok ? r.items : [];
+        if (r?.ok && r.items.length > 0) ordered = r.ordered;
+      }
       cb.applyTherapistArrayPreview(listKey, localesArrays, ordered);
-    } else {
-      cb.applyArrayDraft(`${listKey}.items`, localesArrays);
-      void cb.updateListBlock(listKey, {
-        ordered,
-        items: localesArrays[localeIds[0]] ?? [],
-      });
+      return;
     }
-  }, [listKey, parsed, validationError, initialOrdered, localeIds]);
+
+    const treeLocales: Record<string, ReturnType<typeof normalizeListTree>> = {};
+    let ordered = initialOrdered;
+    for (const id of localeIds) {
+      const r = parsedTree[id];
+      treeLocales[id] = r && r.ok ? r.tree : [];
+      if (r?.ok && r.tree.length > 0) ordered = r.rootOrdered;
+    }
+    cb.applyListTreeDraft(`${listKey}.items`, treeLocales);
+    void cb.updateListBlock(listKey, {
+      ordered,
+      items: treeLocales[localeIds[0]] ?? [],
+    });
+  }, [
+    listKey,
+    parsedFlat,
+    parsedTree,
+    validationError,
+    initialOrdered,
+    localeIds,
+    isFlowList,
+  ]);
+
+  const handleMarkupShortcut = useCallback(
+    (
+      localeId: string,
+      wrap: "bold" | "italic",
+      e: React.KeyboardEvent<HTMLTextAreaElement>,
+    ) => {
+      const el = e.currentTarget;
+      const current = textsRef.current[localeId] ?? "";
+      const result = toggleInlineMarkup(
+        current,
+        el.selectionStart,
+        el.selectionEnd,
+        wrap,
+      );
+      e.preventDefault();
+      userEditedRef.current = true;
+      setTexts((prev) => ({ ...prev, [localeId]: result.text }));
+      requestAnimationFrame(() => {
+        const node = textareaRefs.current[localeId];
+        if (!node) return;
+        node.focus();
+        node.setSelectionRange(result.selectionStart, result.selectionEnd);
+      });
+    },
+    [],
+  );
+
+  const handleTabIndent = useCallback(
+    (localeId: string, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      const el = e.currentTarget;
+      const current = textsRef.current[localeId] ?? "";
+      const result = indentTextareaLines(
+        current,
+        el.selectionStart,
+        el.selectionEnd,
+      );
+      e.preventDefault();
+      userEditedRef.current = true;
+      setTexts((prev) => ({ ...prev, [localeId]: result.text }));
+      requestAnimationFrame(() => {
+        const node = textareaRefs.current[localeId];
+        if (!node) return;
+        node.focus();
+        node.setSelectionRange(result.selectionStart, result.selectionEnd);
+      });
+    },
+    [],
+  );
+
+  const handleTabOutdent = useCallback(
+    (localeId: string, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      const el = e.currentTarget;
+      const current = textsRef.current[localeId] ?? "";
+      const result = outdentTextareaLines(
+        current,
+        el.selectionStart,
+        el.selectionEnd,
+      );
+      e.preventDefault();
+      userEditedRef.current = true;
+      setTexts((prev) => ({ ...prev, [localeId]: result.text }));
+      requestAnimationFrame(() => {
+        const node = textareaRefs.current[localeId];
+        if (!node) return;
+        node.focus();
+        node.setSelectionRange(result.selectionStart, result.selectionEnd);
+      });
+    },
+    [],
+  );
+
+  const handleKeyDown = useCallback(
+    (localeId: string, e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Tab" && !e.metaKey && !e.altKey && !e.ctrlKey) {
+        if (e.shiftKey) handleTabOutdent(localeId, e);
+        else handleTabIndent(localeId, e);
+        return;
+      }
+      if (!e.metaKey) return;
+      if (e.key === "b") handleMarkupShortcut(localeId, "bold", e);
+      if (e.key === "i") handleMarkupShortcut(localeId, "italic", e);
+    },
+    [handleMarkupShortcut, handleTabIndent, handleTabOutdent],
+  );
+
+  const handleAutoFormat = useCallback(() => {
+    userEditedRef.current = true;
+    setTexts((prev) => {
+      const next = { ...prev };
+      for (const id of localeIds) {
+        if (isFlowList) {
+          const r = parseListTreeText(prev[id] ?? "");
+          if (r.ok) next[id] = formatListTreeText(r.tree);
+        } else {
+          const r = parseListText(prev[id] ?? "");
+          if (r.ok) next[id] = formatListText(r.items, r.ordered);
+        }
+      }
+      return next;
+    });
+  }, [isFlowList, localeIds]);
 
   const handleClose = useCallback(() => {
     closeEditor();
@@ -199,20 +361,21 @@ export function ListPropertyPanel() {
 
   const handleCancel = useCallback(async () => {
     if (!listKey) return;
-    const arrayKey = therapistArray ? listKey : `${listKey}.items`;
-    revertArrayDraft(arrayKey);
-
     if (therapistArray) {
+      revertArrayDraft(listKey);
       const record = getTherapistBySlug(therapistArray.slug);
       if (record) setTherapistRuntime(therapistArray.slug, record);
     } else {
+      const itemsKey = `${listKey}.items`;
+      revertListTreeDraft(itemsKey);
       try {
-        const locales = await fetchArrayRegistry(`${listKey}.items`);
+        const locales = await fetchListTreeRegistry(itemsKey);
         const found = lookupListBlock(listKey);
         if (found) {
+          const defaultMarker = found.block.ordered ? "decimal-dot" : "dash";
           await updateListBlock(listKey, {
             ordered: found.block.ordered ?? false,
-            items: locales[localeIds[0]] ?? [],
+            items: normalizeListTree(locales[localeIds[0]], defaultMarker),
           });
         }
       } catch {
@@ -224,6 +387,7 @@ export function ListPropertyPanel() {
     listKey,
     therapistArray,
     revertArrayDraft,
+    revertListTreeDraft,
     lookupListBlock,
     updateListBlock,
     localeIds,
@@ -266,12 +430,14 @@ export function ListPropertyPanel() {
                     textareaRefs.current[id] = node;
                   }}
                   className="input-panel w-full px-3 py-2 font-mono"
-                  rows={8}
+                  rows={12}
+                  style={{ tabSize: 2 }}
                   value={texts[id] ?? ""}
                   onChange={(e) => {
                     userEditedRef.current = true;
                     setTexts((prev) => ({ ...prev, [id]: e.target.value }));
                   }}
+                  onKeyDown={(e) => handleKeyDown(id, e)}
                 />
               </label>
             ))}
@@ -283,6 +449,14 @@ export function ListPropertyPanel() {
           <p className="mt-3 shrink-0 text-sm text-red-600">{validationError}</p>
         ) : null}
         <div className="mt-4 flex shrink-0 justify-end gap-2 border-t border-page-body/10 pt-4">
+          <button
+            type="button"
+            onClick={handleAutoFormat}
+            className="mr-auto rounded px-4 py-2 text-sm text-page-body hover:bg-page-body/10"
+            disabled={loading || committing}
+          >
+            자동 포맷
+          </button>
           <button
             type="button"
             onClick={() => void handleCancel()}

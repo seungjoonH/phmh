@@ -5,7 +5,12 @@ import {
   renumberSteps,
   type GettingStartedStep,
 } from "@/lib/edit/getting-started-step";
-import type { LocaleStringArrays, LocaleTextValues } from "@/lib/edit/client";
+import type {
+  LocaleListTreeArrays,
+  LocaleStringArrays,
+  LocaleTextValues,
+} from "@/lib/edit/client";
+import type { ListTree } from "@/lib/edit/list-tree";
 import { parseArrayItemKey } from "@/lib/edit/array-item-key";
 import { getStringArrayAtPath } from "@/lib/edit/get-message-array";
 import { getStepsAtPath } from "@/lib/edit/get-message-steps";
@@ -41,17 +46,33 @@ export function setArrayAtPath(
 ): Messages {
   const parts = keyPath.split(".");
   const clone = structuredClone(messages) as Record<string, unknown>;
-  let current: Record<string, unknown> = clone;
+  let current: Record<string, unknown> | unknown[] = clone;
   for (let i = 0; i < parts.length - 1; i++) {
     const part = parts[i];
+    const followingPart = parts[i + 1];
+    if (Array.isArray(current)) {
+      if (!isArrayIndex(part)) return messages;
+      const index = Number(part);
+      const child = cloneChildForPath(current[index], followingPart);
+      current[index] = child;
+      current = child;
+      continue;
+    }
     const next = current[part];
     if (next === null || typeof next !== "object") {
       return messages;
     }
-    current[part] = { ...(next as Record<string, unknown>) };
-    current = current[part] as Record<string, unknown>;
+    const child = cloneChildForPath(next, followingPart);
+    current[part] = child;
+    current = child;
   }
-  current[parts[parts.length - 1]] = value;
+  const leaf = parts[parts.length - 1];
+  if (Array.isArray(current)) {
+    if (!isArrayIndex(leaf)) return messages;
+    current[Number(leaf)] = value;
+  } else {
+    current[leaf] = value;
+  }
   return clone as Messages;
 }
 
@@ -216,22 +237,37 @@ export function setObjectAtPath(
 ): Messages {
   const parts = keyPath.split(".");
   const clone = structuredClone(messages) as Record<string, unknown>;
-  let current: Record<string, unknown> = clone;
+  let current: Record<string, unknown> | unknown[] = clone;
   for (let i = 0; i < parts.length - 1; i++) {
     const part = parts[i];
+    const followingPart = parts[i + 1];
+    if (Array.isArray(current)) {
+      if (!isArrayIndex(part)) return messages;
+      const index = Number(part);
+      const child = cloneChildForPath(current[index], followingPart);
+      current[index] = child;
+      current = child;
+      continue;
+    }
     const next = current[part];
     if (next === null || typeof next !== "object") {
       return messages;
     }
-    current[part] = { ...(next as Record<string, unknown>) };
-    current = current[part] as Record<string, unknown>;
+    const child = cloneChildForPath(next, followingPart);
+    current[part] = child;
+    current = child;
   }
   const leaf = parts[parts.length - 1];
-  const prev = current[leaf];
-  current[leaf] =
-    prev !== null && typeof prev === "object"
+  const mergeLeaf = (prev: unknown) =>
+    prev !== null && typeof prev === "object" && !Array.isArray(prev)
       ? { ...(prev as Record<string, unknown>), ...value }
       : value;
+  if (Array.isArray(current)) {
+    if (!isArrayIndex(leaf)) return messages;
+    current[Number(leaf)] = mergeLeaf(current[Number(leaf)]);
+  } else {
+    current[leaf] = mergeLeaf(current[leaf]);
+  }
   return clone as Messages;
 }
 
@@ -277,6 +313,60 @@ export function applyLongFormSectionDraftsForLocale(
     }
     current[leaf] = nextSections;
     result = clone as Messages;
+  }
+  return result;
+}
+
+export function setListTreeAtPath(
+  messages: Messages,
+  keyPath: string,
+  value: ListTree,
+): Messages {
+  const parts = keyPath.split(".");
+  const clone = structuredClone(messages) as Record<string, unknown>;
+  let current: Record<string, unknown> | unknown[] = clone;
+  for (let i = 0; i < parts.length - 1; i++) {
+    const part = parts[i];
+    const followingPart = parts[i + 1];
+    if (Array.isArray(current)) {
+      if (!isArrayIndex(part)) return messages;
+      const index = Number(part);
+      const child = cloneChildForPath(current[index], followingPart);
+      current[index] = child;
+      current = child;
+      continue;
+    }
+    const next = current[part];
+    if (next === null || typeof next !== "object") {
+      return messages;
+    }
+    const child = cloneChildForPath(next, followingPart);
+    current[part] = child;
+    current = child;
+  }
+  const leaf = parts[parts.length - 1];
+  if (Array.isArray(current)) {
+    if (!isArrayIndex(leaf)) return messages;
+    current[Number(leaf)] = value;
+  } else {
+    current[leaf] = value;
+  }
+  return clone as Messages;
+}
+
+export function applyListTreeDraftsForLocale(
+  base: Messages,
+  locale: string,
+  drafts: Record<string, Partial<LocaleListTreeArrays>>,
+  options?: { skipKeys?: (key: string) => boolean },
+): Messages {
+  let result = base;
+  for (const [key, entry] of Object.entries(drafts)) {
+    if (options?.skipKeys?.(key)) continue;
+    const value = entry[locale];
+    if (Array.isArray(value)) {
+      result = setListTreeAtPath(result, key, value);
+    }
   }
   return result;
 }

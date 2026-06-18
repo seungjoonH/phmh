@@ -59,11 +59,9 @@ export default {
     "tel": "전화"
   },
   "siteContact": {
-    "email": "hsj6831@gmail.com",
     "korea": {
       "address": "경기도 광주시 초월읍 진새골길 81-1",
-      "phone": "",
-      "email": "hsj6831@gmail.com"
+      "phone": ""
     },
     "philippines": {
       "addressShort":
@@ -71,8 +69,7 @@ export default {
       "addressFull":
         "McArthur Highway, Brgy. Camachiles, Skytech IT Park Building A, Mabalacat, Pampanga, 2010",
       "phone": "+63 952 479 1119",
-      "phoneViber": "+63 952 479 1119 (Viber)",
-      "email": "hsj6831@gmail.com"
+      "phoneViber": "+63 952 479 1119 (Viber)"
     }
   },
   "footer": {

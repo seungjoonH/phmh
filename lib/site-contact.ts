@@ -1,9 +1,5 @@
-// 연락처 표시 SSOT — locales siteContact.* (편집·미리보기)
+// 연락처 표시 — 주소·전화는 locales siteContact.*, 이메일은 .env (KOREA_*, PHILIPPINES_*)
 import { tPath, type Messages } from "@/lib/i18n/messages";
-
-export function siteContactEmail(messages: Messages): string {
-  return tPath(messages, "siteContact.email");
-}
 
 export function siteContactKoreaAddress(messages: Messages): string {
   return tPath(messages, "siteContact.korea.address");

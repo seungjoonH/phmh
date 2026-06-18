@@ -11,10 +11,7 @@ import {
   isTherapistEditKey,
 } from "@/lib/edit/therapist-edit-key";
 import { isCenterEditKey, parseCenterImagesKey } from "@/lib/edit/center-edit-key";
-import {
-  flowBulletItemEditKey,
-  type FlowBlock,
-} from "@/lib/edit/section-flow";
+import type { FlowBlock } from "@/lib/edit/section-flow";
 import { tPath, type Messages } from "@/lib/i18n/messages";
 
 export type PendingCheckContext = {
@@ -27,6 +24,7 @@ export type PendingCheckContext = {
   imageDeleteDrafts?: Record<string, true>;
   hiddenTextKeys: Record<string, true>;
   arrayDrafts?: Record<string, unknown>;
+  listTreeDrafts?: Record<string, unknown>;
   stepsDrafts?: Record<string, unknown>;
   flowDrafts?: Record<string, FlowBlock[]>;
 };
@@ -115,6 +113,10 @@ export function isEditKeyPending(key: string, ctx: PendingCheckContext): boolean
     return true;
   }
 
+  if (key.endsWith(".items") && ctx.listTreeDrafts?.[key]) {
+    return true;
+  }
+
   return textValueDiffers(ctx.committedMessages, ctx.displayMessages, key);
 }
 
@@ -130,9 +132,7 @@ function collectFlowTextKeys(flow: FlowBlock[]): string[] {
       keys.push(block.textKey);
     }
     if (block.type === "list") {
-      block.items.forEach((_, i) => {
-        keys.push(flowBulletItemEditKey(block.listKey, i));
-      });
+      keys.push(`${block.listKey}.items`);
     }
     if (block.type === "img") {
       keys.push(block.editKey);
@@ -210,6 +210,10 @@ export function countStructuralDrafts(ctx: PendingCheckContext): number {
       return parsed?.arrayKey === arrayKey && isEditKeyPending(k, ctx);
     });
     if (!anyItemDirty) count++;
+  }
+
+  for (const _arrayKey of Object.keys(ctx.listTreeDrafts ?? {})) {
+    count++;
   }
 
   for (const sectionKey of Object.keys(ctx.flowDrafts ?? {})) {

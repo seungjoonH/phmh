@@ -461,7 +461,12 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "**Creating Harmony Together: Gentle Paths to Relationship Healing**\n\nRelationships are not defined by their struggles. With support, understanding, and hope, couples and families can rediscover connection, strengthen bonds, and move forward together with greater confidence and care.",
+        "heading": "**Creating Harmony Together: Gentle Paths to Relationship Healing**",
+        "groups": [
+          [
+            "Relationships are not defined by their struggles. With support, understanding, and hope, couples and families can rediscover connection, strengthen bonds, and move forward together with greater confidence and care."
+          ]
+        ],
         "lists": [
           {
             "lead": "**Psychotherapy & Counseling**",
@@ -644,12 +649,6 @@ export const serviceAreasSectionsEn = {
       },
       {
         "heading": "**Supporting Your Journey: Personalized Care for Individuals and Families**",
-        "groups": [
-          [
-            "**If You're a Parent or Caregiver**",
-            "You may carry so many questions. You may feel tired, overwhelmed, or unsure of what comes next. **That doesn't mean you're failing. It means you're trying—and that matters deeply.** You don't have to do this alone. Support is not just about helping someone else—it's about being resourced and supported yourself, too. We're here to listen, guide, and walk with you, as you learn how to support your loved one—and take care of your own heart in the process."
-          ]
-        ],
         "lists": [
           {
             "lead": "**Psychotherapy & Counseling**",
@@ -668,6 +667,14 @@ export const serviceAreasSectionsEn = {
               "Emotion regulation & coping skills: Teaching children and adults to recognize and respond to emotional cues with more ease"
             ]
           }
+        ]
+      },
+      {
+        "heading": "**If You're a Parent or Caregiver**",
+        "groups": [
+          [
+            "You may carry so many questions. You may feel tired, overwhelmed, or unsure of what comes next. **That doesn't mean you're failing. It means you're trying—and that matters deeply.** You don't have to do this alone. Support is not just about helping someone else—it's about being resourced and supported yourself, too. We're here to listen, guide, and walk with you, as you learn how to support your loved one—and take care of your own heart in the process."
+          ]
         ]
       }
     ],

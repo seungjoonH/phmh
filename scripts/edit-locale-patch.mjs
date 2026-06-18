@@ -671,6 +671,68 @@ export function replaceListBlocksArray(source, keyPath, lists) {
 }
 
 /**
+ * @param {{ text: string, marker: string, children?: unknown[] }} node
+ * @param {number} indent
+ */
+function listTreeNodeToJs(node, indent) {
+  const pad = " ".repeat(indent);
+  const childPad = " ".repeat(indent + 2);
+  const lines = [
+    `${pad}{`,
+    `${childPad}text: "${escapeJsString(node.text)}",`,
+    `${childPad}marker: "${escapeJsString(node.marker)}"`,
+  ];
+  if (node.children?.length) {
+    lines.push(`${childPad}children: ${listTreeToJs(node.children, indent + 2)}`);
+  }
+  lines.push(`${pad}}`);
+  return lines.join("\n");
+}
+
+/**
+ * @param {unknown[]} nodes
+ * @param {number} [indent]
+ */
+function listTreeToJs(nodes, indent = 4) {
+  if (!nodes?.length) return "[]";
+  const body = nodes.map((node) => listTreeNodeToJs(node, indent)).join(",\n");
+  return `[\n${body}\n${" ".repeat(indent - 2)}]`;
+}
+
+/**
+ * 목록 트리 배열 전체 교체 (legacy string[] 도 트리 노드 배열로 교체)
+ * @param {string} source
+ * @param {string} keyPath
+ * @param {unknown[]} nodes
+ */
+export function replaceListTreeArray(source, keyPath, nodes) {
+  const parts = keyPath.split(".");
+  const arrayKey = parts[parts.length - 1];
+  const parentKeys = parts.slice(0, -1);
+  const scopeStart = parentKeys.length ? resolveScopeStart(source, parentKeys) : 0;
+  const bracketIndex = findTopLevelArrayKeyBracketIndex(source, parentKeys, arrayKey);
+  if (bracketIndex === null) {
+    throw new Error(`Array key not found: ${arrayKey} at ${keyPath}`);
+  }
+  let depth = 0;
+  let endBracket = bracketIndex;
+  for (let i = bracketIndex; i < source.length; i++) {
+    const ch = source[i];
+    if (ch === "[") depth += 1;
+    else if (ch === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        endBracket = i;
+        break;
+      }
+    }
+  }
+
+  const replacement = listTreeToJs(nodes);
+  return `${source.slice(0, bracketIndex)}${replacement}${source.slice(endBracket + 1)}`;
+}
+
+/**
  * @param {{ number: string, title: string, description: string }} step
  */
 function stepObjectToJs(step) {

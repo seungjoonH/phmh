@@ -1,5 +1,7 @@
 // 서비스 섹션 본문 — 통합 flow 블록 직렬화·역직렬화
 import type { ContentSubsection, ListBlock } from "@/components/ui/ServiceSection";
+import type { ListTree } from "@/lib/edit/list-tree";
+import { normalizeListTree } from "@/lib/edit/list-tree";
 import { paragraphsToFlow } from "@/lib/edit/prose-flow";
 
 export type FlowBlockInsertType =
@@ -17,7 +19,7 @@ export type FlowBlock =
   | { type: "sectionTitle"; text: string; textKey: string }
   /** ServiceSection prepend 전용 — locale `*.tagline` (flow 배열에는 저장하지 않음) */
   | { type: "tagline"; text: string; textKey: string }
-  | { type: "list"; ordered: boolean; lead?: string; items: string[]; listKey: string }
+  | { type: "list"; ordered: boolean; lead?: string; items: ListTree; listKey: string }
   | { type: "hr" }
   | { type: "button"; text: string; textKey: string }
   | { type: "img"; editKey: string; src: string; alt?: string };
@@ -56,7 +58,7 @@ function flattenLists(lists: ListBlock[], keyPrefix: string): FlowBlock[] {
       blocks.push({
         type: "list",
         ordered: false,
-        items: [...list.items],
+        items: normalizeListTree(list.items, "dash"),
         listKey,
       });
     }
@@ -68,6 +70,7 @@ function flattenSubsections(
   subsections: ContentSubsection[],
   keyPrefix: string,
 ): FlowBlock[] {
+  if (!Array.isArray(subsections)) return [];
   const blocks: FlowBlock[] = [];
   subsections.forEach((sub, si) => {
     const subPrefix = `${keyPrefix}.subsections.${si}`;
@@ -129,7 +132,10 @@ function normalizeStoredFlowBlock(
         type: "list",
         ordered: Boolean(block.ordered),
         lead: block.lead,
-        items: "items" in block && block.items?.length ? [...block.items] : [""],
+        items:
+          "items" in block && block.items?.length
+            ? normalizeListTree(block.items, block.ordered ? "decimal-dot" : "dash")
+            : [],
         listKey: block.listKey,
       };
     case "bullets":
@@ -137,7 +143,10 @@ function normalizeStoredFlowBlock(
         type: "list",
         ordered: false,
         lead: block.lead,
-        items: "items" in block && block.items?.length ? [...block.items] : [""],
+        items:
+          "items" in block && block.items?.length
+            ? normalizeListTree(block.items, "dash")
+            : [],
         listKey: block.listKey,
       };
     case "button":
@@ -196,6 +205,8 @@ export function flattenSectionToFlow(
 
   blocks.push(...flattenLists(section.lists ?? [], keyPrefix));
 
+  blocks.push(...flattenSubsections(section.subsections ?? [], keyPrefix));
+
   (section.closing ?? []).forEach((text, i) => {
     blocks.push({
       type: "p",
@@ -204,14 +215,12 @@ export function flattenSectionToFlow(
     });
   });
 
-  blocks.push(...flattenSubsections(section.subsections ?? [], keyPrefix));
-
   return blocks;
 }
 
 function cloneFlowBlock(block: FlowBlock): FlowBlock {
   if (block.type === "list") {
-    return { ...block, items: [...block.items] };
+    return { ...block, items: structuredClone(block.items) };
   }
   return { ...block };
 }
@@ -339,10 +348,10 @@ export function flowToSectionContent(flow: FlowBlock[]): SectionContent {
       case "list": {
         flushParagraphs();
         if (pendingList && pendingList.items.length === 0) {
-          pendingList.items = [...block.items];
+          pendingList.items = structuredClone(block.items);
         } else {
           flushList();
-          lists.push({ lead: block.lead, items: [...block.items] });
+          lists.push({ lead: block.lead, items: structuredClone(block.items) });
           pendingList = null;
         }
         break;
@@ -379,7 +388,7 @@ export function flowBulletItemEditKey(listKey: string, itemIndex: number): strin
 export function hydrateFlowBlocks(
   blocks: FlowBlock[],
   readText: (key: string) => string,
-  readArray?: (key: string) => string[] | undefined,
+  readListTree?: (key: string) => ListTree | undefined,
 ): FlowBlock[] {
   return blocks.map((block) => {
     if (
@@ -391,16 +400,16 @@ export function hydrateFlowBlocks(
       return { ...block, text: readText(block.textKey) };
     }
     if (block.type === "list") {
-      const liveItems = readArray?.(`${block.listKey}.items`);
-      if (liveItems && liveItems.length > 0) {
-        return { ...block, items: [...liveItems] };
+      const liveTree = readListTree?.(`${block.listKey}.items`);
+      if (liveTree && liveTree.length > 0) {
+        return { ...block, items: structuredClone(liveTree) };
       }
       return {
         ...block,
-        items: block.items.map((item, i) => {
-          const live = readText(flowBulletItemEditKey(block.listKey, i));
-          return live !== "" ? live : item;
-        }),
+        items: normalizeListTree(
+          block.items,
+          block.ordered ? "decimal-dot" : "dash",
+        ),
       };
     }
     if (block.type === "button") {

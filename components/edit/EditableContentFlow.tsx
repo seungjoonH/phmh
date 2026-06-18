@@ -23,6 +23,8 @@ import { flowImagePublicPath } from "@/lib/edit/image-registry";
 import { useEditText } from "@/lib/edit/use-edit-text";
 import { isImageKeyHidden } from "@/lib/image-hidden";
 import { MarkupText } from "@/components/ui/MarkupText";
+import { NestedList } from "@/components/ui/NestedList";
+import { normalizeListTree } from "@/lib/edit/list-tree";
 
 type Props = {
   sectionKey: string;
@@ -109,30 +111,25 @@ function FlowTaglineBlock({ block }: { block: Extract<FlowBlock, { type: "taglin
 }
 
 function FlowListBlock({ block }: { block: Extract<FlowBlock, { type: "list" }> }) {
-  const items = block.items.filter((item) => item.trim() !== "");
-  const isEmpty = items.length === 0;
+  const tree = normalizeListTree(
+    block.items,
+    block.ordered ? "decimal-dot" : "dash",
+  );
+  const isEmpty = tree.length === 0 || tree.every((n) => n.text.trim() === "");
   const attrs = editListAttrs(block.listKey, { longPress: !isEmpty });
-  const Tag = block.ordered ? "ol" : "ul";
-  const listStyle = block.ordered
-    ? "list-decimal space-y-2 pl-6 marker:text-page-body"
-    : "list-disc space-y-2 pl-6 marker:text-page-body";
   return (
     <div {...attrs} className="cursor-pointer rounded-sm">
-      <Tag className={`${listStyle} w-fit max-w-full`}>
-        {isEmpty ? (
+      {isEmpty ? (
+        <ul className="list-disc space-y-2 pl-6 marker:text-page-body">
           <li>
             <span className="inline-flex h-7 min-w-10 items-center justify-center rounded border border-dashed border-page-body/35 px-2 text-sm leading-none text-page-body/50">
               +
             </span>
           </li>
-        ) : (
-          items.map((item, i) => (
-            <li key={i}>
-              <MarkupText as="span">{item.replace(/^([•\-–]|\d+\.)\s*/, "")}</MarkupText>
-            </li>
-          ))
-        )}
-      </Tag>
+        </ul>
+      ) : (
+        <NestedList tree={tree} />
+      )}
     </div>
   );
 }
@@ -266,20 +263,11 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
         </p>
       );
     case "list": {
-      const items = block.items.filter((item) => item.trim() !== "");
-      const Tag = block.ordered ? "ol" : "ul";
-      const listStyle = block.ordered
-        ? "list-decimal space-y-2 pl-6 marker:text-page-body"
-        : "list-disc space-y-2 pl-6 marker:text-page-body";
-      return (
-        <Tag className={`${listStyle} w-fit max-w-full`}>
-          {items.map((item, i) => (
-            <li key={i}>
-              <MarkupText as="span">{item.replace(/^([•\-–]|\d+\.)\s*/, "")}</MarkupText>
-            </li>
-          ))}
-        </Tag>
+      const tree = normalizeListTree(
+        block.items,
+        block.ordered ? "decimal-dot" : "dash",
       );
+      return <NestedList tree={tree} />;
     }
     case "hr":
       return (

@@ -15,6 +15,7 @@ import {
   patchContactFormStructure,
   patchCenter,
   patchLocaleManifest,
+  patchListTreeArray,
   patchStringArray,
   patchText,
   patchTherapist,
@@ -24,6 +25,7 @@ import {
   restoreTherapistDefaultPortrait,
   setImageHidden,
   writeImageFile,
+  type LocaleListTreeArrays,
   type LocaleStepsArrays,
   type LocaleStringArrays,
   type LocaleTextValues,
@@ -70,6 +72,7 @@ import type { LocaleManifest } from "@/lib/site-locales";
 export type PendingCommitInput = {
   drafts: Record<string, LocaleTextValues>;
   arrayDrafts: Record<string, Partial<LocaleStringArrays>>;
+  listTreeDrafts: Record<string, Partial<LocaleListTreeArrays>>;
   stepsDrafts: Record<string, Partial<LocaleStepsArrays>>;
   hiddenTextKeys: Record<string, true>;
   imageDrafts: Record<string, ImageDraft>;
@@ -265,6 +268,17 @@ export async function commitPendingEdits(
     }
     if (isFlowManagedContentKey(key, flowSectionKeys)) continue;
     await patchStringArray(key, locales);
+  }
+
+  const mergedListTreeDrafts: Record<string, LocaleListTreeArrays> = {};
+  for (const [key, partial] of Object.entries(input.listTreeDrafts ?? {})) {
+    if (!partial || Object.keys(partial).length === 0) continue;
+    const complete = getActiveLocaleIds().every((id) => Array.isArray(partial[id]));
+    if (!complete) continue;
+    mergedListTreeDrafts[key] = partial as LocaleListTreeArrays;
+  }
+  for (const [key, locales] of Object.entries(mergedListTreeDrafts)) {
+    await patchListTreeArray(key, locales);
   }
 
   await commitStepsArrayDrafts(input.stepsDrafts, textDrafts);

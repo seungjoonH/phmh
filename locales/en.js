@@ -283,7 +283,7 @@ export default {
       "hoursTitle": "Opening Hours",
       "hoursWeekday": "Mon - Fri: 10:00 am – 7:00 pm",
       "hoursWeekend": "Saturday & Sunday: Office closed",
-      "virtualNote": "Virtual sessions are available outside of office hours"
+      "virtualNote": "Virtual sessions are available"
     }
   }
 };

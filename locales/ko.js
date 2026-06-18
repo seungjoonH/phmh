@@ -283,7 +283,7 @@ export default {
       "hoursTitle": "운영 시간",
       "hoursWeekday": "월 - 금: 오전 10:00 – 오후 7:00",
       "hoursWeekend": "토요일 및 일요일: 휴무",
-      "virtualNote": "진료 시간 외 화상 상담 가능"
+      "virtualNote": "화상 상담 가능"
     }
   }
 };

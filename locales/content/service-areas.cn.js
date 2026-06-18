@@ -129,11 +129,11 @@ export const serviceAreasSectionsCn = {
       }
     ],
     "closing": [
-      "",
-      "",
-      "",
-      ""
-    ]
+    "",
+    "",
+    "",
+    ""
+  ]
   },
   "anxietyPanic": {
     "title": "",
@@ -308,10 +308,10 @@ export const serviceAreasSectionsCn = {
       }
     ],
     "closing": [
-      "",
-      "",
-      ""
-    ]
+    "",
+    "",
+    ""
+  ]
   },
   "bipolar": {
     "title": "",
@@ -367,9 +367,9 @@ export const serviceAreasSectionsCn = {
       }
     ],
     "closing": [
-      "",
-      ""
-    ]
+    "",
+    ""
+  ]
   },
   "adhd": {
     "title": "",

@@ -275,7 +275,7 @@ export default {
       "hoursTitle": "営業時間",
       "hoursWeekday": "月〜金：午前10:00〜午後7:00",
       "hoursWeekend": "土・日：休業",
-      "virtualNote": "営業時間外もオンラインセッション対応可"
+      "virtualNote": "バーチャルセッションが利用可能です"
     }
   }
 };

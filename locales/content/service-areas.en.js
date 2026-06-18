@@ -5,7 +5,7 @@ export const serviceAreasSectionsEn = {
     "tagline": "You Are Not Alone",
     "groups": [
       [
-        "Depression is more than just feeling sad. It can feel like a heavy fog that settles over everything—making even the simplest tasks feel overwhelming. You might be tired all the time, yet unable to rest. Things you once enjoyed may no longer bring you joy. You may feel numb, hopeless, or quietly overwhelmed without always knowing why. And still, you keep going. You try to hold it together, even when it feels like you're falling apart inside."
+        "**Depression is more than just feeling sad. **It can feel like a heavy fog that settles over everything—making even the simplest tasks feel overwhelming. You might be tired all the time, yet unable to rest. Things you once enjoyed may no longer bring you joy. You may feel numb, hopeless, or quietly overwhelmed without always knowing why. And still, you keep going. You try to hold it together, even when it feels like you're falling apart inside."
       ],
       [
         "If this sounds familiar, please know: this is not your fault. You are not weak. Depression is not a flaw in your character—it's a signal that your heart and mind are asking for care.",
@@ -14,7 +14,7 @@ export const serviceAreasSectionsEn = {
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Feelings: When to Seek Support for Depression",
+        "heading": "**Listening to Your Feelings: When to Seek Support for Depression**",
         "lists": [
           {
             "lead": "If you've experienced some of the following for more than two weeks, it may be time to seek support:",
@@ -34,15 +34,15 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Rediscovering Your Strength: Your Path to Emotional Healing (Treatment & Support)",
+        "heading": "** Rediscovering Your Strength: Your Path to Emotional Healing (Treatment & Support)**",
         "groups": [
           [
-            "Depression is highly treatable. While there's no single path to recovery, there are many effective ways to begin healing and reconnecting with life."
+            "**Depression is highly treatable. **While there's no single path to recovery, there are many effective ways to begin healing and reconnecting with life."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Identify unhelpful thought patterns and develop more balanced, supportive ways of thinking.",
               "Interpersonal Therapy (IPT): Explore how relationship struggles might impact your mood and learn tools for building healthier connections.",
@@ -52,7 +52,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "**Lifestyle Support & Self-Care**",
             "items": [
               "Gentle physical movement to boost energy and support mood",
               "A balanced, nourishing diet to care for both body and mind",
@@ -74,14 +74,14 @@ export const serviceAreasSectionsEn = {
     "tagline": "You Are Not Defined by What Happened to You — You Deserve to Feel Safe Again",
     "groups": [
       [
-        "Some memories don't fade with time. They show up uninvited—during a quiet conversation, on a crowded street, or when you're just trying to fall asleep. Sometimes fear appears out of nowhere. Other times, it feels like you're stuck in a moment that's long since passed, unable to fully return to the present.",
-        "But what happened to you is just one part of your story—it doesn't define who you are. Trauma is never your fault, and you don't have to carry it forever. Even if healing feels out of reach right now, you still have the strength to reclaim your life—to feel safe again, to reconnect with yourself, and to find peace.",
+        "**Some memories don't fade with time. **They show up uninvited—during a quiet conversation, on a crowded street, or when you're just trying to fall asleep. Sometimes fear appears out of nowhere. Other times, it feels like you're stuck in a moment that's long since passed, unable to fully return to the present.",
+        "But what happened to you is just one part of your story—it doesn't define who you are. Trauma is never your fault, and you don't have to carry it forever. Even if healing feels out of reach right now, **you still have the strength to reclaim your life**—to feel safe again, to reconnect with yourself, and to find peace.",
         "Healing takes time, and it doesn't have to happen alone. At our counseling center, we offer a safe and supportive space where you can begin to heal—gently, and at your own pace."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Your Heart Feels Heavy: Recognizing the Need for Care",
+        "heading": "**When Your Heart Feels Heavy: Recognizing the Need for Care**",
         "lists": [
           {
             "lead": "Trauma can show up in many different ways. If any of the following feel familiar, professional support may help:",
@@ -98,15 +98,15 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Reclaiming Your Life: A Gentle Path to Trauma Recovery",
+        "heading": "**Reclaiming Your Life: A Gentle Path to Trauma Recovery**",
         "groups": [
           [
-            "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
+            "**You're not meant to carry trauma alone.** With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
           ]
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Identify unhelpful thoughts and develop healthier coping strategies.",
               "Exposure Therapy: Safely revisit trauma-related memories in a controlled environment to reduce fear and avoidance.",
@@ -118,7 +118,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "**Lifestyle Support & Self-Care**",
             "items": [
               "Practice mindfulness, deep breathing, or grounding exercises to soothe your body and mind",
               "Incorporate regular movement—such as walking or yoga—to help release tension",
@@ -129,11 +129,11 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not broken. The pain you carry is real—but it is not all of who you are. Healing doesn't mean forgetting. It means feeling safe again, finding peace in the present, and allowing hope to grow.",
-      "You don't have to rush. You don't have to go through it alone. You get to choose how healing looks for you. And we're here to walk that path with you—with steadiness, care, and respect.",
-      "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
-    ]
+    "**Your First Step Toward Healing**",
+    "You are not broken. The pain you carry is real—but it is not all of who you are. **Healing doesn't mean forgetting.** It means feeling safe again, finding peace in the present, and allowing hope to grow.",
+    "You don't have to rush. You don't have to go through it alone. You get to choose how healing looks for you. And we're here to walk that path with you—with steadiness, care, and respect.",
+    "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
+  ]
   },
   "anxietyPanic": {
     "title": "Anxiety Panic Attacks",
@@ -141,13 +141,13 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "Sometimes, panic strikes without warning. Your heart races. Your chest tightens. It feels like you can't breathe—as if something terrible is about to happen, or like you're losing control. In those moments, your entire body goes on high alert, even when there's no clear threat.",
-        "It's not just frightening—it's exhausting. And when it happens more than once, you might start avoiding places, people, or even everyday situations, fearing that another attack could happen at any moment. But panic doesn't have to control your life. These responses are not your fault—they're your nervous system's way of signaling that it needs care. The good news is, that care is possible.",
+        "It's not just frightening—it's exhausting. And when it happens more than once, you might start avoiding places, people, or even everyday situations, fearing that another attack could happen at any moment. But panic doesn't have to control your life. **These responses are not your fault—they're your nervous system's way of signaling that it needs care.** The good news is, that care is possible.",
         "At our counseling center, we help you gently understand what your mind and body are trying to tell you. Together, we'll explore ways to calm the fear, rebuild a sense of safety, and return to a life that feels more steady and manageable—at your own pace."
       ]
     ],
     "subsections": [
       {
-        "heading": "When Panic Feels Overwhelming (Signs You Might Need Support)",
+        "heading": "**When Panic Feels Overwhelming (Signs You Might Need Support)**",
         "lists": [
           {
             "items": [
@@ -165,7 +165,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Rediscovering Inner Peace: Your Path Toward Calm",
+        "heading": "**Rediscovering Inner Peace: Your Path Toward Calm**",
         "groups": [
           [
             "Panic attacks can feel intense—but they are also highly treatable. With the right tools and guidance, you can interrupt the cycle of fear, better understand your anxiety, and build long-lasting confidence in yourself."
@@ -173,7 +173,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Learn to recognize and reshape the thought patterns that trigger panic and develop healthier responses.",
               "Exposure Therapy: Gradually and safely face feared situations, helping you reduce avoidance and build resilience.",
@@ -182,7 +182,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle Support & Everyday Care",
+            "lead": "**Lifestyle Support & Everyday Care**",
             "items": [
               "Breathing & Relaxation Practices: Techniques like deep breathing, mindfulness, or yoga to calm your body and mind.",
               "Movement & Nourishment: Regular exercise and a balanced diet to support emotional and physical regulation.",
@@ -203,13 +203,13 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "There may be days when everything feels unbearably heavy. When waking up feels like a battle, and just getting through the day takes all the strength you have. The pain may be loud or silent, constant or unpredictable. It may feel like you've tried everything, and nothing has helped. Like the world is moving on—while you remain stuck in the same place, hurting.",
-        "If this is where you are right now, please know: You are not weak. You are not broken. And you are not alone. These thoughts are not shameful. They are signals—messages from a part of you that is overwhelmed, exhausted, and longing for care. And that part of you deserves to be seen, heard, and held with compassion.",
+        "If this is where you are right now, please know: **You are not weak. You are not broken. And you are not alone. **These thoughts are not shameful. They are signals—messages from a part of you that is overwhelmed, exhausted, and longing for care. And that part of you deserves to be seen, heard, and held with compassion.",
         "At our counseling center, we offer a space that is gentle, safe, and pressure-free. A place where your pain isn't rushed or minimized—but honored, respected, and understood. We'll sit with you—right where you are—and help you begin to breathe again."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Pain: Recognizing When It's Time to Reach Out",
+        "heading": "**Listening to Your Pain: Recognizing When It's Time to Reach Out**",
         "lists": [
           {
             "lead": "If any of these experiences sound familiar, it may be time to ask for help:",
@@ -227,7 +227,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Finding Light Again: Gentle Guidance Toward Hope and Healing",
+        "heading": "**Finding Light Again: Gentle Guidance Toward Hope and Healing**",
         "groups": [
           [
             "There is no one right way to heal. But there is a way forward—and you don't have to find it alone."
@@ -235,7 +235,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Gently explore and reframe painful thoughts, and rediscover moments of hope and meaning.",
               "Client-Centered Therapy: A compassionate space where your voice matters, and healing unfolds at your own pace.",
@@ -258,13 +258,13 @@ export const serviceAreasSectionsEn = {
       [
         "Each of us carries a story that cannot be told in just one language, place, or tradition. Your cultural identity isn't defined solely by your birthplace or nationality—it's shaped by the people you've known, the places you've lived, the values you hold, and the experiences that have shaped your heart.",
         "Sometimes, living between cultures can feel disorienting. You may find yourself caught between expectations—never fully belonging here or there. At times, it might feel like you're standing in two worlds, yet at home in neither.",
-        "These feelings aren't signs of weakness. They're part of a meaningful journey—one that leads to deeper self-understanding and the creation of an identity that is fully, authentically yours. Your multicultural experiences aren't something to overcome—they're something to explore, integrate, and embrace.",
+        "**These feelings aren't signs of weakness.** They're part of a meaningful journey—one that leads to deeper self-understanding and the creation of an identity that is fully, authentically yours. Your multicultural experiences aren't something to overcome—they're something to explore, integrate, and embrace.",
         "At our counseling center, we offer a warm, respectful space to support that exploration. We're here to help you reconnect with yourself and build a life that feels grounded, confident, and true to who you are."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Yourself: Signs Cultural Identity Issues Need Support",
+        "heading": "**Listening to Yourself: Signs Cultural Identity Issues Need Support**",
         "lists": [
           {
             "lead": "If any of the following feel familiar, counseling may help:",
@@ -281,7 +281,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Embracing Your Identity: Empowering Cultural Healing",
+        "heading": "**Embracing Your Identity: Empowering Cultural Healing**",
         "groups": [
           [
             "Counseling is not about choosing one part of you over another—it's about learning to bring all of your experiences into harmony, with gentleness and care."
@@ -289,7 +289,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Identity Exploration & Integration: Explore your cultural experiences and values to develop a more grounded and secure sense of self.",
               "Culturally Responsive Counseling: Learn how to navigate different cultural spaces while honoring your individuality.",
@@ -297,7 +297,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Social Support & Self-Care",
+            "lead": "**Social Support & Self-Care**",
             "items": [
               "Embracing Cultural Strengths: Recognize how your unique cultural background can be a source of strength, perspective, and pride.",
               "Self-Acceptance & Self-Esteem: Practice affirming your identity, respecting yourself, and finding confidence in your uniqueness.",
@@ -308,10 +308,10 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Wholeness**",
-      "Your identity is not a problem to be solved. It is a story still unfolding—rich in complexity, shaped by experience, and full of possibility. Even if the path feels uncertain now, you have the ability to define what belonging means to you. You don't have to choose between cultures—you can choose to embrace your whole self.",
-      "We're here to walk beside you as you learn to live more freely, more fully, and more in alignment with who you truly are."
-    ]
+    "**Your First Step Toward Wholeness**",
+    "Your identity is not a problem to be solved. It is a story still unfolding—rich in complexity, shaped by experience, and full of possibility. Even if the path feels uncertain now, you have the ability to define what belonging means to you. **You don't have to choose between cultures—you can choose to embrace your whole self.**",
+    "We're here to walk beside you as you learn to live more freely, more fully, and more in alignment with who you truly are."
+  ]
   },
   "bipolar": {
     "title": "Bipolar Disorder",
@@ -319,13 +319,13 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "Some days, you may feel unstoppable—full of energy, ideas, and possibility. Other days, even getting out of bed can feel like climbing a mountain. Your emotions might swing between hope and hopelessness, energy and exhaustion—sometimes without warning—leaving you disoriented and out of sync with yourself.",
-        "But none of this is your fault. Bipolar disorder is not a reflection of who you are—it's a condition that affects how your brain processes mood and energy. Most importantly, it is treatable. Even when your emotions feel like they're moving faster than you can keep up, you are not powerless. With the right support, you can learn to recognize your patterns, build tools for stability, and move through emotional waves with more ease.",
+        "But none of this is your fault. **Bipolar disorder is not a reflection of who you are—it's a condition that affects how your brain processes mood and energy. **Most importantly, it is treatable. Even when your emotions feel like they're moving faster than you can keep up, you are not powerless. With the right support, you can learn to recognize your patterns, build tools for stability, and move through emotional waves with more ease.",
         "You don't have to go through this alone. At our counseling center, we're here to walk beside you—helping you restore balance and reconnect with your sense of self."
       ]
     ],
     "subsections": [
       {
-        "heading": "Recognizing Your Signals: When Bipolar Disorder Affects Your Life",
+        "heading": "**Recognizing Your Signals: When Bipolar Disorder Affects Your Life**",
         "lists": [
           {
             "items": [
@@ -339,7 +339,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Reclaiming Your Life: Finding Harmony Through Bipolar Disorder",
+        "heading": "**Reclaiming Your Life: Finding Harmony Through Bipolar Disorder**",
         "groups": [
           [
             "Bipolar disorder isn't about pushing emotions away. It's about learning how to live with them, work with them, and respond to them with more understanding and balance. With the right therapeutic support and self-care, you can build a more stable and fulfilling life."
@@ -347,7 +347,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Identify patterns in thoughts and behavior that impact mood—and learn how to regulate emotions more effectively.",
               "Interpersonal & Social Rhythm Therapy (IPSRT): Establish healthy routines and strengthen relationships to support mood stability.",
@@ -356,7 +356,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle Support & Self-Care",
+            "lead": "**Lifestyle Support & Self-Care**",
             "items": [
               "Keep a steady routine: Maintaining consistent sleep, meal, and daily activity schedules can support your body's natural rhythms.",
               "Recognize impulsive patterns: Bring gentle awareness to impulsive urges and practice pausing before reacting.",
@@ -367,9 +367,9 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Stability**",
-      "You are not defined by your highs and lows. Even when life feels out of balance, there is a path forward—a way to feel steady, grounded, and more in tune with yourself again. Healing doesn't have to happen all at once. It begins with understanding, with self-compassion, and with small steps that lead to real change. You already carry the strength it takes to begin. And we're here to walk beside you—every step of the way."
-    ]
+    "**Your First Step Toward Stability**",
+    "You are not defined by your highs and lows. Even when life feels out of balance, there is a path forward—a way to feel steady, grounded, and more in tune with yourself again. Healing doesn't have to happen all at once. It begins with understanding, with self-compassion, and with small steps that lead to real change. **You already carry the strength it takes to begin. **And we're here to walk beside you—every step of the way."
+  ]
   },
   "adhd": {
     "title": "ADHD (Attention Deficit Hyperactivity Disorder)",
@@ -377,14 +377,14 @@ export const serviceAreasSectionsEn = {
     "groups": [
       [
         "Have you noticed your child struggling to finish tasks, frequently jumping from one thing to another, or acting on impulse without thinking it through? Maybe they're full of energy and bright ideas, but staying organized, following instructions, or sitting still seems especially difficult.",
-        "As a parent, you may feel a mix of admiration, concern, and exhaustion. You may have asked yourself, \"Why is this so hard for them?\" or even, \"Am I doing something wrong?\" Please know: your child is not broken. And you are not failing them.",
+        "As a parent, you may feel a mix of admiration, concern, and exhaustion. You may have asked yourself, \"Why is this so hard for them?\" or even, \"Am I doing something wrong?\" **Please know: your child is not broken. And you are not failing them.**",
         "ADHD is not about laziness, disobedience, or lack of effort. It's about a brain that processes, organizes, and responds to the world differently. And with the right understanding and support, your child can thrive—not in spite of their differences, but through them.",
         "At our counseling center, we're here to help you better understand your child's unique strengths and challenges—and to walk alongside your family with care, clarity, and compassion."
       ]
     ],
     "subsections": [
       {
-        "heading": "Listening to Your Child: Signs ADHD Support Can Help",
+        "heading": "**Listening to Your Child: Signs ADHD Support Can Help**",
         "lists": [
           {
             "items": [
@@ -398,7 +398,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Helping Your Child Flourish: Support for Thriving With ADHD",
+        "heading": "**Helping Your Child Flourish: Support for Thriving With ADHD**",
         "groups": [
           [
             "There's no one-size-fits-all approach to ADHD—and that's okay. Your child's brain works differently, and that difference can be a source of strength. With the right support, guidance, and strategies, your child can learn to focus, regulate emotions, and navigate challenges with more ease and self-confidence."
@@ -406,7 +406,7 @@ export const serviceAreasSectionsEn = {
         ],
         "lists": [
           {
-            "lead": "Psychotherapy & Counseling",
+            "lead": "**Psychotherapy & Counseling**",
             "items": [
               "Cognitive Behavioral Therapy (CBT): Helps your child identify unhelpful thought patterns and build practical skills for focus, emotional awareness, and self-regulation.",
               "Behavioral Therapy: Uses structure, routine, and positive reinforcement to support healthy habits and behavioral growth.",
@@ -415,7 +415,7 @@ export const serviceAreasSectionsEn = {
             ]
           },
           {
-            "lead": "Lifestyle Support & Everyday Support",
+            "lead": "**Lifestyle Supporat & Everyday Support**",
             "items": [
               "Establish predictable routines to reduce overwhelm and bring consistency",
               "Minimize distractions and create focused, calming environments for work or study",
@@ -443,7 +443,7 @@ export const serviceAreasSectionsEn = {
     ],
     "subsections": [
       {
-        "heading": "When Connection Feels Difficult: Recognizing Signs to Seek Support",
+        "heading": "**When Connection Feels Difficult: Recognizing Signs to Seek Support**",
         "lists": [
           {
             "items": [
@@ -461,7 +461,7 @@ export const serviceAreasSectionsEn = {
         ]
       },
       {
-        "heading": "Creating Harmony Together: Gentle Paths to Relationship Healing",
+        "heading": "**Creating Harmony Together: Gentle Paths to Relationship Healing**",
         "lists": [
           {
             "lead": "Psychotherapy & Counseling",

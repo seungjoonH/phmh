@@ -44,12 +44,27 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify unhelpful thought patterns and develop more balanced, supportive ways of thinking.",
-              "Interpersonal Therapy (IPT): Explore how relationship struggles might impact your mood and learn tools for building healthier connections.",
-              "Behavioral Activation (BA): Re-engage with small, meaningful activities that help rebuild motivation, energy, and joy.",
-              "Client-Centered Therapy: A warm, nonjudgmental space to talk openly, reflect deeply, and grow with support.",
-              "Stress Management & Thought Restructuring: Learn how to calm your body and mind, and replace negative thought cycles with more constructive perspectives."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nIdentify unhelpful thought patterns and develop more balanced, supportive ways of thinking.",
+      marker: "dash"
+    },
+    {
+      text: "**Interpersonal Therapy (IPT):**\nExplore how relationship struggles might impact your mood and learn tools for building healthier connections.",
+      marker: "dash"
+    },
+    {
+      text: "**Behavioral Activation (BA):**\nRe-engage with small, meaningful activities that help rebuild motivation, energy, and joy.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nA warm, nonjudgmental space to talk openly, reflect deeply, and grow with support.",
+      marker: "dash"
+    },
+    {
+      text: "**Stress Management & Thought Restructuring:**\nLearn how to calm your body and mind, and replace negative thought cycles with more constructive perspectives.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle Support & Self-Care**",
@@ -64,9 +79,28 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing**",
-      "You are not defined by what you're feeling right now. This pain—this difficult season—does not last forever. Depression is treatable, and you don't have to navigate it alone.",
-      "There is space for healing, for renewal, and for life to feel like yours again. You don't have to be \"ready.\" You just need a safe place to begin. We'll meet you there—gently, respectfully, and at your pace."
+    "**Your First Step Toward Healing**",
+    "You are not defined by what you're feeling right now. This pain—this difficult season—does not last forever. Depression is treatable, and you don't have to navigate it alone.\nThere is space for healing, for renewal, and for life to feel like yours again. You don't have to be \"ready.\" You just need a safe place to begin. We'll meet you there—gently, respectfully, and at your pace.",
+    "There is space for healing, for renewal, and for life to feel like yours again. You don't have to be \"ready.\" You just need a safe place to begin. We'll meet you there—gently, respectfully, and at your pace."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.1.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.1.1" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.depression.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.depression.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.depression.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.closing.1" }
     ]
   },
   "traumaPtsd": {
@@ -86,11 +120,23 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "Trauma can show up in many different ways. If any of the following feel familiar, professional support may help:",
             "items": [
-              "Intrusive Memories & Reactions: Flashbacks, nightmares, or distressing memories that feel hard to escape; Sudden emotional or physical reactions to reminders of the trauma",
-              "Avoidance & Disconnection: Avoiding people, places, or conversations that bring up painful memories; Feeling emotionally numb or disconnected from yourself or others",
-              "Negative Thoughts & Mood Changes: Ongoing guilt, shame, or self-blame; Difficulty trusting others or feeling emotionally close; Trouble remembering parts of the trauma or viewing the world as unsafe",
-              "Hyperarousal & Reactivity: Constantly feeling on edge, easily startled, or overly alert; Difficulty sleeping, concentrating, or managing energy levels; Intense emotional reactions or difficulty regulating strong emotions"
-            ]
+    {
+      text: "**Intrusive Memories & Reactions:**\nFlashbacks, nightmares, or distressing memories that feel hard to escape.\nSudden emotional or physical reactions to reminders of the trauma.",
+      marker: "dash"
+    },
+    {
+      text: "**Avoidance & Disconnection:**\nAvoiding people, places, or conversations that bring up painful memories.\nFeeling emotionally numb or disconnected from yourself or others.",
+      marker: "dash"
+    },
+    {
+      text: "**Negative Thoughts & Mood Changes:**\nOngoing guilt, shame, or self-blame.\nDifficulty trusting others or feeling emotionally close.\nTrouble remembering parts of the trauma or viewing the world as unsafe.",
+      marker: "dash"
+    },
+    {
+      text: "**Hyperarousal & Reactivity:**\nConstantly feeling on edge, easily startled, or overly alert.\nDifficulty sleeping, concentrating, or managing energy levels.\nIntense emotional reactions or difficulty regulating strong emotions.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -108,14 +154,35 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify unhelpful thoughts and develop healthier coping strategies.",
-              "Exposure Therapy: Safely revisit trauma-related memories in a controlled environment to reduce fear and avoidance.",
-              "Eye Movement Desensitization and Reprocessing (EMDR): Use guided eye movements to help your brain process and release distressing memories.",
-              "Interpersonal Therapy (IPT): Rebuild connection and trust through healing interpersonal relationships.",
-              "Client-Centered Therapy: Explore emotions in a nonjudgmental space, guided by your pace and your needs.",
-              "Behavioral Activation (BA): Re-engage in meaningful activities to restore a sense of purpose and joy.",
-              "Stress Management & Cognitive Restructuring: Learn techniques to calm your nervous system and shift negative thought patterns."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nIdentify unhelpful thoughts and develop healthier coping strategies.",
+      marker: "dash"
+    },
+    {
+      text: "**Exposure Therapy:**\nSafely revisit trauma-related memories in a controlled environment to reduce fear and avoidance.",
+      marker: "dash"
+    },
+    {
+      text: "**Eye Movement Desensitization and Reprocessing (EMDR):**\nUse guided eye movements to help your brain process and release distressing memories.",
+      marker: "dash"
+    },
+    {
+      text: "**Interpersonal Therapy (IPT):**\nRebuild connection and trust through healing interpersonal relationships.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nExplore emotions in a nonjudgmental space, guided by your pace and your needs.",
+      marker: "dash"
+    },
+    {
+      text: "**Behavioral Activation (BA):**\nRe-engage in meaningful activities to restore a sense of purpose and joy.",
+      marker: "dash"
+    },
+    {
+      text: "**Stress Management & Cognitive Restructuring:**\nLearn techniques to calm your nervous system and shift negative thought patterns.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle Support & Self-Care**",
@@ -130,10 +197,29 @@ export const serviceAreasSectionsEn = {
     ],
     "closing": [
     "**Your First Step Toward Healing**",
-    "You are not broken. The pain you carry is real—but it is not all of who you are. **Healing doesn't mean forgetting.** It means feeling safe again, finding peace in the present, and allowing hope to grow.",
+    "You are not broken. The pain you carry is real—but it is not all of who you are. **Healing doesn't mean forgetting.** It means feeling safe again, finding peace in the present, and allowing hope to grow.\nYou don't have to rush. You don't have to go through it alone. You get to choose how healing looks for you. And we're here to walk that path with you—with steadiness, care, and respect.\nYou're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life.",
     "You don't have to rush. You don't have to go through it alone. You get to choose how healing looks for you. And we're here to walk that path with you—with steadiness, care, and respect.",
     "You're not meant to carry trauma alone. With the right support, you can feel grounded again, rebuild trust, and begin to reconnect with life."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.closing.1" }
+    ]
   },
   "anxietyPanic": {
     "title": "Anxiety Panic Attacks",
@@ -175,26 +261,65 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Learn to recognize and reshape the thought patterns that trigger panic and develop healthier responses.",
-              "Exposure Therapy: Gradually and safely face feared situations, helping you reduce avoidance and build resilience.",
-              "Client-Centered Therapy: A supportive, nonjudgmental space where you can process fear, rebuild trust in your body, and reconnect with yourself.",
-              "Stress Management & Cognitive Restructuring: Gain practical tools to soothe your nervous system and reframe anxious thoughts into steadier, more balanced perspectives."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT): **\nLearn to recognize and reshape the thought patterns that trigger panic and develop healthier responses.",
+      marker: "dash"
+    },
+    {
+      text: "**Exposure Therapy:**\nGradually and safely face feared situations, helping you reduce avoidance and build resilience.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nA supportive, nonjudgmental space where you can process fear, rebuild trust in your body, and reconnect with yourself.",
+      marker: "dash"
+    },
+    {
+      text: "**Stress Management & Cognitive Restructuring:**\nGain practical tools to soothe your nervous system and reframe anxious thoughts into steadier, more balanced perspectives.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle Support & Everyday Care**",
             "items": [
-              "Breathing & Relaxation Practices: Techniques like deep breathing, mindfulness, or yoga to calm your body and mind.",
-              "Movement & Nourishment: Regular exercise and a balanced diet to support emotional and physical regulation.",
-              "Reducing Triggers & Stimulants: Limiting caffeine or overstimulation to help reduce anxiety symptoms."
-            ]
+    {
+      text: "**Breathing & Relaxation Practices: **\nTechniques like deep breathing, mindfulness, or yoga to calm your body and mind.",
+      marker: "dash"
+    },
+    {
+      text: "**Movement & Nourishment: **\nRegular exercise and a balanced diet to support emotional and physical regulation.",
+      marker: "dash"
+    },
+    {
+      text: "**Reducing Triggers & Stimulants:**\nLimiting caffeine or overstimulation to help reduce anxiety symptoms.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
     ],
     "closing": [
-      "**Your First Step Toward Peace**",
-      "Panic is not a sign of weakness. It's a signal that your body is asking for safety and support—and with care, safety can be restored. You are more than your fear. You are capable of living a calm, steady life again. You don't have to brace yourself for the next panic attack. You can move through the fear—and come out stronger on the other side. We'll be here to walk with you—step by step."
+    "**Your First Step Toward Peace**",
+    "Panic is not a sign of weakness. It's a signal that your body is asking for safety and support—and with care, safety can be restored. **You are more than your fear. **You are capable of living a calm, steady life again. You don't have to brace yourself for the next panic attack. You can move through the fear—and come out stronger on the other side. We'll be here to walk with you—step by step."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.closing.1" }
     ]
   },
   "suicidalThoughts": {
@@ -237,11 +362,23 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Gently explore and reframe painful thoughts, and rediscover moments of hope and meaning.",
-              "Client-Centered Therapy: A compassionate space where your voice matters, and healing unfolds at your own pace.",
-              "Interpersonal Therapy (IPT): Strengthen meaningful relationships and rebuild the support you need and deserve.",
-              "Crisis Support & Emotional Care: Immediate support during moments of emotional overwhelm; Tools to manage intense feelings and stay grounded; Guidance in building a support system—people who genuinely care and want to walk beside you"
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nGently explore and reframe painful thoughts, and rediscover moments of hope and meaning.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nA compassionate space where your voice matters, and healing unfolds at your own pace.",
+      marker: "dash"
+    },
+    {
+      text: "**Interpersonal Therapy (IPT):**\nStrengthen meaningful relationships and rebuild the support you need and deserve.",
+      marker: "dash"
+    },
+    {
+      text: "**Crisis Support & Emotional Care:**\nImmediate support during moments of emotional overwhelm.\nTools to manage intense feelings and stay grounded.\nGuidance in building a support system—people who genuinely care and want to walk beside you.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -249,6 +386,23 @@ export const serviceAreasSectionsEn = {
     "closing": [
       "**You Are Still Here—And That Matters**",
       "Even if you can't see it right now, life still holds space for you. A breath you haven't taken yet. A connection you haven't made. A feeling of peace you haven't known in a long time. You don't have to pretend you're okay. You don't need to have all the answers. You just need one small, safe place to begin again. We'll be with you in the dark—not to push, but to remind you that you're not alone. And when you're ready, we'll walk with you—gently—toward the light."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.suicidalThoughts.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.suicidalThoughts.subsections.1.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.closing.1" }
     ]
   },
   "culturalIdentity": {
@@ -291,27 +445,65 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Identity Exploration & Integration: Explore your cultural experiences and values to develop a more grounded and secure sense of self.",
-              "Culturally Responsive Counseling: Learn how to navigate different cultural spaces while honoring your individuality.",
-              "Stress & Resilience in Multicultural Settings: Understand the emotional impact of cultural stress and build strategies to respond with confidence and clarity."
-            ]
+    {
+      text: "**Identity Exploration & Integration:**\nExplore your cultural experiences and values to develop a more grounded and secure sense of self.",
+      marker: "dash"
+    },
+    {
+      text: "**Culturally Responsive Counseling:**\nLearn how to navigate different cultural spaces while honoring your individuality.",
+      marker: "dash"
+    },
+    {
+      text: "**Stress & Resilience in Multicultural Settings:**\nUnderstand the emotional impact of cultural stress and build strategies to respond with confidence and clarity.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Social Support & Self-Care**",
             "items": [
-              "Embracing Cultural Strengths: Recognize how your unique cultural background can be a source of strength, perspective, and pride.",
-              "Self-Acceptance & Self-Esteem: Practice affirming your identity, respecting yourself, and finding confidence in your uniqueness.",
-              "Building Meaningful Relationships: Foster connections where you feel seen, respected, and supported—just as you are."
-            ]
+    {
+      text: "**Embracing Cultural Strengths:**\nRecognize how your unique cultural background can be a source of strength, perspective, and pride.",
+      marker: "dash"
+    },
+    {
+      text: "**Self-Acceptance & Self-Esteem:**\nPractice affirming your identity, respecting yourself, and finding confidence in your uniqueness.",
+      marker: "dash"
+    },
+    {
+      text: "**Building Meaningful Relationships:**\nFoster connections where you feel seen, respected, and supported—just as you are.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
     ],
     "closing": [
     "**Your First Step Toward Wholeness**",
-    "Your identity is not a problem to be solved. It is a story still unfolding—rich in complexity, shaped by experience, and full of possibility. Even if the path feels uncertain now, you have the ability to define what belonging means to you. **You don't have to choose between cultures—you can choose to embrace your whole self.**",
+    "Your identity is not a problem to be solved. It is a story still unfolding—rich in complexity, shaped by experience, and full of possibility. Even if the path feels uncertain now, you have the ability to define what belonging means to you. **You don't have to choose between cultures—you can choose to embrace your whole self.**\nWe're here to walk beside you as you learn to live more freely, more fully, and more in alignment with who you truly are.",
     "We're here to walk beside you as you learn to live more freely, more fully, and more in alignment with who you truly are."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.closing.1" }
+    ]
   },
   "bipolar": {
     "title": "Bipolar Disorder",
@@ -329,9 +521,15 @@ export const serviceAreasSectionsEn = {
         "lists": [
           {
             "items": [
-              "Manic or Hypomanic Episodes: Surges of energy, excitement, or euphoria that feel hard to contain; Sleeping very little without feeling tired; Impulsive behaviors—risky spending, reckless decisions, or overcommitting; Racing thoughts, rapid speech, or difficulty focusing",
-              "Depressive Episodes: Deep, lingering sadness or emotional numbness; Loss of interest in activities you once enjoyed; Fatigue or a heavy, slowed-down feeling in your body; Trouble concentrating or making everyday decisions; Feelings of hopelessness or thoughts of self-harm"
-            ]
+    {
+      text: "**Manic or Hypomanic Episodes:**\nSurges of energy, excitement, or euphoria that feel hard to contain.\nSleeping very little without feeling tired.\nImpulsive behaviors—risky spending, reckless decisions, or overcommitting.\nRacing thoughts, rapid speech, or difficulty focusing.",
+      marker: "dash"
+    },
+    {
+      text: "**Depressive Episodes:**\nDeep, lingering sadness or emotional numbness.\nLoss of interest in activities you once enjoyed.\nFatigue or a heavy, slowed-down feeling in your body.\nTrouble concentrating or making everyday decisions.\nFeelings of hopelessness or thoughts of self-harm.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -349,19 +547,40 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify patterns in thoughts and behavior that impact mood—and learn how to regulate emotions more effectively.",
-              "Interpersonal & Social Rhythm Therapy (IPSRT): Establish healthy routines and strengthen relationships to support mood stability.",
-              "Client-Centered Therapy: Explore your experiences in a safe, nonjudgmental space and deepen your understanding of your emotional needs.",
-              "Emotion Regulation & Stress Management: Build practical skills to manage mood swings and respond to stress with confidence and calm."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT): **\nIdentify patterns in thoughts and behavior that impact mood—and learn how to regulate emotions more effectively.",
+      marker: "dash"
+    },
+    {
+      text: "**Interpersonal & Social Rhythm Therapy (IPSRT):**\nEstablish healthy routines and strengthen relationships to support mood stability.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nExplore your experiences in a safe, nonjudgmental space and deepen your understanding of your emotional needs.",
+      marker: "dash"
+    },
+    {
+      text: "**Emotion Regulation & Stress Management:**\nBuild practical skills to manage mood swings and respond to stress with confidence and calm.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle Support & Self-Care**",
             "items": [
-              "Keep a steady routine: Maintaining consistent sleep, meal, and daily activity schedules can support your body's natural rhythms.",
-              "Recognize impulsive patterns: Bring gentle awareness to impulsive urges and practice pausing before reacting.",
-              "Track your moods: Use a journal or app to notice emotional patterns and identify early signs of mood shifts."
-            ]
+    {
+      text: "**Keep a steady routine:**\nMaintaining consistent sleep, meal, and daily activity schedules can support your body's natural rhythms.",
+      marker: "dash"
+    },
+    {
+      text: "**Recognize impulsive patterns:**\nBring gentle awareness to impulsive urges and practice pausing before reacting.",
+      marker: "dash"
+    },
+    {
+      text: "**Track your moods:**\nUse a journal or app to notice emotional patterns and identify early signs of mood shifts.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -369,7 +588,25 @@ export const serviceAreasSectionsEn = {
     "closing": [
     "**Your First Step Toward Stability**",
     "You are not defined by your highs and lows. Even when life feels out of balance, there is a path forward—a way to feel steady, grounded, and more in tune with yourself again. Healing doesn't have to happen all at once. It begins with understanding, with self-compassion, and with small steps that lead to real change. **You already carry the strength it takes to begin. **And we're here to walk beside you—every step of the way."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.closing.1" }
+    ]
   },
   "adhd": {
     "title": "ADHD (Attention Deficit Hyperactivity Disorder)",
@@ -388,9 +625,15 @@ export const serviceAreasSectionsEn = {
         "lists": [
           {
             "items": [
-              "Inattention: Trouble starting or completing tasks; Frequently losing everyday items like books, toys, or school supplies; Difficulty with organization, time management, or following multi-step directions; Easily distracted; struggling to focus for sustained periods",
-              "Hyperactivity & Impulsivity: Constant movement, fidgeting, or restlessness; Talking excessively, interrupting others, or difficulty waiting their turn; Acting impulsively, often followed by frustration or regret; Difficulty managing emotions or following rules in group settings"
-            ]
+    {
+      text: "**Inattention:**\nTrouble starting or completing tasks.\nFrequently losing everyday items like books, toys, or school supplies.\nDifficulty with organization, time management, or following multi-step directions.\nEasily distracted; struggling to focus for sustained periods",
+      marker: "dash"
+    },
+    {
+      text: "**Hyperactivity & Impulsivity:**\nConstant movement, fidgeting, or restlessness.\nTalking excessively, interrupting others, or difficulty waiting their turn.\nActing impulsively, often followed by frustration or regret.\nDifficulty managing emotions or following rules in group settings.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -408,11 +651,23 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Helps your child identify unhelpful thought patterns and build practical skills for focus, emotional awareness, and self-regulation.",
-              "Behavioral Therapy: Uses structure, routine, and positive reinforcement to support healthy habits and behavioral growth.",
-              "Organizational & Self-Management Coaching: Teaches tools for planning, prioritizing, and managing daily tasks—reducing stress and encouraging independence.",
-              "Social & Emotional Skills Training: Improves communication, impulse control, and emotional expression to support healthier relationships at home and school."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nHelps your child identify unhelpful thought patterns and build practical skills for focus, emotional awareness, and self-regulation.",
+      marker: "dash"
+    },
+    {
+      text: "**Behavioral Therapy:**\nUses structure, routine, and positive reinforcement to support healthy habits and behavioral growth.",
+      marker: "dash"
+    },
+    {
+      text: "**Organizational & Self-Management Coaching:**\nTeaches tools for planning, prioritizing, and managing daily tasks—reducing stress and encouraging independence.",
+      marker: "dash"
+    },
+    {
+      text: "**Social & Emotional Skills Training: **\nImproves communication, impulse control, and emotional expression to support healthier relationships at home and school.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle Supporat & Everyday Support**",
@@ -429,6 +684,25 @@ export const serviceAreasSectionsEn = {
     "closing": [
       "**Rediscovering Possibility—Together**",
       "Your child may move through the world in a way that's harder for others to understand—but that doesn't make their journey any less meaningful. Their creativity, curiosity, and sensitivity are not challenges to \"fix\"—they're strengths to support and celebrate. If this path feels overwhelming, you don't have to walk it alone. We're here to listen, to help, and to walk alongside your family—step by step."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.adhd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.adhd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.closing.1" }
     ]
   },
   "relationship": {
@@ -471,10 +745,19 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Relationship Pattern Exploration: Reflect on recurring dynamics and discover how to build healthier, more balanced ways of connecting.",
-              "Cognitive Behavioral Therapy (CBT): Shift unhelpful thoughts and learn practical tools for managing emotions and communication.",
-              "Client-Centered Therapy: Share difficult feelings in a nonjudgmental space—and strengthen your ability to stay present with your own emotions."
-            ]
+    {
+      text: "**Relationship Pattern Exploration:**\nReflect on recurring dynamics and discover how to build healthier, more balanced ways of connecting.",
+      marker: "dash"
+    },
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nShift unhelpful thoughts and learn practical tools for managing emotions and communication.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nShare difficult feelings in a nonjudgmental space—and strengthen your ability to stay present with your own emotions.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Communication & Emotional Expression**",
@@ -496,9 +779,29 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Healthier Connection**",
-      "The most nourishing relationships don't ask you to shrink—they help you expand into who you truly are. What you're facing now may not be failure, but a turning point—an invitation to grow, relate, and love more authentically. The desire to connect deeply without losing yourself is not too much to ask. And you don't have to navigate it alone.",
-      "When you're ready to open your heart again, we'll be here—gently, steadily, and by your side."
+    "**Your First Step Toward Healthier Connection**",
+    "The most nourishing relationships don't ask you to shrink—they help you expand into who you truly are. What you're facing now may not be failure, but a turning point—an invitation to grow, relate, and love more authentically. The desire to connect deeply without losing yourself is not too much to ask. And you don't have to navigate it alone.\nWhen you're ready to open your heart again, we'll be here—gently, steadily, and by your side.",
+    "When you're ready to open your heart again, we'll be here—gently, steadily, and by your side."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.relationship.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.1", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.2.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.2", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.relationship.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.closing.1" }
     ]
   },
   "ocd": {
@@ -518,9 +821,15 @@ export const serviceAreasSectionsEn = {
         "lists": [
           {
             "items": [
-              "Obsessions (Intrusive Thoughts): Repetitive, unwanted thoughts, images, or urges; Fears related to contamination, harm, or things being \"not quite right\"; Growing anxiety if a thought isn't \"neutralized\" or undone",
-              "Compulsions (Repetitive Behaviors): Repeated handwashing, checking, counting, or arranging; A belief that something bad will happen unless a specific behavior is completed; Rituals that interfere with daily life, relationships, or your sense of well-being"
-            ]
+    {
+      text: "**Obsessions (Intrusive Thoughts): **\nRepetitive, unwanted thoughts, images, or urges.\nFears related to contamination, harm, or things being \"not quite right\".\nGrowing anxiety if a thought isn't \"neutralized\" or undone",
+      marker: "dash"
+    },
+    {
+      text: "**Compulsions (Repetitive Behaviors): **\nRepeated handwashing, checking, counting, or arranging.\nA belief that something bad will happen unless a specific behavior is completed.\nRituals that interfere with daily life, relationships, or your sense of well-being.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -538,11 +847,23 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify and shift unhelpful thought patterns while building healthier coping strategies.",
-              "Exposure and Response Prevention (ERP): Gradually face anxiety triggers in a safe, supportive space while learning to resist compulsive responses.",
-              "Client-Centered Therapy: Work with a therapist who offers warmth, respect, and understanding as you explore your experiences.",
-              "Emotion Regulation & Stress Management: Practice grounding and mindfulness techniques to manage overwhelming emotions and increase emotional resilience."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT): **\nIdentify and shift unhelpful thought patterns while building healthier coping strategies.",
+      marker: "dash"
+    },
+    {
+      text: "**Exposure and Response Prevention (ERP): **\nGradually face anxiety triggers in a safe, supportive space while learning to resist compulsive responses.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nWork with a therapist who offers warmth, respect, and understanding as you explore your experiences.",
+      marker: "dash"
+    },
+    {
+      text: "**Emotion Regulation & Stress Management:**\nPractice grounding and mindfulness techniques to manage overwhelming emotions and increase emotional resilience.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle & Self-Care Support**",
@@ -559,7 +880,26 @@ export const serviceAreasSectionsEn = {
     "closing": [
     "**Your First Step Toward Healing**",
     "Intrusive thoughts and compulsive behaviors may feel powerful—**but they are not stronger than you. **They're not personal flaws. They are signs that your mind is doing its best to stay safe. You don't have to face this alone. With the right support, you can find steadier ground, ease anxiety's grip, and return to a life that feels calmer, clearer, and truly your own. Let's begin—gently, together."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.ocd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.ocd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.closing.1" }
+    ]
   },
   "eatingDisorders": {
     "title": "Eating Disorders",
@@ -578,10 +918,19 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "If you recognize any of the following patterns in yourself or someone you care about, it may be time to reach out:",
             "items": [
-              "Anorexia Nervosa: Ongoing food restriction and an intense fear of gaining weight; Anxiety around eating or maintaining a \"normal\" body size; Distorted body image and strict rules around food",
-              "Bulimia Nervosa: Episodes of binge eating followed by purging (vomiting, laxatives, or over-exercising); Strong preoccupation with weight and body shape; Feelings of shame, guilt, or distress after eating",
-              "Binge Eating Disorder: Frequent episodes of eating beyond fullness, often with a sense of being out of control; Emotional numbness, self-criticism, or guilt following meals; May be associated with weight fluctuations or physical discomfort"
-            ]
+    {
+      text: "**Anorexia Nervosa: **\nOngoing food restriction and an intense fear of gaining weight.\nAnxiety around eating or maintaining a \"normal\" body size.\nDistorted body image and strict rules around food.",
+      marker: "dash"
+    },
+    {
+      text: "**Bulimia Nervosa:**\nEpisodes of binge eating followed by purging (vomiting, laxatives, or over-exercising).\nStrong preoccupation with weight and body shape.\nFeelings of shame, guilt, or distress after eating.",
+      marker: "dash"
+    },
+    {
+      text: "**Binge Eating Disorder:**\nFrequent episodes of eating beyond fullness, often with a sense of being out of control.\nEmotional numbness, self-criticism, or guilt following meals.\nMay be associated with weight fluctuations or physical discomfort.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -599,11 +948,23 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Reframe harmful beliefs about food, body image, and self-worth while building healthier habits.",
-              "Interpersonal Therapy (IPT): Explore how life transitions and relationship dynamics influence eating patterns and self-image.",
-              "Client-Centered Therapy: A warm, supportive space where your experience is heard, understood, and valued.",
-              "Emotion Regulation & Stress Management: Recognize emotional triggers and develop healthy coping skills that reduce the urge to engage in disordered behaviors."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT): **\nReframe harmful beliefs about food, body image, and self-worth while building healthier habits.",
+      marker: "dash"
+    },
+    {
+      text: "**Interpersonal Therapy (IPT):**\nExplore how life transitions and relationship dynamics influence eating patterns and self-image.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy: **\nA warm, supportive space where your experience is heard, understood, and valued.",
+      marker: "dash"
+    },
+    {
+      text: "**Emotion Regulation & Stress Management:**\nRecognize emotional triggers and develop healthy coping skills that reduce the urge to engage in disordered behaviors.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Nutritional Guidance & Lifestyle Support**",
@@ -618,9 +979,28 @@ export const serviceAreasSectionsEn = {
     ],
     "closing": [
     "**Your First Step Toward Healing**",
-    "The discomfort in your body. The fear in front of the mirror. The quiet battle that happens with every meal—**These are not signs of failure. They're signs of pain. And pain deserves care.** You don't have to fight this alone. Recovery isn't about getting everything \"right.\" It's about softening self-judgment, releasing shame, and learning to trust yourself again—gently, and at your own pace.",
+    "The discomfort in your body. The fear in front of the mirror. The quiet battle that happens with every meal—**These are not signs of failure. They're signs of pain. And pain deserves care.** You don't have to fight this alone. Recovery isn't about getting everything \"right.\" It's about softening self-judgment, releasing shame, and learning to trust yourself again—gently, and at your own pace.\nLet's begin there: Not with pressure, but with patience. Not with criticism, but with compassion. Not by changing who you are, but by helping you feel at home in your body—and in your life.",
     "Let's begin there: Not with pressure, but with patience. Not with criticism, but with compassion. Not by changing who you are, but by helping you feel at home in your body—and in your life."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.closing.1" }
+    ]
   },
   "asd": {
     "title": "Autism Spectrum Disorder (ASD)",
@@ -638,9 +1018,15 @@ export const serviceAreasSectionsEn = {
         "lists": [
           {
             "items": [
-              "Social interaction and communication differences: Avoiding eye contact or struggling with facial expressions and tone of voice; Difficulty with back-and-forth conversations or interpreting social cues; Needing extra time to process and express emotions",
-              "Repetitive behaviors and focused interests: Intense attachment to routines, patterns, or specific interests; Discomfort with unexpected changes or transitions; Unusual sensitivity to lights, sounds, textures, or physical touch"
-            ]
+    {
+      text: "**Social interaction and communication differences: **\nAvoiding eye contact or struggling with facial expressions and tone of voice.\nDifficulty with back-and-forth conversations or interpreting social cues.\nNeeding extra time to process and express emotions.",
+      marker: "dash"
+    },
+    {
+      text: "**Repetitive behaviors and focused interests:**\nIntense attachment to routines, patterns, or specific interests.\nDiscomfort with unexpected changes or transitions.\nUnusual sensitivity to lights, sounds, textures, or physical touch.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -653,19 +1039,40 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Social Skills Training (SST): Supporting natural social growth through structured, peer-based practice",
-              "Cognitive Behavioral Therapy (CBT): Helping manage anxiety, increase flexibility, and build self-regulation",
-              "Speech & Language Therapy: Strengthening verbal and non-verbal communication",
-              "Sensory Integration Therapy: Creating comfort and calm in sensory experiences"
-            ]
+    {
+      text: "**Social Skills Training (SST): **\nSupporting natural social growth through structured, peer-based practice.",
+      marker: "dash"
+    },
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nHelping manage anxiety, increase flexibility, and build self-regulation.",
+      marker: "dash"
+    },
+    {
+      text: "**Speech & Language Therapy: **\nStrengthening verbal and non-verbal communication.",
+      marker: "dash"
+    },
+    {
+      text: "**Sensory Integration Therapy: **\nCreating comfort and calm in sensory experiences.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle Support & Self-Regulation**",
             "items": [
-              "Creating predictable routines: Fostering a sense of security through structure",
-              "Sensory management tools: Developing strategies to navigate overstimulation",
-              "Emotion regulation & coping skills: Teaching children and adults to recognize and respond to emotional cues with more ease"
-            ]
+    {
+      text: "**Creating predictable routines: **\nFostering a sense of security through structure.",
+      marker: "dash"
+    },
+    {
+      text: "**Sensory management tools:**\nDeveloping strategies to navigate overstimulation.",
+      marker: "dash"
+    },
+    {
+      text: "**Emotion regulation & coping skills: **\nTeaching children and adults to recognize and respond to emotional cues with more ease.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       },
@@ -681,6 +1088,26 @@ export const serviceAreasSectionsEn = {
     "closing": [
       "**A First Step Toward Understanding and Connection**",
       "Autism is not something to fix. It is something to understand, embrace, and support. You and your loved one are already enough, just as you are. We believe in nurturing strengths, not erasing difference. In helping families grow closer, not further apart. And in walking with you—gently, respectfully, every step of the way."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.asd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.1.lists.1", ordered: false },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.2.heading" },
+      { type: "p", textKey: "serviceAreas.sections.asd.subsections.2.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.closing.1" }
     ]
   },
   "lifeStress": {
@@ -722,10 +1149,19 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Identify and reframe unhelpful thought patterns. Build healthier, more grounded perspectives that ease mental pressure.",
-              "Client-Centered Therapy: Explore your experiences in a supportive, judgment-free space. Feel truly heard—and find direction at your own pace.",
-              "Stress Management Training: Learn practical tools to manage overwhelm, regulate your emotions, and feel more in control in high-pressure situations."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT):**\nIdentify and reframe unhelpful thought patterns. Build healthier, more grounded perspectives that ease mental pressure.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nExplore your experiences in a supportive, judgment-free space. Feel truly heard—and find direction at your own pace.",
+      marker: "dash"
+    },
+    {
+      text: "**Stress Management Training:**\nLearn practical tools to manage overwhelm, regulate your emotions, and feel more in control in high-pressure situations.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle & Self-Care**",
@@ -742,6 +1178,24 @@ export const serviceAreasSectionsEn = {
     "closing": [
       "**Your First Step Toward a Lighter Tomorrow**",
       "Stress may be part of life—but it doesn't have to take up all the space. You don't have to carry everything on your own. Whatever you're feeling right now, you have the strength to find your way forward. And when you're ready, we'll be here—to walk beside you, at your pace, in your way."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.groups.0.1" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.closing.1" }
     ]
   },
   "griefLoss": {
@@ -784,17 +1238,32 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "Cognitive Behavioral Therapy (CBT): Gently explore and reframe difficult thoughts surrounding your loss. Learn healthier ways to cope with emotional overwhelm.",
-              "Client-Centered Therapy: A warm, nonjudgmental space where your emotions are seen, heard, and supported—without pressure or expectation.",
-              "Grief Processing & Emotional Support: Develop emotional awareness, allowing grief to move through you naturally. Discover how to express, honor, and live with your loss in a meaningful way."
-            ]
+    {
+      text: "**Cognitive Behavioral Therapy (CBT): **\nGently explore and reframe difficult thoughts surrounding your loss. Learn healthier ways to cope with emotional overwhelm.",
+      marker: "dash"
+    },
+    {
+      text: "**Client-Centered Therapy:**\nA warm, nonjudgmental space where your emotions are seen, heard, and supported—without pressure or expectation.",
+      marker: "dash"
+    },
+    {
+      text: "**Grief Processing & Emotional Support:**\nDevelop emotional awareness, allowing grief to move through you naturally. Discover how to express, honor, and live with your loss in a meaningful way.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Social Support & Self-Care**",
             "items": [
-              "Connecting with Others: Talk openly with trusted friends or family. Shared stories and simple presence can be a source of comfort and connection.",
-              "Gentle Care for Body and Mind: Incorporate calming routines—like mindful walking, quiet journaling, or deep breathing—that give space to your grief and help restore your inner balance."
-            ]
+    {
+      text: "**Connecting with Others: **\nTalk openly with trusted friends or family. Shared stories and simple presence can be a source of comfort and connection.",
+      marker: "dash"
+    },
+    {
+      text: "**Gentle Care for Body and Mind:**\nIncorporate calming routines—like mindful walking, quiet journaling, or deep breathing—that give space to your grief and help restore your inner balance.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -802,6 +1271,25 @@ export const serviceAreasSectionsEn = {
     "closing": [
       "**Your First Step Toward Healing**",
       "Grief is a reflection of love—and the pain you feel honors the depth of that connection. But your grief is not the whole of you. And this season of sorrow is not where your story ends. The people and memories you carry with you will always matter. And in time, you can begin to feel warmth again—not by forgetting, but by learning to carry love and loss side by side. You don't have to walk this path alone. We're here to support you—gently, steadily, and always in your time."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.closing.1" }
     ]
   },
   "sleep": {
@@ -821,11 +1309,23 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "If any of the following sound familiar, it may be time to reach out:",
             "items": [
-              "Insomnia: Difficulty falling asleep or staying asleep; Waking up too early and being unable to return to sleep; Persistent fatigue, even after sleeping",
-              "Sleep Apnea: Breathing that stops or becomes shallow during sleep; Snoring or gasping for air; Daytime drowsiness, irritability, or difficulty focusing",
-              "Hypersomnia: Excessive sleepiness despite getting enough sleep; Struggling to stay awake during the day; Difficulty functioning due to overwhelming fatigue",
-              "Nightmare Disorder: Intense, distressing dreams that interrupt your sleep; Lingering fear or anxiety around falling asleep; Emotional exhaustion upon waking"
-            ]
+    {
+      text: "**Insomnia:**\nDifficulty falling asleep or staying asleep.\nWaking up too early and being unable to return to sleep.\nPersistent fatigue, even after sleeping.",
+      marker: "dash"
+    },
+    {
+      text: "**Sleep Apnea:**\nBreathing that stops or becomes shallow during sleep.\nSnoring or gasping for air.\nDaytime drowsiness, irritability, or difficulty focusing.",
+      marker: "dash"
+    },
+    {
+      text: "**Hypersomnia: **\nExcessive sleepiness despite getting enough sleep.\nStruggling to stay awake during the day.\nDifficulty functioning due to overwhelming fatigue.",
+      marker: "dash"
+    },
+    {
+      text: "**Nightmare Disorder:**\nIntense, distressing dreams that interrupt your sleep.\nLingering fear or anxiety around falling asleep.\nEmotional exhaustion upon waking.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -843,9 +1343,15 @@ export const serviceAreasSectionsEn = {
           {
             "lead": "**Psychotherapy & Counseling**",
             "items": [
-              "CBT-I (Cognitive Behavioral Therapy for Insomnia): Identify and shift thought patterns that interfere with sleep. Build healthier bedtime routines and reduce anxiety around sleep.",
-              "Stress Management & Relaxation Training: Practice techniques like deep breathing, progressive muscle relaxation, or guided imagery to calm the nervous system and ease into rest."
-            ]
+    {
+      text: "**CBT-I (Cognitive Behavioral Therapy for Insomnia): **\nIdentify and shift thought patterns that interfere with sleep. Build healthier bedtime routines and reduce anxiety around sleep.",
+      marker: "dash"
+    },
+    {
+      text: "**Stress Management & Relaxation Training:**\nPractice techniques like deep breathing, progressive muscle relaxation, or guided imagery to calm the nervous system and ease into rest.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**Lifestyle & Self-Care Support**",
@@ -860,9 +1366,28 @@ export const serviceAreasSectionsEn = {
       }
     ],
     "closing": [
-      "**Your First Step Toward Healing Rest**",
-      "If sleep feels far away—if nights are restless and mornings feel heavy—it may be your body and mind asking for gentler care. The good news is that restful sleep can be restored. You don't have to keep pushing through exhaustion. You can reclaim rest.",
-      "At our counseling center, we take the time to understand not just your symptoms—but your story. Together, we'll help you find new rhythms that bring balance, calm, and renewal."
+    "**Your First Step Toward Healing Rest**",
+    "If sleep feels far away—if nights are restless and mornings feel heavy—it may be your body and mind asking for gentler care. The good news is that restful sleep can be restored. You don't have to keep pushing through exhaustion. You can reclaim rest.\nAt our counseling center, we take the time to understand not just your symptoms—but your story. Together, we'll help you find new rhythms that bring balance, calm, and renewal.",
+    "At our counseling center, we take the time to understand not just your symptoms—but your story. Together, we'll help you find new rhythms that bring balance, calm, and renewal."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.sleep.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.sleep.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.closing.1" }
     ]
   }
 };

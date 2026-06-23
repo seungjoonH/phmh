@@ -4,7 +4,7 @@ export const servicesSectionsJp = {
     title: "個人カウンセリング",
     groups: [
       [
-        "誰もが生きていく中で、困難な時期を経験します。身体的な病気になったとき、最善の対処は早めに治療を受けることです。",
+        "誰もが生きていく中で、困難な時期を経験します。身体的な病気になったとき、最善の対処は早めに治療を受けることです。\n心の健康も同じです。心理的な問題が生じたとき、早めにサポートを受けるほど回復も早く、放置するほど長く、深刻になっていくことがあります。",
         "心の健康も同じです。心理的な問題が生じたとき、早めにサポートを受けるほど回復も早く、放置するほど長く、深刻になっていくことがあります。",
       ],
       [
@@ -49,6 +49,18 @@ export const servicesSectionsJp = {
     closing: [
       "カウンセリングは、より充実した人生を送り、回復力を高め、人間関係を強化するのに役立ちます。",
     ],
+    "flow": [
+      { type: "p", textKey: "services.sections.individual.groups.0.0" },
+      { type: "p", textKey: "services.sections.individual.groups.1.0" },
+      { type: "p", textKey: "services.sections.individual.groups.2.0" },
+      { type: "heading", textKey: "services.sections.individual.lists.0.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.0", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.1.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.1", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.2.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.2", ordered: false },
+      { type: "p", textKey: "services.sections.individual.closing.0" }
+    ]
   },
   couples: {
     title: "カップルカウンセリング",
@@ -136,7 +148,7 @@ export const servicesSectionsJp = {
     groups: [
       [
         "一人で苦しんでいると感じていませんか？似た経験を持つ人たちとつながることで、助けられると思いませんか？",
-        "グループカウンセリングは、参加者が洞察を分かち合い、励まし合い、共に成長できる支援的な場を提供します。",
+        "グループカウンセリングは、参加者が洞察を分かち合い、励まし合い、共に成長できる支援的な場を提供します。特に次のような方に効果的です：",
       ],
     ],
     lists: [
@@ -154,6 +166,12 @@ export const servicesSectionsJp = {
     closing: [
       "つながりと共有された経験を通じて、グループカウンセリングは新たな視点を得て回復力を高め、コミュニティの中で支えを見つける助けになります。",
     ],
+    "flow": [
+      { type: "p", textKey: "services.sections.group.groups.0.0" },
+      { type: "p", textKey: "services.sections.group.groups.0.1" },
+      { type: "list", listKey: "services.sections.group.lists.0", ordered: false },
+      { type: "p", textKey: "services.sections.group.closing.0" }
+    ]
   },
   christian: {
     title: "キリスト教カウンセリング",

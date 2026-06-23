@@ -4,7 +4,7 @@ export const servicesSectionsEn = {
     title: "Individual Therapy",
     groups: [
       [
-        "Everyone experiences challenges at some point in life. When faced with a physical illness, the best course of action is to seek treatment early.",
+        "Everyone experiences challenges at some point in life. When faced with a physical illness, the best course of action is to seek treatment early.\nThe same principle applies to mental health. Addressing psychological concerns as soon as they arise leads to faster recovery, while delaying help can prolong and intensify difficulties.",
         "The same principle applies to mental health. Addressing psychological concerns as soon as they arise leads to faster recovery, while delaying help can prolong and intensify difficulties.",
       ],
       [
@@ -49,6 +49,18 @@ export const servicesSectionsEn = {
     closing: [
       "Therapy empowers you to lead a more fulfilling life, build resilience, and strengthen your relationships.",
     ],
+    "flow": [
+      { type: "p", textKey: "services.sections.individual.groups.0.0" },
+      { type: "p", textKey: "services.sections.individual.groups.1.0" },
+      { type: "p", textKey: "services.sections.individual.groups.2.0" },
+      { type: "heading", textKey: "services.sections.individual.lists.0.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.0", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.1.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.1", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.2.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.2", ordered: false },
+      { type: "p", textKey: "services.sections.individual.closing.0" }
+    ]
   },
   couples: {
     title: "Couples Therapy",
@@ -130,7 +142,7 @@ export const servicesSectionsEn = {
     groups: [
       [
         "Do you feel like you're struggling alone? Would you benefit from connecting with others who understand your experiences?",
-        "Group therapy provides a supportive space where participants share insights, receive encouragement, and grow together.",
+        "Group therapy provides a supportive space where participants share insights, receive encouragement, and grow together. It is especially effective for those dealing with:",
       ],
     ],
     lists: [
@@ -148,6 +160,12 @@ export const servicesSectionsEn = {
     closing: [
       "By fostering connection and shared experiences, group therapy helps individuals gain perspective, build resilience, and find support in a community setting.",
     ],
+    "flow": [
+      { type: "p", textKey: "services.sections.group.groups.0.0" },
+      { type: "p", textKey: "services.sections.group.groups.0.1" },
+      { type: "list", listKey: "services.sections.group.lists.0", ordered: false },
+      { type: "p", textKey: "services.sections.group.closing.0" }
+    ]
   },
   christian: {
     title: "Christian Counseling",

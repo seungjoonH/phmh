@@ -4,7 +4,7 @@ export const servicesSectionsKo = {
     title: "개인 상담",
     groups: [
       [
-        "누구나 살면서 한 번쯤 어려운 시기를 겪게 됩니다. 신체적 질환이 생겼을 때 가장 현명한 대처는 조기에 치료를 받는 것입니다.",
+        "누구나 살면서 한 번쯤 어려운 시기를 겪게 됩니다. 신체적 질환이 생겼을 때 가장 현명한 대처는 조기에 치료를 받는 것입니다.\n정신건강도 마찬가지입니다. 심리적인 어려움이 생겼을 때 빨리 도움을 받을수록 더 빠르게 회복할 수 있으며, 방치할수록 어려움은 더 오래, 더 깊어질 수 있습니다.",
         "정신건강도 마찬가지입니다. 심리적인 어려움이 생겼을 때 빨리 도움을 받을수록 더 빠르게 회복할 수 있으며, 방치할수록 어려움은 더 오래, 더 깊어질 수 있습니다.",
       ],
       [
@@ -49,6 +49,18 @@ export const servicesSectionsKo = {
     closing: [
       "상담은 더 충만한 삶을 살고, 회복력을 키우며, 관계를 강화하는 데 도움이 됩니다.",
     ],
+    "flow": [
+      { type: "p", textKey: "services.sections.individual.groups.0.0" },
+      { type: "p", textKey: "services.sections.individual.groups.1.0" },
+      { type: "p", textKey: "services.sections.individual.groups.2.0" },
+      { type: "heading", textKey: "services.sections.individual.lists.0.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.0", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.1.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.1", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.2.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.2", ordered: false },
+      { type: "p", textKey: "services.sections.individual.closing.0" }
+    ]
   },
   couples: {
     title: "커플 상담",
@@ -130,7 +142,7 @@ export const servicesSectionsKo = {
     groups: [
       [
         "혼자 힘든 싸움을 하고 있다는 느낌이 드시나요? 비슷한 경험을 가진 사람들과 연결되면 도움이 될 것 같으신가요?",
-        "집단 상담은 참여자들이 서로의 통찰을 나누고 격려를 받으며 함께 성장할 수 있는 지지적인 공간을 제공합니다.",
+        "집단 상담은 참여자들이 서로의 통찰을 나누고 격려를 받으며 함께 성장할 수 있는 지지적인 공간을 제공합니다. 다음과 같은 어려움을 겪는 분들에게 특히 효과적입니다.",
       ],
     ],
     lists: [
@@ -148,6 +160,12 @@ export const servicesSectionsKo = {
     closing: [
       "연결과 공유된 경험을 통해 집단 상담은 새로운 관점을 얻고 회복력을 키우며 공동체 안에서 지지를 받도록 돕습니다.",
     ],
+    "flow": [
+      { type: "p", textKey: "services.sections.group.groups.0.0" },
+      { type: "p", textKey: "services.sections.group.groups.0.1" },
+      { type: "list", listKey: "services.sections.group.lists.0", ordered: false },
+      { type: "p", textKey: "services.sections.group.closing.0" }
+    ]
   },
   christian: {
     title: "기독교 상담",

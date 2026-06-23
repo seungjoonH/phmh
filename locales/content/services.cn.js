@@ -47,6 +47,18 @@ export const servicesSectionsCn = {
     ],
     "closing": [
       ""
+    ],
+    "flow": [
+      { type: "p", textKey: "services.sections.individual.groups.0.0" },
+      { type: "p", textKey: "services.sections.individual.groups.1.0" },
+      { type: "p", textKey: "services.sections.individual.groups.2.0" },
+      { type: "heading", textKey: "services.sections.individual.lists.0.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.0", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.1.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.1", ordered: false },
+      { type: "heading", textKey: "services.sections.individual.lists.2.lead" },
+      { type: "list", listKey: "services.sections.individual.lists.2", ordered: false },
+      { type: "p", textKey: "services.sections.individual.closing.0" }
     ]
   },
   "couples": {
@@ -152,6 +164,12 @@ export const servicesSectionsCn = {
     ],
     "closing": [
       ""
+    ],
+    "flow": [
+      { type: "p", textKey: "services.sections.group.groups.0.0" },
+      { type: "p", textKey: "services.sections.group.groups.0.1" },
+      { type: "list", listKey: "services.sections.group.lists.0", ordered: false },
+      { type: "p", textKey: "services.sections.group.closing.0" }
     ]
   },
   "christian": {

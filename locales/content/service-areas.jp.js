@@ -44,12 +44,27 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し、より均衡のとれた支えとなる考え方を育てます。",
-              "対人関係療法（IPT）：対人関係の課題が気分にどう影響するかを探り、より健全なつながりを築くためのツールを学びます。",
-              "行動活性化（BA）：意欲・エネルギー・喜びを取り戻すための小さくて意味のある活動に再び取り組みます。",
-              "クライアント中心療法：温かく、判断のない空間で率直に話し、深く内省し、サポートのもとで成長します。",
-              "ストレス管理と思考の再構成：心身を落ち着かせ、否定的な思考の連鎖をより建設的な視点に置き換える方法を学びます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n役に立たない思考パターンを見つけ出し、より均衡のとれた支えとなる考え方を育てます。",
+      marker: "dash"
+    },
+    {
+      text: "**対人関係療法（IPT）：**\n対人関係の課題が気分にどう影響するかを探り、より健全なつながりを築くためのツールを学びます。",
+      marker: "dash"
+    },
+    {
+      text: "**行動活性化（BA）：**\n意欲・エネルギー・喜びを取り戻すための小さくて意味のある活動に再び取り組みます。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\n温かく、判断のない空間で率直に話し、深く内省し、サポートのもとで成長します。",
+      marker: "dash"
+    },
+    {
+      text: "**ストレス管理と思考の再構成：**\n心身を落ち着かせ、否定的な思考の連鎖をより建設的な視点に置き換える方法を学びます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルのサポートとセルフケア**",
@@ -64,9 +79,28 @@ export const serviceAreasSectionsJp = {
       }
     ],
     "closing": [
-      "**回復への第一歩**",
-      "あなたは今感じていることで定義されるわけではありません。この痛み――この困難な季節――は永遠には続きません。うつ病は治療可能であり、一人で向き合う必要はありません。",
-      "癒しの空間があります。再生の空間があります。人生が再びあなたのものだと感じられる空間があります。「準備ができている」必要はありません。ただ、始めるための安全な場所が必要なだけです。私たちは、穏やかに、敬意をもって、あなたのペースで、そこであなたを迎えます。"
+    "**回復への第一歩**",
+    "あなたは今感じていることで定義されるわけではありません。この痛み――この困難な季節――は永遠には続きません。うつ病は治療可能であり、一人で向き合う必要はありません。\n癒しの空間があります。再生の空間があります。人生が再びあなたのものだと感じられる空間があります。「準備ができている」必要はありません。ただ、始めるための安全な場所が必要なだけです。私たちは、穏やかに、敬意をもって、あなたのペースで、そこであなたを迎えます。",
+    "癒しの空間があります。再生の空間があります。人生が再びあなたのものだと感じられる空間があります。「準備ができている」必要はありません。ただ、始めるための安全な場所が必要なだけです。私たちは、穏やかに、敬意をもって、あなたのペースで、そこであなたを迎えます。"
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.1.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.1.1" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.depression.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.depression.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.depression.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.closing.1" }
     ]
   },
   "traumaPtsd": {
@@ -86,11 +120,23 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "トラウマはさまざまな形で現れます。以下のいずれかが心当たりのある場合、専門的なサポートが助けになるかもしれません。",
             "items": [
-              "侵入的な記憶と反応：逃げられないように感じるフラッシュバック、悪夢、または苦痛を伴う記憶；トラウマを思い出させるものへの突然の感情的・身体的反応",
-              "回避と断絶：辛い記憶を呼び起こす人物、場所、または会話を避ける；感情的に麻痺したり、自分や他者から切り離されたように感じる",
-              "否定的な思考と気分の変化：持続的な罪悪感、恥、または自責；他者を信頼したり感情的に親密になることへの困難；トラウマの一部を思い出せなかったり、世界を危険だと感じる",
-              "過覚醒と反応性：常に警戒状態、驚きやすい、または過度に注意が向く；睡眠、集中力、またはエネルギー管理の困難；強い感情反応、または強い感情を調整することへの困難"
-            ]
+    {
+      text: "**侵入的な記憶と反応：**\n逃げられないように感じるフラッシュバック、悪夢、または苦痛を伴う記憶\nトラウマを思い出させるものへの突然の感情的・身体的反応",
+      marker: "dash"
+    },
+    {
+      text: "**回避と断絶：**\n辛い記憶を呼び起こす人物、場所、または会話を避ける\n感情的に麻痺したり、自分や他者から切り離されたように感じる",
+      marker: "dash"
+    },
+    {
+      text: "**否定的な思考と気分の変化：**\n持続的な罪悪感、恥、または自責；他者を信頼したり感情的に親密になることへの困難\nトラウマの一部を思い出せなかったり、世界を危険だと感じる",
+      marker: "dash"
+    },
+    {
+      text: "**過覚醒と反応性：**\n常に警戒状態、驚きやすい、または過度に注意が向く\n睡眠、集中力、またはエネルギー管理の困難；強い感情反応、または強い感情を調整することへの困難",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -108,14 +154,35 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：役に立たない思考を見つけ出し、より健全な対処法を育てます。",
-              "曝露療法：制御された環境でトラウマに関連する記憶に安全に向き合い、恐怖と回避を軽減します。",
-              "眼球運動による脱感作と再処理（EMDR）：誘導された眼球運動を使い、苦痛を伴う記憶を脳が処理・解放するのを助けます。",
-              "対人関係療法（IPT）：対人関係の癒しを通じて、つながりと信頼を再構築します。",
-              "クライアント中心療法：あなたのペースとニーズに沿って、判断のない空間で感情を探ります。",
-              "行動活性化（BA）：目的と喜びの感覚を回復するために、意味のある活動に再び取り組みます。",
-              "ストレス管理と認知の再構成：神経系を落ち着かせ、否定的な思考パターンを転換するためのテクニックを学びます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n役に立たない思考を見つけ出し、より健全な対処法を育てます。",
+      marker: "dash"
+    },
+    {
+      text: "**曝露療法：**\n制御された環境でトラウマに関連する記憶に安全に向き合い、恐怖と回避を軽減します。",
+      marker: "dash"
+    },
+    {
+      text: "**眼球運動による脱感作と再処理（EMDR）：**\n誘導された眼球運動を使い、苦痛を伴う記憶を脳が処理・解放するのを助けます。",
+      marker: "dash"
+    },
+    {
+      text: "**対人関係療法（IPT）：**\n対人関係の癒しを通じて、つながりと信頼を再構築します。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\nあなたのペースとニーズに沿って、判断のない空間で感情を探ります。",
+      marker: "dash"
+    },
+    {
+      text: "**行動活性化（BA）：**\n目的と喜びの感覚を回復するために、意味のある活動に再び取り組みます。",
+      marker: "dash"
+    },
+    {
+      text: "**ストレス管理と認知の再構成：**\n神経系を落ち着かせ、否定的な思考パターンを転換するためのテクニックを学びます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルのサポートとセルフケア**",
@@ -130,10 +197,29 @@ export const serviceAreasSectionsJp = {
     ],
     "closing": [
     "**回復への第一歩**",
-    "あなたは壊れていません。あなたが抱える痛みは本物です――しかし、それがあなたのすべてではありません。**癒しとは忘れることではありません。**それは再び安心を感じ、現在の中に平和を見つけ、希望が育まれることを許すことです。",
+    "あなたは壊れていません。あなたが抱える痛みは本物です――しかし、それがあなたのすべてではありません。**癒しとは忘れることではありません。**それは再び安心を感じ、現在の中に平和を見つけ、希望が育まれることを許すことです。\n急ぐ必要はありません。一人で乗り越える必要もありません。癒しがどのようなものかは、あなたが選ぶことができます。そして私たちは、確かさ、ケア、そして敬意をもって、その道をともに歩みます。\nトラウマは一人で抱え込むものではありません。適切なサポートがあれば、再び地に足のついた感覚を持ち、信頼を再構築し、人生と再びつながり始めることができます。",
     "急ぐ必要はありません。一人で乗り越える必要もありません。癒しがどのようなものかは、あなたが選ぶことができます。そして私たちは、確かさ、ケア、そして敬意をもって、その道をともに歩みます。",
     "トラウマは一人で抱え込むものではありません。適切なサポートがあれば、再び地に足のついた感覚を持ち、信頼を再構築し、人生と再びつながり始めることができます。"
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.closing.1" }
+    ]
   },
   "anxietyPanic": {
     "title": "不安・パニック発作",
@@ -175,26 +261,65 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：パニックを引き起こす思考パターンを認識し再構成することを学び、より健全な反応を育てます。",
-              "曝露療法：恐れている状況に段階的かつ安全に向き合い、回避を減らし、回復力を高めます。",
-              "クライアント中心療法：恐怖を処理し、身体への信頼を再構築し、自分自身と再びつながれる、サポーティブで判断のない空間。",
-              "ストレス管理と認知の再構成：神経系を落ち着かせ、不安な思考をより安定したバランスのとれた視点に変えるための実践的なツールを身につけます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\nパニックを引き起こす思考パターンを認識し再構成することを学び、より健全な反応を育てます。",
+      marker: "dash"
+    },
+    {
+      text: "**曝露療法：**\n恐れている状況に段階的かつ安全に向き合い、回避を減らし、回復力を高めます。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\n恐怖を処理し、身体への信頼を再構築し、自分自身と再びつながれる、サポーティブで判断のない空間。",
+      marker: "dash"
+    },
+    {
+      text: "**ストレス管理と認知の再構成：**\n神経系を落ち着かせ、不安な思考をより安定したバランスのとれた視点に変えるための実践的なツールを身につけます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルのサポートと日常のケア**",
             "items": [
-              "呼吸とリラクゼーションの実践：深呼吸、マインドフルネス、ヨガなどの技法で心身を落ち着かせます。",
-              "運動と栄養：感情的・身体的な調整をサポートするための定期的な運動とバランスのとれた食事。",
-              "刺激物・誘発因子の軽減：不安症状を軽減するためにカフェインや過剰な刺激を制限する。"
-            ]
+    {
+      text: "**呼吸とリラクゼーションの実践：**\n深呼吸、マインドフルネス、ヨガなどの技法で心身を落ち着かせます。",
+      marker: "dash"
+    },
+    {
+      text: "**運動と栄養：**\n感情的・身体的な調整をサポートするための定期的な運動とバランスのとれた食事。",
+      marker: "dash"
+    },
+    {
+      text: "**刺激物・誘発因子の軽減：**\n不安症状を軽減するためにカフェインや過剰な刺激を制限する。",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
     ],
     "closing": [
-      "**平和への第一歩**",
-      "パニックは弱さのサインではありません。それはあなたの身体が安心とサポートを求めているというサインであり、ケアがあれば安心は回復できます。あなたは恐れよりも大きな存在です。再び穏やかで安定した生活を送る力があります。次のパニック発作に備えて身構える必要はありません。恐怖を乗り越え――より強くなって出てくることができます。私たちは、一歩一歩、ともに歩みます。"
+    "**平和への第一歩**",
+    "パニックは弱さのサインではありません。それはあなたの身体が安心とサポートを求めているというサインであり、ケアがあれば安心は回復できます。**あなたは恐れよりも大きな存在です。**再び穏やかで安定した生活を送る力があります。次のパニック発作に備えて身構える必要はありません。恐怖を乗り越え――より強くなって出てくることができます。私たちは、一歩一歩、ともに歩みます。"
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.closing.1" }
     ]
   },
   "suicidalThoughts": {
@@ -237,11 +362,23 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：つらい思考を穏やかに探り再構成し、希望と意味の瞬間を再発見します。",
-              "クライアント中心療法：あなたの声が大切にされ、あなた自身のペースで癒しが展開される、思いやりある空間。",
-              "対人関係療法（IPT）：意味のある関係を強化し、必要とし、値するサポートを再構築します。",
-              "危機支援と感情的ケア：感情的に圧倒されそうなときの即時サポート；強い感情を管理し地に足をつけるためのツール；あなたのそばで歩んでくれる人々のサポートシステムを築くための指針"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\nつらい思考を穏やかに探り再構成し、希望と意味の瞬間を再発見します。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\nあなたの声が大切にされ、あなた自身のペースで癒しが展開される、思いやりある空間。",
+      marker: "dash"
+    },
+    {
+      text: "**対人関係療法（IPT）：**\n意味のある関係を強化し、必要とし、値するサポートを再構築します。",
+      marker: "dash"
+    },
+    {
+      text: "**危機支援と感情的ケア：**\n感情的に圧倒されそうなときの即時サポート。\n強い感情を管理し地に足をつけるためのツール。\nあなたのそばで歩んでくれる人々のサポートシステムを築くための指針。",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -249,6 +386,23 @@ export const serviceAreasSectionsJp = {
     "closing": [
       "**あなたはまだここにいる――それが大切なこと**",
       "今はそう見えなくても、人生にはまだあなたのための場所があります。まだ吸っていない息があります。まだ出会っていないつながりがあります。長い間感じていなかった平和の感覚があります。大丈夫なふりをする必要はありません。すべての答えを持っている必要もありません。ただ、やり直すための小さく安全な場所が一つあれば十分です。私たちは暗闇の中であなたのそばにいます――押し進めるためではなく、あなたがひとりではないことを伝えるために。そして準備ができたとき、穏やかに――光へと、ともに歩みます。"
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.suicidalThoughts.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.suicidalThoughts.subsections.1.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.closing.1" }
     ]
   },
   "culturalIdentity": {
@@ -291,27 +445,65 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "アイデンティティの探求と統合：文化的な経験と価値観を探り、より安定した確かな自己感覚を育てます。",
-              "文化的に応答するカウンセリング：個性を尊重しながら、さまざまな文化的空間をうまく渡り歩く方法を学びます。",
-              "多文化環境でのストレスと回復力：文化的ストレスの感情的な影響を理解し、自信と明確さをもって対応するための戦略を構築します。"
-            ]
+    {
+      text: "**アイデンティティの探求と統合：**\n文化的な経験と価値観を探り、より安定した確かな自己感覚を育てます。",
+      marker: "dash"
+    },
+    {
+      text: "**文化的に応答するカウンセリング：**\n個性を尊重しながら、さまざまな文化的空間をうまく渡り歩く方法を学びます。",
+      marker: "dash"
+    },
+    {
+      text: "**多文化環境でのストレスと回復力：**\n文化的ストレスの感情的な影響を理解し、自信と明確さをもって対応するための戦略を構築します。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**社会的サポートとセルフケア**",
             "items": [
-              "文化的強みを受け入れる：あなた独自の文化的背景が、強さ、視点、そして誇りの源となりうることを認識します。",
-              "自己受容と自尊心：自分のアイデンティティを肯定し、自分を尊重し、自分の独自性に自信を見つける実践。",
-              "意味のある関係を築く：ありのままの自分として、見られ、尊重され、サポートされると感じられるつながりを育てます。"
-            ]
+    {
+      text: "**文化的強みを受け入れる：**あなた独自の文化的背景が、強さ、視点、そして誇りの源となりうることを認識します。",
+      marker: "dash"
+    },
+    {
+      text: "**自己受容と自尊心：**自分のアイデンティティを肯定し、自分を尊重し、自分の独自性に自信を見つける実践。",
+      marker: "dash"
+    },
+    {
+      text: "**意味のある関係を築く：**ありのままの自分として、見られ、尊重され、サポートされると感じられるつながりを育てます。",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
     ],
     "closing": [
     "**あなた自身の全体性への第一歩**",
-    "あなたのアイデンティティは解決されるべき問題ではありません。それはまだ展開し続けている物語です――複雑さに富み、経験に形作られ、可能性に満ちている。たとえ今は道が不確かに感じられても、あなたには「属する」ということが自分にとって何を意味するかを定義する力があります。**文化の間でどちらかを選ぶ必要はありません――全部の自分を受け入れることを選べるのです。**",
+    "あなたのアイデンティティは解決されるべき問題ではありません。それはまだ展開し続けている物語です――複雑さに富み、経験に形作られ、可能性に満ちている。たとえ今は道が不確かに感じられても、あなたには「属する」ということが自分にとって何を意味するかを定義する力があります。**文化の間でどちらかを選ぶ必要はありません――全部の自分を受け入れることを選べるのです。**\nあなたがより自由に、より充実して、そして真に自分らしく生きることを学ぶ過程で、私たちはあなたのそばに寄り添います。",
     "あなたがより自由に、より充実して、そして真に自分らしく生きることを学ぶ過程で、私たちはあなたのそばに寄り添います。"
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.closing.1" }
+    ]
   },
   "bipolar": {
     "title": "双極性障害",
@@ -329,9 +521,15 @@ export const serviceAreasSectionsJp = {
         "lists": [
           {
             "items": [
-              "躁状態または軽躁状態のエピソード：抑えきれないような感覚のエネルギー、興奮、または多幸感；眠れなくても疲れを感じない；衝動的な行動――リスクのある出費、無謀な決断、またはやりすぎ；思考が飛び回る、早口になる、または集中困難",
-              "うつ病エピソード：深く続く悲しみや感情の麻痺；かつて楽しんでいた活動への興味喪失；疲労感、または身体が重くのろく感じる；集中困難、または日常的な決断のしにくさ；絶望感、または自傷に関する考え"
-            ]
+    {
+      text: "**躁状態または軽躁状態のエピソード：**\n抑えきれないような感覚のエネルギー、興奮、または多幸感.\n眠れなくても疲れを感じない.\n衝動的な行動――リスクのある出費、無謀な決断、またはやりすぎ.\n思考が飛び回る、早口になる、または集中困難.",
+      marker: "dash"
+    },
+    {
+      text: "**うつ病エピソード：**\n深く続く悲しみや感情の麻痺.\nかつて楽しんでいた活動への興味喪失.\n疲労感、または身体が重くのろく感じる.\n集中困難、または日常的な決断のしにくさ.\n絶望感、または自傷に関する考え.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -349,19 +547,40 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：気分に影響を与える思考と行動のパターンを見つけ出し、感情をより効果的に調整する方法を学びます。",
-              "対人関係・社会的リズム療法（IPSRT）：健全なルーティンを確立し、気分の安定を支える関係を強化します。",
-              "クライアント中心療法：安全で判断のない空間で自分の経験を探り、感情的ニーズへの理解を深めます。",
-              "感情調整とストレス管理：気分の波を管理し、自信と平静さをもってストレスに対応するための実践的なスキルを築きます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n気分に影響を与える思考と行動のパターンを見つけ出し、感情をより効果的に調整する方法を学びます。",
+      marker: "dash"
+    },
+    {
+      text: "**対人関係・社会的リズム療法（IPSRT）：**\n健全なルーティンを確立し、気分の安定を支える関係を強化します。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\n安全で判断のない空間で自分の経験を探り、感情的ニーズへの理解を深めます。",
+      marker: "dash"
+    },
+    {
+      text: "**感情調整とストレス管理：**\n気分の波を管理し、自信と平静さをもってストレスに対応するための実践的なスキルを築きます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルのサポートとセルフケア**",
             "items": [
-              "安定したルーティンを保つ：一貫した睡眠、食事、日常活動のスケジュールを維持することで身体の自然なリズムをサポートします。",
-              "衝動的なパターンを認識する：衝動的な衝動に穏やかな気づきを向け、反応する前に立ち止まる練習をします。",
-              "気分を記録する：日記やアプリを使って感情的なパターンに気づき、気分の変化の早期サインを見つけます。"
-            ]
+    {
+      text: "**安定したルーティンを保つ：**\n一貫した睡眠、食事、日常活動のスケジュールを維持することで身体の自然なリズムをサポートします。",
+      marker: "dash"
+    },
+    {
+      text: "**衝動的なパターンを認識する：**\n衝動的な衝動に穏やかな気づきを向け、反応する前に立ち止まる練習をします。",
+      marker: "dash"
+    },
+    {
+      text: "**気分を記録する：**\n日記やアプリを使って感情的なパターンに気づき、気分の変化の早期サインを見つけます。",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -369,7 +588,25 @@ export const serviceAreasSectionsJp = {
     "closing": [
     "**安定への第一歩**",
     "あなたは浮き沈みで定義されるのではありません。たとえ人生がバランスを失っているように感じても、前に進む道があります――再び安定した、地に足のついた、自分自身と調和した感覚を持つための道が。癒しは一度に起こる必要はありません。それは理解から、自己への思いやりから、そして本当の変化につながる小さな一歩から始まります。**あなたはすでに、始めるのに必要な強さを持っています。**そして私たちは、一歩一歩、あなたのそばで歩みます。"
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.closing.1" }
+    ]
   },
   "adhd": {
     "title": "ADHD（注意欠如・多動性障害）",
@@ -388,9 +625,15 @@ export const serviceAreasSectionsJp = {
         "lists": [
           {
             "items": [
-              "不注意：タスクを始めたり完了したりすることへの困難；本、おもちゃ、学用品などの日用品を頻繁に失くす；整理、時間管理、または複数ステップの指示に従うことへの困難；気が散りやすく、持続的に集中することへの困難",
-              "多動性と衝動性：絶え間ない動き、そわそわ、または落ち着きのなさ；過度のおしゃべり、他者への割り込み、または順番を待つことへの困難；衝動的に行動し、その後で欲求不満や後悔につながることが多い；感情の管理、またはグループ設定でのルールを守ることへの困難"
-            ]
+    {
+      text: "**不注意：**\nタスクを始めたり完了したりすることへの困難.\n本、おもちゃ、学用品などの日用品を頻繁に失くす.\n整理、時間管理、または複数ステップの指示に従うことへの困難.\n気が散りやすく、持続的に集中することへの困難",
+      marker: "dash"
+    },
+    {
+      text: "**多動性と衝動性：**\n絶え間ない動き、そわそわ、または落ち着きのなさ.\n過度のおしゃべり、他者への割り込み、または順番を待つことへの困難.\n衝動的に行動し、その後で欲求不満や後悔につながることが多い.\n感情の管理、またはグループ設定でのルールを守ることへの困難.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -408,11 +651,23 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し、集中力、感情的な気づき、自己調整のための実践的なスキルを築くのを助けます。",
-              "行動療法：健全な習慣と行動的成長をサポートするために、構造、ルーティン、正のフィードバックを活用します。",
-              "整理・自己管理コーチング：計画、優先順位づけ、日常タスクの管理のためのツールを教えます――ストレスを軽減し、自立を促します。",
-              "社会的・感情的スキルトレーニング：家庭や学校でのより健全な関係をサポートするために、コミュニケーション、衝動制御、感情表現を向上させます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n役に立たない思考パターンを見つけ出し、集中力、感情的な気づき、自己調整のための実践的なスキルを築くのを助けます。",
+      marker: "dash"
+    },
+    {
+      text: "**行動療法：**\n健全な習慣と行動的成長をサポートするために、構造、ルーティン、正のフィードバックを活用します。",
+      marker: "dash"
+    },
+    {
+      text: "**整理・自己管理コーチング：**\n計画、優先順位づけ、日常タスクの管理のためのツールを教えます――ストレスを軽減し、自立を促します。",
+      marker: "dash"
+    },
+    {
+      text: "**社会的・感情的スキルトレーニング：**\n家庭や学校でのより健全な関係をサポートするために、コミュニケーション、衝動制御、感情表現を向上させます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルのサポートと日常のケア**",
@@ -429,6 +684,25 @@ export const serviceAreasSectionsJp = {
     "closing": [
       "**ともに可能性を再発見する**",
       "お子さんは他の人には理解しにくい方法で世界と向き合っているかもしれません――しかし、それはその旅が意味深くないということではありません。その創造性、好奇心、感受性は「修正」すべき課題ではありません――サポートされ、称えられるべき強みです。この道が圧倒的に感じられるなら、一人で歩む必要はありません。私たちは、話を聞き、助け、一歩一歩、ご家族に寄り添うためにここにいます。"
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.adhd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.adhd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.closing.1" }
     ]
   },
   "relationship": {
@@ -471,10 +745,19 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "関係パターンの探求：繰り返す関係のダイナミクスを振り返り、よりバランスのとれた健全なつながり方を発見します。",
-              "認知行動療法（CBT）：役に立たない思考を転換し、感情管理とコミュニケーションのための実践的なツールを学びます。",
-              "クライアント中心療法：判断のない空間でつらい感情を分かち合い――自分自身の感情とともにいる力を強化します。"
-            ]
+    {
+      text: "**関係パターンの探求：**\n繰り返す関係のダイナミクスを振り返り、よりバランスのとれた健全なつながり方を発見します。",
+      marker: "dash"
+    },
+    {
+      text: "**認知行動療法（CBT）：**\n役に立たない思考を転換し、感情管理とコミュニケーションのための実践的なツールを学びます。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\n判断のない空間でつらい感情を分かち合い――自分自身の感情とともにいる力を強化します。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**コミュニケーションと感情表現**",
@@ -496,9 +779,29 @@ export const serviceAreasSectionsJp = {
       }
     ],
     "closing": [
-      "**より健全なつながりへの第一歩**",
-      "最も豊かな関係は、あなたを縮小させるものではなく――真の自分へと広がる助けをしてくれるものです。今直面していることは失敗ではなく、成長し、より真に関わり、より真に愛するための転換点かもしれません。自分を失わずに深くつながりたいという願いは、贅沢なことではありません。そしてそれを一人で乗り越える必要もありません。",
-      "再び心を開く準備ができたとき、私たちはここにいます――穏やかに、確かに、あなたのそばに。"
+    "**より健全なつながりへの第一歩**",
+    "最も豊かな関係は、あなたを縮小させるものではなく――真の自分へと広がる助けをしてくれるものです。今直面していることは失敗ではなく、成長し、より真に関わり、より真に愛するための転換点かもしれません。自分を失わずに深くつながりたいという願いは、贅沢なことではありません。そしてそれを一人で乗り越える必要もありません。\n再び心を開く準備ができたとき、私たちはここにいます――穏やかに、確かに、あなたのそばに。",
+    "再び心を開く準備ができたとき、私たちはここにいます――穏やかに、確かに、あなたのそばに。"
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.relationship.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.1", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.2.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.2", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.relationship.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.closing.1" }
     ]
   },
   "ocd": {
@@ -518,9 +821,15 @@ export const serviceAreasSectionsJp = {
         "lists": [
           {
             "items": [
-              "強迫観念（侵入的な考え）：繰り返す望まない考え、イメージ、または衝動；汚染、危害、または何かが「ちょうどよくない」という恐れ；考えが「中和」または取り消されないと高まる不安",
-              "強迫行為（反復的な行動）：繰り返す手洗い、確認、数える、または並べる；特定の行動を完了しなければ何か悪いことが起きるという信念；日常生活、関係、またはウェルビーイングを妨げる儀式"
-            ]
+    {
+      text: "**強迫観念（侵入的な考え）：**\n繰り返す望まない考え、イメージ、または衝動.\n汚染、危害、または何かが「ちょうどよくない」という恐れ.\n考えが「中和」または取り消されないと高まる不安.",
+      marker: "dash"
+    },
+    {
+      text: "**強迫行為（反復的な行動）：**\n繰り返す手洗い、確認、数える、または並べる.\n特定の行動を完了しなければ何か悪いことが起きるという信念.\n日常生活、関係、またはウェルビーイングを妨げる儀式.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -538,11 +847,23 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し転換しながら、より健全な対処法を築きます。",
-              "曝露反応妨害法（ERP）：安全でサポーティブな空間で不安のトリガーに段階的に向き合いながら、強迫的な反応に抵抗することを学びます。",
-              "クライアント中心療法：あなたの経験を探りながら、温かさ、敬意、理解を提供するセラピストとともに取り組みます。",
-              "感情調整とストレス管理：圧倒的な感情を管理し感情的な回復力を高めるためのグラウンディングとマインドフルネスの技法を練習します。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n役に立たない思考パターンを見つけ出し転換しながら、より健全な対処法を築きます。",
+      marker: "dash"
+    },
+    {
+      text: "**曝露反応妨害法（ERP）：**\n安全でサポーティブな空間で不安のトリガーに段階的に向き合いながら、強迫的な反応に抵抗することを学びます。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\nあなたの経験を探りながら、温かさ、敬意、理解を提供するセラピストとともに取り組みます。",
+      marker: "dash"
+    },
+    {
+      text: "**感情調整とストレス管理：**\n圧倒的な感情を管理し感情的な回復力を高めるためのグラウンディングとマインドフルネスの技法を練習します。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルとセルフケアのサポート**",
@@ -559,7 +880,26 @@ export const serviceAreasSectionsJp = {
     "closing": [
     "**癒しへの第一歩**",
     "侵入的な考えと強迫的な行動は強力に感じられるかもしれませんが、あなたよりも強くはありません。**それらは個人的な欠陥ではありません。**それらはあなたの心が安全を保とうとしているサインです。一人でこれと向き合う必要はありません。適切なサポートがあれば、より安定した地を見つけ、不安の締め付けを緩め、より穏やかで、より明確で、真に自分自身の人生に戻ることができます。穏やかに、ともに始めましょう。"
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.ocd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.ocd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.closing.1" }
+    ]
   },
   "eatingDisorders": {
     "title": "摂食障害",
@@ -578,10 +918,19 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "以下のパターンのいずれかに自分自身または大切な人に心当たりがある場合、手を伸ばすタイミングかもしれません。",
             "items": [
-              "神経性食欲不振症：持続的な食制限と体重増加への強い恐怖；食事や「正常な」体型を維持することへの不安；歪んだ身体イメージと食事に関する厳しいルール",
-              "神経性過食症：過食とその後の排出（嘔吐、下剤、または過度の運動）のエピソード；体重と体型への強い執着；食後の恥、罪悪感、または苦痛の感情",
-              "過食性障害：制御を失った感覚を伴う、満腹を超えて食べる頻繁なエピソード；食後の感情的麻痺、自己批判、または罪悪感；体重の変動または身体的不快感と関連することがある"
-            ]
+    {
+      text: "**神経性食欲不振症：**\n持続的な食制限と体重増加への強い恐怖.\n食事や「正常な」体型を維持することへの不安.\n歪んだ身体イメージと食事に関する厳しいルール.",
+      marker: "dash"
+    },
+    {
+      text: "**神経性過食症：**\n過食とその後の排出（嘔吐、下剤、または過度の運動）のエピソード.\n体重と体型への強い執着.\n食後の恥、罪悪感、または苦痛の感情.",
+      marker: "dash"
+    },
+    {
+      text: "**過食性障害：**\n制御を失った感覚を伴う、満腹を超えて食べる頻繁なエピソード.\n食後の感情的麻痺、自己批判、または罪悪感.\n体重の変動または身体的不快感と関連することがある.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -599,11 +948,23 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：食、身体イメージ、自己価値に関する有害な信念を再構成しながら、より健全な習慣を築きます。",
-              "対人関係療法（IPT）：人生の転換期と対人関係のダイナミクスが食のパターンと自己像にどう影響するかを探ります。",
-              "クライアント中心療法：あなたの経験が聞かれ、理解され、大切にされる温かくサポーティブな空間。",
-              "感情調整とストレス管理：感情的なトリガーを認識し、乱れた行動へのエネルギーを減らす健全な対処スキルを育てます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n食、身体イメージ、自己価値に関する有害な信念を再構成しながら、より健全な習慣を築きます。",
+      marker: "dash"
+    },
+    {
+      text: "**対人関係療法（IPT）：**\n人生の転換期と対人関係のダイナミクスが食のパターンと自己像にどう影響するかを探ります。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\nあなたの経験が聞かれ、理解され、大切にされる温かくサポーティブな空間。",
+      marker: "dash"
+    },
+    {
+      text: "**感情調整とストレス管理：**\n感情的なトリガーを認識し、乱れた行動へのエネルギーを減らす健全な対処スキルを育てます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**栄養指導とライフスタイルサポート**",
@@ -618,9 +979,28 @@ export const serviceAreasSectionsJp = {
     ],
     "closing": [
     "**癒しへの第一歩**",
-    "身体の中の不快感。鏡の前での恐怖。毎回の食事のたびに繰り広げられる静かな戦い――**これらは失敗のサインではありません。それらは痛みのサインです。**そして痛みはケアに値します。一人でこれと戦う必要はありません。回復はすべてを「正しく」することではありません。それは自己批判を和らげ、恥を手放し、穏やかに、自分のペースで、再び自分自身を信頼することを学ぶことです。",
+    "身体の中の不快感。鏡の前での恐怖。毎回の食事のたびに繰り広げられる静かな戦い――**これらは失敗のサインではありません。それらは痛みのサインです。**そして痛みはケアに値します。一人でこれと戦う必要はありません。回復はすべてを「正しく」することではありません。それは自己批判を和らげ、恥を手放し、穏やかに、自分のペースで、再び自分自身を信頼することを学ぶことです。\nそこから始めましょう。プレッシャーではなく、忍耐から。批判ではなく、思いやりから。あなたを変えることではなく、あなたが身体の中に、そして人生の中に、我が家を感じる手助けをすることから。",
     "そこから始めましょう。プレッシャーではなく、忍耐から。批判ではなく、思いやりから。あなたを変えることではなく、あなたが身体の中に、そして人生の中に、我が家を感じる手助けをすることから。"
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.closing.1" }
+    ]
   },
   "asd": {
     "title": "自閉スペクトラム症（ASD）",
@@ -638,9 +1018,15 @@ export const serviceAreasSectionsJp = {
         "lists": [
           {
             "items": [
-              "社会的交流とコミュニケーションの違い：目を合わせることや表情、声のトーンへの苦労；やりとりのある会話や社会的なサインの解釈への困難；感情の処理と表現に余分な時間が必要",
-              "反復的な行動と集中した興味：ルーティン、パターン、または特定の興味への強い執着；予期しない変化や移行への不快感；光、音、質感、または身体的な接触への異常な感受性"
-            ]
+    {
+      text: "**社会的交流とコミュニケーションの違い：**\n目を合わせることや表情、声のトーンへの苦労.\nやりとりのある会話や社会的なサインの解釈への困難.\n感情の処理と表現に余分な時間が必要.",
+      marker: "dash"
+    },
+    {
+      text: "**反復的な行動と集中した興味：**\nルーティン、パターン、または特定の興味への強い執着.\n予期しない変化や移行への不快感.\n光、音、質感、または身体的な接触への異常な感受性.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -653,19 +1039,40 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "ソーシャルスキルトレーニング（SST）：構造化されたピアベースの練習を通じて、自然な社会的成長をサポートします。",
-              "認知行動療法（CBT）：不安の管理、柔軟性の向上、自己調整の構築を助けます。",
-              "言語・コミュニケーション療法：言語的および非言語的コミュニケーションを強化します。",
-              "感覚統合療法：感覚体験における安心と落ち着きを育てます。"
-            ]
+    {
+      text: "**ソーシャルスキルトレーニング（SST）：**\n構造化されたピアベースの練習を通じて、自然な社会的成長をサポートします。",
+      marker: "dash"
+    },
+    {
+      text: "**認知行動療法（CBT）：**\n不安の管理、柔軟性の向上、自己調整の構築を助けます。",
+      marker: "dash"
+    },
+    {
+      text: "**言語・コミュニケーション療法：**\n言語的および非言語的コミュニケーションを強化します。",
+      marker: "dash"
+    },
+    {
+      text: "**感覚統合療法：**\n感覚体験における安心と落ち着きを育てます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルのサポートと自己調整**",
             "items": [
-              "予測可能なルーティンを作る：構造を通じて安心感を育てます。",
-              "感覚管理ツール：過剰刺激を乗り越えるための戦略を開発します。",
-              "感情調整と対処スキル：子どもと大人が感情的なサインをより楽に認識し対応することを教えます。"
-            ]
+    {
+      text: "**予測可能なルーティンを作る：**\n構造を通じて安心感を育てます。",
+      marker: "dash"
+    },
+    {
+      text: "**感覚管理ツール：**\n過剰刺激を乗り越えるための戦略を開発します。",
+      marker: "dash"
+    },
+    {
+      text: "**感情調整と対処スキル：**\n子どもと大人が感情的なサインをより楽に認識し対応することを教えます。",
+      marker: "dash"
+    }
+  ]
           }
         ]
       },
@@ -681,6 +1088,26 @@ export const serviceAreasSectionsJp = {
     "closing": [
       "**理解とつながりへの第一歩**",
       "自閉症は修正すべきものではありません。それは理解し、受け入れ、サポートすべきものです。あなたと大切な人は、今のままで、すでに十分です。私たちは違いを消すのではなく、強みを育てることを信じています。家族が離れるのではなく、より近くなることを助けることを信じています。そして、穏やかに、敬意をもって、一歩一歩、ともに歩むことを信じています。"
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.asd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.1.lists.1", ordered: false },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.2.heading" },
+      { type: "p", textKey: "serviceAreas.sections.asd.subsections.2.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.closing.1" }
     ]
   },
   "lifeStress": {
@@ -722,10 +1149,19 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：役に立たない思考パターンを見つけ出し、再構成する。精神的なプレッシャーを和らげる、より健全で地に足のついた視点を築きます。",
-              "クライアント中心療法：サポーティブで判断のない空間で自分の経験を探ります。真に話を聞いてもらいながら、自分のペースで方向性を見つけます。",
-              "ストレス管理トレーニング：圧倒感を管理し、感情を調整し、プレッシャーの高い状況でより主体的に感じるための実践的なツールを学びます。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n役に立たない思考パターンを見つけ出し、再構成する。精神的なプレッシャーを和らげる、より健全で地に足のついた視点を築きます。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\nサポーティブで判断のない空間で自分の経験を探ります。真に話を聞いてもらいながら、自分のペースで方向性を見つけます。",
+      marker: "dash"
+    },
+    {
+      text: "**ストレス管理トレーニング：**\n圧倒感を管理し、感情を調整し、プレッシャーの高い状況でより主体的に感じるための実践的なツールを学びます。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルとセルフケア**",
@@ -742,6 +1178,24 @@ export const serviceAreasSectionsJp = {
     "closing": [
       "**より軽い明日への第一歩**",
       "ストレスは生活の一部かもしれませんが、すべての空間を占有する必要はありません。すべてを一人で抱える必要はありません。今どう感じていても、前に進む道を見つける力があります。そして準備ができたとき、私たちはここにいます――あなたのペースで、あなたのやり方で、そばで歩みます。"
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.groups.0.1" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.closing.1" }
     ]
   },
   "griefLoss": {
@@ -784,17 +1238,32 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "認知行動療法（CBT）：喪失を巡る困難な考えを穏やかに探り、再構成します。感情的な圧倒にうまく対処するための方法を学びます。",
-              "クライアント中心療法：プレッシャーや期待なく、感情が見られ、聞かれ、サポートされる温かく判断のない空間。",
-              "悲嘆の処理と感情的サポート：感情的な気づきを育て、悲嘆が自然に流れていくことを許します。喪失を意味深く表現し、大切にし、ともに生きる方法を発見します。"
-            ]
+    {
+      text: "**認知行動療法（CBT）：**\n喪失を巡る困難な考えを穏やかに探り、再構成します。感情的な圧倒にうまく対処するための方法を学びます。",
+      marker: "dash"
+    },
+    {
+      text: "**クライアント中心療法：**\nプレッシャーや期待なく、感情が見られ、聞かれ、サポートされる温かく判断のない空間。",
+      marker: "dash"
+    },
+    {
+      text: "**悲嘆の処理と感情的サポート：**\n感情的な気づきを育て、悲嘆が自然に流れていくことを許します。喪失を意味深く表現し、大切にし、ともに生きる方法を発見します。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**社会的サポートとセルフケア**",
             "items": [
-              "他者とつながる：信頼できる友人や家族とオープンに話す。共有された物語とそこにいてくれること自体が、慰めとつながりの源になることがあります。",
-              "心身への穏やかなケア：マインドフルなウォーキング、静かな日記書き、または深呼吸などの落ち着いたルーティンを取り入れ、悲嘆に空間を与え、内なるバランスを回復する助けをします。"
-            ]
+    {
+      text: "**他者とつながる：**\n信頼できる友人や家族とオープンに話す。共有された物語とそこにいてくれること自体が、慰めとつながりの源になることがあります。",
+      marker: "dash"
+    },
+    {
+      text: "**心身への穏やかなケア：**\nマインドフルなウォーキング、静かな日記書き、または深呼吸などの落ち着いたルーティンを取り入れ、悲嘆に空間を与え、内なるバランスを回復する助けをします。",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -802,6 +1271,25 @@ export const serviceAreasSectionsJp = {
     "closing": [
       "**癒しへの第一歩**",
       "悲嘆は愛の反映であり、あなたが感じる痛みはそのつながりの深さを称えるものです。しかし、あなたの悲嘆はあなたのすべてではありません。そして、この悲しみの季節はあなたの物語が終わる場所ではありません。あなたが抱き続ける人々と記憶は、常に大切であり続けます。そして時を経て、忘れることによってではなく、愛と喪失を並べて抱く方法を学ぶことによって、再び温もりを感じ始めることができます。この道を一人で歩む必要はありません。穏やかに、確かに、常にあなたの時間で、あなたをサポートするためにここにいます。"
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.closing.1" }
     ]
   },
   "sleep": {
@@ -821,11 +1309,23 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "以下のいずれかが心当たりのある場合、手を伸ばすタイミングかもしれません。",
             "items": [
-              "不眠症：寝つけない、または眠り続けることができない；早く目が覚めて、再び眠れない；眠った後も持続的な疲労感",
-              "睡眠時無呼吸症候群：睡眠中に呼吸が止まったり、浅くなったりする；いびき、または息が詰まる感覚；日中の眠気、過敏性、または集中困難",
-              "過眠症：十分な睡眠をとっているのに過度の眠気；日中に目を覚まし続けることへの困難；圧倒的な疲労のために機能することへの困難",
-              "悪夢障害：睡眠を妨げる強烈で苦痛を伴う夢；眠りに落ちることへの残留する恐怖または不安；目覚めた際の感情的な疲弊"
-            ]
+    {
+      text: "**不眠症：**\n寝つけない、または眠り続けることができない.\n早く目が覚めて、再び眠れない.\n眠った後も持続的な疲労感.",
+      marker: "dash"
+    },
+    {
+      text: "**睡眠時無呼吸症候群：**\n睡眠中に呼吸が止まったり、浅くなったりする.\nいびき、または息が詰まる感覚.\n日中の眠気、過敏性、または集中困難.",
+      marker: "dash"
+    },
+    {
+      text: "**過眠症：**\n十分な睡眠をとっているのに過度の眠気.\n日中に目を覚まし続けることへの困難.\n圧倒的な疲労のために機能することへの困難.",
+      marker: "dash"
+    },
+    {
+      text: "**悪夢障害：**\n睡眠を妨げる強烈で苦痛を伴う夢.\n眠りに落ちることへの残留する恐怖または不安.\n目覚めた際の感情的な疲弊.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -843,9 +1343,15 @@ export const serviceAreasSectionsJp = {
           {
             "lead": "**心理療法・カウンセリング**",
             "items": [
-              "不眠症のための認知行動療法（CBT-I）：睡眠を妨げる思考パターンを見つけ出し、転換する。より健全な就寝ルーティンを築き、睡眠に関する不安を軽減します。",
-              "ストレス管理とリラクゼーショントレーニング：深呼吸、漸進的筋弛緩法、または誘導イメージなどの技法を練習し、神経系を落ち着かせ、休息へと穏やかに入ります。"
-            ]
+    {
+      text: "**不眠症のための認知行動療法（CBT-I）：**\n睡眠を妨げる思考パターンを見つけ出し、転換する。より健全な就寝ルーティンを築き、睡眠に関する不安を軽減します。",
+      marker: "dash"
+    },
+    {
+      text: "**ストレス管理とリラクゼーショントレーニング：**\n深呼吸、漸進的筋弛緩法、または誘導イメージなどの技法を練習し、神経系を落ち着かせ、休息へと穏やかに入ります。",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**ライフスタイルとセルフケアのサポート**",
@@ -860,9 +1366,28 @@ export const serviceAreasSectionsJp = {
       }
     ],
     "closing": [
-      "**癒しの休息への第一歩**",
-      "睡眠が遠く感じられるなら――夜が落ち着かず、朝が重く感じられるなら――それはあなたの心と身体がより穏やかなケアを求めているサインかもしれません。朗報は、安らかな睡眠は回復できるということです。疲弊を押し進め続ける必要はありません。休息を取り戻すことができます。",
-      "私たちのカウンセリングセンターでは、あなたの症状だけでなく――あなたの物語を理解するための時間をとります。ともに、バランス、穏やかさ、そして再生をもたらす新しいリズムを見つけるお手伝いをします。"
+    "**癒しの休息への第一歩**",
+    "睡眠が遠く感じられるなら――夜が落ち着かず、朝が重く感じられるなら――それはあなたの心と身体がより穏やかなケアを求めているサインかもしれません。朗報は、安らかな睡眠は回復できるということです。疲弊を押し進め続ける必要はありません。休息を取り戻すことができます。\n私たちのカウンセリングセンターでは、あなたの症状だけでなく――あなたの物語を理解するための時間をとります。ともに、バランス、穏やかさ、そして再生をもたらす新しいリズムを見つけるお手伝いをします。",
+    "私たちのカウンセリングセンターでは、あなたの症状だけでなく――あなたの物語を理解するための時間をとります。ともに、バランス、穏やかさ、そして再生をもたらす新しいリズムを見つけるお手伝いをします。"
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.sleep.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.sleep.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.closing.1" }
     ]
   }
 };

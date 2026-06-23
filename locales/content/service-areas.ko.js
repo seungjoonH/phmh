@@ -44,12 +44,27 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 도움이 되지 않는 사고 패턴을 파악하고, 보다 균형 잡히고 건강한 사고 방식을 개발합니다.",
-              "대인관계치료(IPT): 관계의 어려움이 기분에 미치는 영향을 탐색하고, 보다 건강한 관계를 형성하는 방법을 배웁니다.",
-              "행동 활성화(BA): 동기, 에너지, 기쁨을 되살려주는 소소하고 의미 있는 활동들에 다시 참여합니다.",
-              "내담자 중심 치료: 따뜻하고 비판단적인 공간에서 마음을 열어 이야기하고, 깊이 성찰하며, 지원을 받으며 성장합니다.",
-              "스트레스 관리 및 사고 재구조화: 몸과 마음을 안정시키고, 부정적인 사고 패턴을 보다 건설적인 관점으로 전환하는 방법을 배웁니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n도움이 되지 않는 사고 패턴을 파악하고, 보다 균형 잡히고 건강한 사고 방식을 개발합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**대인관계치료(IPT):**\n관계의 어려움이 기분에 미치는 영향을 탐색하고, 보다 건강한 관계를 형성하는 방법을 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**행동 활성화(BA):**\n동기, 에너지, 기쁨을 되살려주는 소소하고 의미 있는 활동들에 다시 참여합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n따뜻하고 비판단적인 공간에서 마음을 열어 이야기하고, 깊이 성찰하며, 지원을 받으며 성장합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**스트레스 관리 및 사고 재구조화:**\n몸과 마음을 안정시키고, 부정적인 사고 패턴을 보다 건설적인 관점으로 전환하는 방법을 배웁니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 지원 및 자기 돌봄**",
@@ -64,9 +79,28 @@ export const serviceAreasSectionsKo = {
       }
     ],
     "closing": [
-      "**치유를 향한 첫 걸음**",
-      "당신은 지금 느끼는 감정으로 규정되지 않습니다. 이 고통과 힘든 시간은 영원히 지속되지 않습니다. 우울증은 치료될 수 있으며, 혼자 감당하지 않아도 됩니다.",
-      "치유와 새로운 시작, 그리고 삶이 다시 자신의 것으로 느껴질 공간이 있습니다. '준비가 되었을 때'를 기다릴 필요가 없습니다. 안전하게 시작할 수 있는 곳만 있으면 됩니다. 저희가 그곳에서 당신을 기다리겠습니다—부드럽게, 존중을 담아, 당신의 속도로."
+    "**치유를 향한 첫 걸음**",
+    "당신은 지금 느끼는 감정으로 규정되지 않습니다. 이 고통과 힘든 시간은 영원히 지속되지 않습니다. 우울증은 치료될 수 있으며, 혼자 감당하지 않아도 됩니다.\n치유와 새로운 시작, 그리고 삶이 다시 자신의 것으로 느껴질 공간이 있습니다. '준비가 되었을 때'를 기다릴 필요가 없습니다. 안전하게 시작할 수 있는 곳만 있으면 됩니다. 저희가 그곳에서 당신을 기다리겠습니다—부드럽게, 존중을 담아, 당신의 속도로.",
+    "치유와 새로운 시작, 그리고 삶이 다시 자신의 것으로 느껴질 공간이 있습니다. '준비가 되었을 때'를 기다릴 필요가 없습니다. 안전하게 시작할 수 있는 곳만 있으면 됩니다. 저희가 그곳에서 당신을 기다리겠습니다—부드럽게, 존중을 담아, 당신의 속도로."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.1.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.groups.1.1" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.depression.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.depression.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.depression.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.depression.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.depression.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.depression.closing.1" }
     ]
   },
   "traumaPtsd": {
@@ -86,11 +120,23 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "트라우마는 다양한 방식으로 나타날 수 있습니다. 다음 중 익숙하게 느껴지는 것이 있다면 전문적인 지원이 도움이 될 수 있습니다.",
             "items": [
-              "침습적 기억 및 반응: 벗어나기 어려운 플래시백, 악몽, 또는 고통스러운 기억들. 트라우마를 상기시키는 것에 대한 갑작스러운 감정적·신체적 반응",
-              "회피 및 단절: 고통스러운 기억을 불러일으키는 사람, 장소, 또는 대화를 피함. 감정적으로 무감각해지거나 자신 또는 타인과 단절된 느낌",
-              "부정적 사고 및 기분 변화: 지속적인 죄책감, 수치심, 또는 자책. 타인을 신뢰하거나 정서적으로 가까워지는 것의 어려움. 트라우마의 일부를 기억하지 못하거나 세상이 안전하지 않다고 느낌",
-              "과각성 및 반응성: 끊임없이 긴장 상태에 있거나, 쉽게 놀라거나, 과도하게 경계함. 수면, 집중, 또는 에너지 조절의 어려움. 강렬한 감정 반응 또는 강한 감정을 조절하는 데 어려움"
-            ]
+    {
+      text: "**침습적 기억 및 반응: **\n벗어나기 어려운 플래시백, 악몽, 또는 고통스러운 기억들.\n트라우마를 상기시키는 것에 대한 갑작스러운 감정적·신체적 반응.",
+      marker: "dash"
+    },
+    {
+      text: "**회피 및 단절:**\n고통스러운 기억을 불러일으키는 사람, 장소, 또는 대화를 피함.\n감정적으로 무감각해지거나 자신 또는 타인과 단절된 느낌",
+      marker: "dash"
+    },
+    {
+      text: "**부정적 사고 및 기분 변화:**\n지속적인 죄책감, 수치심, 또는 자책.\n타인을 신뢰하거나 정서적으로 가까워지는 것의 어려움.\n트라우마의 일부를 기억하지 못하거나 세상이 안전하지 않다고 느낌.",
+      marker: "dash"
+    },
+    {
+      text: "**과각성 및 반응성:**\n끊임없이 긴장 상태에 있거나, 쉽게 놀라거나, 과도하게 경계함. 수면, 집중, 또는 에너지 조절의 어려움.\n강렬한 감정 반응 또는 강한 감정을 조절하는 데 어려움.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -108,14 +154,35 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 도움이 되지 않는 사고를 파악하고 더 건강한 대처 전략을 개발합니다.",
-              "노출 치료: 통제된 환경에서 트라우마 관련 기억을 안전하게 다시 마주하여 두려움과 회피를 줄입니다.",
-              "안구운동 민감소실 및 재처리 요법(EMDR): 안내된 안구 운동을 활용해 뇌가 고통스러운 기억을 처리하고 해소하도록 돕습니다.",
-              "대인관계치료(IPT): 치유적인 대인관계를 통해 연결감과 신뢰를 회복합니다.",
-              "내담자 중심 치료: 비판단적인 공간에서 당신의 속도와 필요에 따라 감정을 탐색합니다.",
-              "행동 활성화(BA): 의미 있는 활동에 다시 참여하여 삶의 목적과 기쁨을 되찾습니다.",
-              "스트레스 관리 및 인지 재구조화: 신경계를 안정시키고 부정적인 사고 패턴을 전환하는 기술을 배웁니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n도움이 되지 않는 사고를 파악하고 더 건강한 대처 전략을 개발합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**노출 치료:**\n통제된 환경에서 트라우마 관련 기억을 안전하게 다시 마주하여 두려움과 회피를 줄입니다.",
+      marker: "dash"
+    },
+    {
+      text: "**안구운동 민감소실 및 재처리 요법(EMDR):**\n안내된 안구 운동을 활용해 뇌가 고통스러운 기억을 처리하고 해소하도록 돕습니다.",
+      marker: "dash"
+    },
+    {
+      text: "**대인관계치료(IPT):**\n치유적인 대인관계를 통해 연결감과 신뢰를 회복합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n비판단적인 공간에서 당신의 속도와 필요에 따라 감정을 탐색합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**행동 활성화(BA):**\n의미 있는 활동에 다시 참여하여 삶의 목적과 기쁨을 되찾습니다.",
+      marker: "dash"
+    },
+    {
+      text: "**스트레스 관리 및 인지 재구조화:**\n신경계를 안정시키고 부정적인 사고 패턴을 전환하는 기술을 배웁니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 지원 및 자기 돌봄**",
@@ -130,10 +197,29 @@ export const serviceAreasSectionsKo = {
     ],
     "closing": [
     "**치유를 향한 첫 걸음**",
-    "당신은 망가진 존재가 아닙니다. 당신이 짊어진 고통은 실재합니다—하지만 그것이 당신의 전부는 아닙니다. **치유는 잊는다는 의미가 아닙니다. **다시 안전함을 느끼고, 현재에서 평화를 찾고, 희망이 자라나도록 허용하는 것을 의미합니다.",
+    "당신은 망가진 존재가 아닙니다. 당신이 짊어진 고통은 실재합니다—하지만 그것이 당신의 전부는 아닙니다. **치유는 잊는다는 의미가 아닙니다. **다시 안전함을 느끼고, 현재에서 평화를 찾고, 희망이 자라나도록 허용하는 것을 의미합니다.\n서두를 필요가 없습니다. 혼자 감당하지 않아도 됩니다. 치유의 모습은 당신이 선택할 수 있습니다. 저희는 그 길을 함께 걷겠습니다—흔들림 없이, 진심으로, 그리고 깊은 존중을 담아.\n트라우마는 혼자 짊어지도록 설계되지 않았습니다. 적절한 지원으로 다시 안정감을 찾고, 신뢰를 재건하며, 삶과 다시 연결되기 시작할 수 있습니다.",
     "서두를 필요가 없습니다. 혼자 감당하지 않아도 됩니다. 치유의 모습은 당신이 선택할 수 있습니다. 저희는 그 길을 함께 걷겠습니다—흔들림 없이, 진심으로, 그리고 깊은 존중을 담아.",
     "트라우마는 혼자 짊어지도록 설계되지 않았습니다. 적절한 지원으로 다시 안정감을 찾고, 신뢰를 재건하며, 삶과 다시 연결되기 시작할 수 있습니다."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.traumaPtsd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.traumaPtsd.closing.1" }
+    ]
   },
   "anxietyPanic": {
     "title": "불안 & 공황 발작",
@@ -175,26 +261,65 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 공황을 유발하는 사고 패턴을 인식하고 재구성하며, 보다 건강한 반응 방식을 개발하는 것을 배웁니다.",
-              "노출 치료: 두려운 상황에 점진적으로 안전하게 직면하여 회피를 줄이고 회복 탄력성을 키웁니다.",
-              "내담자 중심 치료: 두려움을 처리하고, 몸에 대한 신뢰를 재건하며, 자신과 다시 연결될 수 있는 지지적이고 비판단적인 공간.",
-              "스트레스 관리 및 인지 재구조화: 신경계를 안정시키고 불안한 생각을 보다 균형 잡히고 안정적인 관점으로 재구성하는 실용적인 도구를 얻습니다."
-            ]
+    {
+      text: "**인지행동치료(CBT): **\n공황을 유발하는 사고 패턴을 인식하고 재구성하며, 보다 건강한 반응 방식을 개발하는 것을 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**노출 치료: **\n두려운 상황에 점진적으로 안전하게 직면하여 회피를 줄이고 회복 탄력성을 키웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료: **\n두려움을 처리하고, 몸에 대한 신뢰를 재건하며, 자신과 다시 연결될 수 있는 지지적이고 비판단적인 공간.",
+      marker: "dash"
+    },
+    {
+      text: "**스트레스 관리 및 인지 재구조화: **\n신경계를 안정시키고 불안한 생각을 보다 균형 잡히고 안정적인 관점으로 재구성하는 실용적인 도구를 얻습니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 지원 및 일상 돌봄**",
             "items": [
-              "호흡 및 이완 훈련: 몸과 마음을 안정시키는 복식 호흡, 마음 챙김, 또는 요가 같은 기법.",
-              "움직임 및 영양 관리: 정서적·신체적 조절을 지원하는 규칙적인 운동과 균형 잡힌 식단.",
-              "유발 요인 및 자극제 줄이기: 카페인이나 과도한 자극을 제한하여 불안 증상을 완화합니다."
-            ]
+    {
+      text: "**호흡 및 이완 훈련:**\n몸과 마음을 안정시키는 복식 호흡, 마음 챙김, 또는 요가 같은 기법.",
+      marker: "dash"
+    },
+    {
+      text: "**움직임 및 영양 관리:**\n정서적·신체적 조절을 지원하는 규칙적인 운동과 균형 잡힌 식단.",
+      marker: "dash"
+    },
+    {
+      text: "**유발 요인 및 자극제 줄이기:**\n카페인이나 과도한 자극을 제한하여 불안 증상을 완화합니다.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
     ],
     "closing": [
-      "**평온을 향한 첫 걸음**",
-      "공황은 나약함의 표시가 아닙니다. 몸이 안전과 지지를 필요로 한다는 신호이며—적절한 돌봄으로 안전은 회복될 수 있습니다. 당신은 두려움 이상의 존재입니다. 다시 평온하고 안정적인 삶을 살 수 있습니다. 다음 공황 발작에 움츠러들지 않아도 됩니다. 두려움을 통과하여—더 단단해질 수 있습니다. 저희가 한 걸음씩 함께 걷겠습니다."
+    "**평온을 향한 첫 걸음**",
+    "공황은 나약함의 표시가 아닙니다. 몸이 안전과 지지를 필요로 한다는 신호이며—적절한 돌봄으로 안전은 회복될 수 있습니다. **당신은 두려움 이상의 존재입니다. **다시 평온하고 안정적인 삶을 살 수 있습니다. 다음 공황 발작에 움츠러들지 않아도 됩니다. 두려움을 통과하여—더 단단해질 수 있습니다. 저희가 한 걸음씩 함께 걷겠습니다."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.anxietyPanic.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.anxietyPanic.closing.1" }
     ]
   },
   "suicidalThoughts": {
@@ -237,11 +362,23 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 고통스러운 생각을 부드럽게 탐색하고 재구성하며, 희망과 의미의 순간들을 다시 발견합니다.",
-              "내담자 중심 치료: 당신의 목소리가 중요하고, 치유가 당신만의 속도로 펼쳐지는 따뜻하고 공감 어린 공간.",
-              "대인관계치료(IPT): 의미 있는 관계를 강화하고, 필요하고 당연히 받아야 할 지지를 재건합니다.",
-              "위기 지원 및 정서적 돌봄: 감정이 압도될 때 즉각적인 지지. 강렬한 감정을 관리하고 안정감을 유지하는 도구. 진심으로 당신을 아끼고 곁에서 함께하고 싶어 하는 사람들로 이루어진 지지 체계 구축 안내"
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n고통스러운 생각을 부드럽게 탐색하고 재구성하며, 희망과 의미의 순간들을 다시 발견합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n당신의 목소리가 중요하고, 치유가 당신만의 속도로 펼쳐지는 따뜻하고 공감 어린 공간.",
+      marker: "dash"
+    },
+    {
+      text: "**대인관계치료(IPT):**\n의미 있는 관계를 강화하고, 필요하고 당연히 받아야 할 지지를 재건합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**위기 지원 및 정서적 돌봄:**\n감정이 압도될 때 즉각적인 지지.\n강렬한 감정을 관리하고 안정감을 유지하는 도구.\n진심으로 당신을 아끼고 곁에서 함께하고 싶어 하는 사람들로 이루어진 지지 체계 구축 안내.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -249,6 +386,23 @@ export const serviceAreasSectionsKo = {
     "closing": [
       "**당신은 여전히 여기 있습니다—그것이 중요합니다**",
       "지금은 보이지 않을 수 있지만, 삶은 여전히 당신을 위한 공간을 간직하고 있습니다. 아직 마시지 않은 숨결. 아직 맺지 못한 인연. 오랫동안 느끼지 못했던 평온함. 괜찮은 척 하지 않아도 됩니다. 모든 답을 가질 필요도 없습니다. 다시 시작할 수 있는 작고 안전한 공간 하나만 있으면 됩니다. 저희가 어둠 속에서 당신 곁에 있겠습니다—재촉하지 않고, 당신이 혼자가 아님을 기억할 수 있도록. 그리고 준비가 되면, 당신과 함께—조용히—빛을 향해 걷겠습니다."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.suicidalThoughts.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.suicidalThoughts.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.suicidalThoughts.subsections.1.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.suicidalThoughts.closing.1" }
     ]
   },
   "culturalIdentity": {
@@ -291,27 +445,65 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "정체성 탐색 및 통합: 문화적 경험과 가치를 탐색하여 보다 안정적이고 확고한 자아 감각을 발전시킵니다.",
-              "문화적으로 민감한 상담: 자신의 개성을 존중하면서 다양한 문화적 공간을 헤쳐나가는 방법을 배웁니다.",
-              "다문화 환경에서의 스트레스 및 회복 탄력성: 문화적 스트레스의 정서적 영향을 이해하고, 자신감과 명확함으로 대응하는 전략을 구축합니다."
-            ]
+    {
+      text: "**정체성 탐색 및 통합:**\n문화적 경험과 가치를 탐색하여 보다 안정적이고 확고한 자아 감각을 발전시킵니다.",
+      marker: "dash"
+    },
+    {
+      text: "**문화적으로 민감한 상담:**\n자신의 개성을 존중하면서 다양한 문화적 공간을 헤쳐나가는 방법을 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**다문화 환경에서의 스트레스 및 회복 탄력성:**\n문화적 스트레스의 정서적 영향을 이해하고, 자신감과 명확함으로 대응하는 전략을 구축합니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**사회적 지지 및 자기 돌봄**",
             "items": [
-              "문화적 강점 받아들이기: 고유한 문화적 배경이 어떻게 강점, 통찰, 그리고 자긍심의 원천이 될 수 있는지 인식합니다.",
-              "자기 수용 및 자존감: 자신의 정체성을 긍정하고, 자신을 존중하며, 자신만의 고유함에서 자신감을 찾는 연습.",
-              "의미 있는 관계 형성: 있는 그대로의 당신이 보여지고, 존중받고, 지지받는다고 느낄 수 있는 관계를 키워나갑니다."
-            ]
+    {
+      text: "**문화적 강점 받아들이기:**\n고유한 문화적 배경이 어떻게 강점, 통찰, 그리고 자긍심의 원천이 될 수 있는지 인식합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**자기 수용 및 자존감:**\n자신의 정체성을 긍정하고, 자신을 존중하며, 자신만의 고유함에서 자신감을 찾는 연습.",
+      marker: "dash"
+    },
+    {
+      text: "**의미 있는 관계 형성:**\n있는 그대로의 당신이 보여지고, 존중받고, 지지받는다고 느낄 수 있는 관계를 키워나갑니다.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
     ],
     "closing": [
     "**온전함을 향한 첫 걸음**",
-    "당신의 정체성은 해결해야 할 문제가 아닙니다. 그것은 여전히 펼쳐지고 있는 이야기입니다—풍부한 복잡성을 지니고, 경험으로 빚어지고, 가능성으로 가득 찬. 지금 길이 불확실하게 느껴지더라도, 당신에게 소속감이 무엇인지 스스로 정의할 능력이 있습니다. **문화 사이에서 하나를 선택할 필요가 없습니다—온전한 자신을 받아들이는 것을 선택할 수 있습니다.**",
+    "당신의 정체성은 해결해야 할 문제가 아닙니다. 그것은 여전히 펼쳐지고 있는 이야기입니다—풍부한 복잡성을 지니고, 경험으로 빚어지고, 가능성으로 가득 찬. 지금 길이 불확실하게 느껴지더라도, 당신에게 소속감이 무엇인지 스스로 정의할 능력이 있습니다. **문화 사이에서 하나를 선택할 필요가 없습니다—온전한 자신을 받아들이는 것을 선택할 수 있습니다.**\n당신이 보다 자유롭게, 보다 충만하게, 그리고 진정한 자신과 더 가까이 살아가는 법을 배워가는 동안 저희가 곁에서 함께하겠습니다.",
     "당신이 보다 자유롭게, 보다 충만하게, 그리고 진정한 자신과 더 가까이 살아가는 법을 배워가는 동안 저희가 곁에서 함께하겠습니다."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.culturalIdentity.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.culturalIdentity.closing.1" }
+    ]
   },
   "bipolar": {
     "title": "양극성 장애",
@@ -329,9 +521,15 @@ export const serviceAreasSectionsKo = {
         "lists": [
           {
             "items": [
-              "조증 또는 경조증 삽화: 억누르기 어려운 에너지, 흥분, 또는 행복감의 급증. 피곤함을 느끼지 않으면서 거의 잠을 자지 않음. 충동적인 행동—위험한 지출, 무모한 결정, 또는 과도한 약속. 생각이 빠르게 달리거나, 말이 빨라지거나, 집중하기 어려움",
-              "우울증 삽화: 깊고 오래 지속되는 슬픔 또는 감정적 무감각. 예전에 즐겼던 활동에 대한 흥미 상실. 피로감 또는 몸이 무겁고 굼뜬 느낌. 집중하거나 일상적인 결정을 내리는 것의 어려움. 희망 없음 또는 자해에 대한 생각"
-            ]
+    {
+      text: "**조증 또는 경조증 삽화:**\n억누르기 어려운 에너지, 흥분, 또는 행복감의 급증.\n피곤함을 느끼지 않으면서 거의 잠을 자지 않음.\n충동적인 행동—위험한 지출, 무모한 결정, 또는 과도한 약속. 생각이 빠르게 달리거나, 말이 빨라지거나, 집중하기 어려움.",
+      marker: "dash"
+    },
+    {
+      text: "**우울증 삽화:**\n깊고 오래 지속되는 슬픔 또는 감정적 무감각.\n예전에 즐겼던 활동에 대한 흥미 상실.\n피로감 또는 몸이 무겁고 굼뜬 느낌.\n집중하거나 일상적인 결정을 내리는 것의 어려움.\n희망 없음 또는 자해에 대한 생각.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -349,19 +547,40 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 기분에 영향을 미치는 사고와 행동의 패턴을 파악하고, 감정을 보다 효과적으로 조절하는 법을 배웁니다.",
-              "대인관계 및 사회적 리듬 치료(IPSRT): 건강한 루틴을 확립하고 관계를 강화하여 기분 안정을 지원합니다.",
-              "내담자 중심 치료: 안전하고 비판단적인 공간에서 자신의 경험을 탐색하고 정서적 필요에 대한 이해를 심화합니다.",
-              "감정 조절 및 스트레스 관리: 기분 변화를 관리하고 스트레스에 자신감 있고 침착하게 대응하는 실용적인 기술을 쌓습니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n기분에 영향을 미치는 사고와 행동의 패턴을 파악하고, 감정을 보다 효과적으로 조절하는 법을 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**대인관계 및 사회적 리듬 치료(IPSRT):**\n건강한 루틴을 확립하고 관계를 강화하여 기분 안정을 지원합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n안전하고 비판단적인 공간에서 자신의 경험을 탐색하고 정서적 필요에 대한 이해를 심화합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**감정 조절 및 스트레스 관리:**\n기분 변화를 관리하고 스트레스에 자신감 있고 침착하게 대응하는 실용적인 기술을 쌓습니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 지원 및 자기 돌봄**",
             "items": [
-              "규칙적인 루틴 유지하기: 일관된 수면, 식사, 그리고 일상 활동 일정을 유지하는 것이 몸의 자연적인 리듬을 지원합니다.",
-              "충동적인 패턴 알아차리기: 충동적인 욕구에 부드럽게 주의를 기울이고, 반응하기 전에 잠시 멈추는 연습을 합니다.",
-              "기분 기록하기: 일기나 앱을 사용하여 감정 패턴을 파악하고 기분 변화의 초기 신호를 포착합니다."
-            ]
+    {
+      text: "**규칙적인 루틴 유지하기:**\n일관된 수면, 식사, 그리고 일상 활동 일정을 유지하는 것이 몸의 자연적인 리듬을 지원합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**충동적인 패턴 알아차리기:**\n충동적인 욕구에 부드럽게 주의를 기울이고, 반응하기 전에 잠시 멈추는 연습을 합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**기분 기록하기:**\n일기나 앱을 사용하여 감정 패턴을 파악하고 기분 변화의 초기 신호를 포착합니다.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -369,7 +588,25 @@ export const serviceAreasSectionsKo = {
     "closing": [
     "**안정을 향한 첫 걸음**",
     "당신은 기복으로 규정되지 않습니다. 삶이 불균형하게 느껴질 때도, 앞으로 나아가는 길이 있습니다—다시 안정적이고, 안정감 있으며, 자신과 더 조화를 이루는 느낌을 받을 수 있는 방법. 치유는 한 번에 이루어질 필요가 없습니다. 그것은 이해와 함께, 자기 연민과 함께, 그리고 진정한 변화로 이어지는 작은 발걸음들과 함께 시작됩니다.** 당신은 이미 시작하는 데 필요한 힘을 갖고 있습니다. **저희가 매 걸음마다 함께하겠습니다."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.bipolar.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.bipolar.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.bipolar.closing.1" }
+    ]
   },
   "adhd": {
     "title": "ADHD (주의력결핍 과잉행동장애)",
@@ -388,9 +625,15 @@ export const serviceAreasSectionsKo = {
         "lists": [
           {
             "items": [
-              "부주의: 과제를 시작하거나 완료하는 것의 어려움. 책, 장난감, 학용품 같은 일상 용품을 자주 잃어버림. 정리, 시간 관리, 또는 여러 단계의 지시를 따르는 것의 어려움. 쉽게 산만해지거나 오랫동안 집중하는 데 어려움",
-              "과잉행동 및 충동성: 끊임없는 움직임, 안절부절못함, 또는 가만히 있지 못함. 과도한 말하기, 다른 사람의 말을 끊거나, 차례를 기다리는 것의 어려움. 충동적으로 행동하고, 종종 좌절감이나 후회가 뒤따름. 집단 환경에서 감정을 관리하거나 규칙을 따르는 것의 어려움"
-            ]
+    {
+      text: "**부주의:**\n과제를 시작하거나 완료하는 것의 어려움.\n책, 장난감, 학용품 같은 일상 용품을 자주 잃어버림.\n정리, 시간 관리, 또는 여러 단계의 지시를 따르는 것의 어려움.\n쉽게 산만해지거나 오랫동안 집중하는 데 어려움.",
+      marker: "dash"
+    },
+    {
+      text: "**과잉행동 및 충동성:**\n끊임없는 움직임, 안절부절못함, 또는 가만히 있지 못함.\n과도한 말하기, 다른 사람의 말을 끊거나, 차례를 기다리는 것의 어려움.\n충동적으로 행동하고, 종종 좌절감이나 후회가 뒤따름.\n집단 환경에서 감정을 관리하거나 규칙을 따르는 것의 어려움.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -408,11 +651,23 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 아이가 도움이 되지 않는 사고 패턴을 파악하고, 집중력, 감정 인식, 자기 조절을 위한 실용적인 기술을 쌓도록 돕습니다.",
-              "행동 치료: 구조, 루틴, 그리고 긍정적 강화를 사용하여 건강한 습관과 행동적 성장을 지원합니다.",
-              "조직화 및 자기 관리 코칭: 일상 과제를 계획하고, 우선순위를 정하며, 관리하는 도구를 가르쳐—스트레스를 줄이고 독립심을 키웁니다.",
-              "사회적·정서적 기술 훈련: 가정과 학교에서 더 건강한 관계를 지원하기 위해 의사소통, 충동 조절, 감정 표현을 향상시킵니다."
-            ]
+    {
+      text: "**인지행동치료(CBT): **\n아이가 도움이 되지 않는 사고 패턴을 파악하고, 집중력, 감정 인식, 자기 조절을 위한 실용적인 기술을 쌓도록 돕습니다.",
+      marker: "dash"
+    },
+    {
+      text: "**행동 치료:**\n구조, 루틴, 그리고 긍정적 강화를 사용하여 건강한 습관과 행동적 성장을 지원합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**조직화 및 자기 관리 코칭:**\n일상 과제를 계획하고, 우선순위를 정하며, 관리하는 도구를 가르쳐—스트레스를 줄이고 독립심을 키웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**사회적·정서적 기술 훈련:**\n가정과 학교에서 더 건강한 관계를 지원하기 위해 의사소통, 충동 조절, 감정 표현을 향상시킵니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 지원 및 일상 돌봄**",
@@ -429,6 +684,25 @@ export const serviceAreasSectionsKo = {
     "closing": [
       "**함께 가능성을 다시 발견하기**",
       "당신의 아이는 다른 사람들이 이해하기 어려운 방식으로 세상을 살아갈 수 있습니다—하지만 그렇다고 그들의 여정이 덜 의미 있는 것은 아닙니다. 그들의 창의성, 호기심, 그리고 감수성은 '고쳐야 할' 어려움이 아닙니다—지지하고 축하해야 할 강점입니다. 이 길이 버겁게 느껴진다면, 혼자 걷지 않아도 됩니다. 저희가 귀 기울이고, 돕고, 가족과 함께—한 걸음씩—걷겠습니다."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.adhd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.adhd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.adhd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.adhd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.adhd.closing.1" }
     ]
   },
   "relationship": {
@@ -471,10 +745,19 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "관계 패턴 탐색: 반복되는 역학 관계를 성찰하고, 보다 건강하고 균형 잡힌 연결 방식을 구축하는 방법을 발견합니다.",
-              "인지행동치료(CBT): 도움이 되지 않는 생각을 전환하고, 감정과 의사소통을 관리하는 실용적인 도구를 배웁니다.",
-              "내담자 중심 치료: 비판단적인 공간에서 어려운 감정을 나누고—자신의 감정과 함께 있는 능력을 강화합니다."
-            ]
+    {
+      text: "**관계 패턴 탐색:**\n반복되는 역학 관계를 성찰하고, 보다 건강하고 균형 잡힌 연결 방식을 구축하는 방법을 발견합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**인지행동치료(CBT):**\n도움이 되지 않는 생각을 전환하고, 감정과 의사소통을 관리하는 실용적인 도구를 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n비판단적인 공간에서 어려운 감정을 나누고—자신의 감정과 함께 있는 능력을 강화합니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**의사소통 및 감정 표현**",
@@ -496,9 +779,29 @@ export const serviceAreasSectionsKo = {
       }
     ],
     "closing": [
-      "**더 건강한 관계를 향한 첫 걸음**",
-      "가장 영양이 되는 관계는 당신을 줄어들게 요구하지 않습니다—그것들은 당신이 진정한 자신으로 확장되도록 돕습니다. 지금 직면하고 있는 것이 실패가 아닐 수 있습니다—성장하고, 더 진실하게 관계 맺고, 사랑하는 전환점일 수 있습니다. 자신을 잃지 않으면서 깊이 연결되고 싶다는 바람은 너무 많은 것을 바라는 것이 아닙니다. 그리고 혼자 헤쳐나가지 않아도 됩니다.",
-      "다시 마음을 열 준비가 되었을 때, 저희가 여기 있겠습니다—부드럽게, 꾸준히, 그리고 당신 곁에서."
+    "**더 건강한 관계를 향한 첫 걸음**",
+    "가장 영양이 되는 관계는 당신을 줄어들게 요구하지 않습니다—그것들은 당신이 진정한 자신으로 확장되도록 돕습니다. 지금 직면하고 있는 것이 실패가 아닐 수 있습니다—성장하고, 더 진실하게 관계 맺고, 사랑하는 전환점일 수 있습니다. 자신을 잃지 않으면서 깊이 연결되고 싶다는 바람은 너무 많은 것을 바라는 것이 아닙니다. 그리고 혼자 헤쳐나가지 않아도 됩니다.\n다시 마음을 열 준비가 되었을 때, 저희가 여기 있겠습니다—부드럽게, 꾸준히, 그리고 당신 곁에서.",
+    "다시 마음을 열 준비가 되었을 때, 저희가 여기 있겠습니다—부드럽게, 꾸준히, 그리고 당신 곁에서."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.relationship.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.1", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.relationship.subsections.1.lists.2.lead" },
+      { type: "list", listKey: "serviceAreas.sections.relationship.subsections.1.lists.2", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.relationship.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.relationship.closing.1" }
     ]
   },
   "ocd": {
@@ -518,9 +821,15 @@ export const serviceAreasSectionsKo = {
         "lists": [
           {
             "items": [
-              "강박 사고(침습적 생각): 반복적이고 원하지 않는 생각, 이미지, 또는 충동. 오염, 해를 끼치는 것, 또는 무언가가 '딱 맞지 않는' 것에 대한 두려움. 생각이 '중화'되거나 취소되지 않으면 커지는 불안",
-              "강박 행동(반복적 행동): 반복적인 손 씻기, 확인, 세기, 또는 정렬. 특정 행동을 완료하지 않으면 나쁜 일이 일어날 것이라는 믿음. 일상생활, 관계, 또는 안녕감을 방해하는 의식"
-            ]
+    {
+      text: "**강박 사고(침습적 생각):**\n반복적이고 원하지 않는 생각, 이미지, 또는 충동.\n오염, 해를 끼치는 것, 또는 무언가가 '딱 맞지 않는' 것에 대한 두려움.\n생각이 '중화'되거나 취소되지 않으면 커지는 불안.",
+      marker: "dash"
+    },
+    {
+      text: "**강박 행동(반복적 행동):**\n반복적인 손 씻기, 확인, 세기, 또는 정렬.\n특정 행동을 완료하지 않으면 나쁜 일이 일어날 것이라는 믿음.\n일상생활, 관계, 또는 안녕감을 방해하는 의식",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -538,11 +847,23 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 도움이 되지 않는 사고 패턴을 파악하고 전환하면서 더 건강한 대처 전략을 구축합니다.",
-              "노출 및 반응 방지(ERP): 안전하고 지지적인 공간에서 불안 유발 요인에 점진적으로 직면하면서 강박적 반응을 억제하는 것을 배웁니다.",
-              "내담자 중심 치료: 경험을 탐색하면서 따뜻함, 존중, 이해를 제공하는 치료자와 함께합니다.",
-              "감정 조절 및 스트레스 관리: 압도적인 감정을 관리하고 정서적 회복 탄력성을 높이기 위한 그라운딩 및 마음 챙김 기법을 연습합니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n도움이 되지 않는 사고 패턴을 파악하고 전환하면서 더 건강한 대처 전략을 구축합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**노출 및 반응 방지(ERP):**\n안전하고 지지적인 공간에서 불안 유발 요인에 점진적으로 직면하면서 강박적 반응을 억제하는 것을 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n경험을 탐색하면서 따뜻함, 존중, 이해를 제공하는 치료자와 함께합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**감정 조절 및 스트레스 관리:**\n압도적인 감정을 관리하고 정서적 회복 탄력성을 높이기 위한 그라운딩 및 마음 챙김 기법을 연습합니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 및 자기 돌봄 지원**",
@@ -559,7 +880,26 @@ export const serviceAreasSectionsKo = {
     "closing": [
     "**치유를 향한 첫 걸음**",
     "침습적 생각과 강박적 행동은 강력하게 느껴질 수 있습니다—**하지만 그것들은 당신보다 강하지 않습니다.** 그것들은 개인적인 결함이 아닙니다. 마음이 안전하게 지내려고 최선을 다하고 있다는 신호입니다. 혼자 이것을 감당하지 않아도 됩니다. 적절한 지원으로 더 안정된 땅을 찾고, 불안의 지배를 느슨하게 하며, 더 조용하고 명확하며 진정으로 자신만의 삶으로 돌아갈 수 있습니다. 시작해 봅시다—부드럽게, 함께."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.2" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.groups.0.3" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.ocd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.ocd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.ocd.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.ocd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.ocd.closing.1" }
+    ]
   },
   "eatingDisorders": {
     "title": "섭식 장애",
@@ -578,10 +918,19 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "자신이나 소중한 사람에게서 다음 패턴 중 어느 것이라도 인식된다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "신경성 식욕부진증: 지속적인 식이 제한과 체중 증가에 대한 강렬한 두려움. 먹거나 '정상적인' 체형을 유지하는 것에 대한 불안. 왜곡된 체형 인식과 음식에 관한 엄격한 규칙",
-              "신경성 폭식증: 구토, 하제 복용, 또는 과도한 운동으로 이어지는 폭식 삽화. 체중과 체형에 대한 강한 집착. 식사 후 수치심, 죄책감, 또는 괴로움",
-              "폭식 장애: 통제력을 잃는 느낌과 함께 포만감을 넘어서는 잦은 식사 삽화. 식사 후 감정적 무감각, 자기 비판, 또는 죄책감. 체중 변동이나 신체적 불편함을 동반할 수 있음"
-            ]
+    {
+      text: "**신경성 식욕부진증:**\n지속적인 식이 제한과 체중 증가에 대한 강렬한 두려움.\n먹거나 '정상적인' 체형을 유지하는 것에 대한 불안.\n왜곡된 체형 인식과 음식에 관한 엄격한 규칙.",
+      marker: "dash"
+    },
+    {
+      text: "**신경성 폭식증:**\n구토, 하제 복용, 또는 과도한 운동으로 이어지는 폭식 삽화.\n체중과 체형에 대한 강한 집착.\n식사 후 수치심, 죄책감, 또는 괴로움.",
+      marker: "dash"
+    },
+    {
+      text: "**폭식 장애: **\n통제력을 잃는 느낌과 함께 포만감을 넘어서는 잦은 식사 삽화.\n식사 후 감정적 무감각, 자기 비판, 또는 죄책감.\n체중 변동이나 신체적 불편함을 동반할 수 있음.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -599,11 +948,23 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 음식, 체형, 자기 가치에 대한 해로운 신념을 재구성하면서 더 건강한 습관을 구축합니다.",
-              "대인관계치료(IPT): 삶의 전환과 관계 역학이 식습관과 자아상에 어떻게 영향을 미치는지 탐색합니다.",
-              "내담자 중심 치료: 당신의 경험이 들려지고, 이해받고, 소중히 여겨지는 따뜻하고 지지적인 공간.",
-              "감정 조절 및 스트레스 관리: 감정적 유발 요인을 인식하고, 장애적 행동에 대한 충동을 줄이는 건강한 대처 기술을 개발합니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n음식, 체형, 자기 가치에 대한 해로운 신념을 재구성하면서 더 건강한 습관을 구축합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**대인관계치료(IPT):**\n삶의 전환과 관계 역학이 식습관과 자아상에 어떻게 영향을 미치는지 탐색합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n당신의 경험이 들려지고, 이해받고, 소중히 여겨지는 따뜻하고 지지적인 공간.",
+      marker: "dash"
+    },
+    {
+      text: "**감정 조절 및 스트레스 관리:**\n감정적 유발 요인을 인식하고, 장애적 행동에 대한 충동을 줄이는 건강한 대처 기술을 개발합니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**영양 안내 및 생활 지원**",
@@ -618,9 +979,28 @@ export const serviceAreasSectionsKo = {
     ],
     "closing": [
     "**치유를 향한 첫 걸음**",
-    "몸의 불편함. 거울 앞의 두려움. 매 식사마다 벌어지는 조용한 싸움—**이것들은 실패의 표시가 아닙니다. 고통의 표시입니다. **그리고 고통은 돌봄을 받을 자격이 있습니다. 혼자 이것과 싸우지 않아도 됩니다. 회복은 모든 것을 '올바르게' 하는 것이 아닙니다. 자기 판단을 부드럽게 하고, 수치심을 내려놓으며, 다시 자신을 신뢰하는 것을 배우는 것입니다—부드럽게, 그리고 자신의 속도로.",
+    "몸의 불편함. 거울 앞의 두려움. 매 식사마다 벌어지는 조용한 싸움—**이것들은 실패의 표시가 아닙니다. 고통의 표시입니다. **그리고 고통은 돌봄을 받을 자격이 있습니다. 혼자 이것과 싸우지 않아도 됩니다. 회복은 모든 것을 '올바르게' 하는 것이 아닙니다. 자기 판단을 부드럽게 하고, 수치심을 내려놓으며, 다시 자신을 신뢰하는 것을 배우는 것입니다—부드럽게, 그리고 자신의 속도로.\n여기서 시작해 봅시다. 압박이 아닌 인내심으로. 비판이 아닌 자기 연민으로. 당신이 누구인지를 바꾸는 것이 아니라, 몸 안에서—그리고 삶 안에서—편안함을 느낄 수 있도록 돕는 것으로.",
     "여기서 시작해 봅시다. 압박이 아닌 인내심으로. 비판이 아닌 자기 연민으로. 당신이 누구인지를 바꾸는 것이 아니라, 몸 안에서—그리고 삶 안에서—편안함을 느낄 수 있도록 돕는 것으로."
-  ]
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.eatingDisorders.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.eatingDisorders.closing.1" }
+    ]
   },
   "asd": {
     "title": "자폐 스펙트럼 장애(ASD)",
@@ -638,9 +1018,15 @@ export const serviceAreasSectionsKo = {
         "lists": [
           {
             "items": [
-              "사회적 상호작용 및 의사소통의 차이: 눈 맞춤을 피하거나 표정과 목소리 톤을 파악하는 것의 어려움. 주고받는 대화나 사회적 신호를 해석하는 것의 어려움. 감정을 처리하고 표현하는 데 추가적인 시간이 필요함",
-              "반복적 행동과 집중적 관심: 루틴, 패턴, 또는 특정 관심사에 대한 강한 집착. 예상치 못한 변화나 전환에 대한 불편함. 빛, 소리, 질감, 또는 신체적 접촉에 대한 특이한 민감성"
-            ]
+    {
+      text: "**사회적 상호작용 및 의사소통의 차이:**\n눈 맞춤을 피하거나 표정과 목소리 톤을 파악하는 것의 어려움.\n주고받는 대화나 사회적 신호를 해석하는 것의 어려움.\n감정을 처리하고 표현하는 데 추가적인 시간이 필요함.",
+      marker: "dash"
+    },
+    {
+      text: "**반복적 행동과 집중적 관심:**\n루틴, 패턴, 또는 특정 관심사에 대한 강한 집착.\n예상치 못한 변화나 전환에 대한 불편함.\n빛, 소리, 질감, 또는 신체적 접촉에 대한 특이한 민감성.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -653,19 +1039,40 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "사회적 기술 훈련(SST): 구조화된 또래 기반 연습을 통한 자연스러운 사회적 성장 지원",
-              "인지행동치료(CBT): 불안 관리, 유연성 향상, 자기 조절 능력 구축",
-              "언어 및 말하기 치료: 언어적·비언어적 의사소통 강화",
-              "감각 통합 치료: 감각 경험에서의 편안함과 안정감 조성"
-            ]
+    {
+      text: "**사회적 기술 훈련(SST):**\n구조화된 또래 기반 연습을 통한 자연스러운 사회적 성장 지원",
+      marker: "dash"
+    },
+    {
+      text: "**인지행동치료(CBT):**\n불안 관리, 유연성 향상, 자기 조절 능력 구축",
+      marker: "dash"
+    },
+    {
+      text: "**언어 및 말하기 치료:**\n언어적·비언어적 의사소통 강화",
+      marker: "dash"
+    },
+    {
+      text: "**감각 통합 치료:**\n감각 경험에서의 편안함과 안정감 조성",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 지원 및 자기 조절**",
             "items": [
-              "예측 가능한 루틴 만들기: 구조를 통해 안전감 조성",
-              "감각 관리 도구: 과부하 상황을 헤쳐나가는 전략 개발",
-              "감정 조절 및 대처 기술: 아이와 어른이 감정적 신호를 보다 수월하게 인식하고 반응하는 것 교육"
-            ]
+    {
+      text: "**예측 가능한 루틴 만들기: **\n구조를 통해 안전감 조성.",
+      marker: "dash"
+    },
+    {
+      text: "**감각 관리 도구:**\n과부하 상황을 헤쳐나가는 전략 개발.",
+      marker: "dash"
+    },
+    {
+      text: "**감정 조절 및 대처 기술:**\n아이와 어른이 감정적 신호를 보다 수월하게 인식하고 반응하는 것 교육.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       },
@@ -681,6 +1088,26 @@ export const serviceAreasSectionsKo = {
     "closing": [
       "**이해와 연결을 향한 첫 걸음**",
       "자폐는 고쳐야 할 것이 아닙니다. 이해하고, 받아들이고, 지지해야 할 것입니다. 당신과 사랑하는 사람은 이미 지금 있는 그대로 충분합니다. 저희는 차이를 지우는 것이 아니라 강점을 키우는 것을 믿습니다. 가족이 더 멀어지는 것이 아니라 더 가까워지도록 돕는 것을. 그리고 당신과 함께—부드럽게, 존중을 담아, 매 걸음마다—걷는 것을."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.asd.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.0.heading" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.asd.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.asd.subsections.1.lists.1", ordered: false },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.asd.subsections.2.heading" },
+      { type: "p", textKey: "serviceAreas.sections.asd.subsections.2.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.asd.closing.1" }
     ]
   },
   "lifeStress": {
@@ -722,10 +1149,19 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 도움이 되지 않는 사고 패턴을 파악하고 재구성합니다. 정신적 압박을 완화하는 더 건강하고 안정된 관점을 구축합니다.",
-              "내담자 중심 치료: 지지적이고 판단 없는 공간에서 자신의 경험을 탐색합니다. 진정으로 들려지고—자신의 속도로 방향을 찾습니다.",
-              "스트레스 관리 훈련: 압도감을 관리하고, 감정을 조절하며, 높은 압박 상황에서 더 통제감을 느끼는 실용적인 도구를 배웁니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n도움이 되지 않는 사고 패턴을 파악하고 재구성합니다. 정신적 압박을 완화하는 더 건강하고 안정된 관점을 구축합니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n지지적이고 판단 없는 공간에서 자신의 경험을 탐색합니다. 진정으로 들려지고—자신의 속도로 방향을 찾습니다.",
+      marker: "dash"
+    },
+    {
+      text: "**스트레스 관리 훈련:**\n압도감을 관리하고, 감정을 조절하며, 높은 압박 상황에서 더 통제감을 느끼는 실용적인 도구를 배웁니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 및 자기 돌봄**",
@@ -742,6 +1178,24 @@ export const serviceAreasSectionsKo = {
     "closing": [
       "**더 가벼운 내일을 향한 첫 걸음**",
       "스트레스는 삶의 일부일 수 있습니다—하지만 모든 공간을 차지할 필요는 없습니다. 모든 것을 혼자 짊어지지 않아도 됩니다. 지금 어떤 감정을 느끼든, 당신에게는 앞으로 나아갈 힘이 있습니다. 그리고 준비가 되면, 저희가 여기 있겠습니다—당신의 속도로, 당신의 방식으로 함께 걸으며."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.groups.0.1" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.lifeStress.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.lifeStress.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.lifeStress.closing.1" }
     ]
   },
   "griefLoss": {
@@ -784,17 +1238,32 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "인지행동치료(CBT): 상실을 둘러싼 어려운 생각들을 부드럽게 탐색하고 재구성합니다. 감정적 압도를 대처하는 더 건강한 방법을 배웁니다.",
-              "내담자 중심 치료: 감정이 보여지고, 들려지고, 지지받는—압박이나 기대 없는 따뜻하고 비판단적인 공간.",
-              "슬픔 처리 및 정서적 지지: 감정적 인식을 개발하여 슬픔이 자연스럽게 통과하도록 합니다. 상실을 의미 있는 방식으로 표현하고, 기리고, 함께 살아가는 법을 발견합니다."
-            ]
+    {
+      text: "**인지행동치료(CBT):**\n상실을 둘러싼 어려운 생각들을 부드럽게 탐색하고 재구성합니다. 감정적 압도를 대처하는 더 건강한 방법을 배웁니다.",
+      marker: "dash"
+    },
+    {
+      text: "**내담자 중심 치료:**\n감정이 보여지고, 들려지고, 지지받는—압박이나 기대 없는 따뜻하고 비판단적인 공간.",
+      marker: "dash"
+    },
+    {
+      text: "**슬픔 처리 및 정서적 지지:** 감\n정적 인식을 개발하여 슬픔이 자연스럽게 통과하도록 합니다. 상실을 의미 있는 방식으로 표현하고, 기리고, 함께 살아가는 법을 발견합니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**사회적 지지 및 자기 돌봄**",
             "items": [
-              "타인과 연결하기: 신뢰하는 친구나 가족과 마음을 열어 이야기합니다. 함께 나누는 이야기와 단순한 존재감이 위안과 연결의 원천이 될 수 있습니다.",
-              "몸과 마음을 위한 부드러운 돌봄: 마음 챙김 걷기, 조용한 일기 쓰기, 또는 복식 호흡 같은 차분한 루틴을 실천하여 슬픔에 공간을 주고 내면의 균형을 회복합니다."
-            ]
+    {
+      text: "**타인과 연결하기:**\n신뢰하는 친구나 가족과 마음을 열어 이야기합니다. 함께 나누는 이야기와 단순한 존재감이 위안과 연결의 원천이 될 수 있습니다.",
+      marker: "dash"
+    },
+    {
+      text: "**몸과 마음을 위한 부드러운 돌봄:**\n마음 챙김 걷기, 조용한 일기 쓰기, 또는 복식 호흡 같은 차분한 루틴을 실천하여 슬픔에 공간을 주고 내면의 균형을 회복합니다.",
+      marker: "dash"
+    }
+  ]
           }
         ]
       }
@@ -802,6 +1271,25 @@ export const serviceAreasSectionsKo = {
     "closing": [
       "**치유를 향한 첫 걸음**",
       "슬픔은 사랑의 반영입니다—그리고 느끼는 고통은 그 연결의 깊이를 기리는 것입니다. 하지만 슬픔이 당신의 전부는 아닙니다. 그리고 이 비탄의 계절이 당신의 이야기가 끝나는 곳이 아닙니다. 함께한 사람들과 기억들은 항상 중요할 것입니다. 그리고 시간이 지나면, 잊는 것이 아니라 사랑과 상실을 나란히 안고 살아가는 법을 배우면서—다시 따뜻함을 느끼기 시작할 수 있습니다. 이 길을 혼자 걷지 않아도 됩니다. 저희가 당신을 지지하겠습니다—부드럽게, 꾸준히, 그리고 항상 당신의 시간에 맞추어."
+    ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.griefLoss.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.griefLoss.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.griefLoss.closing.1" }
     ]
   },
   "sleep": {
@@ -821,11 +1309,23 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "다음 중 익숙하게 느껴지는 것이 있다면, 도움을 구할 때가 되었을 수 있습니다.",
             "items": [
-              "불면증: 잠들거나 잠을 유지하는 것의 어려움. 너무 일찍 깨어나 다시 잠들지 못함. 자고 나도 지속되는 피로",
-              "수면 무호흡증: 수면 중 호흡이 멈추거나 얕아짐. 코골이 또는 숨을 헐떡임. 낮 시간의 졸림, 짜증, 또는 집중 어려움",
-              "과다수면증: 충분히 자도 과도한 졸림. 낮에 깨어 있는 것의 어려움. 압도적인 피로로 인한 일상 기능 어려움",
-              "악몽 장애: 수면을 방해하는 강렬하고 고통스러운 꿈. 잠드는 것에 대한 지속적인 두려움 또는 불안. 깨어났을 때의 감정적 탈진"
-            ]
+    {
+      text: "**불면증:**\n잠들거나 잠을 유지하는 것의 어려움.\n너무 일찍 깨어나 다시 잠들지 못함.\n자고 나도 지속되는 피로.",
+      marker: "dash"
+    },
+    {
+      text: "**수면 무호흡증:**\n수면 중 호흡이 멈추거나 얕아짐.\n코골이 또는 숨을 헐떡임.\n낮 시간의 졸림, 짜증, 또는 집중 어려움.",
+      marker: "dash"
+    },
+    {
+      text: "**과다수면증:**\n충분히 자도 과도한 졸림.\n낮에 깨어 있는 것의 어려움.\n압도적인 피로로 인한 일상 기능 어려움.",
+      marker: "dash"
+    },
+    {
+      text: "**악몽 장애: **\n수면을 방해하는 강렬하고 고통스러운 꿈.\n잠드는 것에 대한 지속적인 두려움 또는 불안.\n깨어났을 때의 감정적 탈진.",
+      marker: "dash"
+    }
+  ]
           }
         ],
         "closing": [
@@ -843,9 +1343,15 @@ export const serviceAreasSectionsKo = {
           {
             "lead": "**심리치료 및 상담**",
             "items": [
-              "불면증을 위한 인지행동치료(CBT-I): 수면을 방해하는 사고 패턴을 파악하고 전환합니다. 더 건강한 취침 루틴을 만들고 수면에 대한 불안을 줄입니다.",
-              "스트레스 관리 및 이완 훈련: 신경계를 안정시키고 휴식으로 자연스럽게 전환하기 위해 복식 호흡, 점진적 근육 이완, 또는 안내 이미지 같은 기법을 연습합니다."
-            ]
+    {
+      text: "**불면증을 위한 인지행동치료(CBT-I): **\n수면을 방해하는 사고 패턴을 파악하고 전환합니다. 더 건강한 취침 루틴을 만들고 수면에 대한 불안을 줄입니다.",
+      marker: "dash"
+    },
+    {
+      text: "**스트레스 관리 및 이완 훈련: **\n신경계를 안정시키고 휴식으로 자연스럽게 전환하기 위해 복식 호흡, 점진적 근육 이완, 또는 안내 이미지 같은 기법을 연습합니다.",
+      marker: "dash"
+    }
+  ]
           },
           {
             "lead": "**생활 및 자기 돌봄 지원**",
@@ -860,9 +1366,28 @@ export const serviceAreasSectionsKo = {
       }
     ],
     "closing": [
-      "**편안한 휴식을 향한 첫 걸음**",
-      "수면이 멀게 느껴진다면—밤이 불안하고 아침이 무겁게 느껴진다면—그것은 몸과 마음이 더 부드러운 돌봄을 요청하고 있는 것일 수 있습니다. 좋은 소식은 편안한 수면이 회복될 수 있다는 것입니다. 피로를 억지로 버티지 않아도 됩니다. 휴식을 되찾을 수 있습니다.",
-      "저희 상담센터에서는 단순히 증상만이 아니라—당신의 이야기를 이해하는 데 시간을 할애합니다. 함께 균형, 고요함, 그리고 새로운 활력을 가져오는 새로운 리듬을 찾아가겠습니다."
+    "**편안한 휴식을 향한 첫 걸음**",
+    "수면이 멀게 느껴진다면—밤이 불안하고 아침이 무겁게 느껴진다면—그것은 몸과 마음이 더 부드러운 돌봄을 요청하고 있는 것일 수 있습니다. 좋은 소식은 편안한 수면이 회복될 수 있다는 것입니다. 피로를 억지로 버티지 않아도 됩니다. 휴식을 되찾을 수 있습니다.\n저희 상담센터에서는 단순히 증상만이 아니라—당신의 이야기를 이해하는 데 시간을 할애합니다. 함께 균형, 고요함, 그리고 새로운 활력을 가져오는 새로운 리듬을 찾아가겠습니다.",
+    "저희 상담센터에서는 단순히 증상만이 아니라—당신의 이야기를 이해하는 데 시간을 할애합니다. 함께 균형, 고요함, 그리고 새로운 활력을 가져오는 새로운 리듬을 찾아가겠습니다."
+  ],
+    "flow": [
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.0" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.1" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.groups.0.2" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.0.heading" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.0.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.0.lists.0", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.sleep.subsections.0.closing.0" },
+      { type: "hr" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.heading" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.subsections.1.groups.0.0" },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.lists.0.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.1.lists.0", ordered: false },
+      { type: "heading", textKey: "serviceAreas.sections.sleep.subsections.1.lists.1.lead" },
+      { type: "list", listKey: "serviceAreas.sections.sleep.subsections.1.lists.1", ordered: false },
+      { type: "p", textKey: "serviceAreas.sections.sleep.closing.0" },
+      { type: "p", textKey: "serviceAreas.sections.sleep.closing.1" }
     ]
   }
 };

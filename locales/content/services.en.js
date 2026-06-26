@@ -185,4 +185,14 @@ export const servicesSectionsEn = {
       "Through faith-based counseling, individuals can experience personal growth, inner peace, and renewed strength.",
     ],
   },
+    sec_mqurr95d: {
+    title: "New section",
+    groups: [
+      [
+        ""
+      ]
+    ],
+    lists: [],
+    closing: []
+  }
 };

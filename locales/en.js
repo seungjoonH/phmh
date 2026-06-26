@@ -216,13 +216,14 @@ export default {
       "top": "Top of site"
     },
     "sectionOrder": [
-      "individual",
-      "couples",
-      "family",
-      "play",
-      "group",
-      "christian"
-    ],
+    "sec_mqurr95d",
+    "individual",
+    "couples",
+    "family",
+    "play",
+    "group",
+    "christian"
+  ],
     "sections": servicesSectionsEn,
   },
   "serviceAreas": {

@@ -19,7 +19,7 @@ import {
   type FlowBlockInsertType,
 } from "@/lib/edit/section-flow";
 import { isEditMode } from "@/lib/edit/env";
-import { flowImagePublicPath } from "@/lib/edit/image-registry";
+import { imageRegistryPublicPath } from "@/lib/edit/image-registry";
 import { useEditText } from "@/lib/edit/use-edit-text";
 import { isImageKeyHidden } from "@/lib/image-hidden";
 import { MarkupText } from "@/components/ui/MarkupText";
@@ -173,20 +173,22 @@ function FlowImageBlock({ block }: { block: Extract<FlowBlock, { type: "img" }> 
   const edit = useEditDraftOptional();
   const pendingDelete = Boolean(edit?.isImagePendingDelete(block.editKey));
   const hasDraft = Boolean(edit?.imageDrafts[block.editKey]);
-  const registrySrc = flowImagePublicPath(block.editKey) ?? "";
+  const cacheVersion = edit?.getImageCacheVersion(block.editKey);
+  const registrySrc = imageRegistryPublicPath(block.editKey) ?? "";
   const committedSrc = block.src || registrySrc;
   const [loadFailed, setLoadFailed] = useState(false);
+  const staleLoadFailed = loadFailed && !cacheVersion;
 
   useEffect(() => {
     setLoadFailed(false);
-  }, [block.editKey, committedSrc, hasDraft]);
+  }, [block.editKey, committedSrc, hasDraft, cacheVersion]);
 
   if (pendingDelete) {
     return <FlowImagePlaceholder editKey={block.editKey} />;
   }
 
   const showPlaceholder =
-    !hasDraft && !block.src && (!registrySrc || loadFailed);
+    !hasDraft && (!committedSrc || staleLoadFailed);
 
   if (showPlaceholder) {
     return <FlowImagePlaceholder editKey={block.editKey} />;
@@ -195,13 +197,14 @@ function FlowImageBlock({ block }: { block: Extract<FlowBlock, { type: "img" }> 
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">
       <EditableImage
+        key={`${block.editKey}-${hasDraft ? "draft" : "committed"}-${cacheVersion ?? 0}`}
         editKey={block.editKey}
         src={committedSrc}
         alt={block.alt ?? ""}
         fill
         className="object-cover"
         onError={() => {
-          if (!hasDraft) setLoadFailed(true);
+          if (!hasDraft && !cacheVersion) setLoadFailed(true);
         }}
       />
     </div>
@@ -285,7 +288,7 @@ function renderBlockReadonly(block: FlowBlock, ctaHref?: string) {
       );
     case "img": {
       if (isImageKeyHidden(block.editKey)) return null;
-      const src = block.src || flowImagePublicPath(block.editKey);
+      const src = block.src || imageRegistryPublicPath(block.editKey);
       if (!src) return null;
       return (
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm">

@@ -118,3 +118,8 @@ export function flowImageKey(sectionKey: string, blockId: string): string {
 export function flowImagePublicPath(key: string): string | undefined {
   return flowImageEntry(key)?.publicPath;
 }
+
+/** registry 키 → publicPath (정적·flow·롱폼 sec_* 포함) */
+export function imageRegistryPublicPath(key: string): string | undefined {
+  return getImageRegistryEntry(key)?.publicPath;
+}

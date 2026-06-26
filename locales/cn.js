@@ -211,13 +211,14 @@ export default {
       "top": ""
     },
     "sectionOrder": [
-      "individual",
-      "couples",
-      "family",
-      "play",
-      "group",
-      "christian"
-    ],
+    "sec_mqurr95d",
+    "individual",
+    "couples",
+    "family",
+    "play",
+    "group",
+    "christian"
+  ],
     "sections": servicesSectionsCn
   },
   "serviceAreas": {

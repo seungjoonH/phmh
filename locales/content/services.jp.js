@@ -191,4 +191,14 @@ export const servicesSectionsJp = {
       "信仰に基づくカウンセリングを通じて、個人的な成長、内なる平安、新たな力を得ることができます。",
     ],
   },
+    sec_mqurr95d: {
+    title: "新しいセクション",
+    groups: [
+      [
+        ""
+      ]
+    ],
+    lists: [],
+    closing: []
+  }
 };

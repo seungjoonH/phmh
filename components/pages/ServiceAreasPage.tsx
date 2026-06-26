@@ -14,7 +14,7 @@ type StructuredSection = {
 };
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getContactPath } from "@/lib/contact";
-import { isImageKeyHidden } from "@/lib/image-hidden";
+import { resolveLongFormSectionImageSrc } from "@/lib/long-form-section-image";
 import { pageHeroes } from "@/lib/page-heroes";
 import { areaAnchors, areaImages } from "@/lib/service-images";
 
@@ -67,12 +67,11 @@ export function ServiceAreasPage() {
   const sections = order.map((k) => {
     const sec = sectionsMap[k] ?? ({ title: "" } as StructuredSection);
     const anchor = areaAnchors[k] ?? k;
-    const imageKey = `area.${k}`;
-    const hasDefaultImage = k in areaImages && !isImageKeyHidden(imageKey);
+    const imageSrc = resolveLongFormSectionImageSrc("area", k, areaImages);
     return {
       id: anchor,
       title: sec.title,
-      imageSrc: hasDefaultImage ? areaImages[k] : undefined,
+      imageSrc,
       // 모든 섹션이 헤더 이미지 자리(0 or 1)를 가진다 — edit 모드에서만 placeholder 표시,
       // dev/prod 에서는 imageSrc 가 없으면 ParallaxMedia 분기가 렌더되지 않는다.
       imageEditKey: `area.${k}`,

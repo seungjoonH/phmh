@@ -208,13 +208,14 @@ export default {
       "top": "ページトップ"
     },
     "sectionOrder": [
-      "individual",
-      "couples",
-      "family",
-      "play",
-      "group",
-      "christian"
-    ],
+    "sec_mqurr95d",
+    "individual",
+    "couples",
+    "family",
+    "play",
+    "group",
+    "christian"
+  ],
     "sections": servicesSectionsJp,
   },
   "serviceAreas": {

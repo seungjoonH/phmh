@@ -1,5 +1,6 @@
 // 롱폼 서비스 섹션 블록
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxMedia } from "@/components/motion/ParallaxMedia";
 import { EditableContentFlow } from "@/components/edit/EditableContentFlow";
@@ -159,6 +160,7 @@ export function ServiceSection({
   revealDelay = 0,
 }: Props) {
   const edit = useEditDraftOptional();
+  const [headerImageFailed, setHeaderImageFailed] = useState(false);
   const sectionContent: SectionContent = { groups, lists, closing, subsections };
   const hasStructuredContent =
     groups.length > 0 ||
@@ -173,6 +175,10 @@ export function ServiceSection({
     imageEditKey && edit?.isImagePendingDelete(imageEditKey),
   );
   const effectiveImageSrc = pendingDelete ? undefined : imageSrc;
+
+  useEffect(() => {
+    setHeaderImageFailed(false);
+  }, [effectiveImageSrc, imageEditKey]);
 
   const prepend: FlowBlock[] = [];
   // 섹션 헤더 이미지(0 or 1) — imageEditKey 가 있는 섹션은 src 가 비어 있어도 placeholder 자리를 둔다.
@@ -205,7 +211,7 @@ export function ServiceSection({
       id={id}
       className="scroll-mt-28 py-16"
     >
-      {!useFlowLayout && effectiveImageSrc ? (
+      {!useFlowLayout && effectiveImageSrc && !headerImageFailed ? (
         <ParallaxMedia className="group relative mb-8 aspect-[16/10] w-full overflow-hidden rounded-sm">
           <EditableImage
             editKey={imageEditKey}
@@ -213,6 +219,7 @@ export function ServiceSection({
             alt={imageAlt || title}
             fill
             className="object-cover transition-transform duration-700 ease-calm group-hover:scale-[1.03]"
+            onError={() => setHeaderImageFailed(true)}
           />
         </ParallaxMedia>
       ) : null}

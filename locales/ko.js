@@ -216,13 +216,14 @@ export default {
       "top": "페이지 상단"
     },
     "sectionOrder": [
-      "individual",
-      "couples",
-      "family",
-      "play",
-      "group",
-      "christian"
-    ],
+    "sec_mqurr95d",
+    "individual",
+    "couples",
+    "family",
+    "play",
+    "group",
+    "christian"
+  ],
     "sections": servicesSectionsKo,
   },
   "serviceAreas": {

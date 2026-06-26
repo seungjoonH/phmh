@@ -127,7 +127,7 @@ import {
 import type { SitePageGroup } from "@/lib/site-pages";
 import { ensureLocaleLoaded } from "@/lib/i18n/load-locale";
 import { arrayBufferToBase64 } from "@/lib/edit/array-buffer-to-base64";
-import { getImageRegistryEntry } from "@/lib/edit/image-registry";
+import { getImageRegistryEntry, imageRegistryPublicPath } from "@/lib/edit/image-registry";
 import {
   findLinkedDraft,
   getLinkedTextKeys,
@@ -266,6 +266,7 @@ type EditDraftContextValue = {
   panelBaseline: DraftEntry | null;
   setPanelBaseline: (entry: DraftEntry | null) => void;
   getImagePreviewSrc: (key: string, committedSrc: string) => string;
+  getImageCacheVersion: (key: string) => number | undefined;
   arrayBusy: string | null;
   isTextKeyHidden: (key: string) => boolean;
   addArrayItem: (arrayKey: string) => Promise<void>;
@@ -1861,14 +1862,21 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       if (imageDeleteDrafts[key]) {
         return isTherapistPortraitKey(key) ? DEFAULT_PORTRAIT_LIGHT : DEFAULT_HERO_LIGHT;
       }
+      const base =
+        committedSrc || imageRegistryPublicPath(key) || "";
       const v = imageCacheBust[key];
       if (v) {
-        const sep = committedSrc.includes("?") ? "&" : "?";
-        return `${committedSrc}${sep}v=${v}`;
+        const sep = base.includes("?") ? "&" : "?";
+        return `${base}${sep}v=${v}`;
       }
-      return committedSrc;
+      return base;
     },
     [imageDrafts, imageDeleteDrafts, imageCacheBust],
+  );
+
+  const getImageCacheVersion = useCallback(
+    (key: string) => imageCacheBust[key],
+    [imageCacheBust],
   );
 
   const pendingCount =
@@ -1936,6 +1944,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       panelBaseline,
       setPanelBaseline,
       getImagePreviewSrc,
+      getImageCacheVersion,
       arrayBusy,
       isTextKeyHidden,
       addArrayItem,
@@ -2014,6 +2023,7 @@ export function EditDraftProvider({ children }: { children: ReactNode }) {
       isEditKeyPending,
       panelBaseline,
       getImagePreviewSrc,
+      getImageCacheVersion,
       arrayBusy,
       isTextKeyHidden,
       addArrayItem,

@@ -185,4 +185,14 @@ export const servicesSectionsKo = {
       "신앙 기반 상담을 통해 개인적 성장, 내면의 평화, 새로운 힘을 경험할 수 있습니다.",
     ],
   },
+    sec_mqurr95d: {
+    title: "새 섹션",
+    groups: [
+      [
+        ""
+      ]
+    ],
+    lists: [],
+    closing: []
+  }
 };

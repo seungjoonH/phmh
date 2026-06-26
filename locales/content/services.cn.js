@@ -190,4 +190,15 @@ export const servicesSectionsCn = {
       ""
     ]
   }
+,
+  sec_mqurr95d: {
+    title: "新章节",
+    groups: [
+      [
+        ""
+      ]
+    ],
+    lists: [],
+    closing: []
+  }
 };

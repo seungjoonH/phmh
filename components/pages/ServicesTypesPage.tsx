@@ -13,7 +13,7 @@ type StructuredSection = {
 };
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getContactPath } from "@/lib/contact";
-import { isImageKeyHidden } from "@/lib/image-hidden";
+import { resolveLongFormSectionImageSrc } from "@/lib/long-form-section-image";
 import { pageHeroes } from "@/lib/page-heroes";
 import {
   therapyAnchors,
@@ -61,12 +61,11 @@ export function ServicesTypesPage() {
   const sections = order.map((k) => {
     const sec = sectionsMap[k] ?? ({ title: "" } as StructuredSection);
     const anchor = therapyAnchors[k] ?? k;
-    const imageKey = `therapy.${k}`;
-    const hasDefaultImage = k in therapyImages && !isImageKeyHidden(imageKey);
+    const imageSrc = resolveLongFormSectionImageSrc("therapy", k, therapyImages);
     return {
       id: anchor,
       title: sec.title,
-      imageSrc: hasDefaultImage ? therapyImages[k] : undefined,
+      imageSrc,
       // 모든 섹션이 헤더 이미지 자리(0 or 1)를 가진다. 이미지가 없는 섹션은 edit 모드에서만
       // dashed placeholder 가 보이고, dev/prod 에서는 ParallaxMedia 분기 자체가 렌더되지 않아
       // 빈 공간을 차지하지 않는다(ServiceSection 의 `!useFlowLayout && imageSrc` 조건).
